@@ -8,6 +8,12 @@
 
 /** */
 public class Source extends NetworkElement {
+	Source() {
+		Skeleton.indentPrint("Source: Source()");
+		Skeleton.INDENT++;
+		Skeleton.indentPrint("Source created");
+		Skeleton.INDENT--;
+	}
 	/** */
 	public void tick() {
 	}

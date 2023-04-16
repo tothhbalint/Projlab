@@ -8,7 +8,13 @@
 
 /** */
 public class Cistern extends NetworkElement {
-	/** */
+
+	Cistern() {
+		Skeleton.indentPrint("Cistern : Cistern()");
+		Skeleton.INDENT++;
+		Skeleton.indentPrint("Cistern created");
+		Skeleton.INDENT--;
+	}
 
 	@Override
 	public boolean isConnected(NetworkElement ne) {

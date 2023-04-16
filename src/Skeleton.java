@@ -102,9 +102,8 @@ public class Skeleton {
         nomadTeam = null;
         nMap = null;
     }
-    //TODO Toti
     public static void init(){
-        //TODO Make it work on the inside too
+        //TODO setting up connections and stuff
         plumberTeam = new Team();
         plumberTeam.createPlumberTeam("Plumbers", 2);
         nomadTeam = new Team();
@@ -113,28 +112,28 @@ public class Skeleton {
         nMap = new NetworkMap();
 
         nMap.build();
-
-        System.out.println("Finished initializing \n Press enter to continue");
         scanner.nextLine();
     }
-    //TODO Toti
     public static void createTeam(){
-        //TODO Make it work on the inside too
         System.out.println("What kind of team do you want to create?");
         System.out.println("""
                                 0. Plumber
                                 1. Nomad""");
         String teamType = scanner.nextLine();
 
+        System.out.println("How many players do you want to add to the team?");
+        int noOfPlayers = scanner.nextInt();
+
         if(teamType.equals("0")){
             plumberTeam = new Team();
-            plumberTeam.createPlumberTeam("Plumbers", 2);
+            plumberTeam.createPlumberTeam("Plumbers", noOfPlayers);
         } else if(teamType.equals("1")){
             nomadTeam = new Team();
-            nomadTeam.createNomadTeam("Nomads", 2);
+            nomadTeam.createNomadTeam("Nomads", noOfPlayers);
         } else {
             System.out.println("Invalid input");
         }
+        scanner.nextLine();
     }
     //TODO Toti
     public static void movePlayer(){
@@ -169,10 +168,9 @@ public class Skeleton {
                 //TODO
                 break;
         }
-
-        //TODO
+        scanner.nextLine();
     }
-    //TODO Toti
+    //DONE
     public static void directPump(){
         init();
         System.out.println("What kind of player do you want to direct the pump with?");

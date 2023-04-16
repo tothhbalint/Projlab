@@ -7,6 +7,12 @@
 
 /** */
 public class Pump extends NetworkElement {
+	Pump() {
+		Skeleton.indentPrint("Pump : Pump()");
+		Skeleton.INDENT++;
+		Skeleton.indentPrint("Pump created.");
+		Skeleton.INDENT--;
+	}
 	@Override
 	public boolean isConnected(NetworkElement ne) {
 		Skeleton.indentPrint("Pump : isConnected()");

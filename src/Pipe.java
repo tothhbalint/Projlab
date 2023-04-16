@@ -8,12 +8,21 @@
 
 /** */
 public class Pipe extends NetworkElement {
+	Pipe() {
+		Skeleton.indentPrint("Pipe : Pipe()");
+		Skeleton.INDENT++;
+		Skeleton.indentPrint("Created a pipe");
+		Skeleton.INDENT--;
+	}
 	/** */
 	public void tick() {
 	}
 	
 	/** */
-	public void setInput() {
+	public void setInput(NetworkElement input) {
+	}
+
+	public void setOutput(NetworkElement output) {
 	}
 	
 	@Override
