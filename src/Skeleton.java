@@ -10,6 +10,8 @@ public class Skeleton {
 
     static HashMap<String, NetworkElement> elementHashMap = new HashMap<>();
 
+    static HashMap<String, Player> playerHashMap = new HashMap<>();
+
 
     static NetworkMap nMap = new NetworkMap();
 
@@ -103,8 +105,12 @@ public class Skeleton {
     //TODO Toti
     public static void init(){
         //TODO Make it work on the inside too
-        createTeam();
-        createTeam();
+        plumberTeam = new Team();
+        plumberTeam.createPlumberTeam("Plumbers", 2);
+        nomadTeam = new Team();
+        nomadTeam.createNomadTeam("Nomads", 2);
+
+        nMap = new NetworkMap();
 
         nMap.build();
 
@@ -119,13 +125,13 @@ public class Skeleton {
                                 0. Plumber
                                 1. Nomad""");
         String teamType = scanner.nextLine();
-        System.out.println("How many players do you want to create?");
-        int noOfPlayers = Integer.parseInt(scanner.nextLine());
 
         if(teamType.equals("0")){
-            plumberTeam.createPlumberTeam("Plumbers", noOfPlayers);
+            plumberTeam = new Team();
+            plumberTeam.createPlumberTeam("Plumbers", 2);
         } else if(teamType.equals("1")){
-            nomadTeam.createNomadTeam("Nomads", noOfPlayers);
+            nomadTeam = new Team();
+            nomadTeam.createNomadTeam("Nomads", 2);
         } else {
             System.out.println("Invalid input");
         }
@@ -168,40 +174,20 @@ public class Skeleton {
     }
     //TODO Toti
     public static void directPump(){
+        init();
         System.out.println("What kind of player do you want to direct the pump with?");
         System.out.println("""
                                 0. Plumber
                                 1. Nomad""");
         String playerType = scanner.nextLine();
 
-        System.out.println("Where is the player standing?");
-        System.out.println("""
-                                0. Cistern
-                                1. Pipe
-                                2. Pump
-                                """);
-        String playerPosition = scanner.nextLine();
-
         if(playerType.equals("0")){
+            playerHashMap.get("plumber").directPump();
         } else if(playerType.equals("1")){
+            playerHashMap.get("nomad").directPump();
         } else {
             System.out.println("Invalid input");
         }
-
-        switch (playerPosition){
-            case "0":
-                System.out.println("Can't direct pump from cistern");
-                break;
-            case "1":
-                System.out.println("Can't direct pump from pipe");
-                break;
-            case "2":
-                System.out.println("Where do you want to direct the pump?");
-                //TODO
-                break;
-        }
-
-        //TODO
     }
     //TODO Buzas
     public static void fixElement(){
@@ -246,6 +232,5 @@ public class Skeleton {
             System.out.print("\t");
         }
         System.out.println(string);
-        INDENT++;
     }
 }

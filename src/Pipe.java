@@ -34,8 +34,11 @@ public class Pipe extends NetworkElement {
 	}
 	
 	/** */
-	public void direct(NetworkElement n) {
+	public void direct(NetworkElement in,NetworkElement out) {
 		Skeleton.indentPrint("Pipe : direct()");
+		Skeleton.INDENT++;
+		Skeleton.indentPrint("Can't direct a pipe");
+		Skeleton.INDENT--;
 	}
 	
 	/** */

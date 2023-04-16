@@ -18,7 +18,7 @@ public abstract class NetworkElement implements ITimer, IMove {
 	public abstract void remove(Player p);
 	
 	/** */
-	public abstract void direct(NetworkElement n);
+	public abstract void direct(NetworkElement ne1,NetworkElement ne2);
 	
 	/** */
 	public abstract void pickUpPump(Inventory inv);

@@ -30,8 +30,11 @@ public class Cistern extends NetworkElement {
 	}
 	
 	/** */
-	public void direct(NetworkElement n) {
+	public void direct(NetworkElement in,NetworkElement out) {
 		Skeleton.indentPrint("Cistern : direct()");
+		Skeleton.INDENT++;
+		Skeleton.indentPrint("Can't direct a cistern");
+		Skeleton.INDENT--;
 	}
 	
 	/** */

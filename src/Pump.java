@@ -30,8 +30,22 @@ public class Pump extends NetworkElement {
 	}
 	
 	/** */
-	public void direct(NetworkElement n) {
+	public void direct(NetworkElement in,NetworkElement out) {
 		Skeleton.indentPrint("Pump : direct()");
+		Skeleton.INDENT++;
+		Skeleton.indentPrint("Do the two pipes connect to the pump?"); Skeleton.indentPrint("0 - Yes"); Skeleton.indentPrint("1 - No");
+		switch(Integer.parseInt(Skeleton.scanner.nextLine())) {
+			case 0:
+				Skeleton.indentPrint("Pump directed through the pipes.");
+				break;
+			case 1:
+				Skeleton.indentPrint("Cant direct the pump through these lines.");
+				break;
+			default:
+				Skeleton.indentPrint("Invalid input.");
+				break;
+		}
+		Skeleton.INDENT-=2;
 	}
 	
 	/** */

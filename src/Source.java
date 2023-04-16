@@ -24,8 +24,11 @@ public class Source extends NetworkElement {
 	}
 	
 	/** */
-	public void direct(NetworkElement n) {
+	public void direct(NetworkElement in,NetworkElement out) {
 		Skeleton.indentPrint("Source : direct()");
+		Skeleton.INDENT++;
+		Skeleton.indentPrint("Can't direct a source");
+		Skeleton.INDENT--;
 	}
 	
 	/** */

@@ -21,10 +21,12 @@ public class Team {
 	/** */
 	public void createPlumberTeam(String name, int nop) {
 		Skeleton.indentPrint("Team: createPlumberTeam()");
+		Skeleton.playerHashMap.put("plumber", new Plumber());
 	}
 	
 	/** */
 	public void createNomadTeam(String name, int nop) {
 		Skeleton.indentPrint("Team: createNomadTeam()");
+		Skeleton.playerHashMap.put("nomad", new Nomad());
 	}
 }
