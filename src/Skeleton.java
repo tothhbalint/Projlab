@@ -99,7 +99,7 @@ public class Skeleton {
         nomadTeam = null;
         nMap = null;
     }
-
+    //TODO Toti
     public static void init(){
         //TODO Make it work on the inside too
         createTeam();
@@ -110,7 +110,7 @@ public class Skeleton {
         System.out.println("Finished initializing \n Press enter to continue");
         scanner.nextLine();
     }
-
+    //TODO Toti
     public static void createTeam(){
         //TODO Make it work on the inside too
         System.out.println("What kind of team do you want to create?");
@@ -129,7 +129,7 @@ public class Skeleton {
             System.out.println("Invalid input");
         }
     }
-
+    //TODO Toti
     public static void movePlayer(){
         System.out.println("What kind of player do you want to move?");
         System.out.println("""
@@ -165,7 +165,7 @@ public class Skeleton {
 
         //TODO
     }
-
+    //TODO Toti
     public static void directPump(){
         System.out.println("What kind of player do you want to direct the pump with?");
         System.out.println("""
@@ -202,39 +202,40 @@ public class Skeleton {
 
         //TODO
     }
-
+    //TODO Buzas
     public static void fixElement(){
         //TODO
     }
-
+    //TODO Buzas
     public static void pickUpPump(){
         //TODO
     }
-
+    //TODO Marki
     public static void placePump(){
         //TODO
     }
-
+    //TODO Bence
     public static void destroyPipe(){
         //TODO
     }
 
+    //TODO Buzas
     public static void waterFlows(){
         //TODO
     }
-
+    //TODO Bence
     public static void pipeSpawns(){
         //TODO
     }
-
+    //TODO Marki
     public static void disconnectPipe(){
         //TODO
     }
-
+    //TODO Marki
     public static void connectPipe(){
         //TODO
     }
-
+    //TODO Bence
     public static void endOfRound() {
         //TODO
     }
