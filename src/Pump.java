@@ -9,48 +9,48 @@
 public class Pump extends NetworkElement {
 	@Override
 	public boolean isConnected(NetworkElement ne) {
-		System.out.println("Pump : isConnected()");
+		Skeleton.indentPrint("Pump : isConnected()");
 		return false;
 	}
 
 	/** */
 	public void tick() {
-		System.out.println("Pump : tick()");
+		Skeleton.indentPrint("Pump : tick()");
 	}
 	
 	/** */
 	public boolean accept(Player p) {
-		System.out.println("Pump : accept()");
+		Skeleton.indentPrint("Pump : accept()");
 		return false;
 	}
 	
 	/** */
 	public void remove(Player p) {
-		System.out.println("Pump : remove()");
+		Skeleton.indentPrint("Pump : remove()");
 	}
 	
 	/** */
 	public void direct(NetworkElement n) {
-		System.out.println("Pump : direct()");
+		Skeleton.indentPrint("Pump : direct()");
 	}
 	
 	/** */
 	public void pickUpPump(Inventory inv) {
-		System.out.println("Pump : pickUpPump()");
+		Skeleton.indentPrint("Pump : pickUpPump()");
 	}
 	
 	/** */
 	public void addConnection(NetworkElement ne) {
-		System.out.println("Pump : addConnection()");
+		Skeleton.indentPrint("Pump : addConnection()");
 	}
 	
 	/** */
 	public void removeConnection(NetworkElement ne) {
-		System.out.println("Pump : removeConnection()");
+		Skeleton.indentPrint("Pump : removeConnection()");
 	}
 	
 	/** */
 	public void recieveWater(NetworkElement ne) {
-		System.out.println("Pump : recieveWater()");
+		Skeleton.indentPrint("Pump : recieveWater()");
 	}
 }

@@ -26,31 +26,31 @@ public class Cistern extends NetworkElement {
 	
 	/** */
 	public void remove(Player p) {
-		System.out.println("Cistern : remove()");
+		Skeleton.indentPrint("Cistern : remove()");
 	}
 	
 	/** */
 	public void direct(NetworkElement n) {
-		System.out.println("Cistern : direct()");
+		Skeleton.indentPrint("Cistern : direct()");
 	}
 	
 	/** */
 	public void pickUpPump(Inventory inv) {
-		System.out.println("Cistern : pickUpPump()");
+		Skeleton.indentPrint("Cistern : pickUpPump()");
 	}
 	
 	/** */
 	public void addConnection(NetworkElement ne) {
-		System.out.println("Cistern : addConnection()");
+		Skeleton.indentPrint("Cistern : addConnection()");
 	}
 	
 	/** */
 	public void removeConnection(NetworkElement ne) {
-		System.out.println("Cistern : removeConnection()");
+		Skeleton.indentPrint("Cistern : removeConnection()");
 	}
 	
 	/** */
 	public void recieveWater(NetworkElement ne) {
-		System.out.println("Cistern : recieveWater()");
+		Skeleton.indentPrint("Cistern : recieveWater()");
 	}
 }

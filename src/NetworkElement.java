@@ -37,36 +37,36 @@ public abstract class NetworkElement implements ITimer, IMove {
 	
 	/** */
 	public void setWaterState(boolean b) {
-		System.out.println("NetworkElement : setWaterState()");
+		Skeleton.indentPrint("NetworkElement : setWaterState()");
 	}
 	
 	/** */
 	public static void getNomadPoints() {
-		System.out.println("NetworkElement : getNomadPoints()");
+		Skeleton.indentPrint("NetworkElement : getNomadPoints()");
 	}
 	
 	/** */
 	public static void getPlumberPoints() {
-		System.out.println("NetworkElement : getPlumberPoints()");
+		Skeleton.indentPrint("NetworkElement : getPlumberPoints()");
 	}
 	
 	/** */
 	private void increaseNomadPoint() {
-		System.out.println("NetworkElement : increaseNomadPoint()");
+		Skeleton.indentPrint("NetworkElement : increaseNomadPoint()");
 	}
 	
 	/** */
 	private void increasePlumberPoint() {
-		System.out.println("NetworkElement : increasePlumberPoint()");
+		Skeleton.indentPrint("NetworkElement : increasePlumberPoint()");
 	}
 	
 	/** */
 	public void isOccupied() {
-		System.out.println("NetworkElement : isOccupied() : boolean");
+		Skeleton.indentPrint("NetworkElement : isOccupied() : boolean");
 	}
 	
 	/** */
 	public void setOccupied() {
-		System.out.println("NetworkElement : setOccupied()");
+		Skeleton.indentPrint("NetworkElement : setOccupied()");
 	}
 }

@@ -18,43 +18,43 @@ public class Pipe extends NetworkElement {
 	
 	@Override
 	public boolean isConnected(NetworkElement ne) {
-		System.out.println("Pipe : isConnected()");
+		Skeleton.indentPrint("Pipe : isConnected()");
 		return false;
 	}
 
 	/** */
 	public boolean accept(Player p) {
-		System.out.println("Pipe : accept()");
+		Skeleton.indentPrint("Pipe : accept()");
 		return false;
 	}
 	
 	/** */
 	public void remove(Player p) {
-		System.out.println("Pipe : remove()");
+		Skeleton.indentPrint("Pipe : remove()");
 	}
 	
 	/** */
 	public void direct(NetworkElement n) {
-		System.out.println("Pipe : direct()");
+		Skeleton.indentPrint("Pipe : direct()");
 	}
 	
 	/** */
 	public void pickUpPump(Inventory inv) {
-		System.out.println("Pipe : pickUpPump()");
+		Skeleton.indentPrint("Pipe : pickUpPump()");
 	}
 	
 	/** */
 	public void addConnection(NetworkElement ne) {
-		System.out.println("Pipe : addConnection()");
+		Skeleton.indentPrint("Pipe : addConnection()");
 	}
 	
 	/** */
 	public void removeConnection(NetworkElement ne) {
-		System.out.println("Pipe : removeConnection()");
+		Skeleton.indentPrint("Pipe : removeConnection()");
 	}
 	
 	/** */
 	public void recieveWater(NetworkElement ne) {
-		System.out.println("Pipe : recieveWater()");
+		Skeleton.indentPrint("Pipe : recieveWater()");
 	}
 }

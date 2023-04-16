@@ -23,16 +23,16 @@ public abstract class Player {
 
 	/** */
 	public void move(NetworkElement ne) {
-		System.out.println("Player: move()");
+		Skeleton.indentPrint("Player: move()");
 	}
 
 	/** */
 	public void directPump() {
-		System.out.println("Player: directPump()");
+		Skeleton.indentPrint("Player: directPump()");
 	}
 
 	/** */
 	public void setPosition(NetworkElement ne) {
-		System.out.println("Player: setPosition()");
+		Skeleton.indentPrint("Player: setPosition()");
 	}
 }

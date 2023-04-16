@@ -14,43 +14,43 @@ public class Source extends NetworkElement {
 	
 	/** */
 	public boolean accept(Player p) {
-		System.out.println("Source : accept()");
+		Skeleton.indentPrint("Source : accept()");
 		return false;
 	}
 	
 	/** */
 	public void remove(Player p) {
-		System.out.println("Source : remove()");
+		Skeleton.indentPrint("Source : remove()");
 	}
 	
 	/** */
 	public void direct(NetworkElement n) {
-		System.out.println("Source : direct()");
+		Skeleton.indentPrint("Source : direct()");
 	}
 	
 	/** */
 	public void pickUpPump(Inventory inv) {
-		System.out.println("Source : pickUpPump()");
+		Skeleton.indentPrint("Source : pickUpPump()");
 	}
 	
 	/** */
 	public void addConnection(NetworkElement ne) {
-		System.out.println("Source : addConnection()");
+		Skeleton.indentPrint("Source : addConnection()");
 	}
 	
 	/** */
 	public void removeConnection(NetworkElement ne) {
-		System.out.println("Source : removeConnection()");
+		Skeleton.indentPrint("Source : removeConnection()");
 	}
 
 	@Override
 	public boolean isConnected(NetworkElement ne) {
-		System.out.println("Source : isConnected()");
+		Skeleton.indentPrint("Source : isConnected()");
 		return false;
 	}
 
 	/** */
 	public void recieveWater(NetworkElement ne) {
-		System.out.println("Source : recieveWater()");
+		Skeleton.indentPrint("Source : recieveWater()");
 	}
 }

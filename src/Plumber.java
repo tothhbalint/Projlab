@@ -10,26 +10,26 @@
 public class Plumber extends Player {
 	/** */
 	public void repair(NetworkElement ne) {
-		System.out.println("Plumber: repair()");
+		Skeleton.indentPrint("Plumber: repair()");
 	}
 	
 	/** */
 	public void takePump(Inventory inv) {
-		System.out.println("Plumber: takePump()");
+		Skeleton.indentPrint("Plumber: takePump()");
 	}
 	
 	/** */
 	public void placePump() {
-		System.out.println("Plumber: placePump()");
+		Skeleton.indentPrint("Plumber: placePump()");
 	}
 	
 	/** */
 	public void connectPipe() {
-		System.out.println("Plumber: connectPipe()");
+		Skeleton.indentPrint("Plumber: connectPipe()");
 	}
 	
 	/** */
 	public void disconnectPipe(NetworkElement ne) {
-		System.out.println("Plumber: disconnectPipe()");
+		Skeleton.indentPrint("Plumber: disconnectPipe()");
 	}
 }

@@ -10,26 +10,26 @@
 public class Nomad extends Player {
 	/** */
 	public void breakElement(NetworkElement ne) {
-		System.out.println("Nomad: breakElement()");
+		Skeleton.indentPrint("Nomad: breakElement()");
 	}
 	
 	/** */
 	public void takePump(Inventory inv) {
-		System.out.println("Nomad: takePump()");
+		Skeleton.indentPrint("Nomad: takePump()");
 	}
 	
 	/** */
 	public void placePump() {
-		System.out.println("Nomad: placePump()");
+		Skeleton.indentPrint("Nomad: placePump()");
 	}
 	
 	/** */
 	public void connectPipe() {
-		System.out.println("Nomad: connectPipe()");
+		Skeleton.indentPrint("Nomad: connectPipe()");
 	}
 	
 	/** */
 	public void disconnectPipe(NetworkElement ne) {
-		System.out.println("Nomad: disconnectPipe()");
+		Skeleton.indentPrint("Nomad: disconnectPipe()");
 	}
 }
