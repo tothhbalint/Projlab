@@ -87,6 +87,8 @@ public class Skeleton {
         }
     }
 
+
+
     public static void resetSkeleton(){
         noOfPlayers = 0;
         noOfTeams = 0;
@@ -235,5 +237,13 @@ public class Skeleton {
 
     public static void endOfRound() {
         //TODO
+    }
+
+    public static void indentPrint(String string){
+        for(int i = 0; i < INDENT; i++){
+            System.out.print("\t");
+        }
+        System.out.println(string);
+        INDENT++;
     }
 }
