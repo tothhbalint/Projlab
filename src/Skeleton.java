@@ -299,6 +299,9 @@ public class Skeleton {
                 INDENT++;
                 elementHashMap.get("pump").setInput(newPipe);
                 indentPrint("Pipe : getOutput()");
+                INDENT++;
+                indentPrint("Got output");
+                INDENT--;
                 newPipe.setOutput(elementHashMap.get("pump"));
                 elementHashMap.get("pump").setInput(elementHashMap.get("pipe1"));
                 elementHashMap.get("pipe1").setOutput(elementHashMap.get("pump"));
