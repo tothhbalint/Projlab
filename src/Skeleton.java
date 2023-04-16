@@ -7,6 +7,9 @@ public class Skeleton {
 
     static Team nomadTeam;
 
+
+    static NetworkMap nMap = new NetworkMap();
+
     static Scanner scanner = new Scanner(System.in);
 
     static int INDENT = 0;
@@ -92,14 +95,14 @@ public class Skeleton {
 
         plumberTeam = null;
         nomadTeam = null;
+        nMap = null;
     }
 
     public static void init(){
-        //TODO
+        //TODO Make it work on the inside too
         createTeam();
         createTeam();
 
-        NetworkMap nMap = new NetworkMap();
         nMap.build();
 
         System.out.println("Finished initializing \n Press enter to continue");
@@ -107,7 +110,7 @@ public class Skeleton {
     }
 
     public static void createTeam(){
-        //TODO
+        //TODO Make it work on the inside too
         System.out.println("What kind of team do you want to create?");
         System.out.println("""
                                 0. Plumber
@@ -126,10 +129,75 @@ public class Skeleton {
     }
 
     public static void movePlayer(){
+        System.out.println("What kind of player do you want to move?");
+        System.out.println("""
+                                0. Plumber
+                                1. Nomad""");
+        String playerType = scanner.nextLine();
+
+        System.out.println("Where is the player standing?");
+        System.out.println("""
+                                0. Cistern
+                                1. Pipe
+                                2. Pump
+                                """);
+        String playerPosition = scanner.nextLine();
+
+        if(playerType.equals("0")){
+        } else if(playerType.equals("1")){
+        } else {
+            System.out.println("Invalid input");
+        }
+
+        switch (playerPosition){
+            case "0":
+                //TODO
+                break;
+            case "1":
+                //TODO
+                break;
+            case "2":
+                //TODO
+                break;
+        }
+
         //TODO
     }
 
     public static void directPump(){
+        System.out.println("What kind of player do you want to direct the pump with?");
+        System.out.println("""
+                                0. Plumber
+                                1. Nomad""");
+        String playerType = scanner.nextLine();
+
+        System.out.println("Where is the player standing?");
+        System.out.println("""
+                                0. Cistern
+                                1. Pipe
+                                2. Pump
+                                """);
+        String playerPosition = scanner.nextLine();
+
+        if(playerType.equals("0")){
+        } else if(playerType.equals("1")){
+        } else {
+            System.out.println("Invalid input");
+        }
+
+        switch (playerPosition){
+            case "0":
+                System.out.println("Can't direct pump from cistern");
+                break;
+            case "1":
+                System.out.println("Can't direct pump from pipe");
+                break;
+            case "2":
+                System.out.println("Where do you want to direct the pump?");
+                //TODO
+                break;
+        }
+
         //TODO
     }
 
