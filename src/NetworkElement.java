@@ -10,6 +10,10 @@
 public abstract class NetworkElement implements ITimer, IMove {
 	/** */
 	public abstract void tick();
+
+	abstract void setInput(NetworkElement input);
+
+	abstract void setOutput(NetworkElement output);
 	
 	/** */
 	public abstract boolean accept(Player p);

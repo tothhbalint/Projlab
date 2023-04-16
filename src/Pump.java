@@ -7,6 +7,12 @@
 
 /** */
 public class Pump extends NetworkElement {
+	Pump() {
+		Skeleton.indentPrint("Pump : Pump()");
+		Skeleton.INDENT++;
+		Skeleton.indentPrint("Pump created.");
+		Skeleton.INDENT--;
+	}
 	@Override
 	public boolean isConnected(NetworkElement ne) {
 		Skeleton.indentPrint("Pump : isConnected()");
@@ -17,7 +23,23 @@ public class Pump extends NetworkElement {
 	public void tick() {
 		Skeleton.indentPrint("Pump : tick()");
 	}
-	
+
+	@Override
+	void setInput(NetworkElement input) {
+		Skeleton.indentPrint("Pump : setInput()");
+		Skeleton.INDENT++;
+		Skeleton.indentPrint("Input can not be set this way");
+		Skeleton.INDENT--;
+	}
+
+	@Override
+	void setOutput(NetworkElement output) {
+		Skeleton.indentPrint("Pump : setOutput()");
+		Skeleton.INDENT++;
+		Skeleton.indentPrint("Output can not be set this way");
+		Skeleton.INDENT--;
+	}
+
 	/** */
 	public boolean accept(Player p) {
 		Skeleton.indentPrint("Pump : accept()");
