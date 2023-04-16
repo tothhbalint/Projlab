@@ -194,10 +194,10 @@ public class Skeleton {
         if (elementType.equals("0")){
             System.out.println("Simulating fix pipe:");
             System.out.println("Creating conditions for broken pipe");
-            INDENT++;
+            INDENT += 2;
             Pipe position = (Pipe) elementHashMap.get("pipe1");
             position.setDamaged(true);
-            INDENT--;
+            INDENT -= 2;
             Plumber player = (Plumber) playerHashMap.get("plumber");
             player.setPosition(position);
             player.repair(position);
@@ -205,10 +205,10 @@ public class Skeleton {
         } else if (elementType.equals("1")){
             System.out.println("Simulating fix pump:");
             System.out.println("Creating conditions for broken pump");
-            INDENT++;
+            INDENT += 2;
             Pump position = (Pump) elementHashMap.get("pump");
             position.setDamaged(true);
-            INDENT--;
+            INDENT -= 2;
             Plumber player = (Plumber) playerHashMap.get("plumber");
             player.setPosition(position);
             player.repair(position);
@@ -220,9 +220,8 @@ public class Skeleton {
         scanner.nextLine();
 
     }
-    //TODO Buzas
+    //DONE - Buzas
     public static void pickUpPump(){
-        //TODO
         init();
         System.out.println("Is the plumber's inventory full?:");
         System.out.println("""
