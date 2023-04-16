@@ -1,3 +1,4 @@
+import java.awt.image.ComponentSampleModel;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -6,6 +7,8 @@ public class Skeleton {
     static Team plumberTeam;
 
     static Team nomadTeam;
+
+    static HashMap<String, NetworkElement> elementHashMap = new HashMap<>();
 
 
     static NetworkMap nMap = new NetworkMap();
@@ -86,8 +89,6 @@ public class Skeleton {
             }
         }
     }
-
-
 
     public static void resetSkeleton(){
         noOfPlayers = 0;
