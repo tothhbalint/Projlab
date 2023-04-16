@@ -20,9 +20,19 @@ public class Pipe extends NetworkElement {
 	
 	/** */
 	public void setInput(NetworkElement input) {
+		Skeleton.indentPrint("Pipe : setInput()");
+		Skeleton.INDENT++;
+		input.setOutput(this);
+		Skeleton.indentPrint("Input set");
+		Skeleton.INDENT--;
 	}
 
 	public void setOutput(NetworkElement output) {
+		Skeleton.indentPrint("Pipe : setOutput()");
+		Skeleton.INDENT++;
+		output.setInput(this);
+		Skeleton.indentPrint("Output set");
+		Skeleton.INDENT--;
 	}
 	
 	@Override

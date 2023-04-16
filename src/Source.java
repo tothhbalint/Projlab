@@ -17,7 +17,24 @@ public class Source extends NetworkElement {
 	/** */
 	public void tick() {
 	}
-	
+
+	@Override
+	void setInput(NetworkElement input) {
+		Skeleton.indentPrint("Source : setInput()");
+		Skeleton.INDENT++;
+		Skeleton.indentPrint("Source has no input");
+		Skeleton.INDENT--;
+	}
+
+	@Override
+	void setOutput(NetworkElement output) {
+		Skeleton.indentPrint("Source : setOutput()");
+		Skeleton.INDENT++;
+		output.setInput(this);
+		Skeleton.indentPrint("Output set");
+		Skeleton.INDENT--;
+	}
+
 	/** */
 	public boolean accept(Player p) {
 		Skeleton.indentPrint("Source : accept()");

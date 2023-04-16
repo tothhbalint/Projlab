@@ -24,7 +24,24 @@ public class Cistern extends NetworkElement {
 	/** */
 	public void tick() {
 	}
-	
+
+	@Override
+	void setInput(NetworkElement input) {
+		Skeleton.indentPrint("Cistern : setInput()");
+		Skeleton.INDENT++;
+		input.setOutput(this);
+		Skeleton.indentPrint("Input set");
+		Skeleton.INDENT--;
+	}
+
+	@Override
+	void setOutput(NetworkElement output) {
+		Skeleton.indentPrint("Cistern : setOutput()");
+		Skeleton.INDENT++;
+		Skeleton.indentPrint("Cistern has no output");
+		Skeleton.INDENT--;
+	}
+
 	/** */
 	public boolean accept(Player p) {
 		return false;
