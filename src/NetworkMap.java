@@ -19,13 +19,16 @@ public class NetworkMap {
 		Skeleton.elementHashMap.put("cistern", new Cistern());
 		Skeleton.elementHashMap.put("source", new Source());
 
-		Skeleton.elementHashMap.get("pump").direct(Skeleton.elementHashMap.get("pipe1"), Skeleton.elementHashMap.get("pipe2"));
+		Skeleton.elementHashMap.get("pump").setInput(Skeleton.elementHashMap.get("pipe1"));
+		Skeleton.elementHashMap.get("pump").setOutput(Skeleton.elementHashMap.get("pipe2"));
 
+		Skeleton.elementHashMap.get("source").setOutput(Skeleton.elementHashMap.get("pipe1"));
 		Skeleton.elementHashMap.get("pipe1").setInput(Skeleton.elementHashMap.get("source"));
 		Skeleton.elementHashMap.get("pipe1").setOutput(Skeleton.elementHashMap.get("pump"));
 
 		Skeleton.elementHashMap.get("pipe2").setInput(Skeleton.elementHashMap.get("pump"));
 		Skeleton.elementHashMap.get("pipe2").setOutput(Skeleton.elementHashMap.get("cistern"));
+		Skeleton.elementHashMap.get("cistern").setInput(Skeleton.elementHashMap.get("pipe2"));
 
 		Skeleton.indentPrint("NetworkMap built");
 		Skeleton.INDENT--;

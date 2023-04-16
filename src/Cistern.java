@@ -29,7 +29,6 @@ public class Cistern extends NetworkElement {
 	void setInput(NetworkElement input) {
 		Skeleton.indentPrint("Cistern : setInput()");
 		Skeleton.INDENT++;
-		input.setOutput(this);
 		Skeleton.indentPrint("Input set");
 		Skeleton.INDENT--;
 	}

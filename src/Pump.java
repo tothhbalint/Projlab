@@ -28,7 +28,7 @@ public class Pump extends NetworkElement {
 	void setInput(NetworkElement input) {
 		Skeleton.indentPrint("Pump : setInput()");
 		Skeleton.INDENT++;
-		Skeleton.indentPrint("Input can not be set this way");
+		Skeleton.indentPrint("Input set");
 		Skeleton.INDENT--;
 	}
 
@@ -36,7 +36,7 @@ public class Pump extends NetworkElement {
 	void setOutput(NetworkElement output) {
 		Skeleton.indentPrint("Pump : setOutput()");
 		Skeleton.INDENT++;
-		Skeleton.indentPrint("Output can not be set this way");
+		Skeleton.indentPrint("Output set");
 		Skeleton.INDENT--;
 	}
 
