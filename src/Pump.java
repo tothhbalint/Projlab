@@ -89,4 +89,8 @@ public class Pump extends NetworkElement {
 	public void recieveWater(NetworkElement ne) {
 		Skeleton.indentPrint("Pump : recieveWater()");
 	}
+
+	public void setDamaged(boolean b) {
+		Skeleton.indentPrint("Pump : setDamaged()");
+	}
 }
