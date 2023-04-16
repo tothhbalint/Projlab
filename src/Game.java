@@ -10,9 +10,11 @@
 public class Game {
 	/** */
 	public void startGame() {
+		System.out.println("Game: startGame()");
 	}
 	
 	/** */
 	public void endGame() {
+		System.out.println("Game: endGame()");
 	}
 }

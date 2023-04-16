@@ -36,17 +36,21 @@ public class Cistern extends NetworkElement {
 	
 	/** */
 	public void pickUpPump(Inventory inv) {
+		System.out.println("Cistern : pickUpPump()");
 	}
 	
 	/** */
 	public void addConnection(NetworkElement ne) {
+		System.out.println("Cistern : addConnection()");
 	}
 	
 	/** */
 	public void removeConnection(NetworkElement ne) {
+		System.out.println("Cistern : removeConnection()");
 	}
 	
 	/** */
 	public void recieveWater(NetworkElement ne) {
+		System.out.println("Cistern : recieveWater()");
 	}
 }
