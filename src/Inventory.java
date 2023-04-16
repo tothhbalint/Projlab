@@ -10,9 +10,11 @@
 public class Inventory {
 	/** */
 	public void addItem(NetworkElement ne) {
+		System.out.println("Inventory: addItem()");
 	}
 	
 	/** */
 	public void removeItem(NetworkElement ne) {
+		System.out.println("Inventory: removeItem()");
 	}
 }
