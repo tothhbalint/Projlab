@@ -17,4 +17,11 @@ public class Inventory {
 	public void removeItem(NetworkElement ne) {
 		Skeleton.indentPrint("Inventory: removeItem()");
 	}
+
+	/** */
+	public void isFull() {
+		Skeleton.indentPrint("Inventory: isFull()");
+	}
+
+
 }

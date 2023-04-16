@@ -181,7 +181,7 @@ public class Skeleton {
             System.out.println("Invalid input");
         }
     }
-    //TODO Buzas
+    //DONE - Buzas
     public static void fixElement(){
         init();
         System.out.println("What kind of Element do you want to fix?");
@@ -222,6 +222,43 @@ public class Skeleton {
     //TODO Buzas
     public static void pickUpPump(){
         //TODO
+        init();
+        System.out.println("Is the plumber's inventory full?:");
+        System.out.println("""
+                                0. Yes
+                                1. No""");
+        int inventoryFull = scanner.nextInt();
+        if (inventoryFull == 0){
+            System.out.println("Simulating pick up pump:");
+            System.out.println("Creating conditions");
+            INDENT += 2;
+            Cistern position = (Cistern) elementHashMap.get("cistern");
+            Plumber player = (Plumber) playerHashMap.get("plumber");
+            player.setPosition(position);
+            Inventory inv = new Inventory();
+            INDENT -= 2;
+            player.takePump(inv);
+            position.pickUpPump(inv);
+            System.out.println("Inventory is full, cannot pick up pump");
+        } else if (inventoryFull == 1){
+            System.out.println("Simulating pick up pump:");
+            System.out.println("Creating conditions");
+            INDENT += 2;
+            Cistern position = (Cistern) elementHashMap.get("cistern");
+            Plumber player = (Plumber) playerHashMap.get("plumber");
+            player.setPosition(position);
+            Inventory inv = new Inventory();
+            INDENT -= 2;
+            player.takePump(inv);
+            position.pickUpPump(inv);
+            Pump newPump = new Pump();
+            inv.addItem(newPump);
+            System.out.println("Pump picked up");
+        } else {
+            System.out.println("Invalid input");
+        }
+        System.out.println("\nPress enter to continue");
+        scanner.nextLine();
     }
     //TODO Marki
     public static void placePump(){
