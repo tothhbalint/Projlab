@@ -3,18 +3,12 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 public class Skeleton {
-
     static Team plumberTeam;
-
     static Team nomadTeam;
 
     static HashMap<String, NetworkElement> elementHashMap = new HashMap<>();
-
     static HashMap<String, Player> playerHashMap = new HashMap<>();
-
-
     static NetworkMap nMap = new NetworkMap();
-
     static Scanner scanner = new Scanner(System.in);
 
     static int INDENT = 0;
@@ -191,7 +185,41 @@ public class Skeleton {
     }
     //TODO Buzas
     public static void fixElement(){
-        //TODO
+        init();
+        System.out.println("What kind of Element do you want to fix?");
+        System.out.println("""
+                                0. Pipe
+                                1. Pump
+                                """);
+        String elementType = scanner.nextLine();
+        if (elementType.equals("0")){
+            System.out.println("Simulating fix pipe:");
+            System.out.println("Creating conditions for broken pipe");
+            INDENT++;
+            Pipe position = (Pipe) elementHashMap.get("pipe1");
+            position.setDamaged(true);
+            INDENT--;
+            Plumber player = (Plumber) playerHashMap.get("plumber");
+            player.setPosition(position);
+            player.repair(position);
+
+        } else if (elementType.equals("1")){
+            System.out.println("Simulating fix pump:");
+            System.out.println("Creating conditions for broken pump");
+            INDENT++;
+            Pump position = (Pump) elementHashMap.get("pump");
+            position.setDamaged(true);
+            INDENT--;
+            Plumber player = (Plumber) playerHashMap.get("plumber");
+            player.setPosition(position);
+            player.repair(position);
+
+        } else {
+            System.out.println("Invalid input");
+        }
+        System.out.println("\nPress enter to continue");
+        scanner.nextLine();
+
     }
     //TODO Buzas
     public static void pickUpPump(){

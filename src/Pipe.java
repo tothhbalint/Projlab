@@ -60,4 +60,8 @@ public class Pipe extends NetworkElement {
 	public void recieveWater(NetworkElement ne) {
 		Skeleton.indentPrint("Pipe : recieveWater()");
 	}
+
+	public void setDamaged(boolean b) {
+		Skeleton.indentPrint("Pipe : setDamaged()");
+	}
 }
