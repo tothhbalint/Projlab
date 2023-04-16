@@ -6,9 +6,6 @@
 //
 //
 
-
-
-
 /** */
 public interface ITimer {
 	/** */

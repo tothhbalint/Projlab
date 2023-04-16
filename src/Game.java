@@ -6,23 +6,8 @@
 //
 //
 
-
-
-
 /** */
 public class Game {
-	/** */
-	private Team teams;
-	
-	/** */
-	protected NetworkMap map;
-	
-	/** */
-	private Team nomadTeam;
-	
-	/** */
-	private Team plumberTeam;
-	
 	/** */
 	public void startGame() {
 	}

@@ -5,20 +5,8 @@
 //
 //
 
-
-
-
 /** */
 public class Pump extends NetworkElement {
-	/** */
-	private int age;
-	
-	/** */
-	private NetworkElement input;
-	
-	/** */
-	private NetworkElement output;
-	
 	@Override
 	public boolean isConnected(NetworkElement ne) {
 		return false;

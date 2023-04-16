@@ -7,8 +7,6 @@
 //
 
 
-
-
 /** */
 public interface IMove {
 	/** */

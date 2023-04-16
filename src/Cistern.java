@@ -6,9 +6,6 @@
 //
 //
 
-
-
-
 /** */
 public class Cistern extends NetworkElement {
 	/** */
@@ -29,10 +26,12 @@ public class Cistern extends NetworkElement {
 	
 	/** */
 	public void remove(Player p) {
+		System.out.println("Cistern : remove()");
 	}
 	
 	/** */
 	public void direct(NetworkElement n) {
+		System.out.println("Cistern : direct()");
 	}
 	
 	/** */

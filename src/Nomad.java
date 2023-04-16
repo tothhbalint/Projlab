@@ -6,7 +6,6 @@
 //
 //
 
-
 /** */
 public class Nomad extends Player {
 	/** */

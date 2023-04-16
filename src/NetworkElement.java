@@ -6,32 +6,8 @@
 //
 //
 
-
-
-
 /** */
 public abstract class NetworkElement implements ITimer, IMove {
-	/** */
-	protected int capacity;
-	
-	/** */
-	protected boolean hasWater;
-	
-	/** */
-	protected boolean damaged;
-	
-	/** */
-	private static int nomadPoints;
-	
-	/** */
-	private static int plumberPoints;
-	
-	/** */
-	protected Player occupants;
-	
-	/** */
-	public NetworkElement connections;
-	
 	/** */
 	public abstract void tick();
 	
@@ -61,32 +37,36 @@ public abstract class NetworkElement implements ITimer, IMove {
 	
 	/** */
 	public void setWaterState(boolean b) {
+		System.out.println("NetworkElement : setWaterState()");
 	}
 	
 	/** */
-	public static int getNomadPoints() {
-		return 0;
+	public static void getNomadPoints() {
+		System.out.println("NetworkElement : getNomadPoints()");
 	}
 	
 	/** */
-	public static int getPlumberPoints() {
-		return 0;
+	public static void getPlumberPoints() {
+		System.out.println("NetworkElement : getPlumberPoints()");
 	}
 	
 	/** */
 	private void increaseNomadPoint() {
+		System.out.println("NetworkElement : increaseNomadPoint()");
 	}
 	
 	/** */
 	private void increasePlumberPoint() {
+		System.out.println("NetworkElement : increasePlumberPoint()");
 	}
 	
 	/** */
-	public boolean isOccupied() {
-		return false;
+	public void isOccupied() {
+		System.out.println("NetworkElement : isOccupied() : boolean");
 	}
 	
 	/** */
-	public void setOccupied(boolean b) {
+	public void setOccupied() {
+		System.out.println("NetworkElement : setOccupied()");
 	}
 }

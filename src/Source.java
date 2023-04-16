@@ -6,12 +6,8 @@
 //
 //
 
-
-
-
 /** */
 public class Source extends NetworkElement {
-
 	/** */
 	public void tick() {
 	}

@@ -6,17 +6,8 @@
 //
 //
 
-
-
-
 /** */
 public class Inventory {
-	/** */
-	private Player owner;
-	
-	/** */
-	private NetworkElement elements;
-	
 	/** */
 	public void addItem(NetworkElement ne) {
 	}

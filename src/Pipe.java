@@ -6,17 +6,8 @@
 //
 //
 
-
-
-
 /** */
 public class Pipe extends NetworkElement {
-	/** */
-	private int input;
-	
-	/** */
-	private int output;
-	
 	/** */
 	public void tick() {
 	}
@@ -25,7 +16,6 @@ public class Pipe extends NetworkElement {
 	public void setInput() {
 	}
 	
-
 	@Override
 	public boolean isConnected(NetworkElement ne) {
 		return false;

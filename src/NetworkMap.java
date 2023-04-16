@@ -6,14 +6,8 @@
 //
 //
 
-
-
-
 /** */
 public class NetworkMap {
-	/** */
-	private NetworkElement elements;
-	
 	/** */
 	public void build() {
 	}

@@ -6,17 +6,8 @@
 //
 //
 
-
-
-
 /** */
 public class Team {
-	/** */
-	private int points;
-	
-	/** */
-	private Player members;
-	
 	/** */
 	public void addPoints(int i) {
 	}
