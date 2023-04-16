@@ -6,6 +6,7 @@ public class Skeleton {
     static Team plumberTeam;
     static Team nomadTeam;
 
+
     static HashMap<String, NetworkElement> elementHashMap = new HashMap<>();
     static HashMap<String, Player> playerHashMap = new HashMap<>();
     static NetworkMap nMap = new NetworkMap();
@@ -225,7 +226,61 @@ public class Skeleton {
     }
     //TODO Marki
     public static void placePump(){
-        //TODO
+        init();
+        System.out.println("What kind of player do you want to place a pump with?");
+        System.out.println("""
+                                0. Plumber
+                                1. Nomad""");
+        String playerType = scanner.nextLine();
+
+        String playerPosition = "0";
+        if(playerType.equals("0")) {
+            System.out.println("Where is the player standing?");
+            System.out.println("""
+                    0. Cistern
+                    1. Pipe
+                    2. Pump
+                    """);
+            playerPosition = scanner.nextLine();
+        }
+
+        if(playerType.equals("0")) {
+            if(playerPosition.equals("0")) {
+                playerHashMap.get("plumber").placePump();
+                Skeleton.INDENT++;
+                indentPrint("Cannot place pipe on position");
+                Skeleton.INDENT--;
+            } else if(playerPosition.equals("1")) {
+                System.out.println("Creating conditions for placing pump");
+                Skeleton.INDENT++;
+                Inventory inventory = new Inventory();
+                Skeleton.INDENT--;
+                playerHashMap.get("plumber").placePump();
+                Skeleton.INDENT++;
+                inventory.removeItem(elementHashMap.get("pump"));
+                Pipe newPipe = new Pipe();
+                elementHashMap.get("pump").direct(elementHashMap.get("pipe1"), newPipe);
+                INDENT++;
+                elementHashMap.get("pump").setInput(newPipe);
+                indentPrint("Pipe : getOutput()");
+                newPipe.setOutput(elementHashMap.get("pump"));
+                elementHashMap.get("pump").setInput(elementHashMap.get("pipe1"));
+                elementHashMap.get("pipe1").setOutput(elementHashMap.get("pump"));
+                INDENT -= 2;
+            } else if(playerPosition.equals("2")) {
+                playerHashMap.get("plumber").placePump();
+                Skeleton.INDENT++;
+                indentPrint("Cannot place pipe on position");
+                Skeleton.INDENT--;
+            } else {
+                System.out.println("Invalid input");
+            }
+        } else if(playerType.equals("1")) {
+            playerHashMap.get("nomad").placePump();
+        } else {
+            System.out.println("Invalid input");
+        }
+        scanner.nextLine();
     }
     //TODO Bence
     public static void destroyPipe(){

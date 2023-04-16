@@ -17,6 +17,7 @@ public class Pipe extends NetworkElement {
 	/** */
 	public void tick() {
 	}
+
 	
 	/** */
 	public void setInput(NetworkElement input) {
