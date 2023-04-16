@@ -29,4 +29,11 @@ public class Inventory {
 		Skeleton.indentPrint("Item removed from inventory");
 		Skeleton.INDENT--;
 	}
+
+	/** */
+	public void isFull() {
+		Skeleton.indentPrint("Inventory: isFull()");
+	}
+
+
 }
