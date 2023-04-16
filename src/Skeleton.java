@@ -3,31 +3,38 @@ import java.util.Scanner;
 
 public class Skeleton {
 
-    HashMap<Integer, Player> players = new HashMap<>();
-    HashMap<Integer, Team> teams = new HashMap<>();
-    HashMap<Integer, NetworkElement> elements = new HashMap<>();
-    HashMap<Integer, Inventory> inventories = new HashMap<>();
+    static Team plumberTeam;
 
+    static Team nomadTeam;
+
+    static Scanner scanner = new Scanner(System.in);
+
+    static int INDENT = 0;
+    static int noOfPlayers = 0;
+    static int noOfTeams = 0;
+    static int noOfElements = 0;
+    static int noOfInventories = 0;
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
         while(true){
-            System.out.println("Choose a situation to simulate:");
+            resetSkeleton();
 
-            System.out.println("0. Init" +
-                    "1. Create Team" +
-                    "\n2. Move player" +
-                    "\n3. Direct pump" +
-                    "\n4. Fix element" +
-                    "\n5. Pick up pump" +
-                    "\n6. Place pump" +
-                    "\n7. Destroy pipe" +
-                    "\n8. Water flows" +
-                    "\n9. Pipe spawns" +
-                    "\n10. Disconnect pipe" +
-                    "\n11. Connect pipe" +
-                    "\n12. End of round" +
-                    "\n13. Exit");
+            System.out.println("Choose a situation to simulate:");
+            System.out.println("""
+                                0. Init
+                                1. Create Team
+                                2. Move player
+                                3. Direct pump
+                                4. Fix element
+                                5. Pick up pump
+                                6. Place pump
+                                7. Destroy pipe
+                                8. Water flows
+                                9. Pipe spawns
+                                10. Disconnect pipe
+                                11. Connect pipe
+                                12. End of round
+                                13. Exit""");
 
             switch (scanner.nextLine()){
                 case "0":
@@ -73,17 +80,49 @@ public class Skeleton {
                     System.exit(0);
                 default:
                     System.out.println("Invalid input");
+            }
         }
     }
+
+    public static void resetSkeleton(){
+        noOfPlayers = 0;
+        noOfTeams = 0;
+        noOfElements = 0;
+        noOfInventories = 0;
+
+        plumberTeam = null;
+        nomadTeam = null;
     }
 
     public static void init(){
         //TODO
+        createTeam();
+        createTeam();
+
+        NetworkMap nMap = new NetworkMap();
+        nMap.build();
+
+        System.out.println("Finished initializing \n Press enter to continue");
+        scanner.nextLine();
     }
 
     public static void createTeam(){
-        init();
         //TODO
+        System.out.println("What kind of team do you want to create?");
+        System.out.println("""
+                                0. Plumber
+                                1. Nomad""");
+        String teamType = scanner.nextLine();
+        System.out.println("How many players do you want to create?");
+        int noOfPlayers = Integer.parseInt(scanner.nextLine());
+
+        if(teamType.equals("0")){
+            plumberTeam.createPlumberTeam("Plumbers", noOfPlayers);
+        } else if(teamType.equals("1")){
+            nomadTeam.createNomadTeam("Nomads", noOfPlayers);
+        } else {
+            System.out.println("Invalid input");
+        }
     }
 
     public static void movePlayer(){
