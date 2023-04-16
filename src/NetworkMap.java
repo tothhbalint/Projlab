@@ -10,15 +10,12 @@
 public class NetworkMap {
 	/** */
 	public void build() {
-		Pump pump = new Pump();
-		Pipe pipe = new Pipe();
-		Cistern cistern = new Cistern();
-		Source source = new Source();
-
-		Skeleton.elementHashMap.put("pump", pump);
-		Skeleton.elementHashMap.put("pipe", pipe);
-		Skeleton.elementHashMap.put("cistern", cistern);
-		Skeleton.elementHashMap.put("source", source);
+		Skeleton.elementHashMap.put("pump", new Pump());
+		Skeleton.elementHashMap.put("pipe1", new Pipe());
+		Skeleton.elementHashMap.put("pipe2", new Pipe());
+		Skeleton.elementHashMap.put("pipe3", new Pipe());
+		Skeleton.elementHashMap.put("cistern", new Cistern());
+		Skeleton.elementHashMap.put("source", new Source());
 	}
 	
 	/** */
