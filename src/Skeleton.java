@@ -1,15 +1,21 @@
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Scanner;
 
 public class Skeleton {
+
+    HashMap<Integer, Player> players = new HashMap<>();
+    HashMap<Integer, Team> teams = new HashMap<>();
+    HashMap<Integer, NetworkElement> elements = new HashMap<>();
+    HashMap<Integer, Inventory> inventories = new HashMap<>();
+
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         while(true){
             System.out.println("Choose a situation to simulate:");
 
-            System.out.println("1. Create Team" +
+            System.out.println("0. Init" +
+                    "1. Create Team" +
                     "\n2. Move player" +
                     "\n3. Direct pump" +
                     "\n4. Fix element" +
@@ -22,42 +28,46 @@ public class Skeleton {
                     "\n11. Connect pipe" +
                     "\n12. End of round" +
                     "\n13. Exit");
+
             switch (scanner.nextLine()){
+                case "0":
+                    init();
+                    break;
                 case "1":
-                    System.out.println("Create Team");
+                    createTeam();
                     break;
                 case "2":
-                    System.out.println("Move player");
+                    movePlayer();
                     break;
                 case "3":
-                    System.out.println("Direct pump");
+                    directPump();
                     break;
                 case "4":
-                    System.out.println("Fix element");
+                    fixElement();
                     break;
                 case "5":
-                    System.out.println("Pick up pump");
+                    pickUpPump();
                     break;
                 case "6":
-                    System.out.println("Place pump");
+                    placePump();
                     break;
                 case "7":
-                    System.out.println("Destroy pipe");
+                    destroyPipe();
                     break;
                 case "8":
-                    System.out.println("Water flows");
+                    waterFlows();
                     break;
                 case "9":
-                    System.out.println("Pipe spawns");
+                    pipeSpawns();
                     break;
                 case "10":
-                    System.out.println("Disconnect pipe");
+                    disconnectPipe();
                     break;
                 case "11":
-                    System.out.println("Connect pipe");
+                    connectPipe();
                     break;
                 case "12":
-                    System.out.println("End of round");
+                    endOfRound();
                     break;
                 case "13":
                     System.exit(0);
@@ -67,4 +77,56 @@ public class Skeleton {
     }
     }
 
+    public static void init(){
+        //TODO
+    }
+
+    public static void createTeam(){
+        init();
+        //TODO
+    }
+
+    public static void movePlayer(){
+        //TODO
+    }
+
+    public static void directPump(){
+        //TODO
+    }
+
+    public static void fixElement(){
+        //TODO
+    }
+
+    public static void pickUpPump(){
+        //TODO
+    }
+
+    public static void placePump(){
+        //TODO
+    }
+
+    public static void destroyPipe(){
+        //TODO
+    }
+
+    public static void waterFlows(){
+        //TODO
+    }
+
+    public static void pipeSpawns(){
+        //TODO
+    }
+
+    public static void disconnectPipe(){
+        //TODO
+    }
+
+    public static void connectPipe(){
+        //TODO
+    }
+
+    public static void endOfRound() {
+        //TODO
+    }
 }
