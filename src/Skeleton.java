@@ -40,50 +40,22 @@ public class Skeleton {
                                 12. End of round
                                 13. Exit""");
 
-            switch (scanner.nextLine()){
-                case "0":
-                    init();
-                    break;
-                case "1":
-                    createTeam();
-                    break;
-                case "2":
-                    movePlayer();
-                    break;
-                case "3":
-                    directPump();
-                    break;
-                case "4":
-                    fixElement();
-                    break;
-                case "5":
-                    pickUpPump();
-                    break;
-                case "6":
-                    placePump();
-                    break;
-                case "7":
-                    destroyPipe();
-                    break;
-                case "8":
-                    waterFlows();
-                    break;
-                case "9":
-                    pipeSpawns();
-                    break;
-                case "10":
-                    disconnectPipe();
-                    break;
-                case "11":
-                    connectPipe();
-                    break;
-                case "12":
-                    endOfRound();
-                    break;
-                case "13":
-                    System.exit(0);
-                default:
-                    System.out.println("Invalid input");
+            switch (scanner.nextLine()) {
+                case "0" -> init();
+                case "1" -> createTeam();
+                case "2" -> movePlayer();
+                case "3" -> directPump();
+                case "4" -> fixElement();
+                case "5" -> pickUpPump();
+                case "6" -> placePump();
+                case "7" -> destroyPipe();
+                case "8" -> waterFlows();
+                case "9" -> pipeSpawns();
+                case "10" -> disconnectPipe();
+                case "11" -> connectPipe();
+                case "12" -> endOfRound();
+                case "13" -> System.exit(0);
+                default -> System.out.println("Invalid input");
             }
         }
     }
