@@ -79,52 +79,66 @@ public abstract class Player {
 
     public NetworkElement getPosition(){
         Skeleton.indentPrint("Player: getPosition()");
-        return new NetworkElement() {
-            @Override
-            public void tick() {
 
-            }
+        Skeleton.INDENT++;
 
-            @Override
-            void setInput(NetworkElement input) {
+        Skeleton.indentPrint("Where is the player standing?");
+        Skeleton.indentPrint("0. Cistern");
+        Skeleton.indentPrint("1. Pipe");
+        Skeleton.indentPrint("2. Pump");
+        String playerPosition = Skeleton.scanner.nextLine();
 
-            }
+        return switch (playerPosition) {
+            case "0" -> Skeleton.elementHashMap.get("cistern");
+            case "1" -> Skeleton.elementHashMap.get("pipe1");
+            case "2" -> Skeleton.elementHashMap.get("pump");
+            default -> new NetworkElement() {
+                @Override
+                public void tick() {
 
-            @Override
-            void setOutput(NetworkElement output) {
+                }
 
-            }
+                @Override
+                void setInput(NetworkElement input) {
 
-            @Override
-            public void remove(Player p) {
-                Skeleton.indentPrint("NetworkElement: remove()");
+                }
 
-            }
+                @Override
+                void setOutput(NetworkElement output) {
 
-            @Override
-            public void direct(NetworkElement ne1, NetworkElement ne2) {
+                }
 
-            }
+                @Override
+                public void remove(Player p) {
+                    Skeleton.indentPrint("NetworkElement: remove()");
 
-            @Override
-            public void pickUpPump(Inventory inv) {
+                }
 
-            }
+                @Override
+                public void direct(NetworkElement ne1, NetworkElement ne2) {
 
-            @Override
-            public void addConnection(NetworkElement ne) {
+                }
 
-            }
+                @Override
+                public void pickUpPump(Inventory inv) {
 
-            @Override
-            public void removeConnection(NetworkElement ne) {
+                }
 
-            }
+                @Override
+                public void addConnection(NetworkElement ne) {
 
-            @Override
-            public void recieveWater(NetworkElement ne) {
+                }
 
-            }
+                @Override
+                public void removeConnection(NetworkElement ne) {
+
+                }
+
+                @Override
+                public void recieveWater(NetworkElement ne) {
+
+                }
+            };
         };
     }
 

@@ -13,6 +13,9 @@ public class Nomad extends Player {
 	/** */
 	public void breakElement(NetworkElement ne) {
 		Skeleton.indentPrint("Nomad: breakElement()");
+		Skeleton.INDENT++;
+
+		ne.setDamaged(true);
 	}
 	
 	/** */
