@@ -25,9 +25,11 @@ public abstract class NetworkElement implements ITimer, IMove {
 			oldPos.setOccupied();
 			setOccupied();
 			Skeleton.indentPrint("Player accepted");
+			Skeleton.INDENT--;
 			return true;
 		}else {
 			Skeleton.indentPrint("Player rejected");
+			Skeleton.INDENT--;
 			return false;
 		}
 	}

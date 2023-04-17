@@ -44,6 +44,7 @@ public abstract class Player {
         } else {
             Skeleton.indentPrint("Player can't move");
         }
+        Skeleton.INDENT--;
     }
 
     /**
@@ -78,7 +79,6 @@ public abstract class Player {
 
     public NetworkElement getPosition(){
         Skeleton.indentPrint("Player: getPosition()");
-        Skeleton.INDENT--;
         return new NetworkElement() {
             @Override
             public void tick() {
@@ -97,7 +97,7 @@ public abstract class Player {
 
             @Override
             public void remove(Player p) {
-                Skeleton.indentPrint("Player: remove()");
+                Skeleton.indentPrint("NetworkElement: remove()");
 
             }
 
