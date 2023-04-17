@@ -427,7 +427,9 @@ public class Skeleton {
     }
     //TODO Matyikaa
     public static void pipeSpawns(){
-        //TODO
+        init();
+
+
     }
     //TODO Marki
     public static void disconnectPipe(){

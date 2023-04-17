@@ -73,4 +73,11 @@ public class NetworkMap {
 		Skeleton.indentPrint("NetworkElements connected");
 		//Skeleton.INDENT--;
 	}
+	public void tick(){
+		//TODO
+	}
+
+	public void addElement(NetworkElement ne){
+		Skeleton.indentPrint("NetworkElement successfully added");
+	}
 }
