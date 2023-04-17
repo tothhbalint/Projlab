@@ -5,7 +5,6 @@ import java.util.Scanner;
 public class Skeleton {
     static Team plumberTeam;
     static Team nomadTeam;
-
     static Game game = new Game();
 
     static HashMap<String, NetworkElement> elementHashMap = new HashMap<>();
@@ -80,6 +79,8 @@ public class Skeleton {
         nMap = new NetworkMap();
 
         nMap.build();
+
+        System.out.println("\nPress enter to continue");
         scanner.nextLine();
     }
     public static void createTeam(){
@@ -101,6 +102,7 @@ public class Skeleton {
         } else {
             System.out.println("Invalid input");
         }
+        System.out.println("\nPress enter to continue");
         scanner.nextLine();
     }
     public static void movePlayer(){
@@ -139,7 +141,7 @@ public class Skeleton {
         } else {
             System.out.println("Invalid input");
         }
-
+        System.out.println("\nPress enter to continue");
         scanner.nextLine();
     }
     public static void directPump(){
@@ -157,6 +159,8 @@ public class Skeleton {
         } else {
             System.out.println("Invalid input");
         }
+        System.out.println("\nPress enter to continue");
+        scanner.nextLine();
     }
     //DONE - Buzas
     public static void fixElement(){
@@ -185,7 +189,6 @@ public class Skeleton {
             indentPrint("Invalid input");
         }
         System.out.println("\nPress enter to continue");
-        scanner.nextLine();
         scanner.nextLine();
     }
     //DONE Marki
@@ -251,6 +254,7 @@ public class Skeleton {
             System.out.println("Invalid input");
         }
         INDENT--;
+        System.out.println("\nPress enter to continue");
         scanner.nextLine();
     }
     //TODO Matyikaa DONE
@@ -403,7 +407,7 @@ public class Skeleton {
         } else {
             System.out.println("Invalid input");
         }
-        scanner.nextLine();
+        System.out.println("\nPress enter to continue");
         scanner.nextLine();
 
     }
@@ -521,6 +525,7 @@ public class Skeleton {
             System.out.println("Invalid input");
         }
         INDENT--;
+        System.out.println("\nPress enter to continue");
         scanner.nextLine();
     }
     //DONE Marki
@@ -588,12 +593,14 @@ public class Skeleton {
             System.out.println("Invalid input");
         }
         INDENT--;
+        System.out.println("\nPress enter to continue");
         scanner.nextLine();
     }
     //TODO Toti
     public static void endOfRound() {
         init();
         game.tick();
+        System.out.println("\nPress enter to continue");
         scanner.nextLine();
     }
 
