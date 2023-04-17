@@ -84,6 +84,9 @@ public class Cistern extends NetworkElement {
 	/** */
 	public void removeConnection(NetworkElement ne) {
 		Skeleton.indentPrint("Cistern : removeConnection()");
+		Skeleton.INDENT++;
+		Skeleton.indentPrint("Connection removed");
+		Skeleton.INDENT--;
 	}
 
 	/**

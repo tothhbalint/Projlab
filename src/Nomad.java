@@ -42,5 +42,8 @@ public class Nomad extends Player {
 	/** */
 	public void disconnectPipe(NetworkElement ne) {
 		Skeleton.indentPrint("Nomad: disconnectPipe()");
+		Skeleton.INDENT++;
+		Skeleton.indentPrint("Nomads cannot disconnect pipes");
+		Skeleton.INDENT--;
 	}
 }
