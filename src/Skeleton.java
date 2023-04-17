@@ -75,7 +75,8 @@ public class Skeleton {
         plumberTeam.createPlumberTeam("Plumbers", 2);
         nomadTeam = new Team();
         nomadTeam.createNomadTeam("Nomads", 2);
-
+        INDENT = 0;
+        scanner = new Scanner(System.in);
         nMap = new NetworkMap();
 
         nMap.build();
@@ -173,37 +174,18 @@ public class Skeleton {
         init();
         System.out.println("Is the plumber's inventory full?:");
         System.out.println("""
-                                0. Yes
-                                1. No""");
+                                0. No
+                                1. Yes""");
         int inventoryFull = scanner.nextInt();
         if (inventoryFull == 0){
-            System.out.println("Simulating pick up pump:");
-            System.out.println("Creating conditions");
-            Cistern position = (Cistern) elementHashMap.get("cistern");
-            Plumber player = (Plumber) playerHashMap.get("plumber");
-            player.setPosition(position);
-            Inventory inv = new Inventory();
-            player.takePump(inv);
-            position.pickUpPump(inv);
-            System.out.println("Inventory is full, cannot pick up pump");
+
         } else if (inventoryFull == 1){
-            System.out.println("Simulating pick up pump:");
-            System.out.println("Creating conditions");
-            INDENT += 2;
-            Cistern position = (Cistern) elementHashMap.get("cistern");
-            Plumber player = (Plumber) playerHashMap.get("plumber");
-            player.setPosition(position);
-            Inventory inv = new Inventory();
-            INDENT -= 2;
-            player.takePump(inv);
-            position.pickUpPump(inv);
-            Pump newPump = new Pump();
-            inv.addItem(newPump);
-            System.out.println("Pump picked up");
+
         } else {
-            System.out.println("Invalid input");
+            indentPrint("Invalid input");
         }
         System.out.println("\nPress enter to continue");
+        scanner.nextLine();
         scanner.nextLine();
     }
     //DONE Marki
