@@ -284,9 +284,8 @@ public class Skeleton {
         scanner.nextLine();
     }
 
-    //TODO Buzas
+    //DONE - Buzas
     public static void waterFlows(){
-        //TODO
         init();
         System.out.println("Simulating water flow:");
         System.out.println("Where do you want the water to flow from?");
@@ -294,20 +293,137 @@ public class Skeleton {
                 0. Source
                 1. Pipe
                 2. Pump
-                3. flow TO cistern""");
+                3. flow TO cistern from pipe""");
         int waterFlow = scanner.nextInt();
         if (waterFlow == 0){
             Source source = (Source) elementHashMap.get("source");
+            Pipe pipe = (Pipe) elementHashMap.get("pipe1");
+            System.out.print("for all: ");
+            source.getConnections();
+            INDENT++;
+            pipe.recieveWater(source);
+            INDENT--;
 
         } else if (waterFlow == 1){
-
+            System.out.println("Should the pipe contain water?");
+            System.out.println("""
+                    0. No
+                    1. Yes""");
+            int pipeContainsWater = scanner.nextInt();
+            if(pipeContainsWater == 0){
+                INDENT++;
+                Pipe pipe = (Pipe) elementHashMap.get("pipe2");
+                pipe.setWaterState(false);
+                System.out.println("Pipe is empty, cannot transfer water");
+                INDENT--;
+            } else if(pipeContainsWater == 1){
+                INDENT++;
+                Pipe pipe2 = (Pipe) elementHashMap.get("pipe2");
+                Pump pump = (Pump) elementHashMap.get("pump");
+                pipe2.setWaterState(true);
+                System.out.println("Should the pipe be damaged?");
+                System.out.println("""
+                    0. No
+                    1. Yes""");
+                int pipeDamaged = scanner.nextInt();
+                if(pipeDamaged == 1){
+                    INDENT++;
+                    pipe2.setDamaged(true);
+                    System.out.println("Pipe is damaged, cannot transfer water");
+                    INDENT--;
+                } else if(pipeDamaged == 0){
+                    INDENT++;
+                    pipe2.recieveWater(pump);
+                    INDENT--;
+                } else {
+                    System.out.println("Invalid input");
+                }
+                INDENT--;
+            } else {
+                System.out.println("Invalid input");
+            }
         } else if (waterFlow == 2){
-
+            System.out.println("Should the pump contain water?");
+            System.out.println("""
+                    0. No
+                    1. Yes""");
+            int pumpContainsWater = scanner.nextInt();
+            if(pumpContainsWater == 0){
+                INDENT++;
+                Pump pump = (Pump) elementHashMap.get("pump");
+                pump.setWaterState(false);
+                System.out.println("Pump is empty, cannot transfer water");
+                INDENT--;
+            } else if(pumpContainsWater == 1){
+                INDENT++;
+                Pump pump = (Pump) elementHashMap.get("pump");
+                Pipe pipe2 = (Pipe) elementHashMap.get("pipe2");
+                pump.setWaterState(true);
+                System.out.println("Should the pump be damaged?");
+                System.out.println("""
+                    0. No
+                    1. Yes""");
+                int pumpDamaged = scanner.nextInt();
+                if(pumpDamaged == 1){
+                    INDENT++;
+                    pump.setDamaged(true);
+                    System.out.println("Pump is damaged, cannot transfer water");
+                    INDENT--;
+                } else if(pumpDamaged == 0){
+                    INDENT++;
+                    pump.recieveWater(pipe2);
+                    INDENT--;
+                } else {
+                    System.out.println("Invalid input");
+                }
+                INDENT--;
+            } else {
+                System.out.println("Invalid input");
+            }
         } else if (waterFlow == 3){
-
+            System.out.println("Should the pipe contain water?");
+            System.out.println("""
+                    0. No
+                    1. Yes""");
+            int pipeContainsWater = scanner.nextInt();
+            if(pipeContainsWater == 0){
+                INDENT++;
+                Pipe pipe = (Pipe) elementHashMap.get("pipe2");
+                pipe.setWaterState(false);
+                System.out.println("Pipe is empty, cannot transfer water");
+                INDENT--;
+            } else if(pipeContainsWater == 1){
+                INDENT++;
+                Pipe pipe2 = (Pipe) elementHashMap.get("pipe2");
+                Cistern cistern = (Cistern) elementHashMap.get("cistern");
+                pipe2.setWaterState(true);
+                System.out.println("Should the pipe be damaged?");
+                System.out.println("""
+                    0. No
+                    1. Yes""");
+                int pipeDamaged = scanner.nextInt();
+                if(pipeDamaged == 1){
+                    INDENT++;
+                    pipe2.setDamaged(true);
+                    System.out.println("Pipe is damaged, cannot transfer water");
+                    INDENT--;
+                } else if(pipeDamaged == 0){
+                    INDENT++;
+                    cistern.recieveWater(pipe2);
+                    INDENT--;
+                } else {
+                    System.out.println("Invalid input");
+                }
+                INDENT--;
+            } else {
+                System.out.println("Invalid input");
+            }
         } else {
             System.out.println("Invalid input");
         }
+        scanner.nextLine();
+        scanner.nextLine();
+
     }
     //TODO Matyikaa
     public static void pipeSpawns(){

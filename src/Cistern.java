@@ -85,9 +85,16 @@ public class Cistern extends NetworkElement {
 	public void removeConnection(NetworkElement ne) {
 		Skeleton.indentPrint("Cistern : removeConnection()");
 	}
-	
-	/** */
+
+	/**
+	 * Cistern receives water from the parameter NetworkElement
+	 * @param ne The NetworkElement that sends water
+	 * @author Buzas
+	 * */
 	public void recieveWater(NetworkElement ne) {
 		Skeleton.indentPrint("Cistern : recieveWater()");
+		setInput(ne);
+		setWaterState(true);
+		ne.setWaterState(false);
 	}
 }

@@ -69,7 +69,11 @@ public abstract class NetworkElement implements ITimer, IMove {
 		}
 	}
 	
-	/** */
+	/**
+	 * NetworkElement receives water from the parameter NetworkElement
+	 * @param ne The NetworkElement that sends water
+	 * @author Buzas
+	 * */
 	public abstract void recieveWater(NetworkElement ne);
 	
 	/** */
@@ -129,5 +133,13 @@ public abstract class NetworkElement implements ITimer, IMove {
 	/** */
 	public void setOccupied() {
 		Skeleton.indentPrint("NetworkElement : setOccupied()");
+	}
+
+	public void getConnections(){
+		Skeleton.indentPrint("NetworkElement : getConnections()");
+	}
+
+	public void getDamaged(){
+		Skeleton.indentPrint("NetworkElement : getDamaged()");
 	}
 }

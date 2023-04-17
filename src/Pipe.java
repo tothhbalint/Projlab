@@ -93,10 +93,17 @@ public class Pipe extends NetworkElement {
 	public void removeConnection(NetworkElement ne) {
 		Skeleton.indentPrint("Pipe : removeConnection()");
 	}
-	
-	/** */
+
+	/**
+	 * Pipe receives water from the parameter NetworkElement
+	 * @param ne The NetworkElement that sends water
+	 * @author Buzas
+	 * */
 	public void recieveWater(NetworkElement ne) {
 		Skeleton.indentPrint("Pipe : recieveWater()");
+		setInput(ne);
+		setWaterState(true);
+		ne.setWaterState(false);
 	}
 
 	public void setDamaged(boolean b) {
