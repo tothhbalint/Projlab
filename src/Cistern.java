@@ -42,11 +42,6 @@ public class Cistern extends NetworkElement {
 	}
 
 	/** */
-	public boolean accept(Player p) {
-		return false;
-	}
-	
-	/** */
 	public void remove(Player p) {
 		Skeleton.indentPrint("Cistern : remove()");
 	}

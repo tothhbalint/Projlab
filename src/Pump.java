@@ -41,12 +41,6 @@ public class Pump extends NetworkElement {
 	}
 
 	/** */
-	public boolean accept(Player p) {
-		Skeleton.indentPrint("Pump : accept()");
-		return false;
-	}
-	
-	/** */
 	public void remove(Player p) {
 		Skeleton.indentPrint("Pump : remove()");
 	}

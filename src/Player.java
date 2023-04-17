@@ -36,6 +36,14 @@ public abstract class Player {
      */
     public void move(NetworkElement ne) {
         Skeleton.indentPrint("Player: move()");
+        Skeleton.INDENT++;
+
+        if(ne.accept(this)) {
+            setPosition(ne);
+            Skeleton.indentPrint("Player moved");
+        } else {
+            Skeleton.indentPrint("Player can't move");
+        }
     }
 
     /**
@@ -66,6 +74,58 @@ public abstract class Player {
         }
 
         Skeleton.INDENT--;
+    }
+
+    public NetworkElement getPosition(){
+        Skeleton.indentPrint("Player: getPosition()");
+        Skeleton.INDENT--;
+        return new NetworkElement() {
+            @Override
+            public void tick() {
+
+            }
+
+            @Override
+            void setInput(NetworkElement input) {
+
+            }
+
+            @Override
+            void setOutput(NetworkElement output) {
+
+            }
+
+            @Override
+            public void remove(Player p) {
+                Skeleton.indentPrint("Player: remove()");
+
+            }
+
+            @Override
+            public void direct(NetworkElement ne1, NetworkElement ne2) {
+
+            }
+
+            @Override
+            public void pickUpPump(Inventory inv) {
+
+            }
+
+            @Override
+            public void addConnection(NetworkElement ne) {
+
+            }
+
+            @Override
+            public void removeConnection(NetworkElement ne) {
+
+            }
+
+            @Override
+            public void recieveWater(NetworkElement ne) {
+
+            }
+        };
     }
 
     /**

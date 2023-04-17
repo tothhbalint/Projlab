@@ -42,7 +42,24 @@ public class Pipe extends NetworkElement {
 	/** */
 	public boolean accept(Player p) {
 		Skeleton.indentPrint("Pipe : accept()");
-		return false;
+		Skeleton.INDENT++;
+		if(!isOccupied()){
+			NetworkElement oldPos = p.getPosition();
+			if(oldPos.isConnected(this)) {
+				oldPos.remove(p);
+				oldPos.setOccupied();
+				setOccupied();
+				Skeleton.indentPrint("Player accepted");
+				Skeleton.INDENT--;
+				return true;
+			}else {
+				Skeleton.indentPrint("Player rejected");
+				Skeleton.INDENT--;
+				return false;
+			}
+		}else{
+			return false;
+		}
 	}
 	
 	/** */

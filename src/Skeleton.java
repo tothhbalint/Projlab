@@ -131,37 +131,42 @@ public class Skeleton {
     }
     //TODO Toti
     public static void movePlayer(){
+        init();
         System.out.println("What kind of player do you want to move?");
         System.out.println("""
                                 0. Plumber
                                 1. Nomad""");
         String playerType = scanner.nextLine();
 
-        System.out.println("Where is the player standing?");
+        System.out.println("Where do you want to move the player?");
         System.out.println("""
-                                0. Cistern
-                                1. Pipe
-                                2. Pump
-                                """);
-        String playerPosition = scanner.nextLine();
+                                0. Source
+                                1. Cistern
+                                2. Pipe
+                                3. Pump""");
+        String elementType = scanner.nextLine();
+        String elementName = "";
 
-        if(playerType.equals("0")){
-        } else if(playerType.equals("1")){
+        if(elementType.equals("0")){
+           elementName = "source";
+        } else if(elementType.equals("1")){
+            elementName = "cistern";
+        } else if(elementType.equals("2")){
+            elementName = "pipe1";
+        } else if(elementType.equals("3")){
+            elementName = "pump";
         } else {
             System.out.println("Invalid input");
         }
 
-        switch (playerPosition){
-            case "0":
-                //TODO
-                break;
-            case "1":
-                //TODO
-                break;
-            case "2":
-                //TODO
-                break;
+        if(playerType.equals("0")){
+            playerHashMap.get("plumber").move(elementHashMap.get(elementName));
+        } else if(playerType.equals("1")){
+            playerHashMap.get("nomad").move(elementHashMap.get(elementName));
+        } else {
+            System.out.println("Invalid input");
         }
+
         scanner.nextLine();
     }
     //DONE

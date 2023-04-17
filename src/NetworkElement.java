@@ -16,8 +16,22 @@ public abstract class NetworkElement implements ITimer, IMove {
 	abstract void setOutput(NetworkElement output);
 	
 	/** */
-	public abstract boolean accept(Player p);
-	
+	public boolean accept(Player p) {
+		Skeleton.indentPrint("Cistern : accept()");
+		Skeleton.INDENT++;
+		NetworkElement oldPos = p.getPosition();
+		if(oldPos.isConnected(this)) {
+			oldPos.remove(p);
+			oldPos.setOccupied();
+			setOccupied();
+			Skeleton.indentPrint("Player accepted");
+			return true;
+		}else {
+			Skeleton.indentPrint("Player rejected");
+			return false;
+		}
+	}
+
 	/** */
 	public abstract void remove(Player p);
 	
@@ -34,7 +48,22 @@ public abstract class NetworkElement implements ITimer, IMove {
 	public abstract void removeConnection(NetworkElement ne);
 	
 	/** */
-	public abstract boolean isConnected(NetworkElement ne);
+	public boolean isConnected(NetworkElement ne){
+		Skeleton.indentPrint("NetworkElement : isConnected()");
+		Skeleton.INDENT++;
+		Skeleton.indentPrint("Is this connected to the player's position?");
+		Skeleton.indentPrint("0 - Yes");
+		Skeleton.indentPrint("1 - No");
+		String connected = Skeleton.scanner.nextLine();
+
+		Skeleton.INDENT--;
+
+		if (connected.equals("0")) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 	
 	/** */
 	public abstract void recieveWater(NetworkElement ne);
@@ -65,8 +94,26 @@ public abstract class NetworkElement implements ITimer, IMove {
 	}
 	
 	/** */
-	public void isOccupied() {
-		Skeleton.indentPrint("NetworkElement : isOccupied() : boolean");
+	public boolean isOccupied() {
+		Skeleton.indentPrint("NetworkElement : isOccupied()");
+		Skeleton.INDENT++;
+		Skeleton.indentPrint("Is the network element occupied?");
+		Skeleton.indentPrint("0 - No");
+		Skeleton.indentPrint("1 - Yes");
+		String occupied = Skeleton.scanner.nextLine();
+
+		switch(Integer.parseInt(occupied)) {
+			case 0:
+				Skeleton.INDENT--;
+				return false;
+			case 1:
+				Skeleton.INDENT--;
+				return true;
+			default:
+				Skeleton.indentPrint("Invalid input");
+				Skeleton.INDENT--;
+				return false;
+		}
 	}
 	
 	/** */
