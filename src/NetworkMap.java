@@ -36,12 +36,22 @@ public class NetworkMap {
 		Skeleton.INDENT--;
 	}
 
+	/**
+	 * Returns nomad points
+	 * @return int - nomad points
+	 * @author Buzas
+	 */
 	public int getNomadPoints() {
 		Skeleton.INDENT++;
 		Skeleton.indentPrint("NetworkMap : getNomadPoints()");
 		return NetworkElement.getNomadPoints();
 	}
 
+	/**
+	 * Returns plumber points
+	 * @return int - plumber points
+	 * @author Buzas
+	 */
 	public int getPlumberPoints() {
 		Skeleton.INDENT++;
 		Skeleton.indentPrint("NetworkMap : getPlumberPoints()");

@@ -185,7 +185,7 @@ public class Skeleton {
             System.out.println("Invalid input");
         }
     }
-    //TODO - Buzas
+    //DONE - Buzas
     public static void fixElement(){
         init();
         System.out.println("What kind of Element do you want to fix?");
@@ -223,12 +223,10 @@ public class Skeleton {
         if (inventoryFull == 0){
             System.out.println("Simulating pick up pump:");
             System.out.println("Creating conditions");
-            INDENT += 2;
             Cistern position = (Cistern) elementHashMap.get("cistern");
             Plumber player = (Plumber) playerHashMap.get("plumber");
             player.setPosition(position);
             Inventory inv = new Inventory();
-            INDENT -= 2;
             player.takePump(inv);
             position.pickUpPump(inv);
             System.out.println("Inventory is full, cannot pick up pump");
@@ -344,6 +342,27 @@ public class Skeleton {
     //TODO Buzas
     public static void waterFlows(){
         //TODO
+        init();
+        System.out.println("Simulating water flow:");
+        System.out.println("Where do you want the water to flow from?");
+        System.out.println("""
+                0. Source
+                1. Pipe
+                2. Pump
+                3. flow TO cistern""");
+        int waterFlow = scanner.nextInt();
+        if (waterFlow == 0){
+            Source source = (Source) elementHashMap.get("source");
+
+        } else if (waterFlow == 1){
+
+        } else if (waterFlow == 2){
+
+        } else if (waterFlow == 3){
+
+        } else {
+            System.out.println("Invalid input");
+        }
     }
     //TODO Matyikaa
     public static void pipeSpawns(){
@@ -357,11 +376,7 @@ public class Skeleton {
     public static void connectPipe(){
         //TODO
     }
-<<<<<<< Updated upstream
     //TODO Toti
-=======
-    //TODO Matyikaa
->>>>>>> Stashed changes
     public static void endOfRound() {
         init();
         game.tick();
