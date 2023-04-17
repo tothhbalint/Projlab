@@ -34,6 +34,9 @@ public class Nomad extends Player {
 	/** */
 	public void connectPipe() {
 		Skeleton.indentPrint("Nomad: connectPipe()");
+		Skeleton.INDENT++;
+		Skeleton.indentPrint("Nomads cannot connect pipes");
+		Skeleton.INDENT--;
 	}
 	
 	/** */

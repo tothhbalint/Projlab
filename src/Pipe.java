@@ -84,6 +84,9 @@ public class Pipe extends NetworkElement {
 	/** */
 	public void addConnection(NetworkElement ne) {
 		Skeleton.indentPrint("Pipe : addConnection()");
+		Skeleton.INDENT++;
+		Skeleton.indentPrint("Connection added");
+		Skeleton.INDENT--;
 	}
 	
 	/** */

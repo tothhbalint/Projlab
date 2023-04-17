@@ -76,6 +76,9 @@ public class Cistern extends NetworkElement {
 	/** */
 	public void addConnection(NetworkElement ne) {
 		Skeleton.indentPrint("Cistern : addConnection()");
+		Skeleton.INDENT++;
+		Skeleton.indentPrint("Connection added");
+		Skeleton.INDENT--;
 	}
 	
 	/** */

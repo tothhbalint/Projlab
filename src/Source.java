@@ -70,6 +70,9 @@ public class Source extends NetworkElement {
 	/** */
 	public void addConnection(NetworkElement ne) {
 		Skeleton.indentPrint("Source : addConnection()");
+		Skeleton.INDENT++;
+		Skeleton.indentPrint("Connection added");
+		Skeleton.INDENT--;
 	}
 	
 	/** */
