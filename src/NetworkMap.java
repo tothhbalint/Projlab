@@ -6,9 +6,16 @@
 //
 //
 
-/** */
+/**
+ * The network map class, which is responsible for creating the connections between the elements.
+ * @author Buzas
+ * */
 public class NetworkMap {
-	/** */
+	/**
+	 * Builds the network map, thus creating the connections between the elements.
+	 * @return void
+	 * @author Buzas
+	 * */
 	public void build() {
 		Skeleton.indentPrint("NetworkMap: build()");
 		Skeleton.INDENT++;
@@ -19,16 +26,11 @@ public class NetworkMap {
 		Skeleton.elementHashMap.put("cistern", new Cistern());
 		Skeleton.elementHashMap.put("source", new Source());
 
-		Skeleton.elementHashMap.get("pump").setInput(Skeleton.elementHashMap.get("pipe1"));
-		Skeleton.elementHashMap.get("pump").setOutput(Skeleton.elementHashMap.get("pipe2"));
 
-		Skeleton.elementHashMap.get("source").setOutput(Skeleton.elementHashMap.get("pipe1"));
-		Skeleton.elementHashMap.get("pipe1").setInput(Skeleton.elementHashMap.get("source"));
-		Skeleton.elementHashMap.get("pipe1").setOutput(Skeleton.elementHashMap.get("pump"));
-
-		Skeleton.elementHashMap.get("pipe2").setInput(Skeleton.elementHashMap.get("pump"));
-		Skeleton.elementHashMap.get("pipe2").setOutput(Skeleton.elementHashMap.get("cistern"));
-		Skeleton.elementHashMap.get("cistern").setInput(Skeleton.elementHashMap.get("pipe2"));
+		Skeleton.nMap.connect(Skeleton.elementHashMap.get("source"), Skeleton.elementHashMap.get("pipe1"));
+		Skeleton.nMap.connect(Skeleton.elementHashMap.get("pipe1"), Skeleton.elementHashMap.get("pump"));
+		Skeleton.nMap.connect(Skeleton.elementHashMap.get("pump"), Skeleton.elementHashMap.get("pipe2"));
+		Skeleton.nMap.connect(Skeleton.elementHashMap.get("pipe2"), Skeleton.elementHashMap.get("cistern"));
 
 		Skeleton.indentPrint("NetworkMap built");
 		Skeleton.INDENT--;
@@ -46,7 +48,19 @@ public class NetworkMap {
 		return NetworkElement.getPlumberPoints();
 	}
 	
-	/** */
+	/**
+	 * Connects two network elements
+	 * @param ne1 - the input element
+	 * @param ne2 - the output element
+	 * @return void
+	 * @author Buzas
+	 * */
 	public void connect(NetworkElement ne1, NetworkElement ne2) {
+		//Skeleton.INDENT++;
+		Skeleton.indentPrint("NetworkMap: connect()");
+		ne1.setOutput(ne2);
+		ne2.setInput(ne1);
+		Skeleton.indentPrint("NetworkElements connected");
+		//Skeleton.INDENT--;
 	}
 }

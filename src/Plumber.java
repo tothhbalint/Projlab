@@ -10,7 +10,10 @@
 public class Plumber extends Player {
 	/** */
 	public void repair(NetworkElement ne) {
+		Skeleton.INDENT++;
 		Skeleton.indentPrint("Plumber: repair()");
+		ne.setDamaged(false);
+		Skeleton.INDENT--;
 	}
 	
 	/** */
