@@ -92,7 +92,7 @@ public class Skeleton {
         String teamType = scanner.nextLine();
 
         System.out.println("How many players do you want to add to the team?");
-        int noOfPlayers = scanner.nextInt();
+        int noOfPlayers = Integer.parseInt(scanner.nextLine());
 
         if(teamType.equals("0")){
             plumberTeam = new Team();
@@ -267,8 +267,8 @@ public class Skeleton {
                 1. Pipe
                 2. Pump
                 3. flow TO cistern from pipe""");
-        int waterFlow = scanner.nextInt();
-        if (waterFlow == 0){
+        String waterFlow = scanner.nextLine();
+        if (waterFlow.equals("0")){
             Source source = (Source) elementHashMap.get("source");
             Pipe pipe = (Pipe) elementHashMap.get("pipe1");
             System.out.print("for all: ");
@@ -277,12 +277,12 @@ public class Skeleton {
             pipe.recieveWater(source);
             INDENT--;
 
-        } else if (waterFlow == 1){
+        } else if (waterFlow.equals("1")){
             System.out.println("Should the pipe contain water?");
             System.out.println("""
                     0. No
                     1. Yes""");
-            int pipeContainsWater = scanner.nextInt();
+            int pipeContainsWater = Integer.parseInt(scanner.nextLine());
             if(pipeContainsWater == 0){
                 INDENT++;
                 Pipe pipe = (Pipe) elementHashMap.get("pipe2");
@@ -298,7 +298,7 @@ public class Skeleton {
                 System.out.println("""
                     0. No
                     1. Yes""");
-                int pipeDamaged = scanner.nextInt();
+                int pipeDamaged = Integer.parseInt(scanner.nextLine());
                 if(pipeDamaged == 1){
                     INDENT++;
                     pipe2.setDamaged(true);
@@ -315,12 +315,12 @@ public class Skeleton {
             } else {
                 System.out.println("Invalid input");
             }
-        } else if (waterFlow == 2){
+        } else if (waterFlow.equals("2")){
             System.out.println("Should the pump contain water?");
             System.out.println("""
                     0. No
                     1. Yes""");
-            int pumpContainsWater = scanner.nextInt();
+            int pumpContainsWater = Integer.parseInt(scanner.nextLine());
             if(pumpContainsWater == 0){
                 INDENT++;
                 Pump pump = (Pump) elementHashMap.get("pump");
@@ -336,7 +336,7 @@ public class Skeleton {
                 System.out.println("""
                     0. No
                     1. Yes""");
-                int pumpDamaged = scanner.nextInt();
+                int pumpDamaged = Integer.parseInt(scanner.nextLine());
                 if(pumpDamaged == 1){
                     INDENT++;
                     pump.setDamaged(true);
@@ -353,12 +353,12 @@ public class Skeleton {
             } else {
                 System.out.println("Invalid input");
             }
-        } else if (waterFlow == 3){
+        } else if (waterFlow.equals("3")){
             System.out.println("Should the pipe contain water?");
             System.out.println("""
                     0. No
                     1. Yes""");
-            int pipeContainsWater = scanner.nextInt();
+            int pipeContainsWater = Integer.parseInt(scanner.nextLine());
             if(pipeContainsWater == 0){
                 INDENT++;
                 Pipe pipe = (Pipe) elementHashMap.get("pipe2");
@@ -374,7 +374,7 @@ public class Skeleton {
                 System.out.println("""
                     0. No
                     1. Yes""");
-                int pipeDamaged = scanner.nextInt();
+                int pipeDamaged = Integer.parseInt(scanner.nextLine());
                 if(pipeDamaged == 1){
                     INDENT++;
                     pipe2.setDamaged(true);
