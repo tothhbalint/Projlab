@@ -87,6 +87,7 @@ public abstract class Player {
         Skeleton.indentPrint("1. Pipe");
         Skeleton.indentPrint("2. Pump");
         String playerPosition = Skeleton.scanner.nextLine();
+        Skeleton.INDENT--;
 
         return switch (playerPosition) {
             case "0" -> Skeleton.elementHashMap.get("cistern");
@@ -107,6 +108,11 @@ public abstract class Player {
                 void setOutput(NetworkElement output) {
 
                 }
+                @Override
+                public void setDamaged(boolean b) {
+
+                }
+
 
                 @Override
                 public void remove(Player p) {

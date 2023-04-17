@@ -15,22 +15,8 @@ public abstract class NetworkElement implements ITimer, IMove {
 
 	abstract void setOutput(NetworkElement output);
 
-	public void setDamaged(boolean b){
-		if (b){
-			Skeleton.INDENT++;
-			Skeleton.indentPrint("NetworkElement : setDamaged()");
-			Skeleton.indentPrint("NetworkElement damaged");
-			Skeleton.INDENT--;
-		}
-		else{
-			Skeleton.INDENT++;
-			Skeleton.indentPrint("NetworkElement : setDamaged()");
-			Skeleton.indentPrint("NetworkElement repaired");
-			Skeleton.INDENT--;
-		}
+	abstract void setDamaged(boolean b);
 
-	}
-	
 	/** */
 	public boolean accept(Player p) {
 		Skeleton.indentPrint("Cistern : accept()");

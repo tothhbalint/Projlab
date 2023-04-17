@@ -42,6 +42,14 @@ public class Cistern extends NetworkElement {
 	}
 
 	@Override
+	void setDamaged(boolean b) {
+		Skeleton.indentPrint("Cistern : setDamaged()");
+		Skeleton.INDENT++;
+		Skeleton.indentPrint("Cistern can't be damaged");
+		Skeleton.INDENT--;
+	}
+
+	@Override
 	public boolean accept(Player p){
 		Skeleton.indentPrint("Cistern : accept()");
 		return super.accept(p);

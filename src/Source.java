@@ -35,6 +35,14 @@ public class Source extends NetworkElement {
 		Skeleton.INDENT--;
 	}
 
+	@Override
+	void setDamaged(boolean b) {
+		Skeleton.indentPrint("Source : setDamaged()");
+		Skeleton.INDENT++;
+		Skeleton.indentPrint("Source can't be damaged");
+		Skeleton.INDENT--;
+	}
+
 	/** */
 	public boolean accept(Player p) {
 		Skeleton.indentPrint("Source : accept()");
