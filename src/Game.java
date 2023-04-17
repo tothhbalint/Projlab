@@ -7,7 +7,7 @@
 //
 
 /** */
-public class Game {
+public class Game implements ITimer{
 	/** */
 	public void startGame() {
 		Skeleton.indentPrint("Game: startGame()");
@@ -16,5 +16,13 @@ public class Game {
 	/** */
 	public void endGame() {
 		Skeleton.indentPrint("Game: endGame()");
+	}
+
+	@Override
+	public void tick() {
+		Skeleton.indentPrint("Game: tick()");
+		Skeleton.INDENT++;
+		Skeleton.nomadTeam.updatePoints(Skeleton.nMap.getNomadPoints());
+		Skeleton.plumberTeam.updatePoints(Skeleton.nMap.getPlumberPoints());
 	}
 }

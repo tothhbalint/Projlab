@@ -9,8 +9,9 @@
 /** */
 public class Team {
 	/** */
-	public void addPoints(int i) {
-		Skeleton.indentPrint("Team: addPoints()");
+	public void updatePoints(int i) {
+		Skeleton.indentPrint("Team: updatePoints()");
+		Skeleton.INDENT--;
 	}
 	
 	/** */

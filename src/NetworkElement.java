@@ -76,13 +76,19 @@ public abstract class NetworkElement implements ITimer, IMove {
 	}
 	
 	/** */
-	public static void getNomadPoints() {
+	public static int getNomadPoints() {
+		Skeleton.INDENT++;
 		Skeleton.indentPrint("NetworkElement : getNomadPoints()");
+		Skeleton.INDENT--;
+		return 0;
 	}
 	
 	/** */
-	public static void getPlumberPoints() {
+	public static int getPlumberPoints() {
+		Skeleton.INDENT++;
 		Skeleton.indentPrint("NetworkElement : getPlumberPoints()");
+		Skeleton.INDENT--;
+		return 0;
 	}
 	
 	/** */

@@ -33,6 +33,18 @@ public class NetworkMap {
 		Skeleton.indentPrint("NetworkMap built");
 		Skeleton.INDENT--;
 	}
+
+	public int getNomadPoints() {
+		Skeleton.INDENT++;
+		Skeleton.indentPrint("NetworkMap : getNomadPoints()");
+		return NetworkElement.getNomadPoints();
+	}
+
+	public int getPlumberPoints() {
+		Skeleton.INDENT++;
+		Skeleton.indentPrint("NetworkMap : getPlumberPoints()");
+		return NetworkElement.getPlumberPoints();
+	}
 	
 	/** */
 	public void connect(NetworkElement ne1, NetworkElement ne2) {
