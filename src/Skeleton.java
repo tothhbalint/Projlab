@@ -188,26 +188,10 @@ public class Skeleton {
     //DONE - Buzas
     public static void fixElement(){
         init();
-        System.out.println("What kind of Element do you want to fix?");
-        System.out.println("""
-                                0. Pipe
-                                1. Pump
-                                """);
-        String elementType = scanner.nextLine();
-        if (elementType.equals("0")){
-            Plumber plumber = (Plumber) playerHashMap.get("plumber");
-            Pipe position = (Pipe) elementHashMap.get("pipe1");
-            plumber.setPosition(position);
-            plumber.repair(plumber.getPosition());
+        Plumber plumber = (Plumber) playerHashMap.get("plumber");
+        NetworkElement position = plumber.getPosition();
 
-        } else if (elementType.equals("1")){
-            Plumber plumber = (Plumber) playerHashMap.get("plumber");
-            Pump position = (Pump) elementHashMap.get("pump");
-            plumber.setPosition(position);
-            plumber.repair(plumber.getPosition());
-        } else {
-            System.out.println("Invalid input");
-        }
+        plumber.repair(position);
         System.out.println("\nPress enter to continue");
         scanner.nextLine();
     }

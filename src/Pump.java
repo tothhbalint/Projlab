@@ -90,6 +90,13 @@ public class Pump extends NetworkElement {
 	}
 
 	public void setDamaged(boolean b) {
+		if(!b){
+			Skeleton.indentPrint("Pump : setDamaged()");
+			Skeleton.INDENT++;
+			Skeleton.indentPrint("Pump repaired");
+			Skeleton.INDENT--;
+			return;
+		}
 		Skeleton.indentPrint("Pump : setDamaged()");
 		Skeleton.INDENT++;
 		Skeleton.indentPrint("Pump can't be damaged");

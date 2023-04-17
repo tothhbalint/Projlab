@@ -98,5 +98,12 @@ public class Pipe extends NetworkElement {
 
 	public void setDamaged(boolean b) {
 		Skeleton.indentPrint("Pipe : setDamaged()");
+		Skeleton.INDENT++;
+		if(b){
+			Skeleton.indentPrint("Pipe is damaged");
+		}else{
+			Skeleton.indentPrint("Pipe is fixed");
+		}
+		Skeleton.INDENT--;
 	}
 }
