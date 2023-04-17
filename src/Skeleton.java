@@ -187,7 +187,7 @@ public class Skeleton {
             System.out.println("Invalid input");
         }
     }
-    //DONE - Buzas
+    //TODO - Buzas
     public static void fixElement(){
         init();
         System.out.println("What kind of Element do you want to fix?");
@@ -197,35 +197,24 @@ public class Skeleton {
                                 """);
         String elementType = scanner.nextLine();
         if (elementType.equals("0")){
-            System.out.println("Simulating fix pipe:");
-            System.out.println("Creating conditions for broken pipe");
-            INDENT += 2;
+            Plumber plumber = (Plumber) playerHashMap.get("plumber");
             Pipe position = (Pipe) elementHashMap.get("pipe1");
-            position.setDamaged(true);
-            INDENT -= 2;
-            Plumber player = (Plumber) playerHashMap.get("plumber");
-            player.setPosition(position);
-            player.repair(position);
+            plumber.setPosition(position);
+            plumber.repair(plumber.getPosition());
 
         } else if (elementType.equals("1")){
-            System.out.println("Simulating fix pump:");
-            System.out.println("Creating conditions for broken pump");
-            INDENT += 2;
+            Plumber plumber = (Plumber) playerHashMap.get("plumber");
             Pump position = (Pump) elementHashMap.get("pump");
-            position.setDamaged(true);
-            INDENT -= 2;
-            Plumber player = (Plumber) playerHashMap.get("plumber");
-            player.setPosition(position);
-            player.repair(position);
-
+            plumber.setPosition(position);
+            plumber.repair(plumber.getPosition());
         } else {
             System.out.println("Invalid input");
         }
         System.out.println("\nPress enter to continue");
         scanner.nextLine();
-
     }
-    //DONE - Buzas
+
+    //TODO - Buzas
     public static void pickUpPump(){
         init();
         System.out.println("Is the plumber's inventory full?:");
