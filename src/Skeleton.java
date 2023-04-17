@@ -313,16 +313,39 @@ public class Skeleton {
         }
         scanner.nextLine();
     }
-    //TODO Bence
+    //TODO Matyikaa DONE
     public static void destroyPipe(){
-        //TODO
+        init();
+        System.out.println("Simulating destroy pipe:");
+        Pipe position = (Pipe) elementHashMap.get("pipe1");
+        Nomad player = (Nomad) playerHashMap.get("nomad");
+
+        String playerPosition;
+        System.out.println("Where is the player standing?");
+        System.out.println("""
+                    0. Cistern
+                    1. Pipe
+                    2. Pump
+                    """);
+        playerPosition = scanner.nextLine();
+        if (playerPosition.equals("1")){
+            player.breakElement(position);
+            INDENT++;
+            position.setDamaged(true);
+            INDENT--;
+        }else{
+            System.out.println("You are not on a pipe");
+        }
+
+        System.out.println("\nPress enter to continue");
+        scanner.nextLine();
     }
 
     //TODO Buzas
     public static void waterFlows(){
         //TODO
     }
-    //TODO Bence
+    //TODO Matyikaa
     public static void pipeSpawns(){
         //TODO
     }
@@ -334,7 +357,11 @@ public class Skeleton {
     public static void connectPipe(){
         //TODO
     }
+<<<<<<< Updated upstream
     //TODO Toti
+=======
+    //TODO Matyikaa
+>>>>>>> Stashed changes
     public static void endOfRound() {
         init();
         game.tick();
