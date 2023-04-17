@@ -41,6 +41,12 @@ public class Cistern extends NetworkElement {
 		Skeleton.INDENT--;
 	}
 
+	@Override
+	public boolean accept(Player p){
+		Skeleton.indentPrint("Cistern : accept()");
+		return super.accept(p);
+	}
+
 	/** */
 	public void remove(Player p) {
 		Skeleton.indentPrint("Cistern : remove()");

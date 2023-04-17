@@ -39,6 +39,11 @@ public class Pump extends NetworkElement {
 		Skeleton.indentPrint("Output set");
 		Skeleton.INDENT--;
 	}
+	@Override
+	public boolean accept(Player p){
+		Skeleton.indentPrint("Pump : accept()");
+		return super.accept(p);
+	}
 
 	/** */
 	public void remove(Player p) {

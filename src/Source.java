@@ -38,7 +38,7 @@ public class Source extends NetworkElement {
 	/** */
 	public boolean accept(Player p) {
 		Skeleton.indentPrint("Source : accept()");
-		return false;
+		return super.accept(p);
 	}
 	
 	/** */

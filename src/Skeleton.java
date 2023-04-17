@@ -6,6 +6,7 @@ public class Skeleton {
     static Team plumberTeam;
     static Team nomadTeam;
 
+    static Game game = new Game();
 
     static HashMap<String, NetworkElement> elementHashMap = new HashMap<>();
     static HashMap<String, Player> playerHashMap = new HashMap<>();
@@ -98,7 +99,6 @@ public class Skeleton {
         nMap = null;
     }
     public static void init(){
-        //TODO setting up connections and stuff
         plumberTeam = new Team();
         plumberTeam.createPlumberTeam("Plumbers", 2);
         nomadTeam = new Team();
@@ -130,7 +130,6 @@ public class Skeleton {
         }
         scanner.nextLine();
     }
-    //TODO Toti
     public static void movePlayer(){
         init();
         System.out.println("What kind of player do you want to move?");
@@ -170,7 +169,6 @@ public class Skeleton {
 
         scanner.nextLine();
     }
-    //DONE
     public static void directPump(){
         init();
         System.out.println("What kind of player do you want to direct the pump with?");
@@ -336,9 +334,11 @@ public class Skeleton {
     public static void connectPipe(){
         //TODO
     }
-    //TODO Bence
+    //TODO Toti
     public static void endOfRound() {
-        //TODO
+        init();
+        game.tick();
+        scanner.nextLine();
     }
 
     public static void indentPrint(String string){
