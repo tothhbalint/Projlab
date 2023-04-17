@@ -159,7 +159,6 @@ public class Skeleton {
         System.out.println("\nPress enter to continue");
         scanner.nextLine();
     }
-    //DONE - Buzas
     public static void fixElement(){
         init();
         Plumber plumber = (Plumber) playerHashMap.get("plumber");
@@ -170,7 +169,6 @@ public class Skeleton {
         scanner.nextLine();
     }
 
-    //TODO - Buzas
     public static void pickUpPump(){
         init();
         Plumber plumber = (Plumber) playerHashMap.get("plumber");
@@ -180,7 +178,6 @@ public class Skeleton {
         System.out.println("\nPress enter to continue");
         scanner.nextLine();
     }
-    //DONE Marki
     public static void placePump(){
         init();
         System.out.println("What kind of player do you want to place a pump with?");
@@ -249,7 +246,6 @@ public class Skeleton {
         System.out.println("\nPress enter to continue");
         scanner.nextLine();
     }
-    //TODO Matyikaa DONE
     public static void destroyPipe(){
         init();
         System.out.println("Simulating destroy pipe:");
@@ -262,7 +258,6 @@ public class Skeleton {
         scanner.nextLine();
     }
 
-    //DONE - Buzas
     public static void waterFlows(){
         init();
         System.out.println("Simulating water flow:");
@@ -403,13 +398,11 @@ public class Skeleton {
         scanner.nextLine();
 
     }
-    //TODO Matyikaa
     public static void pipeSpawns(){
         init();
         nMap.tick();
         scanner.nextLine();
     }
-    //TODO Marki
     public static void disconnectPipe(){
         init();
         System.out.println("What kind of player do you want to connect a pipe with?");
@@ -523,7 +516,6 @@ public class Skeleton {
         System.out.println("\nPress enter to continue");
         scanner.nextLine();
     }
-    //DONE Marki
     public static void connectPipe(){
         init();
         System.out.println("What kind of player do you want to connect a pipe with?");
@@ -594,7 +586,6 @@ public class Skeleton {
         System.out.println("\nPress enter to continue");
         scanner.nextLine();
     }
-    //TODO Toti
     public static void endOfRound() {
         init();
         game.tick();
