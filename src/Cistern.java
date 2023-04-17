@@ -100,4 +100,11 @@ public class Cistern extends NetworkElement {
 		setWaterState(true);
 		ne.setWaterState(false);
 	}
+
+	public void spawnPipe() {
+		Skeleton.indentPrint("Cistern : spawnPipe()");
+		Skeleton.INDENT++;
+		Skeleton.nMap.addElement(new Pipe());
+		Skeleton.INDENT--;
+	}
 }

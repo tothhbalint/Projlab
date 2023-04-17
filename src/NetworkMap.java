@@ -66,18 +66,26 @@ public class NetworkMap {
 	 * @author Buzas
 	 * */
 	public void connect(NetworkElement ne1, NetworkElement ne2) {
-		//Skeleton.INDENT++;
 		Skeleton.indentPrint("NetworkMap: connect()");
+		Skeleton.INDENT++;
 		ne1.setOutput(ne2);
 		ne2.setInput(ne1);
 		Skeleton.indentPrint("NetworkElements connected");
-		//Skeleton.INDENT--;
+		Skeleton.INDENT--;
 	}
 	public void tick(){
-		//TODO
+		Skeleton.indentPrint("NetworkMap : tick()");
+		Skeleton.INDENT++;
+		Cistern cistern = (Cistern) Skeleton.elementHashMap.get("cistern");
+		cistern.spawnPipe();
+		Skeleton.nMap.connect(Skeleton.elementHashMap.get("cistern"),Skeleton.elementHashMap.get("newElement"));
+		cistern.addConnection(Skeleton.elementHashMap.get("newElement"));
+		Skeleton.INDENT--;
 	}
 
 	public void addElement(NetworkElement ne){
-		Skeleton.indentPrint("NetworkElement successfully added");
+		Skeleton.indentPrint("NetworkMap : addElement()");
+		Skeleton.elementHashMap.put("newElement",ne);
+
 	}
 }

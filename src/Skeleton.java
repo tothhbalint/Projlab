@@ -410,8 +410,8 @@ public class Skeleton {
     //TODO Matyikaa
     public static void pipeSpawns(){
         init();
-
-
+        nMap.tick();
+        scanner.nextLine();
     }
     //TODO Marki
     public static void disconnectPipe(){
