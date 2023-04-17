@@ -85,6 +85,9 @@ public class Pump extends NetworkElement {
 	/** */
 	public void removeConnection(NetworkElement ne) {
 		Skeleton.indentPrint("Pump : removeConnection()");
+		Skeleton.INDENT++;
+		Skeleton.indentPrint("Connection removed");
+		Skeleton.INDENT--;
 	}
 
 	/**

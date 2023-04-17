@@ -78,6 +78,9 @@ public class Source extends NetworkElement {
 	/** */
 	public void removeConnection(NetworkElement ne) {
 		Skeleton.indentPrint("Source : removeConnection()");
+		Skeleton.INDENT++;
+		Skeleton.indentPrint("Connection removed");
+		Skeleton.INDENT--;
 	}
 
 	@Override

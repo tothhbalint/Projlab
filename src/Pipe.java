@@ -92,6 +92,9 @@ public class Pipe extends NetworkElement {
 	/** */
 	public void removeConnection(NetworkElement ne) {
 		Skeleton.indentPrint("Pipe : removeConnection()");
+		Skeleton.INDENT++;
+		Skeleton.indentPrint("Connection removed");
+		Skeleton.INDENT--;
 	}
 
 	/**
