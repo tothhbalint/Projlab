@@ -17,8 +17,15 @@ public class Plumber extends Player {
 	}
 	
 	/** */
-	public void takePump(Inventory inv) {
+	public void takePump() {
 		Skeleton.indentPrint("Plumber: takePump()");
+
+		Skeleton.INDENT++;
+
+		NetworkElement ne = this.getPosition();
+
+		ne.pickUpPump(Skeleton.inventory);
+
 	}
 	
 	/** */

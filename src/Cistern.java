@@ -71,6 +71,15 @@ public class Cistern extends NetworkElement {
 	/** */
 	public void pickUpPump(Inventory inv) {
 		Skeleton.indentPrint("Cistern : pickUpPump()");
+		Skeleton.INDENT++;
+		if(inv.isFull()){
+			Skeleton.indentPrint("Inventory is full");
+		}
+		else {
+			inv.addItem(new Pump());
+			Skeleton.indentPrint("Pump picked up");
+		}
+		Skeleton.INDENT--;
 	}
 	
 	/** */

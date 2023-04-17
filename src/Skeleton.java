@@ -5,6 +5,12 @@ import java.util.Scanner;
 public class Skeleton {
     static Team plumberTeam;
     static Team nomadTeam;
+<<<<<<< Updated upstream
+=======
+
+    static Inventory inventory;
+
+>>>>>>> Stashed changes
     static Game game = new Game();
 
     static HashMap<String, NetworkElement> elementHashMap = new HashMap<>();
@@ -16,7 +22,6 @@ public class Skeleton {
     static int noOfPlayers = 0;
     static int noOfTeams = 0;
     static int noOfElements = 0;
-    static int noOfInventories = 0;
 
     public static void main(String[] args) {
         while(true){
@@ -63,11 +68,11 @@ public class Skeleton {
         noOfPlayers = 0;
         noOfTeams = 0;
         noOfElements = 0;
-        noOfInventories = 0;
 
         plumberTeam = null;
         nomadTeam = null;
         nMap = null;
+        inventory = null;
     }
     public static void init(){
         plumberTeam = new Team();
@@ -77,6 +82,7 @@ public class Skeleton {
         INDENT = 0;
         scanner = new Scanner(System.in);
         nMap = new NetworkMap();
+        inventory = new Inventory();
 
         nMap.build();
 
@@ -176,18 +182,10 @@ public class Skeleton {
     //TODO - Buzas
     public static void pickUpPump(){
         init();
-        System.out.println("Is the plumber's inventory full?:");
-        System.out.println("""
-                                0. No
-                                1. Yes""");
-        int inventoryFull = scanner.nextInt();
-        if (inventoryFull == 0){
+        Plumber plumber = (Plumber) playerHashMap.get("plumber");
 
-        } else if (inventoryFull == 1){
+        plumber.takePump();
 
-        } else {
-            indentPrint("Invalid input");
-        }
         System.out.println("\nPress enter to continue");
         scanner.nextLine();
     }

@@ -14,7 +14,7 @@ public abstract class Player {
     /**
      *
      */
-    public abstract void takePump(Inventory inv);
+    public abstract void takePump();
 
     /**
      *
@@ -63,15 +63,14 @@ public abstract class Player {
         String playerPosition = Skeleton.scanner.nextLine();
 
         switch (playerPosition) {
-            case "0":
-                Skeleton.elementHashMap.get("cistern").direct(Skeleton.elementHashMap.get("pipe1"), Skeleton.elementHashMap.get("pipe2"));
-                break;
-            case "1":
-                Skeleton.elementHashMap.get("pipe1").direct(Skeleton.elementHashMap.get("pipe1"), Skeleton.elementHashMap.get("pipe2"));
-                break;
-            case "2":
-                Skeleton.elementHashMap.get("pump").direct(Skeleton.elementHashMap.get("pipe1"), Skeleton.elementHashMap.get("pipe2"));
-                break;
+            case "0" ->
+                    Skeleton.elementHashMap.get("cistern").direct(Skeleton.elementHashMap.get("pipe1"), Skeleton.elementHashMap.get("pipe2"));
+            case "1" ->
+                    Skeleton.elementHashMap.get("pipe1").direct(Skeleton.elementHashMap.get("pipe1"), Skeleton.elementHashMap.get("pipe2"));
+            case "2" ->
+                    Skeleton.elementHashMap.get("pump").direct(Skeleton.elementHashMap.get("pipe1"), Skeleton.elementHashMap.get("pipe2"));
+            case "3" ->
+                    Skeleton.elementHashMap.get("source").direct(Skeleton.elementHashMap.get("pipe1"), Skeleton.elementHashMap.get("pipe2"));
         }
 
         Skeleton.INDENT--;
@@ -86,6 +85,7 @@ public abstract class Player {
         Skeleton.indentPrint("0. Cistern");
         Skeleton.indentPrint("1. Pipe");
         Skeleton.indentPrint("2. Pump");
+        Skeleton.indentPrint("3.Source");
         String playerPosition = Skeleton.scanner.nextLine();
         Skeleton.INDENT--;
 
@@ -93,6 +93,7 @@ public abstract class Player {
             case "0" -> Skeleton.elementHashMap.get("cistern");
             case "1" -> Skeleton.elementHashMap.get("pipe1");
             case "2" -> Skeleton.elementHashMap.get("pump");
+            case "3" -> Skeleton.elementHashMap.get("source");
             default -> new NetworkElement() {
                 @Override
                 public void tick() {

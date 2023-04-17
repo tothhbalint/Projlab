@@ -79,6 +79,9 @@ public class Pipe extends NetworkElement {
 	/** */
 	public void pickUpPump(Inventory inv) {
 		Skeleton.indentPrint("Pipe : pickUpPump()");
+		Skeleton.INDENT++;
+		Skeleton.indentPrint("Can't pick up a pump here");
+		Skeleton.INDENT--;
 	}
 	
 	/** */

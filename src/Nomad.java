@@ -19,8 +19,10 @@ public class Nomad extends Player {
 	}
 	
 	/** */
-	public void takePump(Inventory inv) {
+	public void takePump() {
 		Skeleton.indentPrint("Nomad: takePump()");
+		Skeleton.INDENT++;
+		Skeleton.indentPrint("Nomads cannot take pumps");
 	}
 	
 	/** */
