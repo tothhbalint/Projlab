@@ -315,25 +315,10 @@ public class Skeleton {
     public static void destroyPipe(){
         init();
         System.out.println("Simulating destroy pipe:");
-        Pipe position = (Pipe) elementHashMap.get("pipe1");
-        Nomad player = (Nomad) playerHashMap.get("nomad");
 
-        String playerPosition;
-        System.out.println("Where is the player standing?");
-        System.out.println("""
-                    0. Cistern
-                    1. Pipe
-                    2. Pump
-                    """);
-        playerPosition = scanner.nextLine();
-        if (playerPosition.equals("1")){
-            player.breakElement(position);
-            INDENT++;
-            position.setDamaged(true);
-            INDENT--;
-        }else{
-            System.out.println("You are not on a pipe");
-        }
+        Nomad nomad = (Nomad) playerHashMap.get("nomad");
+
+        nomad.breakElement(nomad.getPosition());
 
         System.out.println("\nPress enter to continue");
         scanner.nextLine();
