@@ -6,6 +6,8 @@
 //
 //
 
+import javax.net.ssl.SSLContext;
+
 /** */
 public class Nomad extends Player {
 	/** */
@@ -21,6 +23,9 @@ public class Nomad extends Player {
 	/** */
 	public void placePump() {
 		Skeleton.indentPrint("Nomad: placePump()");
+		Skeleton.INDENT++;
+		Skeleton.indentPrint("Nomads cannot place pumps");
+		Skeleton.INDENT--;
 	}
 	
 	/** */

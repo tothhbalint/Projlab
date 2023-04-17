@@ -19,9 +19,7 @@ public class Plumber extends Player {
 	}
 	
 	/** */
-	public void placePump() {
-		Skeleton.indentPrint("Plumber: placePump()");
-	}
+	public void placePump() { Skeleton.indentPrint("Plumber: placePump()"); }
 	
 	/** */
 	public void connectPipe() {
