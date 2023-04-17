@@ -1,16 +1,11 @@
-import java.awt.image.ComponentSampleModel;
 import java.util.HashMap;
 import java.util.Scanner;
 
 public class Skeleton {
     static Team plumberTeam;
     static Team nomadTeam;
-<<<<<<< Updated upstream
-=======
 
     static Inventory inventory;
-
->>>>>>> Stashed changes
     static Game game = new Game();
 
     static HashMap<String, NetworkElement> elementHashMap = new HashMap<>();
@@ -128,16 +123,12 @@ public class Skeleton {
         String elementType = scanner.nextLine();
         String elementName = "";
 
-        if(elementType.equals("0")){
-           elementName = "source";
-        } else if(elementType.equals("1")){
-            elementName = "cistern";
-        } else if(elementType.equals("2")){
-            elementName = "pipe1";
-        } else if(elementType.equals("3")){
-            elementName = "pump";
-        } else {
-            System.out.println("Invalid input");
+        switch (elementType) {
+            case "0" -> elementName = "source";
+            case "1" -> elementName = "cistern";
+            case "2" -> elementName = "pipe1";
+            case "3" -> elementName = "pump";
+            default -> System.out.println("Invalid input");
         }
 
         if(playerType.equals("0")){
@@ -217,34 +208,37 @@ public class Skeleton {
         System.out.println("Simulating placePump():");
         INDENT++;
         if(playerType.equals("0")) {
-            if(playerPosition.equals("0")) {
-                playerHashMap.get("plumber").placePump();
-                INDENT++;
-                indentPrint("Cannot place pipe on position");
-                INDENT--;
-            } else if(playerPosition.equals("1")) {
-                playerHashMap.get("plumber").placePump();
-                INDENT++;
-                inventory.removeItem(elementHashMap.get("pump"));
-                Pipe newPipe = new Pipe();
-                elementHashMap.get("pump").direct(elementHashMap.get("pipe1"), newPipe);
-                INDENT++;
-                elementHashMap.get("pump").setInput(newPipe);
-                indentPrint("Pipe : getOutput()");
-                INDENT++;
-                indentPrint("Got output");
-                INDENT--;
-                newPipe.setOutput(elementHashMap.get("pump"));
-                elementHashMap.get("pump").setInput(elementHashMap.get("pipe1"));
-                elementHashMap.get("pipe1").setOutput(elementHashMap.get("pump"));
-                INDENT -= 2;
-            } else if(playerPosition.equals("2")) {
-                playerHashMap.get("plumber").placePump();
-                INDENT++;
-                indentPrint("Cannot place pipe on position");
-                INDENT--;
-            } else {
-                System.out.println("Invalid input");
+            switch (playerPosition) {
+                case "0" -> {
+                    playerHashMap.get("plumber").placePump();
+                    INDENT++;
+                    indentPrint("Cannot place pipe on position");
+                    INDENT--;
+                }
+                case "1" -> {
+                    playerHashMap.get("plumber").placePump();
+                    INDENT++;
+                    inventory.removeItem(elementHashMap.get("pump"));
+                    Pipe newPipe = new Pipe();
+                    elementHashMap.get("pump").direct(elementHashMap.get("pipe1"), newPipe);
+                    INDENT++;
+                    elementHashMap.get("pump").setInput(newPipe);
+                    indentPrint("Pipe : getOutput()");
+                    INDENT++;
+                    indentPrint("Got output");
+                    INDENT--;
+                    newPipe.setOutput(elementHashMap.get("pump"));
+                    elementHashMap.get("pump").setInput(elementHashMap.get("pipe1"));
+                    elementHashMap.get("pipe1").setOutput(elementHashMap.get("pump"));
+                    INDENT -= 2;
+                }
+                case "2" -> {
+                    playerHashMap.get("plumber").placePump();
+                    INDENT++;
+                    indentPrint("Cannot place pipe on position");
+                    INDENT--;
+                }
+                default -> System.out.println("Invalid input");
             }
         } else if(playerType.equals("1")) {
             playerHashMap.get("nomad").placePump();
@@ -425,7 +419,6 @@ public class Skeleton {
         String playerType = scanner.nextLine();
 
         String playerPosition = "0";
-        String connectionTarget = "0";
         String inventoryStatus = "0";
         if(playerType.equals("0")) {
             System.out.println("Where is the player standing?");
@@ -455,67 +448,71 @@ public class Skeleton {
         System.out.println("Simulating connectPipe():");
         INDENT++;
         if(playerType.equals("0")) {
-            if(playerPosition.equals("0")) {
-                if(inventoryStatus.equals("0")){
-                    playerHashMap.get("plumber").disconnectPipe(elementHashMap.get("pipe1"));
-                    INDENT++;
-                    indentPrint("Inventory is full");
-                    INDENT--;
-                } else if(inventoryStatus.equals("1")) {
-                    elementHashMap.get("pipe1").isConnected(elementHashMap.get("cistern"));
-                    INDENT++;
-                    indentPrint("Element is connected");
-                    INDENT--;
-                    playerHashMap.get("plumber").disconnectPipe(elementHashMap.get("pipe1"));
-                    elementHashMap.get("pipe1").removeConnection(elementHashMap.get("cistern"));
-                    elementHashMap.get("cistern").removeConnection(elementHashMap.get("pipe1"));
-                    inventory.addItem(elementHashMap.get("pipe1"));
-                } else {
-                    System.out.println("Invalid input");
+            switch (playerPosition) {
+                case "0" -> {
+                    if (inventoryStatus.equals("0")) {
+                        playerHashMap.get("plumber").disconnectPipe(elementHashMap.get("pipe1"));
+                        INDENT++;
+                        indentPrint("Inventory is full");
+                        INDENT--;
+                    } else if (inventoryStatus.equals("1")) {
+                        elementHashMap.get("pipe1").isConnected(elementHashMap.get("cistern"));
+                        INDENT++;
+                        indentPrint("Element is connected");
+                        INDENT--;
+                        playerHashMap.get("plumber").disconnectPipe(elementHashMap.get("pipe1"));
+                        elementHashMap.get("pipe1").removeConnection(elementHashMap.get("cistern"));
+                        elementHashMap.get("cistern").removeConnection(elementHashMap.get("pipe1"));
+                        inventory.addItem(elementHashMap.get("pipe1"));
+                    } else {
+                        System.out.println("Invalid input");
+                    }
                 }
-            } else if(playerPosition.equals("1")) {
-                playerHashMap.get("plumber").disconnectPipe(elementHashMap.get("pipe1"));
-                INDENT++;
-                indentPrint("Cannot disconnect a pipe from a pipe");
-                INDENT--;
-            } else if(playerPosition.equals("2")) {
-                if(inventoryStatus.equals("0")){
+                case "1" -> {
                     playerHashMap.get("plumber").disconnectPipe(elementHashMap.get("pipe1"));
                     INDENT++;
-                    indentPrint("Inventory is full");
+                    indentPrint("Cannot disconnect a pipe from a pipe");
                     INDENT--;
-                } else if(inventoryStatus.equals("1")) {
-                    elementHashMap.get("pipe1").isConnected(elementHashMap.get("pump"));
-                    INDENT++;
-                    indentPrint("Element is connected");
-                    INDENT--;
-                    playerHashMap.get("plumber").disconnectPipe(elementHashMap.get("pipe1"));
-                    elementHashMap.get("pipe1").removeConnection(elementHashMap.get("pump"));
-                    elementHashMap.get("pump").removeConnection(elementHashMap.get("pipe1"));
-                    inventory.addItem(elementHashMap.get("pipe1"));
-                } else {
-                    System.out.println("Invalid input");
                 }
-            } else if(playerPosition.equals("3")) {
-                if(inventoryStatus.equals("0")){
-                    playerHashMap.get("plumber").disconnectPipe(elementHashMap.get("pipe1"));
-                    INDENT++;
-                    indentPrint("Inventory is full");
-                    INDENT--;
-                } else if(inventoryStatus.equals("1")) {
-                    elementHashMap.get("pipe1").isConnected(elementHashMap.get("source"));
-                    INDENT++;
-                    indentPrint("Element is connected");
-                    INDENT--;
-                    playerHashMap.get("plumber").disconnectPipe(elementHashMap.get("pipe1"));
-                    elementHashMap.get("pipe1").removeConnection(elementHashMap.get("source"));
-                    elementHashMap.get("source").removeConnection(elementHashMap.get("pipe1"));
-                    inventory.addItem(elementHashMap.get("pipe1"));
-                } else {
-                    System.out.println("Invalid input");
+                case "2" -> {
+                    if (inventoryStatus.equals("0")) {
+                        playerHashMap.get("plumber").disconnectPipe(elementHashMap.get("pipe1"));
+                        INDENT++;
+                        indentPrint("Inventory is full");
+                        INDENT--;
+                    } else if (inventoryStatus.equals("1")) {
+                        elementHashMap.get("pipe1").isConnected(elementHashMap.get("pump"));
+                        INDENT++;
+                        indentPrint("Element is connected");
+                        INDENT--;
+                        playerHashMap.get("plumber").disconnectPipe(elementHashMap.get("pipe1"));
+                        elementHashMap.get("pipe1").removeConnection(elementHashMap.get("pump"));
+                        elementHashMap.get("pump").removeConnection(elementHashMap.get("pipe1"));
+                        inventory.addItem(elementHashMap.get("pipe1"));
+                    } else {
+                        System.out.println("Invalid input");
+                    }
                 }
-            } else {
-                System.out.println("Invalid input");
+                case "3" -> {
+                    if (inventoryStatus.equals("0")) {
+                        playerHashMap.get("plumber").disconnectPipe(elementHashMap.get("pipe1"));
+                        INDENT++;
+                        indentPrint("Inventory is full");
+                        INDENT--;
+                    } else if (inventoryStatus.equals("1")) {
+                        elementHashMap.get("pipe1").isConnected(elementHashMap.get("source"));
+                        INDENT++;
+                        indentPrint("Element is connected");
+                        INDENT--;
+                        playerHashMap.get("plumber").disconnectPipe(elementHashMap.get("pipe1"));
+                        elementHashMap.get("pipe1").removeConnection(elementHashMap.get("source"));
+                        elementHashMap.get("source").removeConnection(elementHashMap.get("pipe1"));
+                        inventory.addItem(elementHashMap.get("pipe1"));
+                    } else {
+                        System.out.println("Invalid input");
+                    }
+                }
+                default -> System.out.println("Invalid input");
             }
         } else if(playerType.equals("1")) {
             playerHashMap.get("nomad").disconnectPipe(elementHashMap.get("pipe1"));
@@ -536,7 +533,6 @@ public class Skeleton {
         String playerType = scanner.nextLine();
 
         String playerPosition = "0";
-        String connectionTarget = "0";
         if(playerType.equals("0")) {
             System.out.println("Where is the player standing?");
             System.out.println("""
@@ -556,34 +552,38 @@ public class Skeleton {
         System.out.println("Simulating connectPipe():");
         INDENT++;
         if(playerType.equals("0")) {
-            if(playerPosition.equals("0")) {
-                playerHashMap.get("plumber").connectPipe();
-                INDENT++;
-                elementHashMap.get("cistern").addConnection(elementHashMap.get("pipe3"));
-                elementHashMap.get("pipe3").addConnection(elementHashMap.get("cistern"));
-                inventory.removeItem(elementHashMap.get("pipe3"));
-                INDENT--;
-            } else if(playerPosition.equals("1")) {
-                playerHashMap.get("plumber").connectPipe();
-                INDENT++;
-                indentPrint("Cannot connect a pipe to a pipe");
-                INDENT--;
-            } else if(playerPosition.equals("2")) {
-                playerHashMap.get("plumber").connectPipe();
-                INDENT++;
-                elementHashMap.get("pump").addConnection(elementHashMap.get("pipe3"));
-                elementHashMap.get("pipe3").addConnection(elementHashMap.get("pump"));
-                inventory.removeItem(elementHashMap.get("pipe3"));
-                INDENT--;
-            } else if(playerPosition.equals("3")) {
-                playerHashMap.get("plumber").connectPipe();
-                INDENT++;
-                elementHashMap.get("source").addConnection(elementHashMap.get("pipe3"));
-                elementHashMap.get("pipe3").addConnection(elementHashMap.get("source"));
-                inventory.removeItem(elementHashMap.get("pipe3"));
-                INDENT--;
-            } else {
-                System.out.println("Invalid input");
+            switch (playerPosition) {
+                case "0" -> {
+                    playerHashMap.get("plumber").connectPipe();
+                    INDENT++;
+                    elementHashMap.get("cistern").addConnection(elementHashMap.get("pipe3"));
+                    elementHashMap.get("pipe3").addConnection(elementHashMap.get("cistern"));
+                    inventory.removeItem(elementHashMap.get("pipe3"));
+                    INDENT--;
+                }
+                case "1" -> {
+                    playerHashMap.get("plumber").connectPipe();
+                    INDENT++;
+                    indentPrint("Cannot connect a pipe to a pipe");
+                    INDENT--;
+                }
+                case "2" -> {
+                    playerHashMap.get("plumber").connectPipe();
+                    INDENT++;
+                    elementHashMap.get("pump").addConnection(elementHashMap.get("pipe3"));
+                    elementHashMap.get("pipe3").addConnection(elementHashMap.get("pump"));
+                    inventory.removeItem(elementHashMap.get("pipe3"));
+                    INDENT--;
+                }
+                case "3" -> {
+                    playerHashMap.get("plumber").connectPipe();
+                    INDENT++;
+                    elementHashMap.get("source").addConnection(elementHashMap.get("pipe3"));
+                    elementHashMap.get("pipe3").addConnection(elementHashMap.get("source"));
+                    inventory.removeItem(elementHashMap.get("pipe3"));
+                    INDENT--;
+                }
+                default -> System.out.println("Invalid input");
             }
         } else if(playerType.equals("1")) {
             playerHashMap.get("nomad").connectPipe();
