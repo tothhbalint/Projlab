@@ -6,29 +6,21 @@
 //
 
 
-
+import java.util.Random;
 
 /** */
 public class Pump extends NetworkElement {
-	/** */
 	private int age;
-	
-	/** */
 	private NetworkElement input;
-	
-	/** */
 	private NetworkElement output;
-	
-	@Override
-	public boolean isConnected(NetworkElement ne) {
-		return false;
-	}
+	private Random rand = new Random();
 
 	/** */
 	public void tick() {
+
 	}
 	
-	/** */
+	/** TODO */
 	public boolean accept(Player p) {
 		return false;
 	}
@@ -39,21 +31,11 @@ public class Pump extends NetworkElement {
 	
 	/** */
 	public void direct(NetworkElement n) {
-	}
-	
-	/** */
-	public void pickUpPump(Inventory inv) {
-	}
-	
-	/** */
-	public void addConnection(NetworkElement ne) {
-	}
-	
-	/** */
-	public void removeConnection(NetworkElement ne) {
+		this.output = n;
 	}
 	
 	/** */
 	public void recieveWater(NetworkElement ne) {
+
 	}
 }

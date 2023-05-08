@@ -12,23 +12,42 @@
 /** */
 public class Pipe extends NetworkElement {
 	/** */
-	private int input;
-	
+	private NetworkElement input;
 	/** */
-	private int output;
-	
+	private NetworkElement output;
+	/** */
+	private boolean sticky;
+	private boolean slippery;
+	private int stickyTimeLeft;
+	private int slipperyTimeLeft;
+	private int repairProtectionTimeLeft;
+
 	/** */
 	public void tick() {
+		if (isDamaged()){
+			increasePlumberPoint();
+		}
+		if (sticky){
+			stickyTimeLeft--;
+			if (stickyTimeLeft <= 0){
+				sticky = false;
+			}
+		}
+		if (slippery){
+			slipperyTimeLeft--;
+			if (slipperyTimeLeft <= 0){
+				slippery = false;
+			}
+		}
+		if (repairProtectionTimeLeft > 0){
+			repairProtectionTimeLeft--;
+		}
+
 	}
 	
 	/** */
-	public void setInput() {
-	}
-	
-
-	@Override
-	public boolean isConnected(NetworkElement ne) {
-		return false;
+	public void setInput(NetworkElement ne) {
+		this.input = ne;
 	}
 
 	/** */
@@ -39,23 +58,7 @@ public class Pipe extends NetworkElement {
 	/** */
 	public void remove(Player p) {
 	}
-	
-	/** */
-	public void direct(NetworkElement n) {
-	}
-	
-	/** */
-	public void pickUpPump(Inventory inv) {
-	}
-	
-	/** */
-	public void addConnection(NetworkElement ne) {
-	}
-	
-	/** */
-	public void removeConnection(NetworkElement ne) {
-	}
-	
+
 	/** */
 	public void recieveWater(NetworkElement ne) {
 	}

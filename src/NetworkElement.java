@@ -30,16 +30,19 @@ public abstract class NetworkElement implements ITimer, IMove {
 	public abstract void remove(Player p);
 	
 	/** */
-	public abstract void pickUpPump(Inventory inv);
+	public void addConnection(NetworkElement ne){
+		this.connections.add(ne);
+	}
 	
 	/** */
-	public abstract void addConnection(NetworkElement ne);
+	public void removeConnection(NetworkElement ne){
+		this.connections.remove(ne);
+	}
 	
 	/** */
-	public abstract void removeConnection(NetworkElement ne);
-	
-	/** */
-	public abstract boolean isConnected(NetworkElement ne);
+	public boolean isConnected(NetworkElement ne){
+		return this.connections.contains(ne);
+	}
 	
 	/** */
 	public abstract void recieveWater(NetworkElement ne);
@@ -77,5 +80,14 @@ public abstract class NetworkElement implements ITimer, IMove {
 	/** */
 	public void setOccupied(boolean b) {
 		this.occupied = b;
+	}
+
+	/** */
+	public boolean isDamaged() {
+		return damaged;
+	}
+
+	public  void setDamaged(boolean b) {
+		this.damaged = b;
 	}
 }
