@@ -7,8 +7,6 @@
 //
 
 
-
-
 /** */
 public class Plumber extends Player {
 	/** */
@@ -35,5 +33,11 @@ public class Plumber extends Player {
 	
 	/** TODO */
 	public void disconnectPipe(NetworkElement ne) {
+		Pipe pipe = (Pipe) position;
+		if (pipe.isConnected(ne)){
+			pipe.removeConnection(ne);
+			ne.removeConnection(pipe);
+			inventory.addPipe(pipe);
+		}
 	}
 }
