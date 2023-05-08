@@ -15,7 +15,7 @@ public class Pump extends NetworkElement {
 	private NetworkElement output;
 	private Random rand = new Random();
 
-	/** */
+	/** TODO randombly break */
 	public void tick() {
 
 	}
@@ -41,5 +41,18 @@ public class Pump extends NetworkElement {
 
 	public void setInput(NetworkElement ne) {
 		this.input = ne;
+	}
+
+	public void repairPump(){
+		this.damaged = false;
+		age = 0;
+	}
+
+	private void breakPump(){
+		int randNum = rand.nextInt(20 - age);
+		if (randNum == 0){
+			this.damaged = true;
+		}
+		age++;
 	}
 }

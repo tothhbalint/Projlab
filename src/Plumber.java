@@ -12,22 +12,28 @@
 /** */
 public class Plumber extends Player {
 	/** */
-	public void repair(NetworkElement ne) {
+	public void repair(Pump pump) {
+		pump.repairPump();
+	}
+
+	public void repair(Pipe pipe){
+		pipe.repairPipe();
 	}
 	
 	/** */
-	public void takePump(Inventory inv) {
+	public void takePump() {
+		this.inventory.addPump(new Pump());
 	}
 	
-	/** */
+	/** TODO */
 	public void placePump() {
 	}
 	
-	/** */
+	/** TODO */
 	public void connectPipe() {
 	}
 	
-	/** */
+	/** TODO */
 	public void disconnectPipe(NetworkElement ne) {
 	}
 }
