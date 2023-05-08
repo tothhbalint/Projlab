@@ -7,35 +7,23 @@
 //
 
 
-
+import java.util.ArrayList;
 
 /** */
 public abstract class NetworkElement implements ITimer, IMove {
-	/** */
 	protected int capacity;
-	
-	/** */
 	protected boolean hasWater;
-	
-	/** */
 	protected boolean damaged;
-	
-	/** */
-	private static int nomadPoints;
-	
-	/** */
-	private static int plumberPoints;
-	
-	/** */
-	protected Player occupants;
-	
-	/** */
-	public NetworkElement connections;
-	
-	/** */
+	protected boolean occupied;
+	protected static int nomadPoints;
+	protected static int plumberPoints;
+	protected ArrayList<NetworkElement> connections;
+	protected ArrayList<Player> occupants;
+
+	/** Implements one time slice in the inherited classes */
 	public abstract void tick();
 	
-	/** */
+	/**  */
 	public abstract boolean accept(Player p);
 	
 	/** */
@@ -61,32 +49,36 @@ public abstract class NetworkElement implements ITimer, IMove {
 	
 	/** */
 	public void setWaterState(boolean b) {
+		this.hasWater = b;
 	}
 	
 	/** */
-	public static int getNomadPoints() {
-		return 0;
+	protected static int getNomadPoints() {
+		return nomadPoints;
 	}
 	
 	/** */
-	public static int getPlumberPoints() {
-		return 0;
+	protected static int getPlumberPoints() {
+		return plumberPoints;
 	}
 	
 	/** */
-	private void increaseNomadPoint() {
+	private static void increaseNomadPoint() {
+		nomadPoints++;
 	}
 	
 	/** */
-	private void increasePlumberPoint() {
+	private static void increasePlumberPoint() {
+		plumberPoints++;
 	}
 	
 	/** */
 	public boolean isOccupied() {
-		return false;
+		return occupied;
 	}
 	
 	/** */
 	public void setOccupied(boolean b) {
+		this.occupied = b;
 	}
 }
