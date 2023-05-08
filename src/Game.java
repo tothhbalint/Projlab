@@ -6,28 +6,21 @@
 //
 //
 
-
-
-
 /** */
 public class Game {
-	/** */
-	private Team teams;
-	
-	/** */
-	protected NetworkMap map;
-	
-	/** */
-	private Team nomadTeam;
-	
-	/** */
-	private Team plumberTeam;
-	
+	private Team plumberTeam = new Team();
+	private Team nomadTeam = new Team();
+	private NetworkMap map = new NetworkMap();
+
 	/** */
 	public void startGame() {
 	}
 	
 	/** */
 	public void endGame() {
+	}
+
+	public void tick(){
+		map.tick();
 	}
 }

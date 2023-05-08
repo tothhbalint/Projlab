@@ -30,9 +30,6 @@ public abstract class NetworkElement implements ITimer, IMove {
 	public abstract void remove(Player p);
 	
 	/** */
-	public abstract void direct(NetworkElement n);
-	
-	/** */
 	public abstract void pickUpPump(Inventory inv);
 	
 	/** */
@@ -63,12 +60,12 @@ public abstract class NetworkElement implements ITimer, IMove {
 	}
 	
 	/** */
-	private static void increaseNomadPoint() {
+	protected static void increaseNomadPoint() {
 		nomadPoints++;
 	}
 	
 	/** */
-	private static void increasePlumberPoint() {
+	protected static void increasePlumberPoint() {
 		plumberPoints++;
 	}
 	
