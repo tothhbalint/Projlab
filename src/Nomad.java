@@ -10,22 +10,9 @@
 /** */
 public class Nomad extends Player {
 	/** */
-	public void breakElement(NetworkElement ne) {
-	}
-	
-	/** */
-	public void takePump(Inventory inv) {
-	}
-	
-	/** */
-	public void placePump() {
-	}
-	
-	/** */
-	public void connectPipe() {
-	}
-	
-	/** */
-	public void disconnectPipe(NetworkElement ne) {
+	public void makePipeSlippery(Pipe pipe){
+		if (!pipe.isSticky()){
+			pipe.setSlippery(true);
+		}
 	}
 }

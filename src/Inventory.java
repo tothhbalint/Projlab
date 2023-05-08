@@ -11,17 +11,47 @@
 
 /** */
 public class Inventory {
-	/** */
 	private Player owner;
-	
-	/** */
-	private NetworkElement elements;
-	
-	/** */
-	public void addItem(NetworkElement ne) {
+	private Pump pump = null;
+	private Pipe pipe = null;
+
+	public Inventory(Player player){
+		owner = player;
+	}
+
+	public void addPump(Pump pu) {
+		if (pump == null) {
+			pump = pu;
+		}
+	}
+
+	public void addPipe(Pipe pi) {
+		if (pipe == null) {
+			pipe = pi;
+		}
 	}
 	
 	/** */
-	public void removeItem(NetworkElement ne) {
+	public Pump removePump() {
+		Pump p = pump;
+		pump = null;
+		return p;
+	}
+
+	/** */
+	public Pipe removePipe() {
+		Pipe p = pipe;
+		pipe = null;
+		return p;
+	}
+
+	/** */
+	public boolean hasPump() {
+		return pump != null;
+	}
+
+	/** */
+	public boolean hasPipe() {
+		return pipe != null;
 	}
 }

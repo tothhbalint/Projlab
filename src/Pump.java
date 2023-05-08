@@ -10,7 +10,7 @@ import java.util.Random;
 
 /** */
 public class Pump extends NetworkElement {
-	private int age;
+	private int age = 0;
 	private NetworkElement input;
 	private NetworkElement output;
 	private Random rand = new Random();
@@ -37,5 +37,9 @@ public class Pump extends NetworkElement {
 	/** */
 	public void recieveWater(NetworkElement ne) {
 
+	}
+
+	public void setInput(NetworkElement ne) {
+		this.input = ne;
 	}
 }

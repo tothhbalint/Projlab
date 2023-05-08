@@ -10,37 +10,44 @@
 //
 
 
-
-
-/** */
 public abstract class Player {
-	/** */
-	protected Inventory inventory;
-	
-	/** */
+	protected Inventory inventory = new Inventory(this);
 	protected NetworkElement position;
-	
-	/** */
+	protected boolean stuck = false;
+	protected int stuckTimeLeft = 0;
+
+	public void tick(){
+		if (stuck){
+			stuckTimeLeft--;
+			if (stuckTimeLeft <= 0){
+				stuck = false;
+			}
+		}
+	}
+
+	//TODO
 	public void move(NetworkElement ne) {
+
 	}
 	
-	/** */
-	public void directPump() {
+	/** TODO if position is an instance of pump,
+	 * we can choose from the pumps' connections an output, and set it as an output
+	 * NOTE: maybe we should rather use the connection as the parameter, not the pump itself
+	 * */
+	public void directPump(Pump pump) {
+
 	}
-	
-	/** */
-	public abstract void takePump(Inventory inv);
-	
-	/** */
-	public abstract void placePump();
-	
-	/** */
-	public abstract void connectPipe();
-	
-	/** */
-	public abstract void disconnectPipe(NetworkElement ne);
 	
 	/** */
 	public void setPosition(NetworkElement ne) {
+		this.position = ne;
+	}
+
+	public void makePipeSticky(Pipe p){
+		p.setSticky(true);
+	}
+
+	public void breakPipe(Pipe p){
+		p.breakPipe();
 	}
 }

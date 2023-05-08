@@ -12,8 +12,7 @@
 /** */
 public interface IMove {
 	/** */
-	abstract boolean accept(Player p);
-
+	boolean accept(Player p);
 	/** */
-	abstract void remove(Player p);
+	void remove(Player p);
 }
