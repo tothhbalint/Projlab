@@ -6,6 +6,8 @@
 //
 //
 
+import java.io.Console;
+
 /** */
 public class Pipe extends NetworkElement {
 	private NetworkElement input;
@@ -35,7 +37,16 @@ public class Pipe extends NetworkElement {
 		if (repairProtectionTimeLeft > 0){
 			repairProtectionTimeLeft--;
 		}
+		//TODO
 
+	}
+
+	public void addConnection(NetworkElement ne){
+		if (this.connections.size() < 2){
+			this.connections.add(ne);
+		} else {
+			System.out.println("Pipe already has 2 connections");
+		}
 	}
 	
 	/** TODO */

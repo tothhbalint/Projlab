@@ -45,7 +45,7 @@ public class Cistern extends NetworkElement {
 
 	/** */
 	public void pickUpPump(Inventory inv) {
-		inv.addItem(new Pump());
+		inv.addPump(new Pump());
 	}
 	
 	/** */

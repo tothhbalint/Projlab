@@ -28,7 +28,7 @@ public abstract class NetworkElement implements ITimer, IMove {
 		this.damaged = false;
 		this.occupied = false;
 		this.capacity = 0; //The question still stands
-		this.id = NetworkMap.genID();
+		this.id = NetworkMap.generateID();
 	}
 
 	/** Implements one time slice in the inherited classes */

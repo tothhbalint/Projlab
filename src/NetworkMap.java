@@ -10,34 +10,68 @@ import java.util.ArrayList;
 /** */
 public class NetworkMap {
 	private static int currentID = 0;
-	/** */
-	private ArrayList<NetworkElement> elements;
+	private ArrayList<NetworkElement> elements = new ArrayList<NetworkElement>();
 	
 	//TODO init the whole game
 	public void build() {
-		Source source1 = new Source();
-		Source source2 = new Source();
-		Source source3 = new Source();
-		Pump pump1 = new Pump();
-		Pump pump2 = new Pump();
-		Pump pump3 = new Pump();
-		Pump pump4 = new Pump();
-		Pump pump5 = new Pump();
-		Pump pump6 = new Pump();
-		Pipe pipe1 = new Pipe();
-		Pipe pipe2 = new Pipe();
-		Pipe pipe3 = new Pipe();
-		Pipe pipe4 = new Pipe();
-		Pipe pipe5 = new Pipe();
-		Pipe pipe6 = new Pipe();
-		Pipe pipe7 = new Pipe();
-		Pipe pipe8 = new Pipe();
-		Pipe pipe9 = new Pipe();
-		Pipe pipe10 = new Pipe();
-		Pipe pipe11 = new Pipe();
-		Pipe pipe12 = new Pipe();
-		Pipe pipe13 = new Pipe();
-		Pipe pipe14 = new Pipe();
+		for (int i = 0; i < 3; i++){
+			Source s = new Source();
+			addElement(s);
+		}
+
+		for (int i = 0; i < 3; i++){
+			Cistern s = new Cistern();
+			addElement(s);
+		}
+
+		for (int i = 0; i < 14; i++){
+			Pipe s = new Pipe();
+			addElement(s);
+		}
+
+		for (int i = 0; i < 6; i++){
+			Pump s = new Pump();
+			addElement(s);
+		}
+
+		//TODO REFACTOR THIS PIECE OF SHIT
+		//Connecting sources with pipes
+		connect(elements.get(0), elements.get(6));
+		connect(elements.get(1), elements.get(12));
+		connect(elements.get(2), elements.get(17));
+
+		//Connecting pumps with pipes
+		connect(elements.get(20), elements.get(6));
+		connect(elements.get(20), elements.get(7));
+		connect(elements.get(20), elements.get(9));
+
+		connect(elements.get(21), elements.get(12));
+		connect(elements.get(21), elements.get(9));
+		connect(elements.get(21), elements.get(10));
+		connect(elements.get(21), elements.get(13));
+
+		connect(elements.get(22), elements.get(17));
+		connect(elements.get(22), elements.get(15));
+		connect(elements.get(22), elements.get(18));
+
+		connect(elements.get(23), elements.get(7));
+		connect(elements.get(23), elements.get(8));
+		connect(elements.get(23), elements.get(11));
+		connect(elements.get(23), elements.get(10));
+
+		connect(elements.get(24), elements.get(13));
+		connect(elements.get(24), elements.get(14));
+		connect(elements.get(24), elements.get(16));
+
+		connect(elements.get(25), elements.get(18));
+		connect(elements.get(25), elements.get(19));
+		connect(elements.get(25), elements.get(16));
+
+		//Connecting cistern with pipes
+		connect(elements.get(3), elements.get(8));
+		connect(elements.get(4), elements.get(11));
+		connect(elements.get(4), elements.get(14));
+		connect(elements.get(5), elements.get(19));
 
 
 	}
