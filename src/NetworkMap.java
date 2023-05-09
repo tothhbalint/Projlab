@@ -34,7 +34,7 @@ public class NetworkMap {
 			addElement(s);
 		}
 
-		//TODO REFACTOR THIS PIECE OF SHIT
+		//TODO REFACTOR THIS PoS WITH some kind of Markup-language
 		//Connecting sources with pipes
 		connect(elements.get(0), elements.get(6));
 		connect(elements.get(1), elements.get(12));
@@ -72,8 +72,6 @@ public class NetworkMap {
 		connect(elements.get(4), elements.get(11));
 		connect(elements.get(4), elements.get(14));
 		connect(elements.get(5), elements.get(19));
-
-
 	}
 	
 	/** */
