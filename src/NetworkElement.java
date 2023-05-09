@@ -11,7 +11,8 @@ import java.util.ArrayList;
 
 /** */
 public abstract class NetworkElement implements ITimer, IMove {
-	protected int capacity;
+	protected int id;
+	protected int capacity; //Do we still need this?
 	protected boolean hasWater;
 	protected boolean damaged;
 	protected boolean occupied;
@@ -19,6 +20,16 @@ public abstract class NetworkElement implements ITimer, IMove {
 	protected static int plumberPoints;
 	protected ArrayList<NetworkElement> connections;
 	protected ArrayList<Player> occupants;
+
+	public NetworkElement(){
+		this.connections = new ArrayList<NetworkElement>();
+		this.occupants = new ArrayList<Player>();
+		this.hasWater = false;
+		this.damaged = false;
+		this.occupied = false;
+		this.capacity = 0; //The question still stands
+		this.id = NetworkMap.genID();
+	}
 
 	/** Implements one time slice in the inherited classes */
 	public abstract void tick();
@@ -89,5 +100,10 @@ public abstract class NetworkElement implements ITimer, IMove {
 
 	public  void setDamaged(boolean b) {
 		this.damaged = b;
+	}
+
+	/** */
+	public int getID() {
+		return id;
 	}
 }

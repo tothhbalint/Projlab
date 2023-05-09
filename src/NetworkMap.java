@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 /** */
 public class NetworkMap {
+	private static int currentID = 0;
 	/** */
 	private ArrayList<NetworkElement> elements;
 	
@@ -68,5 +69,30 @@ public class NetworkMap {
 	/** */
 	public int getPlumberPoints() {
 		return NetworkElement.getPlumberPoints();
+	}
+
+	/** */
+	public void addElement(NetworkElement ne) {
+		this.elements.add(ne);
+	}
+
+	/** */
+	public void removeElement(NetworkElement ne) {
+		this.elements.remove(ne);
+	}
+
+	/** */
+	public static int generateID() {
+		return currentID++;
+	}
+
+	/** */
+	public NetworkElement getElementByID(int id) {
+		for (NetworkElement ne : elements) {
+			if (ne.getID() == id) {
+				return ne;
+			}
+		}
+		return null;
 	}
 }
