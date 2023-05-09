@@ -7,29 +7,32 @@
 //
 
 
-
+import java.util.ArrayList;
 
 /** */
 public class Team {
-	/** */
-	private int points;
+	private ArrayList<Player> members = new ArrayList<Player>();
+	private int points = 0;
+	private String name;
+	private int maxTeamSize = 2;
+
 	
 	/** */
-	private Player members;
-	
-	/** */
-	public void addPoints(int i) {
+	public void updatePoints(int updatedPoints) {
+		points = updatedPoints; //Will be easier to just ask for the static points of the team from the NetworkMap -> NetworkElement
 	}
 	
 	/** */
 	public void addMember(Player p) {
+		if (members.size() < maxTeamSize) {
+			members.add(p);
+		}
 	}
 	
 	/** */
-	public void createPlumberTeam(String name, int nop) {
+	public Team(String name, int nop) {
+		this.name = name;
+		maxTeamSize = nop;
 	}
-	
-	/** */
-	public void createNomadTeam(String name, int nop) {
-	}
+
 }

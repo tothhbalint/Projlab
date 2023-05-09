@@ -16,34 +16,13 @@ public class Source extends NetworkElement {
 	public void tick() {
 	}
 	
-	/** */
+	/** TODO movement*/
 	public boolean accept(Player p) {
 		return false;
 	}
 	
-	/** */
+	/** TODO movement */
 	public void remove(Player p) {
-	}
-	
-	/** */
-	public void direct(NetworkElement n) {
-	}
-	
-	/** */
-	public void pickUpPump(Inventory inv) {
-	}
-	
-	/** */
-	public void addConnection(NetworkElement ne) {
-	}
-	
-	/** */
-	public void removeConnection(NetworkElement ne) {
-	}
-
-	@Override
-	public boolean isConnected(NetworkElement ne) {
-		return false;
 	}
 
 	/** */
