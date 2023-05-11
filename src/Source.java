@@ -15,14 +15,20 @@ public class Source extends NetworkElement {
 	/** */
 	public void tick() {
 	}
-	
-	/** TODO movement*/
+
 	public boolean accept(Player p) {
+		NetworkElement ne = p.getPosition();
+		for (NetworkElement n:
+				this.connections) {
+			if (n == ne){
+				ne.remove(p);
+				return true;
+			}
+		}
 		return false;
 	}
-	
-	/** TODO movement */
 	public void remove(Player p) {
+		// Nothing
 	}
 
 	/** */

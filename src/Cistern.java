@@ -33,14 +33,21 @@ public class Cistern extends NetworkElement {
 
 	}
 	
-	/** TODO */
 	public boolean accept(Player p) {
+		NetworkElement ne = p.getPosition();
+		for (NetworkElement n:
+				this.connections) {
+			if (n == ne){
+				ne.remove(p);
+				return true;
+			}
+		}
 		return false;
 	}
 	
 	/** */
 	public void remove(Player p) {
-		//TODO
+		// Nothing
 	}
 
 	/** */

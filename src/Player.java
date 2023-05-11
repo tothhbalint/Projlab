@@ -25,9 +25,10 @@ public abstract class Player {
 		}
 	}
 
-	//TODO
 	public void move(NetworkElement ne) {
-
+		if (ne.accept(this)){
+			this.setPosition(ne);
+		}
 	}
 	
 	/** TODO if position is an instance of pump,
@@ -37,10 +38,22 @@ public abstract class Player {
 	public void directPump(Pump pump) {
 
 	}
+
+	public void setStuck(boolean b){
+		stuck = b;
+	}
+
+	public void setStuckTimeLeft(int i){
+		stuckTimeLeft = i;
+	}
 	
 	/** */
 	public void setPosition(NetworkElement ne) {
 		this.position = ne;
+	}
+
+	public NetworkElement getPosition(){
+		return this.position;
 	}
 
 	public void makePipeSticky(Pipe p){

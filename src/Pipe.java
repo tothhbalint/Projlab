@@ -7,6 +7,7 @@
 //
 
 import java.io.Console;
+import java.util.Random;
 
 /** */
 public class Pipe extends NetworkElement {
@@ -17,6 +18,7 @@ public class Pipe extends NetworkElement {
 	private int stickyTimeLeft = 0;
 	private int slipperyTimeLeft = 0;
 	private int repairProtectionTimeLeft = 0;
+	private Random rand = new Random();
 
 	public void tick() {
 		if (isDamaged()){
@@ -40,6 +42,9 @@ public class Pipe extends NetworkElement {
 		//TODO
 
 	}
+	public void setStickyTimeLeft(int i){
+		stickyTimeLeft = i;
+	}
 
 	public void addConnection(NetworkElement ne){
 		if (this.connections.size() < 2){
@@ -55,12 +60,49 @@ public class Pipe extends NetworkElement {
 	}
 
 	/** TODO */
+	public NetworkElement getRandomConnection(){ return this; }
+	/** TODO  javitasok ahol a sor utan komment van, TOTIKAAAA SEGITTS*/
 	public boolean accept(Player p) {
-		return false;
+		if (this.isOccupied()){
+			return false;
+		}else{
+			NetworkElement ne = p.getPosition();
+
+			if (this.isConnected(ne)){
+				ne.remove(p);
+				if (this.slippery){
+					if (this.sticky){
+						//NOTHING
+					}else{
+						// TODO if slippery, but not sticky DONE
+						int index = rand.nextInt(this.connections.size());
+						p.setPosition(this.connections.get(index));
+						return true;
+					}
+				}else{
+					if (this.sticky){
+						// TODO if not slippery but sticky DONE
+						p.setPosition(this);
+						this.setOccupied(true);
+						return true;
+					}else{
+						//TODO if not slippery and not sticky DONE
+						this.setOccupied(true);
+						p.setPosition(this);
+						p.setStuck(true);
+						int r = rand.nextInt(10); // majd valami szamot megadni maximumnak
+						p.setStuckTimeLeft(r);
+						this.setStickyTimeLeft(r);
+						return true;
+					}
+				}
+			}
+			return false;
+		}
 	}
-	
-	/** TODO */
+
 	public void remove(Player p) {
+		this.setOccupied(false);
 	}
 
 	/** TODO */

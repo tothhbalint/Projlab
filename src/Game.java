@@ -12,11 +12,11 @@ public class Game {
 	private Team nomadTeam = new Team("Nomad", 2);
 	private NetworkMap map = new NetworkMap();
 
-	/** */
+	/** TODO */
 	public void startGame() {
 	}
 	
-	/** */
+	/** TODO */
 	public void endGame() {
 	}
 
