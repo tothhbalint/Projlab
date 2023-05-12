@@ -11,10 +11,78 @@
 
 
 public abstract class Player {
-	protected Inventory inventory = new Inventory(this);
+	protected Inventory inventory;
 	protected NetworkElement position;
-	protected boolean stuck = false;
-	protected int stuckTimeLeft = 0;
+	protected boolean stuck;
+	protected int stuckTimeLeft;
+
+	/** */
+	public Player() {
+		position = null;
+		stuck = false;
+		stuckTimeLeft = 0;
+		inventory = new Inventory(this);
+	}
+
+	/** */
+	public Player(NetworkElement ne) {
+		position = ne;
+		stuck = false;
+		stuckTimeLeft = 0;
+		inventory = new Inventory(this);
+	}
+
+	/** */
+	public NetworkElement getPosition() {
+		return this.position;
+	}
+
+	/** */
+	public void setPosition(NetworkElement ne) {
+		this.position = ne;
+	}
+
+	/** */
+	public boolean getStuck() {
+		return this.stuck;
+	}
+
+	/** */
+	public void setStuck(boolean b) {
+		this.stuck  = b;
+	}
+
+	/** */
+	public int getStuckTimeLeft() {
+		return this.stuckTimeLeft;
+	}
+
+	/** */
+	public void setStuckTimeLeft(int i) {
+		this.stuckTimeLeft = i;
+	}
+
+	/** */
+	public Inventory getInventory() {
+		return this.inventory;
+	}
+
+	/** */
+	public void setInventory(Inventory inv) {
+		this.inventory = inv;
+	}
+
+	/** */
+	public abstract void takePump(Inventory inv);
+
+	/** */
+	public abstract void placePump();
+
+	/** */
+	public abstract void connectPipe();
+
+	/** */
+	public abstract void disconnectPipe(NetworkElement ne);
 
 	public void tick(){
 		if (stuck){
@@ -25,6 +93,7 @@ public abstract class Player {
 		}
 	}
 
+	//TODO
 	public void move(NetworkElement ne) {
 		if (ne.accept(this)){
 			this.setPosition(ne);
@@ -34,26 +103,11 @@ public abstract class Player {
 	/** TODO if position is an instance of pump,
 	 * we can choose from the pumps' connections an output, and set it as an output
 	 * NOTE: maybe we should rather use the connection as the parameter, not the pump itself
+	 * RE - NOTE: maybe we rather use the pump, and the desired in- and output as parameters,
+	 * 			  because the pump should be given in position (which is a NetworkElement though)
 	 * */
-	public void directPump(Pump pump) {
-
-	}
-
-	public void setStuck(boolean b){
-		stuck = b;
-	}
-
-	public void setStuckTimeLeft(int i){
-		stuckTimeLeft = i;
-	}
-	
-	/** */
-	public void setPosition(NetworkElement ne) {
-		this.position = ne;
-	}
-
-	public NetworkElement getPosition(){
-		return this.position;
+	public void directPump(Pump pump, NetworkElement in, NetworkElement out) {
+		position.direct(in, out);
 	}
 
 	public void makePipeSticky(Pipe p){

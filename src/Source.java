@@ -34,4 +34,14 @@ public class Source extends NetworkElement {
 	/** */
 	public void recieveWater(NetworkElement ne) {
 	}
+
+	/** */
+	public void pickUpPump(Inventory inv) {
+
+	}
+
+	/** */
+	public void direct(NetworkElement in, NetworkElement out) {
+
+	}
 }

@@ -106,4 +106,16 @@ public abstract class NetworkElement implements ITimer, IMove {
 	public int getID() {
 		return id;
 	}
+
+	/**
+	 * NOTE: based on 7.0.1 class diagram, should be boolean, not void
+	 * - consider how accept() works
+	 * */
+	public abstract void pickUpPump(Inventory inv);
+
+	/**
+	 * - consider how accept() works
+	 * should this method be boolean instead of void?
+	 * */
+	public abstract void direct(NetworkElement in, NetworkElement out);
 }

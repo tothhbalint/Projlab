@@ -34,13 +34,20 @@ public class Pump extends NetworkElement {
 		// Nothing
 	}
 	
-	/** */
-	public void direct(NetworkElement n) {
-		this.output = n;
+	/**
+	 * CHANGED: +1 param for input
+	 * */
+	public void direct(NetworkElement in, NetworkElement out) {
+		this.input = in;
+		this.output = out;
 	}
 	
 	/** */
 	public void recieveWater(NetworkElement ne) {
+
+	}
+
+	public void pickUpPump(Inventory inv) {
 
 	}
 

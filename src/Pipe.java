@@ -109,6 +109,16 @@ public class Pipe extends NetworkElement {
 	public void recieveWater(NetworkElement ne) {
 	}
 
+	/** */
+	public void pickUpPump(Inventory inv) {
+
+	}
+
+	/** */
+	public void direct(NetworkElement in, NetworkElement out) {
+
+	}
+
 	public void breakPipe(){
 		if (this.repairProtectionTimeLeft <= 0)
 			this.damaged = true;

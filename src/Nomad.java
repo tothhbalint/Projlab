@@ -15,4 +15,20 @@ public class Nomad extends Player {
 			pipe.setSlippery(true);
 		}
 	}
+
+	public void takePump(Inventory inv) {
+		;
+	}
+
+	public void placePump() {
+		;
+	}
+
+	public void connectPipe() {
+		;
+	}
+
+	public void disconnectPipe(NetworkElement ne) {
+		;
+	}
 }

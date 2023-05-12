@@ -54,7 +54,12 @@ public class Cistern extends NetworkElement {
 	public void pickUpPump(Inventory inv) {
 		inv.addPump(new Pump());
 	}
-	
+
+	/** */
+	public void direct(NetworkElement in, NetworkElement out) {
+
+	}
+
 	/** */
 	public void addConnection(NetworkElement ne) {
 		if (this.connections.size() < this.maxConnectionSize) {
