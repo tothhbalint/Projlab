@@ -41,7 +41,12 @@ public class Pump extends NetworkElement {
 		this.input = in;
 		this.output = out;
 	}
-	
+
+	@Override
+	public void printMatrix() {
+
+	}
+
 	/** */
 	public void recieveWater(NetworkElement ne) {
 

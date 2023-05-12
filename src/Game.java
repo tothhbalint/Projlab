@@ -23,4 +23,16 @@ public class Game {
 	public void tick(){
 		map.tick();
 	}
+
+	public Team getPlumberTeam() {
+		return plumberTeam;
+	}
+
+	public Team getNomadTeam() {
+		return nomadTeam;
+	}
+
+	public NetworkMap getMap() {
+		return map;
+	}
 }

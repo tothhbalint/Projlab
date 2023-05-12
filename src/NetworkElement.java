@@ -118,4 +118,7 @@ public abstract class NetworkElement implements ITimer, IMove {
 	 * should this method be boolean instead of void?
 	 * */
 	public abstract void direct(NetworkElement in, NetworkElement out);
+
+	/** Draw element only verbose mode */
+	public abstract void printMatrix();
 }

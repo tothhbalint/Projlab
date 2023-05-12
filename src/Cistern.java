@@ -14,7 +14,6 @@ import java.util.Random;
 public class Cistern extends NetworkElement {
 	private int maxConnectionSize = 1;
 	Random rand = new Random();
-
 	/** */
 	@Override
 	public boolean isConnected(NetworkElement ne) {
@@ -57,6 +56,11 @@ public class Cistern extends NetworkElement {
 
 	/** */
 	public void direct(NetworkElement in, NetworkElement out) {
+
+	}
+
+	@Override
+	public void printMatrix() {
 
 	}
 

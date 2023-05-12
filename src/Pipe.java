@@ -119,6 +119,11 @@ public class Pipe extends NetworkElement {
 
 	}
 
+	@Override
+	public void printMatrix() {
+
+	}
+
 	public void breakPipe(){
 		if (this.repairProtectionTimeLeft <= 0)
 			this.damaged = true;

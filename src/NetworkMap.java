@@ -127,4 +127,8 @@ public class NetworkMap {
 		}
 		return null;
 	}
+
+	public ArrayList<NetworkElement> getElements(){
+		return elements;
+	}
 }

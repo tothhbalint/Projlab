@@ -34,5 +34,13 @@ public class Team {
 		this.name = name;
 		maxTeamSize = nop;
 	}
+	//TODO figure out an other way to identify a player
+	public Player getPlayer(int playerNumber){
+		if(playerNumber < members.size()){
+			return members.get(playerNumber);
+		}else{
+			throw new RuntimeException("Player number out of bounds");
+		}
+	}
 
 }

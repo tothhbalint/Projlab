@@ -44,4 +44,9 @@ public class Source extends NetworkElement {
 	public void direct(NetworkElement in, NetworkElement out) {
 
 	}
+
+	@Override
+	public void printMatrix() {
+
+	}
 }
