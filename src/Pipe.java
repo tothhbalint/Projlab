@@ -119,11 +119,6 @@ public class Pipe extends NetworkElement {
 
 	}
 
-	@Override
-	public void printMatrix() {
-
-	}
-
 	public void breakPipe(){
 		if (this.repairProtectionTimeLeft <= 0)
 			this.damaged = true;
@@ -158,5 +153,9 @@ public class Pipe extends NetworkElement {
 
 	public boolean isRepairProtected(){
 		return repairProtectionTimeLeft > 0;
+	}
+
+	public String toString(){
+		return "Pipe" + super.toString();
 	}
 }

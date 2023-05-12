@@ -14,6 +14,7 @@ import java.util.Random;
 public class Cistern extends NetworkElement {
 	private int maxConnectionSize = 1;
 	Random rand = new Random();
+
 	/** */
 	@Override
 	public boolean isConnected(NetworkElement ne) {
@@ -31,7 +32,7 @@ public class Cistern extends NetworkElement {
 		}
 
 	}
-	
+
 	public boolean accept(Player p) {
 		NetworkElement ne = p.getPosition();
 		for (NetworkElement n:
@@ -43,7 +44,7 @@ public class Cistern extends NetworkElement {
 		}
 		return false;
 	}
-	
+
 	/** */
 	public void remove(Player p) {
 		// Nothing
@@ -59,9 +60,8 @@ public class Cistern extends NetworkElement {
 
 	}
 
-	@Override
-	public void printMatrix() {
-
+	public String toString(){
+		return "Cistern" + super.toString();
 	}
 
 	/** */
@@ -70,12 +70,12 @@ public class Cistern extends NetworkElement {
 			this.connections.add(ne);
 		}
 	}
-	
+
 	/** */
 	public void removeConnection(NetworkElement ne) {
 		this.connections.remove(ne);
 	}
-	
+
 	/** TODO */
 	public void recieveWater(NetworkElement ne) {
 		//TODO

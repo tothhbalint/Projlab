@@ -42,9 +42,8 @@ public class Pump extends NetworkElement {
 		this.output = out;
 	}
 
-	@Override
-	public void printMatrix() {
-
+	public String toString(){
+		return "Pump" + super.toString();
 	}
 
 	/** */

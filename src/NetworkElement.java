@@ -33,61 +33,61 @@ public abstract class NetworkElement implements ITimer, IMove {
 
 	/** Implements one time slice in the inherited classes */
 	public abstract void tick();
-	
+
 	/**  */
 	public abstract boolean accept(Player p);
-	
+
 	/** */
 	public abstract void remove(Player p);
-	
+
 	/** */
 	public void addConnection(NetworkElement ne){
 		this.connections.add(ne);
 	}
-	
+
 	/** */
 	public void removeConnection(NetworkElement ne){
 		this.connections.remove(ne);
 	}
-	
+
 	/** */
 	public boolean isConnected(NetworkElement ne){
 		return this.connections.contains(ne);
 	}
-	
+
 	/** */
 	public abstract void recieveWater(NetworkElement ne);
-	
+
 	/** */
 	public void setWaterState(boolean b) {
 		this.hasWater = b;
 	}
-	
+
 	/** */
 	protected static int getNomadPoints() {
 		return nomadPoints;
 	}
-	
+
 	/** */
 	protected static int getPlumberPoints() {
 		return plumberPoints;
 	}
-	
+
 	/** */
 	protected static void increaseNomadPoint() {
 		nomadPoints++;
 	}
-	
+
 	/** */
 	protected static void increasePlumberPoint() {
 		plumberPoints++;
 	}
-	
+
 	/** */
 	public boolean isOccupied() {
 		return occupied;
 	}
-	
+
 	/** */
 	public void setOccupied(boolean b) {
 		this.occupied = b;
@@ -119,6 +119,18 @@ public abstract class NetworkElement implements ITimer, IMove {
 	 * */
 	public abstract void direct(NetworkElement in, NetworkElement out);
 
-	/** Draw element only verbose mode */
-	public abstract void printMatrix();
+	/** Draw element only verbose mode
+	 * TODO tweak looks
+	 */
+
+	public void printMatrix(){
+		System.out.print(this.toString() + " ");
+		for (NetworkElement ne : this.connections){
+			System.out.print(ne.toString() + " ");
+		}
+	}
+
+	public String toString(){
+		return Integer.toString(id);
+	}
 }

@@ -45,8 +45,8 @@ public class Source extends NetworkElement {
 
 	}
 
-	@Override
-	public void printMatrix() {
-
+	public String toString(){
+		return "Source" + super.toString();
 	}
+
 }
