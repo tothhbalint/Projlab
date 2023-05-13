@@ -21,9 +21,11 @@ public class Pipe extends NetworkElement {
 	private Random rand = new Random();
 
 	public void tick() {
-		if (isDamaged()){
-			increasePlumberPoint();
+		Proto.print("pipe.tick");
+		if(!isDamaged()){
+			output.recieveWater(this);
 		}
+		output.recieveWater(this);
 		if (sticky){
 			stickyTimeLeft--;
 			if (stickyTimeLeft <= 0){
@@ -39,7 +41,7 @@ public class Pipe extends NetworkElement {
 		if (repairProtectionTimeLeft > 0){
 			repairProtectionTimeLeft--;
 		}
-		//TODO
+
 
 	}
 	public void setStickyTimeLeft(int i){
@@ -47,6 +49,7 @@ public class Pipe extends NetworkElement {
 	}
 
 	public void addConnection(NetworkElement ne){
+		Proto.print("pipe.addConnection");
 		if (this.connections.size() < 2){
 			this.connections.add(ne);
 		} else {
@@ -54,16 +57,25 @@ public class Pipe extends NetworkElement {
 		}
 	}
 	
-	/** TODO */
+
 	public void setInput(NetworkElement ne) {
 		this.input = ne;
 	}
 
-	/** TODO */
-	public NetworkElement getRandomConnection(){ return this; }
-	/** TODO  javitasok ahol a sor utan komment van, TOTIKAAAA SEGITTS*/
+
+	public NetworkElement getRandomConnection(){
+		Proto.print("pipe.getRandomConnection");
+		int index = rand.nextInt(this.connections.size());
+		NetworkElement neighbour = this.connections.get(index);
+		return neighbour;
+	}
+
 	public boolean accept(Player p) {
+
+		Proto.print("pipe.accept");
+
 		if (this.isOccupied()){
+			Proto.print(this.toString() + " occupied");
 			return false;
 		}else{
 			NetworkElement ne = p.getPosition();
@@ -71,28 +83,30 @@ public class Pipe extends NetworkElement {
 			if (this.isConnected(ne)){
 				ne.remove(p);
 				if (this.slippery){
-					if (this.sticky){
-						//NOTHING
-					}else{
-						// TODO if slippery, but not sticky DONE
-						int index = rand.nextInt(this.connections.size());
-						p.setPosition(this.connections.get(index));
+					if (this.sticky){ //Slippery AND Sticky
+						Proto.print("Error: Pipe slippery AND sticky");
+					}else{ //Slippery
+						Proto.print("player.getPosition()");
+						NetworkElement neighbour = this.getRandomConnection();
+						p.setPosition(neighbour);
+						neighbour.setOccupied(true);
+						neighbour.occupants.add(p);
+						Proto.print("player_accepted");
 						return true;
 					}
 				}else{
-					if (this.sticky){
-						// TODO if not slippery but sticky DONE
-						p.setPosition(this);
-						this.setOccupied(true);
-						return true;
-					}else{
-						//TODO if not slippery and not sticky DONE
-						this.setOccupied(true);
+					if (this.sticky){ //Sticky
+						Proto.print("player.getPosition()");
 						p.setPosition(this);
 						p.setStuck(true);
-						int r = rand.nextInt(10); // majd valami szamot megadni maximumnak
-						p.setStuckTimeLeft(r);
-						this.setStickyTimeLeft(r);
+						p.setStuckTimeLeft(rand.nexInt(3)+1);
+						this.setOccupied(true);
+						Proto.print("player_accepted");
+						return true;
+					}else{ //Normal
+						this.setOccupied(true);
+						p.setPosition(this);
+						Proto.print("player_accepted");
 						return true;
 					}
 				}
@@ -102,45 +116,63 @@ public class Pipe extends NetworkElement {
 	}
 
 	public void remove(Player p) {
+		Proto.print("pipe.remove");
 		this.setOccupied(false);
+		this.occupants.remove(p);
+		Proto.print("player_removed");
 	}
 
 	/** TODO */
 	public void recieveWater(NetworkElement ne) {
+		Proto.print("pipe.receiveWater");
+		if (isDamaged()){
+			this.setWaterState(false);
+			increasePlumberPoint();
+		}
 	}
 
 	/** */
 	public void pickUpPump(Inventory inv) {
-
+		Proto.print("pipe.pickUpPump");
+		Proto.print("No_pump_available");
 	}
 
 	/** */
 	public void direct(NetworkElement in, NetworkElement out) {
-
+		Proto.print("pipe.direct");
+		Proto.print("Pipe_cannot_be_directed");
 	}
 
 	public void breakPipe(){
+		Proto.print("pipe.breakPipe");
 		if (this.repairProtectionTimeLeft <= 0)
 			this.damaged = true;
+		Proto.print("pipe_broken");
 	}
 
 	public void repairPipe(){
+		Proto.print("pipe.repairPipe");
 		this.damaged = false;
 		this.repairProtectionTimeLeft = 5;
+		Proto.print("pipe_repaired");
 	}
 
 	public void setSticky(boolean b){
+		Proto.print("pipe.setSticky");
 		if (!slippery){
 			sticky = b;
 			stickyTimeLeft = 5;
 		}
+		Proto.print("pipe_now_sticky");
 	}
 
 	public void setSlippery(boolean b){
+		Proto.print("pipe.setSlippery");
 		if (!sticky){
 			slippery = b;
 			slipperyTimeLeft = 5;
 		}
+		Proto.print("pipe_now_slippery");
 	}
 
 	public boolean isSticky(){
@@ -161,12 +193,12 @@ public class Pipe extends NetworkElement {
 
 	/** */
 	public void connectPipe(NetworkElement ne) {
-		return;
+		//NOTHING
 	}
 
 	/** */
 	public void disconnectPipe(NetworkElement ne) {
-		return;
+		//NOTHING
 	}
 
 	/** */

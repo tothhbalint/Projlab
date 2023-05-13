@@ -12,7 +12,6 @@ import java.util.Random;
  *
  * */
 public class Cistern extends NetworkElement {
-	private int maxConnectionSize = 1;
 	Random rand = new Random();
 
 	/** */
@@ -23,41 +22,46 @@ public class Cistern extends NetworkElement {
 
 	/** */
 	public void tick() {
-		if (this.hasWater){
-			increasePlumberPoint();
-			this.setWaterState(false);
-		}
+		Proto.print("cistern.tick");
 		if (rand.nextInt(10) < 2){
-			maxConnectionSize++;
+			Pipe newPipe = new Pipe();
+			newPipe.addConnection(this);
+			newPipe.setPipeOutput(this);
+			this.addConnection(newPipe);
 		}
-
 	}
 
 	public boolean accept(Player p) {
+		Proto.print("cistern.accept");
 		NetworkElement ne = p.getPosition();
-		for (NetworkElement n:
-				this.connections) {
-			if (n == ne){
-				ne.remove(p);
-				return true;
-			}
+		if (this.isConnected(ne)) {
+			ne.remove(p);
+			this.occupants.add(p);
+			Proto.print("player_accepted");
+			return true;
 		}
+		Proto.print("player_not_accepted");
 		return false;
 	}
 
 	/** */
 	public void remove(Player p) {
-		// Nothing
+		Proto.print("cistern.remove");
+		this.occupants.remove(p);
+		Proto.print("player_removed");
 	}
 
 	/** */
 	public void pickUpPump(Inventory inv) {
+		Proto.print("cistern.pickUpPump");
 		inv.addPump(new Pump());
+		Proto.print("pump_added_to_inventory");
 	}
 
 	/** */
 	public void direct(NetworkElement in, NetworkElement out) {
-
+		Proto.print("cistern.direct");
+		Proto.print("cistern_cannot_be_directed");
 	}
 
 	public String toString(){
@@ -66,29 +70,39 @@ public class Cistern extends NetworkElement {
 
 	/** */
 	public void addConnection(NetworkElement ne) {
+		Proto.print("cistern.addConnection");
 		if (this.connections.size() < this.maxConnectionSize) {
 			this.connections.add(ne);
 		}
+		Proto.print("connection_added");
 	}
 
 	/** */
 	public void removeConnection(NetworkElement ne) {
+		Proto.print("cistern.removeConnection");
 		this.connections.remove(ne);
+		Proto.print("connection_removed");
 	}
 
-	/** TODO */
+
 	public void recieveWater(NetworkElement ne) {
-		//TODO
+		Proto.print("cistern.receiveWater");
+		increasePlumberPoint();
+		Proto.print("water_received");
 	}
 
 	public void connectPipe(NetworkElement ne) {
+		Proto.print("cistern.connectPipe");
 		this.addConnection(ne);
 		ne.addConnection(this);
+		Proto.print("pipe_connected");
 	}
 
 	public void disconnectPipe(NetworkElement ne) {
+		Proto.print("cistern.disconnectPipe");
 		this.removeConnection(ne);
 		ne.removeConnection(this);
+		Proto.print("pipe_disconnected");
 	}
 
 
@@ -101,14 +115,14 @@ public class Cistern extends NetworkElement {
 	}
 
 	public void removePipeOutput(NetworkElement ne) {
-
+		//NOTHING
 	}
 
 	public void addPipeOutput(NetworkElement ne) {
-
+		//NOTHING
 	}
 
 	public void addPipeInput(NetworkElement ne) {
-
+		//NOTHING
 	}
 }
