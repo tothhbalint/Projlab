@@ -100,12 +100,7 @@ public abstract class Player {
 		}
 	}
 	
-	/** TODO if position is an instance of pump,
-	 * we can choose from the pumps' connections an output, and set it as an output
-	 * NOTE: maybe we should rather use the connection as the parameter, not the pump itself
-	 * RE - NOTE: maybe we rather use the pump, and the desired in- and output as parameters,
-	 * 			  because the pump should be given in position (which is a NetworkElement though)
-	 * */
+	/** */
 	public void directPump(Pump pump, NetworkElement in, NetworkElement out) {
 		position.direct(in, out);
 	}

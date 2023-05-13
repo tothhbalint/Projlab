@@ -11,6 +11,7 @@
 public class Nomad extends Player {
 	/** */
 	public void makePipeSlippery(Pipe pipe){
+		Proto.print("Nomad.makePipeSlippery()");
 		if (!pipe.isSticky()){
 			pipe.setSlippery(true);
 		}

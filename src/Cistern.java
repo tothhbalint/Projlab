@@ -80,4 +80,14 @@ public class Cistern extends NetworkElement {
 	public void recieveWater(NetworkElement ne) {
 		//TODO
 	}
+
+	public void connectPipe(NetworkElement ne) {
+		this.addConnection(ne);
+		ne.addConnection(this);
+	}
+
+	public void disconnectPipe(NetworkElement ne) {
+		this.removeConnection(ne);
+		ne.removeConnection(this);
+	}
 }

@@ -158,4 +158,14 @@ public class Pipe extends NetworkElement {
 	public String toString(){
 		return "Pipe" + super.toString();
 	}
+
+	/** */
+	public void connectPipe(NetworkElement ne) {
+		return;
+	}
+
+	/** */
+	public void disconnectPipe(NetworkElement ne) {
+		return;
+	}
 }

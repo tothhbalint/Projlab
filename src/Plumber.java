@@ -17,18 +17,10 @@ public class Plumber extends Player {
 	public void repair(Pipe pipe){
 		pipe.repairPipe();
 	}
-	
-	/**
-	 * ???
-	 * */
-	/*
-	*public void takePump() {
-	* 	this.inventory.addPump(new Pump());
-	*}
-	*/
 
 	/**
-	 * TODO check if position is Cistern
+	 * DONE check if position is Cistern
+	 * only Cistern implements adding a new Pump
 	 * */
 	public void takePump(Inventory inv) {
 		position.pickUpPump(this.inventory);
@@ -38,14 +30,9 @@ public class Plumber extends Player {
 	public void placePump() {
 	}
 	
-	/** TODO
-	 * tempP is local, ?is it good?
-	 * IDEA: inventory should have getters (based on 7.0.3.3 sequence diagram)
-	 * */
+	/**  */
 	public void connectPipe() {
-		Pipe tempP = this.inventory.removePipe();
-		position.addConnection(tempP);
-		tempP.addConnection(this.position);
+		position.connectPipe(this.inventory.removePipe());
 	}
 	
 	/** TODO */
