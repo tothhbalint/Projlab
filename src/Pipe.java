@@ -168,4 +168,28 @@ public class Pipe extends NetworkElement {
 	public void disconnectPipe(NetworkElement ne) {
 		return;
 	}
+
+	/** */
+	public boolean placePump() {
+		return true;
+	}
+
+	public NetworkElement getPipeOutput() {
+		return output;
+	}
+
+	public void removePipeOutput(NetworkElement ne) {
+		output = null;
+		removeConnection(ne);
+	}
+
+	public void addPipeOutput(NetworkElement ne) {
+		output = ne;
+		addConnection(ne);
+	}
+
+	public void addPipeInput(NetworkElement ne) {
+		input = ne;
+		addConnection(ne);
+	}
 }

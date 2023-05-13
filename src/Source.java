@@ -55,6 +55,28 @@ public class Source extends NetworkElement {
 		ne.removeConnection(this);
 	}
 
+
+
+	public boolean placePump() {
+		return false;
+	}
+
+	public NetworkElement getPipeOutput() {
+		return null;
+	}
+
+	public void removePipeOutput(NetworkElement ne) {
+
+	}
+
+	public void addPipeOutput(NetworkElement ne) {
+
+	}
+
+	public void addPipeInput(NetworkElement ne) {
+
+	}
+
 	public String toString(){
 		return "Source" + super.toString();
 	}

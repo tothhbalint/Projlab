@@ -18,18 +18,18 @@ public class Nomad extends Player {
 	}
 
 	public void takePump(Inventory inv) {
-		;
+		Proto.print("Nomad.takePump()");
 	}
 
 	public void placePump() {
-		;
+		Proto.print("Nomad.placePump()");
 	}
 
 	public void connectPipe() {
-		;
+		Proto.print("Nomad.connectPipe()");
 	}
 
 	public void disconnectPipe(NetworkElement ne) {
-		;
+		Proto.print("Nomad.disconnectPipe()");
 	}
 }

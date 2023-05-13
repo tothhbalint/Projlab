@@ -125,6 +125,16 @@ public abstract class NetworkElement implements ITimer, IMove {
 	/** */
 	public abstract void disconnectPipe(NetworkElement ne);
 
+	public abstract boolean placePump();
+
+	public abstract NetworkElement getPipeOutput();
+
+	public abstract void removePipeOutput(NetworkElement ne);
+
+	public abstract void addPipeOutput(NetworkElement ne);
+
+	public  abstract void addPipeInput(NetworkElement ne);
+
 	/** Draw element only verbose mode
 	 * TODO tweak looks
 	 */

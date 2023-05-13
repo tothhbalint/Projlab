@@ -90,4 +90,25 @@ public class Cistern extends NetworkElement {
 		this.removeConnection(ne);
 		ne.removeConnection(this);
 	}
+
+
+	public boolean placePump() {
+		return false;
+	}
+
+	public NetworkElement getPipeOutput() {
+		return null;
+	}
+
+	public void removePipeOutput(NetworkElement ne) {
+
+	}
+
+	public void addPipeOutput(NetworkElement ne) {
+
+	}
+
+	public void addPipeInput(NetworkElement ne) {
+
+	}
 }

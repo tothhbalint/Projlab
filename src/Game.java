@@ -8,8 +8,8 @@
 
 /** */
 public class Game {
-	private Team plumberTeam = new Team("Plumber", 2);
-	private Team nomadTeam = new Team("Nomad", 2);
+	private Team plumberTeam = new Team("Plumber");
+	private Team nomadTeam = new Team("Nomad");
 	private NetworkMap map = new NetworkMap();
 
 	/** TODO */

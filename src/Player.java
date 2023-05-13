@@ -18,6 +18,7 @@ public abstract class Player {
 
 	/** */
 	public Player() {
+		Proto.print("Player.Player()");
 		position = null;
 		stuck = false;
 		stuckTimeLeft = 0;
@@ -26,6 +27,7 @@ public abstract class Player {
 
 	/** */
 	public Player(NetworkElement ne) {
+		Proto.print("Player.Player(NetworkElement)");
 		position = ne;
 		stuck = false;
 		stuckTimeLeft = 0;
@@ -34,41 +36,49 @@ public abstract class Player {
 
 	/** */
 	public NetworkElement getPosition() {
+		Proto.print("Player.getPosition()");
 		return this.position;
 	}
 
 	/** */
 	public void setPosition(NetworkElement ne) {
+		Proto.print("Player.setPosition()");
 		this.position = ne;
 	}
 
 	/** */
 	public boolean getStuck() {
+		Proto.print("Player.getStuck()");
 		return this.stuck;
 	}
 
 	/** */
 	public void setStuck(boolean b) {
+		Proto.print("Player.setStuck()");
 		this.stuck  = b;
 	}
 
 	/** */
 	public int getStuckTimeLeft() {
+		Proto.print("Player.getStuckTimeLeft()");
 		return this.stuckTimeLeft;
 	}
 
 	/** */
 	public void setStuckTimeLeft(int i) {
+		Proto.print("Player.setStuckTimeLeft()");
 		this.stuckTimeLeft = i;
 	}
 
 	/** */
 	public Inventory getInventory() {
+		Proto.print("Player.getInventory()");
 		return this.inventory;
 	}
 
 	/** */
 	public void setInventory(Inventory inv) {
+		Proto.print("Player.setInventory()");
 		this.inventory = inv;
 	}
 
@@ -85,6 +95,7 @@ public abstract class Player {
 	public abstract void disconnectPipe(NetworkElement ne);
 
 	public void tick(){
+		Proto.print("Player.tick()");
 		if (stuck){
 			stuckTimeLeft--;
 			if (stuckTimeLeft <= 0){
@@ -95,6 +106,7 @@ public abstract class Player {
 
 	//TODO
 	public void move(NetworkElement ne) {
+		Proto.print("Player.move()");
 		if (ne.accept(this)){
 			this.setPosition(ne);
 		}
@@ -102,14 +114,17 @@ public abstract class Player {
 	
 	/** */
 	public void directPump(Pump pump, NetworkElement in, NetworkElement out) {
+		Proto.print("Player.directPump()");
 		position.direct(in, out);
 	}
 
 	public void makePipeSticky(Pipe p){
+		Proto.print("Player.makePipeSSticky()");
 		p.setSticky(true);
 	}
 
 	public void breakPipe(Pipe p){
+		Proto.print("Player.breakPipe()");
 		p.breakPipe();
 	}
 }
