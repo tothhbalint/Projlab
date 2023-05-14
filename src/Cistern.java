@@ -26,7 +26,6 @@ public class Cistern extends NetworkElement {
 		if (rand.nextInt(10) < 2){
 			Pipe newPipe = new Pipe();
 			newPipe.addConnection(this);
-			newPipe.setPipeOutput(this);
 			this.addConnection(newPipe);
 		}
 	}
@@ -68,12 +67,19 @@ public class Cistern extends NetworkElement {
 		return "Cistern" + super.toString();
 	}
 
+	@Override
+	public void breakPipe() {
+
+	}
+
+	public void repair(){
+		throw new RuntimeException("Cistern cannot be repaired");
+	}
+
 	/** */
 	public void addConnection(NetworkElement ne) {
 		Proto.print("cistern.addConnection");
-		if (this.connections.size() < this.maxConnectionSize) {
-			this.connections.add(ne);
-		}
+		this.connections.add(ne);
 		Proto.print("connection_added");
 	}
 

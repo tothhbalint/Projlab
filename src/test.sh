@@ -2,6 +2,8 @@
 
 PROTO="java Proto"
 
+eval javac *.java
+
 while :
 do
 	echo "Choose which test to run

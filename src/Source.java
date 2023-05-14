@@ -92,4 +92,13 @@ public class Source extends NetworkElement {
 		return "Source" + super.toString();
 	}
 
+	@Override
+	public void breakPipe() {
+
+	}
+
+	public void repair(){
+		throw new RuntimeException("Source cannot be repaired");
+	}
+
 }

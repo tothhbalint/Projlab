@@ -45,38 +45,6 @@ public class Proto {
         if (test) verbose = false;
     }
 
-    public static void printHelp() {
-        System.out.println("Usage: java Proto [options] [situations] [situation options]");
-        //TODO add list of situations and options
-        //dont make test show up in help
-        System.out.println("Options:");
-        System.out.println("""
-                -v, --verbose: verbose mode
-                -h, --help: print this help
-                """);
-        System.out.println("Situations:");
-        System.out.println("""
-                step : Move $who to $where
-                     -who -where
-                pickup : Pick up $what with $who
-                     -who -what
-                place : Place $what with $who
-                     -who -what
-                break : Break $what with $who
-                     -who -what
-                fix : Fix $who-s position
-                     -who
-                place : Place $what with $who
-                     -who -what
-                oil : Make a pipe slippery with $who
-                     -who
-                glue : Make a pipe sticky with $who
-                     -who
-                flow : Simulate water flow from $from
-                     -from
-                 """);
-    }
-
     static Game gameHandle = new Game();
 
     public static void main(String[] args) {
@@ -87,7 +55,8 @@ public class Proto {
         }
     }
 
-    //TODO draw out the map in ascii for navigation
+    //TODO draw out the map in ascii for navigation or maybe not xd
+
     private static void drawMap() {
         if(!verbose) throw new RuntimeException("Cannot draw map in non-verbose mode");
 
@@ -97,7 +66,6 @@ public class Proto {
             networkElement.printMatrix();
         }
     }
-
 
     private static void processSituation(Situation situation) {
         switch (situation.name) {
@@ -130,7 +98,7 @@ public class Proto {
                 break;
         }
     }
-
+    //overseeing required
     private static void step(String[] options) {
         String who = options[0];
         String where = options[1];
@@ -142,24 +110,61 @@ public class Proto {
 
         String[] whereSplit = where.split("(?<=\\D)(?=\\d)");
         where = whereSplit[0];
+        NetworkElement position = null;
         int whereId = Integer.parseInt(whereSplit[1]);
 
+        Player player = null;
+
         if (who.equals("plumber")) {
-            gameHandle.getPlumberTeam().getPlayer(whoId).getPosition();
+            player = gameHandle.getPlumberTeam().getPlayer(whoId);
         } else if (who.equals("nomad")) {
-            gameHandle.getNomadTeam().getPlayer(whoId).getPosition();
+            player = gameHandle.getNomadTeam().getPlayer(whoId);
         } else {
-            print("Invalid team: " + who);
+            throw new RuntimeException("Invalid team: " + who);
         }
 
+        NetworkElement destination = player.getPosition().getConnections().get(whereId);
+
+        player.move(destination);
     }
+
+    //TODO try to pickup the current position
 
     private static void pickup(String[] options) {
         String who = options[0];
         String what = options[1];
         print("pickup " + who + " " + what);
-    }
 
+
+        String[] whoSplit = who.split("(?<=\\D)(?=\\d)");
+        who = whoSplit[0];
+        int whoId = Integer.parseInt(whoSplit[1]);
+
+        Player player = null;
+
+        if (who.equals("plumber")) {
+            player = gameHandle.getPlumberTeam().getPlayer(whoId);
+        } else if (who.equals("nomad")) {
+            player = gameHandle.getNomadTeam().getPlayer(whoId);
+        } else {
+            throw new RuntimeException("Invalid team: " + who);
+        }
+
+        NetworkElement position = player.getPosition();
+
+        ArrayList<NetworkElement> connections = position.getConnections();
+
+        switch (what) {
+            case "pump":
+                player.takePump();
+                break;
+            case "pipe":
+                player.takePipe(connections.get(0));
+                break;
+            default:
+                throw new RuntimeException("Invalid pickup: " + what);
+        }
+    }
     private static void place(String[] options) {
         String who = options[0];
         String what = options[1];
@@ -167,14 +172,50 @@ public class Proto {
     }
 
     private static void break_(String[] options) {
+        if (options.length > 1) throw new RuntimeException("Too many arguments for break");
+
         String who = options[0];
-        String what = options[1];
-        print("break " + who + " " + what);
+
+        String[] whoSplit = who.split("(?<=\\D)(?=\\d)");
+        who = whoSplit[0];
+        int whoId = Integer.parseInt(whoSplit[1]);
+
+        Player player = null;
+
+        if (who.equals("plumber")) {
+            player = gameHandle.getPlumberTeam().getPlayer(whoId);
+        } else if (who.equals("nomad")) {
+            player = gameHandle.getNomadTeam().getPlayer(whoId);
+        } else {
+            throw new RuntimeException("Invalid team: " + who);
+        }
+
+        player.breakPipe();
     }
 
     private static void fix(String[] options) {
+        if (options.length > 1) throw new RuntimeException("Too many arguments for fix");
+
         String who = options[0];
-        print("fix " + who);
+
+        String[] whoSplit = who.split("(?<=\\D)(?=\\d)");
+        who = whoSplit[0];
+        int whoId = Integer.parseInt(whoSplit[1]);
+
+        Player player = null;
+
+        if (who.equals("plumber")) {
+            player = gameHandle.getPlumberTeam().getPlayer(whoId);
+        } else if (who.equals("nomad")) {
+            throw new RuntimeException("Nomad cannot fix anything");
+        } else {
+            throw new RuntimeException("Invalid team: " + who);
+        }
+
+        Plumber plumber = (Plumber) player;
+
+        plumber.repair();
+
     }
 
     private static void oil(String[] options) {
@@ -194,6 +235,38 @@ public class Proto {
 
     public static void print(String arg) {
         if (verbose) System.out.println(arg);
+    }
+
+    public static void printHelp() {
+        System.out.println("Usage: java Proto [options] [situations] [situation options]");
+        //TODO add list of situations and options
+        //dont make test show up in help
+        System.out.println("Options:");
+        System.out.println("""
+                -v, --verbose: verbose mode
+                -h, --help: print this help
+                """);
+        System.out.println("Situations:");
+        System.out.println("""
+                step : Move $who to $where
+                     -who -where
+                pickup : Pick up $what with $who
+                     -who -what
+                place : Place $what with $who
+                     -who -what
+                break : Break $what with $who
+                     -who -what
+                fix : Fix $who-s position
+                     -who
+                place : Place $what with $who
+                     -who -what
+                oil : Make a pipe slippery with $who
+                     -who
+                glue : Make a pipe sticky with $who
+                     -who
+                flow : Simulate water flow from $from
+                     -from
+                 """);
     }
 
 

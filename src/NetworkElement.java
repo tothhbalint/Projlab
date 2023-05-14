@@ -149,4 +149,12 @@ public abstract class NetworkElement implements ITimer, IMove {
 	public String toString(){
 		return Integer.toString(id);
 	}
+
+	public ArrayList<NetworkElement> getConnections() {
+		return connections;
+	}
+
+	public abstract void breakPipe();
+
+	public abstract void repair();
 }

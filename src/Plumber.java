@@ -10,14 +10,9 @@
 /** */
 public class Plumber extends Player {
 	/** */
-	public void repair(Pump pump) {
-		Proto.print("Plumber.repair(Pump)");
-		pump.repairPump();
-	}
-
-	public void repair(Pipe pipe){
-		Proto.print("Plumber.repair(Pipe)");
-		pipe.repairPipe();
+	public void repair() {
+		Proto.print("Plumber.repair()");
+		position.repair();
 	}
 
 	/** */
@@ -57,3 +52,4 @@ public class Plumber extends Player {
 		position.disconnectPipe(ne);
 	}
 }
+

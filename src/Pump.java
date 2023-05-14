@@ -52,6 +52,11 @@ public class Pump extends NetworkElement {
 		return "Pump" + super.toString();
 	}
 
+	@Override
+	public void breakPipe() {
+
+	}
+
 	/** */
 	public void recieveWater(NetworkElement ne) {
 		if(!damaged){
@@ -68,7 +73,7 @@ public class Pump extends NetworkElement {
 		this.input = ne;
 	}
 
-	public void repairPump(){
+	public void repair(){
 		Proto.print("pump.repairPump");
 		this.damaged = false;
 		age = 0;

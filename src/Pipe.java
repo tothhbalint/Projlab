@@ -99,7 +99,7 @@ public class Pipe extends NetworkElement {
 						Proto.print("player.getPosition()");
 						p.setPosition(this);
 						p.setStuck(true);
-						p.setStuckTimeLeft(rand.nexInt(3)+1);
+						p.setStuckTimeLeft(rand.nextInt(3)+1);
 						this.setOccupied(true);
 						Proto.print("player_accepted");
 						return true;
@@ -150,7 +150,7 @@ public class Pipe extends NetworkElement {
 		Proto.print("pipe_broken");
 	}
 
-	public void repairPipe(){
+	public void repair(){
 		Proto.print("pipe.repairPipe");
 		this.damaged = false;
 		this.repairProtectionTimeLeft = 5;
@@ -192,15 +192,10 @@ public class Pipe extends NetworkElement {
 	}
 
 	/** */
-	public void connectPipe(NetworkElement ne) {
-		//NOTHING
-	}
+	public void connectPipe(NetworkElement ne) { ; }
 
 	/** */
-	public void disconnectPipe(NetworkElement ne) {
-		//NOTHING
-	}
-
+	public void disconnectPipe(NetworkElement ne) { ; }
 	/** */
 	public boolean placePump() {
 		return true;
