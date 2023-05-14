@@ -1,6 +1,14 @@
 import java.util.ArrayList;
-import java.util.LinkedList;
 
+
+/**
+ * TODO : jobb fuggvenyek, foleg a modellel valo kommunikacion kene javitani
+ * TODO : test modeban az argsra kell mukodni amugy loopban varjon uj inputot,
+ * TODO : irja ki a palya allasat, nem gond ha vissza kell scrollolni es picit rakos
+ * TODO : legyenek lekezelve a hibak, a modellben minel tobb helyen dobjon exceptiont(foleg abstract osztalyoknal a //NOTHING helyett)
+ * TODO : write javadoc
+ * TODO :cleanup
+ */
 public class Proto {
     static boolean verbose = false;
 
@@ -26,11 +34,11 @@ public class Proto {
                 if (arg.charAt(0) != '-') {
                     ArrayList<String> options = new ArrayList<>();
                     int x = ++i;
-                    while (args[x].charAt(0) == '-') {
+                    do {
                         options.add(args[x].replace("-", ""));
                         x++;
                         if (x == args.length) break;
-                    }
+                    } while (args[x].charAt(0) == '-');
                     Situation situation = new Situation(arg, options.toArray(new String[options.size()]));
                     situations.add(situation);
                 } else if (arg.equals("-v") || arg.equals("--verbose")) {
@@ -50,6 +58,10 @@ public class Proto {
     public static void main(String[] args) {
         processInput(args);
 
+        gameHandle.startGame();
+
+        drawMap();
+
         for (Situation situation : situations) {
             processSituation(situation);
         }
@@ -68,7 +80,8 @@ public class Proto {
     }
 
     private static void processSituation(Situation situation) {
-        switch (situation.name) {
+        String[] splitSituation = situation.name.split("(?<=\\D)(?=\\d)");
+        switch (splitSituation[0] ) {
             case "step":
                 step(situation.options);
                 break;
@@ -114,18 +127,22 @@ public class Proto {
         int whereId = Integer.parseInt(whereSplit[1]);
 
         Player player = null;
+        try{
+            if (who.equals("plumber")) {
+                player = gameHandle.getPlumberTeam().getPlayer(whoId);
+            } else if (who.equals("nomad")) {
+                player = gameHandle.getNomadTeam().getPlayer(whoId);
+            } else {
+                throw new RuntimeException("Invalid team: " + who);
+            }
 
-        if (who.equals("plumber")) {
-            player = gameHandle.getPlumberTeam().getPlayer(whoId);
-        } else if (who.equals("nomad")) {
-            player = gameHandle.getNomadTeam().getPlayer(whoId);
-        } else {
-            throw new RuntimeException("Invalid team: " + who);
+            NetworkElement destination = player.getPosition().getConnections().get(whereId);
+
+            player.move(destination);
         }
-
-        NetworkElement destination = player.getPosition().getConnections().get(whereId);
-
-        player.move(destination);
+        catch (Exception e){
+            print("Invalid parameters in: step");
+        }
     }
 
     //TODO try to pickup the current position

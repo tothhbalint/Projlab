@@ -10,11 +10,9 @@
 /** */
 public class Nomad extends Player {
 	/** */
-	public void makePipeSlippery(Pipe pipe){
+	public void makePipeSlippery(){
 		Proto.print("Nomad.makePipeSlippery()");
-		if (!pipe.isSticky()){
-			pipe.setSlippery(true);
-		}
+		position.setSlippery();
 	}
 
 	public void takePump(Inventory inv) {

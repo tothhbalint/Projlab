@@ -1,6 +1,6 @@
 #!/bin/sh
 
-PROTO="java Proto"
+PROTO="java Proto -v"
 
 eval javac *.java
 
@@ -20,10 +20,12 @@ do
 	\n	10. Sticky pipe
 	\n	11. Water flow"
 
-	read inpu
+	read input
 	#add grep at the end of the lines, compare with outputs from a file
 	case $input in 
-		0) echo -a |  $PROTO;; 
+		0)
+        eval rm -r *.class
+        exit ;;
 		1) echo "step -player1 -pipe1" | $PROTO;;
 		2) echo "step -player1 -pump1" | $PROTO;;
 		3) echo "pickup -plumber1 -pipe" | $PROTO;;
@@ -39,5 +41,4 @@ do
 	echo "Press any key to continue..."
 	read go_next
 done
-
 

@@ -12,9 +12,9 @@ public class NetworkMap {
 	private static int currentID = 0;
 	private ArrayList<NetworkElement> elements = new ArrayList<NetworkElement>();
 
-	private ArrayList<NetworkElement> sources = new ArrayList<NetworkElement>();
+	private ArrayList<Source> sources = new ArrayList<Source>();
 
-	private ArrayList<NetworkElement> cisterns = new ArrayList<NetworkElement>();
+	private ArrayList<Cistern> cisterns = new ArrayList<Cistern>();
 	
 	//TODO init the whole game
 	public void build() {
@@ -80,11 +80,11 @@ public class NetworkMap {
 		connect(elements.get(5), elements.get(19));
 	}
 
-	public ArrayList<NetworkElement> getSources() {
+	public ArrayList<Source> getSources() {
 		return sources;
 	}
 
-	public ArrayList<NetworkElement> getCisterns() {
+	public ArrayList<Cistern> getCisterns() {
 		return cisterns;
 	}
 	
