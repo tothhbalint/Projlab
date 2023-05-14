@@ -131,4 +131,13 @@ public class Cistern extends NetworkElement {
 	public void addPipeInput(NetworkElement ne) {
 		//NOTHING
 	}
+
+	public void setSlippery() {
+		throw new RuntimeException("Cistern cannot be slippery");
+	}
+
+	@Override
+	public void setSticky() {
+		throw new RuntimeException("Cistern cannot be sticky");
+	}
 }

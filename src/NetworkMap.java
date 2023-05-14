@@ -11,17 +11,23 @@ import java.util.ArrayList;
 public class NetworkMap {
 	private static int currentID = 0;
 	private ArrayList<NetworkElement> elements = new ArrayList<NetworkElement>();
+
+	private ArrayList<NetworkElement> sources = new ArrayList<NetworkElement>();
+
+	private ArrayList<NetworkElement> cisterns = new ArrayList<NetworkElement>();
 	
 	//TODO init the whole game
 	public void build() {
 		for (int i = 0; i < 3; i++){
 			Source s = new Source();
 			addElement(s);
+			sources.add(s);
 		}
 
 		for (int i = 0; i < 3; i++){
 			Cistern s = new Cistern();
 			addElement(s);
+			cisterns.add(s);
 		}
 
 		for (int i = 0; i < 14; i++){
@@ -72,6 +78,14 @@ public class NetworkMap {
 		connect(elements.get(4), elements.get(11));
 		connect(elements.get(4), elements.get(14));
 		connect(elements.get(5), elements.get(19));
+	}
+
+	public ArrayList<NetworkElement> getSources() {
+		return sources;
+	}
+
+	public ArrayList<NetworkElement> getCisterns() {
+		return cisterns;
 	}
 	
 	/** */

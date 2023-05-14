@@ -51,5 +51,9 @@ public class Plumber extends Player {
 		Proto.print("Plumber.disconnectPipe()");
 		position.disconnectPipe(ne);
 	}
+
+	public void makePipeSlippery(){
+		position.setSlippery();
+	}
 }
 

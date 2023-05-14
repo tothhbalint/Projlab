@@ -80,6 +80,16 @@ public class Pump extends NetworkElement {
 		Proto.print("pump_repaired");
 	}
 
+	@Override
+	public void setSlippery() {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public void setSticky() {
+		throw new UnsupportedOperationException();
+	}
+
 	private void breakPump(){
 		Proto.print("pump.breakPump");
 		int randNum = rand.nextInt(20 - age);

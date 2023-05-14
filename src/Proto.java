@@ -165,6 +165,8 @@ public class Proto {
                 throw new RuntimeException("Invalid pickup: " + what);
         }
     }
+
+    //TODO try to place the current position
     private static void place(String[] options) {
         String who = options[0];
         String what = options[1];
@@ -221,15 +223,56 @@ public class Proto {
     private static void oil(String[] options) {
         String who = options[0];
         print("oil " + who);
+
+        String[] whoSplit = who.split("(?<=\\D)(?=\\d)");
+        who = whoSplit[0];
+        int whoId = Integer.parseInt(whoSplit[1]);
+
+        Player player = null;
+
+        if (who.equals("plumber")) {
+            player = gameHandle.getPlumberTeam().getPlayer(whoId);
+        } else if (who.equals("nomad")) {
+            player = gameHandle.getNomadTeam().getPlayer(whoId);
+        } else {
+            throw new RuntimeException("Invalid team: " + who);
+        }
+
+        player.getPosition().setSlippery();
     }
 
     private static void glue(String[] options) {
         String who = options[0];
         print("glue " + who);
+
+        String[] whoSplit = who.split("(?<=\\D)(?=\\d)");
+        who = whoSplit[0];
+        int whoId = Integer.parseInt(whoSplit[1]);
+
+        Player player = null;
+
+        if (who.equals("plumber")) {
+            player = gameHandle.getPlumberTeam().getPlayer(whoId);
+        } else if (who.equals("nomad")) {
+            player = gameHandle.getNomadTeam().getPlayer(whoId);
+        } else {
+            throw new RuntimeException("Invalid team: " + who);
+        }
+
+        player.getPosition().setSticky();
     }
 
     private static void flow(String[] options) {
         String from = options[0];
+
+        String[] fromSplit = from.split("(?<=\\D)(?=\\d)");
+        from = fromSplit[0];
+        int fromId = Integer.parseInt(fromSplit[1]);
+
+        if(from.equals("source")) {
+            gameHandle.getMap().getSources().get(fromId).tick();
+            return;
+        }
         print("flow " + from);
     }
 

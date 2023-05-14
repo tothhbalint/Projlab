@@ -157,4 +157,8 @@ public abstract class NetworkElement implements ITimer, IMove {
 	public abstract void breakPipe();
 
 	public abstract void repair();
+
+	public abstract void setSlippery();
+
+	public abstract void setSticky();
 }

@@ -123,9 +123,9 @@ public abstract class Player {
 		position.direct(in, out);
 	}
 
-	public void makePipeSticky(Pipe p){
-		Proto.print("Player.makePipeSSticky()");
-		p.setSticky(true);
+	public void makePipeSticky(){
+		Proto.print("Player.makePipeSticky()");
+		position.setSticky();
 	}
 
 	public void breakPipe(){

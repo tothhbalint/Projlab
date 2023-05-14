@@ -157,19 +157,19 @@ public class Pipe extends NetworkElement {
 		Proto.print("pipe_repaired");
 	}
 
-	public void setSticky(boolean b){
+	public void setSticky(){
 		Proto.print("pipe.setSticky");
 		if (!slippery){
-			sticky = b;
+			sticky = true;
 			stickyTimeLeft = 5;
 		}
 		Proto.print("pipe_now_sticky");
 	}
 
-	public void setSlippery(boolean b){
+	public void setSlippery(){
 		Proto.print("pipe.setSlippery");
 		if (!sticky){
-			slippery = b;
+			slippery = true;
 			slipperyTimeLeft = 5;
 		}
 		Proto.print("pipe_now_slippery");

@@ -101,4 +101,14 @@ public class Source extends NetworkElement {
 		throw new RuntimeException("Source cannot be repaired");
 	}
 
+	@Override
+	public void setSlippery() {
+		throw new RuntimeException("Source cannot be slippery");
+	}
+
+	public void setSticky() {
+		throw new RuntimeException("Source cannot be sticky");
+	}
+
+
 }
