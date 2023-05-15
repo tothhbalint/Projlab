@@ -49,5 +49,4 @@ public class Team {
 			throw new RuntimeException("Player number out of bounds");
 		}
 	}
-
 }

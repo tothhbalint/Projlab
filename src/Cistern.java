@@ -68,12 +68,12 @@ public class Cistern extends NetworkElement {
 	}
 
 	@Override
-	public void breakPipe() {
-
+	public void breakPipe() throws UnsupportedOperationException {
+		throw new UnsupportedOperationException("Cistern cannot be braked");
 	}
 
-	public void repair(){
-		throw new RuntimeException("Cistern cannot be repaired");
+	public void repair() throws UnsupportedOperationException{
+		throw new UnsupportedOperationException("Cistern cannot be repaired");
 	}
 
 	/** */
@@ -112,32 +112,32 @@ public class Cistern extends NetworkElement {
 	}
 
 
-	public boolean placePump() {
-		return false;
+	public boolean placePump() throws UnsupportedOperationException {
+		throw new UnsupportedOperationException("Cannot place pump next to a Cistern");
 	}
 
-	public NetworkElement getPipeOutput() {
-		return null;
+	public NetworkElement getPipeOutput() throws UnsupportedOperationException{
+		throw new UnsupportedOperationException("Cistern doesn't have any outputs");
 	}
 
-	public void removePipeOutput(NetworkElement ne) {
-		//NOTHING
+	public void removePipeOutput(NetworkElement ne) throws UnsupportedOperationException {
+		throw new UnsupportedOperationException("Cistern doesn't have any outputs");
 	}
 
-	public void addPipeOutput(NetworkElement ne) {
-		//NOTHING
+	public void addPipeOutput(NetworkElement ne) throws UnsupportedOperationException{
+		throw new UnsupportedOperationException("Cistern doesn't have any outputs");
 	}
 
-	public void addPipeInput(NetworkElement ne) {
-		//NOTHING
+	public void addPipeInput(NetworkElement ne) throws UnsupportedOperationException{
+		throw new UnsupportedOperationException("Cistern is not a Pipe");
 	}
 
-	public void setSlippery() {
-		throw new RuntimeException("Cistern cannot be slippery");
+	public void setSlippery() throws UnsupportedOperationException {
+		throw new UnsupportedOperationException("Cistern cannot be slippery");
 	}
 
 	@Override
-	public void setSticky() {
-		throw new RuntimeException("Cistern cannot be sticky");
+	public void setSticky() throws UnsupportedOperationException{
+		throw new UnsupportedOperationException("Cistern cannot be sticky");
 	}
 }

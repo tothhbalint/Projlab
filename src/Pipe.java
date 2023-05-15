@@ -192,10 +192,14 @@ public class Pipe extends NetworkElement {
 	}
 
 	/** */
-	public void connectPipe(NetworkElement ne) { ; }
+	public void connectPipe(NetworkElement ne) throws UnsupportedOperationException{
+		throw new UnsupportedOperationException("Cannot connect a Pipe with another Pipe");
+	}
 
 	/** */
-	public void disconnectPipe(NetworkElement ne) { ; }
+	public void disconnectPipe(NetworkElement ne) throws UnsupportedOperationException{
+		throw new UnsupportedOperationException("Cannot connect a Pipe with another Pipe");
+	}
 	/** */
 	public boolean placePump() {
 		return true;
