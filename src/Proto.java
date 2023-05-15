@@ -7,7 +7,7 @@ import java.util.ArrayList;
  * TODO : irja ki a palya allasat, nem gond ha vissza kell scrollolni es picit rakos
  * TODO : legyenek lekezelve a hibak, a modellben minel tobb helyen dobjon exceptiont(foleg abstract osztalyoknal a //NOTHING helyett)
  * TODO : write javadoc
- * TODO :cleanup
+ * TODO : cleanup
  */
 public class Proto {
     static boolean verbose = false;

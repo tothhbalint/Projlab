@@ -53,8 +53,8 @@ public class Pump extends NetworkElement {
 	}
 
 	@Override
-	public void breakPipe() {
-
+	public void breakPipe() throws UnsupportedOperationException{
+		throw new UnsupportedOperationException("Pump is not a Pipe");
 	}
 
 	/** */
@@ -81,13 +81,13 @@ public class Pump extends NetworkElement {
 	}
 
 	@Override
-	public void setSlippery() {
-		throw new UnsupportedOperationException();
+	public void setSlippery() throws UnsupportedOperationException {
+		throw new UnsupportedOperationException("Pump cannot be slippery");
 	}
 
 	@Override
-	public void setSticky() {
-		throw new UnsupportedOperationException();
+	public void setSticky() throws UnsupportedOperationException {
+		throw new UnsupportedOperationException("Pump cannot be sticky");
 	}
 
 	private void breakPump(){
@@ -121,19 +121,19 @@ public class Pump extends NetworkElement {
 		return false;
 	}
 
-	public NetworkElement getPipeOutput() {
-		return null;
+	public NetworkElement getPipeOutput() throws UnsupportedOperationException {
+		throw new UnsupportedOperationException("Pump is not a Pipe");
 	}
 
-	public void removePipeOutput(NetworkElement ne) {
-		//NOTHING
+	public void removePipeOutput(NetworkElement ne) throws UnsupportedOperationException {
+		throw new UnsupportedOperationException("Pump is not a Pipe");
 	}
 
-	public void addPipeOutput(NetworkElement ne) {
-		//NOTHING
+	public void addPipeOutput(NetworkElement ne) throws UnsupportedOperationException{
+		throw new UnsupportedOperationException("Pump is not a Pipe");
 	}
 
-	public void addPipeInput(NetworkElement ne) {
-		//NOTHING
+	public void addPipeInput(NetworkElement ne) throws UnsupportedOperationException {
+		throw new UnsupportedOperationException("Pump is not a pipe");
 	}
 }

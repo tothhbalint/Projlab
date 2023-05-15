@@ -65,27 +65,24 @@ public class Source extends NetworkElement {
 		ne.removeConnection(this);
 		Proto.print("pipe_disconnected");
 	}
-
-
-
-	public boolean placePump() {
-		return false;
+	public boolean placePump() throws UnsupportedOperationException {
+		throw new UnsupportedOperationException("Cannot place Pump next to a Source");
 	}
 
-	public NetworkElement getPipeOutput() {
-		return null;
+	public NetworkElement getPipeOutput() throws UnsupportedOperationException {
+		throw new UnsupportedOperationException("");
 	}
 
-	public void removePipeOutput(NetworkElement ne) {
-		//NOTHING
+	public void removePipeOutput(NetworkElement ne) throws UnsupportedOperationException {
+		throw new UnsupportedOperationException("Source is not a Pipe");
 	}
 
-	public void addPipeOutput(NetworkElement ne) {
-		//NOTHING
+	public void addPipeOutput(NetworkElement ne) throws UnsupportedOperationException{
+		throw new UnsupportedOperationException("Source is not a Pipe");
 	}
 
-	public void addPipeInput(NetworkElement ne) {
-		//NOTHING
+	public void addPipeInput(NetworkElement ne) throws UnsupportedOperationException{
+		throw new UnsupportedOperationException("Source doesn't have input");
 	}
 
 	public String toString(){
@@ -93,22 +90,21 @@ public class Source extends NetworkElement {
 	}
 
 	@Override
-	public void breakPipe() {
-
+	public void breakPipe() throws UnsupportedOperationException {
+		throw new UnsupportedOperationException("Source cannot be braked");
 	}
 
-	public void repair(){
-		throw new RuntimeException("Source cannot be repaired");
+	public void repair() throws UnsupportedOperationException {
+		throw new UnsupportedOperationException("Source cannot be repaired");
+
 	}
 
 	@Override
-	public void setSlippery() {
-		throw new RuntimeException("Source cannot be slippery");
+	public void setSlippery() throws UnsupportedOperationException {
+		throw new UnsupportedOperationException("Source cannot be slippery");
 	}
 
-	public void setSticky() {
-		throw new RuntimeException("Source cannot be sticky");
+	public void setSticky() throws UnsupportedOperationException {
+		throw new UnsupportedOperationException("Source cannot be sticky");
 	}
-
-
 }
