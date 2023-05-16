@@ -17,7 +17,9 @@ while :; do
         \n      8. Break pipe
         \n      9. Fix
         \n      10. Connect pipe
-        \n      11. Water flow" #done
+        \n      11. Water flow
+        \n      12. Points added to plumber team
+        \n      13. Points added to nomad team" #done
 
   read input
   #add grep at the end of the lines, compare with outputs from a file
@@ -118,13 +120,38 @@ while :; do
       echo "Failed"
     fi
     ;;
-  11)
+  11) #water transfer
     java Proto -t flow>test13.txt
     cat test13.txt
     grep "Water state set to true" test13.txt
     grep "cistern.receiveWater" test13.txt
     if test "$(grep "Water state set to true" test13.txt | wc -l)" -eq 9 &&
        test "$(grep "cistern.receiveWater" test13.txt | wc -l)" -eq 3; then
+      echo "Success"
+    else
+      echo "Failed"
+    fi
+    ;;
+  12) #Points added to Plumber's score
+    java Proto -t flow flow flow flow flow flow >test12.txt # 6 flow should transfer the water to the cistern
+    cat test12.txt
+    grep "Plumber's score increased" test12.txt
+    if test "$(grep "Plumber's score increased" test12.txt | wc -l)" -eq 3; then # All 3 basic cisterns should get water once
+      echo "Success"
+    else
+      echo "Failed"
+    fi
+
+    ;;
+  13) #Points added to Nomad's score
+    # Here I wanted to break the first pipe, at bottom-left.
+    # That should add 5 points to Nomad's score (1: transfer water to pipe, 2-6: points added)
+    # The other two cisterns should get 1-1 point each.
+    java Proto -t break -nomad1 flow flow flow flow flow flow >test13.txt # 6 flow should transfer the water to the cistern and pipe12 (id 17) should break
+    cat test13.txt
+    grep "Nomad's score increased" test13.txt
+    if test "$(grep "Nomad's score increased" test13.txt | wc -l)" -eq 5 &&
+        test "$(grep "Plumber's score increased" test13.txt | wc -l)" -eq 2; then
       echo "Success"
     else
       echo "Failed"
