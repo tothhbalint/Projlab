@@ -148,7 +148,7 @@ public abstract class Player {
 			inventory.addPump((Pump) position);
 			position.pickUpPump(inventory);
 		} catch (Exception e) {
-			e.printStackTrace();
+			Proto.log("pickup failed");
 		}
 		Proto.tab--;
 	}
