@@ -69,10 +69,8 @@ public class Pump extends NetworkElement {
 		Proto.print("pump.direct");
 		Proto.tab++;
 		this.input = in;
-		Proto.print("new_input_" + in.toString());
 		this.output = out;
-		Proto.print("new_output_" + out.toString());
-		Proto.log("pump direction changed");
+		Proto.log("pump direction changed new input:" + input + " new output:" + output);
 		Proto.tab--;
 	}
 
@@ -138,7 +136,7 @@ public class Pump extends NetworkElement {
 			this.damaged = true;
 		}
 		age++;
-		Proto.print("pump broken");
+		Proto.log("pump broken");
 		Proto.tab--;
 	}
 
@@ -147,7 +145,7 @@ public class Pump extends NetworkElement {
 		Proto.tab++;
 		this.addConnection(ne);
 		ne.addConnection(this);
-		Proto.print("pipe connected");
+		Proto.log("pipe connected");
 		Proto.tab--;
 	}
 
@@ -156,7 +154,7 @@ public class Pump extends NetworkElement {
 		Proto.tab++;
 		this.removeConnection(ne);
 		ne.removeConnection(this);
-		Proto.print("pipe disconnected");
+		Proto.log("pipe disconnected");
 		Proto.tab--;
 	}
 

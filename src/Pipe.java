@@ -26,11 +26,11 @@ public class Pipe extends NetworkElement {
         Proto.print("pipe.tick");
         Proto.tab++;
         if (output == null) {
-            Proto.print("no output");
+            Proto.log("water cant flow no output");
             Proto.tab--;
             return;
         } else if (isDamaged()) {
-            Proto.print("damaged");
+            Proto.log("water cant flow pipe is damaged");
             Proto.tab--;
             return;
         }
@@ -61,7 +61,7 @@ public class Pipe extends NetworkElement {
         Proto.tab++;
         if (this.connections.size() < 2) {
             this.connections.add(ne);
-            Proto.print("connection added");
+            Proto.log("connection added");
         } else {
             System.out.println("Pipe already has 2 connections");
         }
@@ -105,12 +105,12 @@ public class Pipe extends NetworkElement {
                                 ne.remove(p);
                         } else
                             p.setPosition(ne);
+                        Proto.log("player slipped");
                         Proto.tab--;
                         return true;
                     }
                 } else {
                     if (this.sticky) { //Sticky
-                        Proto.print("player.getPosition()");
                         p.setPosition(this);
                         p.setStuck(true);
                         p.setStuckTimeLeft(rand.nextInt(3) + 1);

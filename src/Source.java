@@ -38,11 +38,11 @@ public class Source extends NetworkElement {
 		if (this.isConnected(ne)) {
 			ne.remove(p);
 			this.occupants.add(p);
-			Proto.print("player_accepted");
+			Proto.log("player accepted");
 			Proto.tab--;
 			return true;
 		}
-		Proto.print("player_not_accepted");
+		Proto.log("player_not accepted");
 		Proto.tab--;
 		return false;
 	}
@@ -54,7 +54,7 @@ public class Source extends NetworkElement {
 		Proto.print("source.remove");
 		Proto.tab++;
 		this.occupants.remove(p);
-		Proto.print("player_removed");
+		Proto.log("player removed");
 		Proto.tab--;
 	}
 
@@ -92,7 +92,7 @@ public class Source extends NetworkElement {
 		Proto.tab++;
 		this.addConnection(ne);
 		ne.addConnection(this);
-		Proto.print("pipe_connected");
+		Proto.log("pipe connected");
 		Proto.tab--;
 	}
 
@@ -106,7 +106,7 @@ public class Source extends NetworkElement {
 		Proto.tab++;
 		this.removeConnection(ne);
 		ne.removeConnection(this);
-		Proto.print("pipe_disconnected");
+		Proto.log("pipe disconnected");
 		Proto.tab--;
 	}
 

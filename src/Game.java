@@ -39,9 +39,12 @@ public class Game {
      * TODO
      */
     public void startGame() {
+        boolean test = Proto.test;
+        Proto.test = false;
         map.build();
         createNomadTeam();
         createPlumberTeam();
+        Proto.test = test;
     }
 
     /**

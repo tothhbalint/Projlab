@@ -25,9 +25,15 @@ do
         read input
         #add grep at the end of the lines, compare with outputs from a file
         case $input in
-                0)
-                        eval rm -r *.class
-                        exit ;;
+                0)java Proto -t step -plumber0 -pipe0 > test1.txt;
+                  cat test1.txt;
+                  grep "player accepted" <test1.txt;
+                  wc -l <test1.txt
+                if [ $? -eq 1 ];then
+                        echo "Success"
+                else
+                        echo "Failed"
+                fi;;
                 2) echo "step -player1 -pump1" | $PROTO;;
                 3) echo "oil -nomad1 step -nomad1 -p1 step -plumber1 -p0" | $PROTO | grep "player accepted"
                   if [ $? -eq 1 ];then
