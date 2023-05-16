@@ -79,10 +79,6 @@ while :; do
   6);;
   7) echo "fix -player1" | $PROTO ;;
   8) echo "place -plumber1 -pump" | $PROTO ;;
-  9);;
-  10)
-
-    ;;
   11)
     java Proto -t flow>test13.txt
     cat test13.txt
@@ -93,7 +89,8 @@ while :; do
       echo "Success"
     else
       echo "Failed"
-    fi ;;
+    fi
+    ;;
   esac
   echo "Press any key to continue..."
   read go_next
