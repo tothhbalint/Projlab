@@ -35,17 +35,16 @@ public class Proto {
             for (int i = 0; i < args.length; i++) {
                 String arg = args[i];
                 if (arg.charAt(0) != '-') {
-                    if(arg.equals("help")){
+                    if (arg.equals("help")) {
                         printHelp();
-                    }else if (arg.equals("test")) {
+                    } else if (arg.equals("test")) {
                         test = true;
                     } else {
                         ArrayList<String> options = new ArrayList<>();
-                        int x = ++i;
+                        int x = i;
                         do {
+                            if (++x == args.length) break;
                             options.add(args[x].replace("-", ""));
-                            x++;
-                            if (x == args.length) break;
                         } while (args[x].charAt(0) == '-');
                         Situation situation = new Situation(arg, options.toArray(new String[options.size()]));
                         situations.add(situation);
@@ -73,8 +72,8 @@ public class Proto {
 
         Scanner sc = new Scanner(System.in);
 
-        while(!gameEnded){
-            if(!test) {
+        while (!gameEnded) {
+            if (!test) {
                 drawCurrentState();
                 args = sc.nextLine().split(" ");
                 processInput(args);
@@ -94,30 +93,36 @@ public class Proto {
     //TODO draw out the map in ascii for navigation or maybe not xd
 
     private static void drawCurrentState() {
-        if(!verbose) throw new RuntimeException("Cannot draw map in non-verbose mode");
+        if (!verbose) throw new RuntimeException("Cannot draw map in non-verbose mode");
 
-       NetworkMap networkMap = gameHandle.getMap();
+        NetworkMap networkMap = gameHandle.getMap();
 
-        for (NetworkElement networkElement : networkMap.getElements()) {
-            networkElement.printMatrix();
-        }
+//        for (NetworkElement networkElement : networkMap.getElements()) {
+//            networkElement.printMatrix();
+//        }
 
         print("plumber team: ");
         for (int i = 0; i < gameHandle.getPlumberTeam().getNoPlayers(); i++) {
             Player player = gameHandle.getPlumberTeam().getPlayer(i);
             print("\t" + player.toString());
+            tab++;
+            System.out.print("\t");player.getPosition().printMatrix();
+            tab--;
         }
 
         print("nomad team: ");
         for (int i = 0; i < gameHandle.getNomadTeam().getNoPlayers(); i++) {
             Player player = gameHandle.getNomadTeam().getPlayer(i);
             print("\t" + player.toString());
+            tab++;
+            System.out.print("\t");player.getPosition().printMatrix();
+            tab--;
         }
     }
 
     private static void processSituation(Situation situation) {
         String[] splitSituation = situation.name.split("(?<=\\D)(?=\\d)");
-        switch (splitSituation[0] ) {
+        switch (splitSituation[0]) {
             case "step":
                 step(situation.options);
                 break;
@@ -140,13 +145,14 @@ public class Proto {
                 glue(situation.options);
                 break;
             case "flow":
-                flow(situation.options);
+                flow();
                 break;
             default:
                 print("Invalid command: " + situation.name);
                 break;
         }
     }
+
     //overseeing required
     private static void step(String[] options) {
         String who = options[0];
@@ -163,7 +169,7 @@ public class Proto {
         int whereId = Integer.parseInt(whereSplit[1]);
 
         Player player = null;
-        try{
+        try {
             if (who.equals("plumber")) {
                 player = gameHandle.getPlumberTeam().getPlayer(whoId);
             } else if (who.equals("nomad")) {
@@ -175,8 +181,7 @@ public class Proto {
             NetworkElement destination = player.getPosition().getConnections().get(whereId);
 
             player.move(destination);
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             print("Invalid parameters in: step");
         }
     }
@@ -315,26 +320,23 @@ public class Proto {
         player.getPosition().setSticky();
     }
 
-    private static void flow(String[] options) {
-        String from = options[0];
+    private static void flow() {
+        gameHandle.tick();
 
-        String[] fromSplit = from.split("(?<=\\D)(?=\\d)");
-        from = fromSplit[0];
-        int fromId = Integer.parseInt(fromSplit[1]);
-
-        if(from.equals("source")) {
-            gameHandle.tick();
-            gameHandle.getMap().getSources().get(fromId).tick();
-            return;
-        }
-        print("flow " + from);
+        print("flow ");
     }
 
     public static void print(String arg) {
-        for (int i = 0; i < tab; i++) {
-            System.out.print("\t");
+        if (verbose || test) {
+            if (!test) for (int i = 0; i < tab; i++) {
+                System.out.print("\t");
+            }
+            System.out.println(arg);
         }
-        if (verbose) System.out.println(arg);
+    }
+
+    public static void log(String arg) {
+        if (test) print(arg);
     }
 
     public static void printHelp() {

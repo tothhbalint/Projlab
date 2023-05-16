@@ -18,33 +18,20 @@ public class Team {
 
 	/** */
 	public Team(String name) {
-		Proto.print("Team.Team(String)");
 		this.name = name;
 	}
 
 	/** */
-	public void updatePoints(int updatedPoints) {
-		Proto.print("Team.updatePoints()");
-		switch(name.toLowerCase()) {
-			case "nomad":
-				points = NetworkElement.getNomadPoints();
-				break;
-			case "plumber":
-				points = NetworkElement.getPlumberPoints();
-				break;
-		}
-	}
-	
-	/** */
 	public void addMember(Player p) {
 		Proto.print("Team.addMember()");
+		Proto.tab++;
 			members.add(p);
 			noPlayers++;
+		Proto.tab--;
 	}
 
 	//TODO figure out an other way to identify a player
 	public Player getPlayer(int playerNumber){
-		Proto.print("Team.getPlayer()");
 		if(playerNumber < members.size()){
 			return members.get(playerNumber);
 		}else{

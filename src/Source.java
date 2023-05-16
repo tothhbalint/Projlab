@@ -8,6 +8,9 @@
 
 /** */
 public class Source extends NetworkElement {
+	Source() {
+		hasWater = true;
+	}
 
 	/** */
 	public void tick() {
@@ -43,34 +46,36 @@ public class Source extends NetworkElement {
 	}
 
 	/** */
-	public void recieveWater(NetworkElement ne) {
-		Proto.print("source_cannot_receive_water");
+	public void recieveWater(NetworkElement ne) throws UnsupportedOperationException{
+		throw new UnsupportedOperationException("Source cannot recieve water");
 	}
 
 	/** */
-	public void pickUpPump(Inventory inv) {
-		Proto.print("source.pickUpPump");
-		Proto.print("no_pump_available_for_pickup");
+	public void pickUpPump(Inventory inv) throws UnsupportedOperationException{
+		throw new UnsupportedOperationException("Pump cannot be picked up from Source");
 	}
 
 	/** */
-	public void direct(NetworkElement in, NetworkElement out) {
-		Proto.print("source.direct");
-		Proto.print("source_cannot_be_directed");
+	public void direct(NetworkElement in, NetworkElement out) throws UnsupportedOperationException{
+		throw new UnsupportedOperationException("Source cannot be direct");
 	}
 
 	public void connectPipe(NetworkElement ne) {
 		Proto.print("source.connectPipe");
+		Proto.tab++;
 		this.addConnection(ne);
 		ne.addConnection(this);
 		Proto.print("pipe_connected");
+		Proto.tab--;
 	}
 
 	public void disconnectPipe(NetworkElement ne) {
 		Proto.print("source.disconnectPipe");
+		Proto.tab++;
 		this.removeConnection(ne);
 		ne.removeConnection(this);
 		Proto.print("pipe_disconnected");
+		Proto.tab--;
 	}
 	public boolean placePump() throws UnsupportedOperationException {
 		throw new UnsupportedOperationException("Cannot place Pump next to a Source");

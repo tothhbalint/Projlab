@@ -44,7 +44,7 @@ public abstract class NetworkElement implements ITimer, IMove {
 	public void addConnection(NetworkElement ne){
 		this.connections.add(ne);
 	}
-	
+
 	/** */
 	public void removeConnection(NetworkElement ne){
 		this.connections.remove(ne);
@@ -140,12 +140,14 @@ public abstract class NetworkElement implements ITimer, IMove {
 	 */
 
 	public void printMatrix(){
-		Proto.print(this.toString() + " ");
+		Proto.print(this.toString() + " hasWater:" + this.hasWater + " damaged: " + this.damaged + " occupied: " + this.occupied);
 		int x = 0;
+		Proto.tab++;
 		for (NetworkElement ne : this.connections){
 			Proto.print("\t" + x + ": " + ne.toString() + " ");
 			x++;
 		}
+		Proto.tab--;
 	}
 
 	public String toString(){
