@@ -22,8 +22,15 @@ public class Pipe extends NetworkElement {
 
 	public void tick() {
 		Proto.print("pipe.tick");
-		if(!isDamaged()){
-			output.recieveWater(this);
+		Proto.tab++;
+		if(output == null){
+			Proto.print("no output");
+			Proto.tab--;
+			return;
+		}else if(isDamaged()){
+			Proto.print("damaged");
+			Proto.tab--;
+			return;
 		}
 		output.recieveWater(this);
 		if (sticky){
@@ -41,8 +48,6 @@ public class Pipe extends NetworkElement {
 		if (repairProtectionTimeLeft > 0){
 			repairProtectionTimeLeft--;
 		}
-
-
 	}
 	public void setStickyTimeLeft(int i){
 		stickyTimeLeft = i;
@@ -198,7 +203,7 @@ public class Pipe extends NetworkElement {
 
 	/** */
 	public void disconnectPipe(NetworkElement ne) throws UnsupportedOperationException{
-		throw new UnsupportedOperationException("Cannot connect a Pipe with another Pipe");
+		throw new UnsupportedOperationException("Cannot disconnect a Pipe from itself");
 	}
 	/** */
 	public boolean placePump() {

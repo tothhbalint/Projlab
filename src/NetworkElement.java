@@ -141,8 +141,10 @@ public abstract class NetworkElement implements ITimer, IMove {
 
 	public void printMatrix(){
 		Proto.print(this.toString() + " ");
+		int x = 0;
 		for (NetworkElement ne : this.connections){
-			Proto.print("\t" + ne.toString() + " ");
+			Proto.print("\t" + x + ": " + ne.toString() + " ");
+			x++;
 		}
 	}
 

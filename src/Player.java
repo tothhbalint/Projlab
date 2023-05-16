@@ -152,4 +152,8 @@ public abstract class Player {
 			e.printStackTrace();
 		}
 	}
+
+	public String toString(){
+		return "Player position: " + position.toString() + " stuck: " + stuck + " " + stuckTimeLeft + " " + inventory.toString();
+	}
 }

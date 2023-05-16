@@ -23,11 +23,14 @@ public class Cistern extends NetworkElement {
 	/** */
 	public void tick() {
 		Proto.print("cistern.tick");
+		Proto.tab++;
 		if (rand.nextInt(10) < 2){
 			Pipe newPipe = new Pipe();
 			newPipe.addConnection(this);
 			this.addConnection(newPipe);
+			Proto.print("new_pipe_added");
 		}
+		Proto.tab--;
 	}
 
 	public boolean accept(Player p) {

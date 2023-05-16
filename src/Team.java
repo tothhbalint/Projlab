@@ -13,6 +13,7 @@ import java.util.ArrayList;
 public class Team {
 	private ArrayList<Player> members = new ArrayList<Player>();
 	private int points = 0;
+	private int noPlayers = 0;
 	private String name;
 
 	/** */
@@ -38,6 +39,7 @@ public class Team {
 	public void addMember(Player p) {
 		Proto.print("Team.addMember()");
 			members.add(p);
+			noPlayers++;
 	}
 
 	//TODO figure out an other way to identify a player
@@ -48,5 +50,9 @@ public class Team {
 		}else{
 			throw new RuntimeException("Player number out of bounds");
 		}
+	}
+
+	public int getNoPlayers() {
+		return noPlayers;
 	}
 }

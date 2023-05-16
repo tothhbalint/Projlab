@@ -12,27 +12,34 @@ public class Source extends NetworkElement {
 	/** */
 	public void tick() {
 		Proto.print("source.tick");
+		Proto.tab++;
 		for(NetworkElement n : this.connections){
 			n.recieveWater(this);
 		}
+		Proto.tab--;
 	}
 
 	public boolean accept(Player p) {
 		Proto.print("source.accept");
+		Proto.tab++;
 		NetworkElement ne = p.getPosition();
 		if (this.isConnected(ne)) {
 			ne.remove(p);
 			this.occupants.add(p);
 			Proto.print("player_accepted");
+			Proto.tab--;
 			return true;
 		}
 		Proto.print("player_not_accepted");
+		Proto.tab--;
 		return false;
 	}
 	public void remove(Player p) {
 		Proto.print("source.remove");
+		Proto.tab++;
 		this.occupants.remove(p);
 		Proto.print("player_removed");
+		Proto.tab--;
 	}
 
 	/** */
