@@ -37,9 +37,15 @@ public class Inventory {
 	 * @param pu Pump, that need to be added
 	 */
 	public void addPump(Pump pu) {
+		Proto.print("Inventory.addPump");
 		if (pump == null) {
 			pump = pu;
+			Proto.log("pump added");
+		}else {
+			Proto.log("pump not added : inventory full");
 		}
+		Proto.tab--;
+
 	}
 
 	/**

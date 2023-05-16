@@ -100,6 +100,11 @@ public abstract class Player {
 	public void move(NetworkElement ne) {
 		Proto.print("Player.move()");
 		Proto.tab++;
+		if(stuck){
+			Proto.log("player is stuck");
+			Proto.tab--;
+			return;
+		}
 		ne.accept(this);
 		Proto.tab--;
 	}
@@ -140,10 +145,11 @@ public abstract class Player {
 		Proto.print("Player.takePump()");
 		Proto.tab++;
 		try {
-			inventory.addPump((Pump) position);
+//			inventory.addPump((Pump) position);
 			position.pickUpPump(inventory);
+
 		} catch (Exception e) {
-			e.printStackTrace();
+			Proto.log("pickup failed");
 		}
 		Proto.tab--;
 	}

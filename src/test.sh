@@ -24,7 +24,7 @@ while :; do
   case $input in
   1)
     java Proto -t step -plumber0 -pipe0 >test1.txt
-    cat test1.txt
+    cat test1.txt; echo " ";
     grep "player accepted" <test1.txt
     if test "$(grep "player accepted" <test1.txt | wc -l )" -eq 1; then
       echo "Success"
@@ -43,20 +43,42 @@ while :; do
       echo "Failed"
     fi ;;
   3)
-    echo "oil -nomad1 step -nomad1 -p1 step -plumber1 -p0" | $PROTO | grep "player accepted"
-    if [ $? -eq 1 ]; then
+    java Proto -t oil -nomad1 step -nomad1 -p1 step -plumber1 -p0 >test3.txt
+    cat test3.txt; echo " ";
+    grep "player slipped" <test3.txt
+    grep "player accepted" <test3.txt
+
+    if test "$(grep "player slipped" <test3.txt | wc -l)" -eq 1 &&
+        test "$(grep "player accepted" <test3.txt | wc -l)" -eq 4; then
       echo "Success"
     else
       echo "Failed"
-    fi
-    ;;
-  4) echo "pickup -plumber1 -pump" | $PROTO ;;
-  5) echo "place -plumber1 -pipe" | $PROTO ;;
-  6) echo "break -nomad1" | $PROTO ;;
+    fi ;;
+  4)
+    java Proto -t glue -nomad1 step -nomad1 -p1 step -plumber1 -p0 step -plumber1 -p0 >test4.txt
+    cat test4.txt; echo " ";
+    grep "player is stuck" <test4.txt
+    grep "player accepted" <test4.txt
+    if test "$(grep "player is stuck" <test4.txt | wc -l)" -eq 1 &&
+        test "$(grep "player accepted" <test4.txt | wc -l)" -eq 4; then
+      echo "Success"
+    else
+      echo "Failed"
+    fi ;;
+  5)
+    java Proto -t pickup -plumber0 -pump step -plumber0 -p0 step -plumber0 -p1 step -plumber0 -p1 step -plumber0 -p1 step -plumber0 -p1 step -plumber0 -p1 pickup -plumber0 -pump>test5.txt
+    cat test5.txt; echo " ";
+    grep "pickup failed" <test5.txt
+    grep "pump added to the inventory" <test5.txt
+    if test "$(grep "pickup failed" <test5.txt | wc -l)" -eq 1 &&
+        test "$(grep "pump added to the inventory" <test5.txt | wc -l)" -eq 1; then
+      echo "Success"
+    else
+      echo "Failed"
+    fi ;;
+  6);;
   7) echo "fix -player1" | $PROTO ;;
   8) echo "place -plumber1 -pump" | $PROTO ;;
-  9) echo "oil -nomad1" | $PROTO ;;
-  10) echo "glue -player1" | $PROTO ;;
   11)
     java Proto -t flow>test13.txt
     cat test13.txt

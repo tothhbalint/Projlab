@@ -38,11 +38,12 @@ public class Source extends NetworkElement {
 		if (this.isConnected(ne) || ne == null) {
 			if (ne != null)	ne.remove(p);
 			this.occupants.add(p);
+			p.setPosition(this);
 			Proto.log("player accepted");
 			Proto.tab--;
 			return true;
 		}
-		Proto.log("player_not accepted");
+		Proto.log("player not accepted");
 		Proto.tab--;
 		return false;
 	}
