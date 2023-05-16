@@ -70,9 +70,7 @@ public abstract class NetworkElement implements ITimer, IMove {
 	 */
 	public abstract void tick();
 	
-	/**
-	 *
-	 */
+	/** */
 	public abstract boolean accept(Player p);
 	
 	/** */
@@ -83,20 +81,33 @@ public abstract class NetworkElement implements ITimer, IMove {
 		this.connections.add(ne);
 	}
 
-	/** */
+	/**
+	 * This method removes a NetworkElement for the connection list
+	 * @param ne NetworkElement, which need to be removed
+	 */
 	public void removeConnection(NetworkElement ne){
 		this.connections.remove(ne);
 	}
-	
-	/** */
+
+	/**
+	 * This method checks if a NetworkElement is in the connection list
+	 * @param ne NetworkElement, which need to be checked
+	 * @return true, if the connection list contains the NetworkElement, false if it is not
+	 */
 	public boolean isConnected(NetworkElement ne){
 		return this.connections.contains(ne);
 	}
-	
-	/** */
+
+	/**
+	 * This method is implemented in the inharited classes
+	 * @param ne NetworkElement
+	 */
 	public abstract void recieveWater(NetworkElement ne);
 
-	/** */
+	/**
+	 *
+	 * @param ne
+	 */
 	public void setOutput(NetworkElement ne){
 		if (connections.contains(ne)){
 			this.output = ne;
