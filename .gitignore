@@ -23,6 +23,7 @@ bin/
 /.nb-gradle/
 
 /src/*.txt
+/src/*.class
 
 ### VS Code ###
 .vscode/
