@@ -6,7 +6,7 @@ import java.util.Scanner;
  * TODO : jobb fuggvenyek, foleg a modellel valo kommunikacion kene javitani
  * TODO : test modeban az argsra kell mukodni amugy loopban varjon uj inputot,
  * TODO : irja ki a palya allasat, nem gond ha vissza kell scrollolni es picit rakos
- * TODO : legyenek lekezelve a hibak, a modellben minel tobb helyen dobjon exceptiont(foleg abstract osztalyoknal a //NOTHING helyett)
+ * TODO READY: legyenek lekezelve a hibak, a modellben minel tobb helyen dobjon exceptiont(foleg abstract osztalyoknal a //NOTHING helyett)
  * TODO : write javadoc
  * TODO : cleanup
  */

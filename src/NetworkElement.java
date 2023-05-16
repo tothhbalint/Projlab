@@ -9,20 +9,52 @@
 
 import java.util.ArrayList;
 
-/** */
+/**
+ * This class is responsible for all the NetworkElements
+ */
 public abstract class NetworkElement implements ITimer, IMove {
+	/**
+	 * Stores the id of the NetworkElement
+	 */
 	protected int id;
+	/**
+	 * Stores the capacity of the NetworkElement
+	 */
 	protected int capacity; //Do we still need this?
+	/**
+	 * Stores if the NetworkElement has water in it
+	 */
 	protected boolean hasWater;
+	/**
+	 * Stores if the NetworkElement is damaged
+	 */
 	protected boolean damaged;
+	/**
+	 * Stores if the NetworkElement is occupied
+	 */
 	protected boolean occupied;
+	/**
+	 * Stores the point of nomads
+	 */
 	protected static int nomadPoints;
+	/**
+	 * Stores the point of plumbers
+	 */
 	protected static int plumberPoints;
+	/**
+	 * Stores the connections of the NetworkElement in a list
+	 */
 	protected ArrayList<NetworkElement> connections;
+	/**
+	 * Stores the players in a list, which stand on the NetworkElement
+	 */
 	protected ArrayList<Player> occupants;
 	protected NetworkElement output;
 	protected NetworkElement input;
 
+	/**
+	 * Sets the starting values
+	 */
 	public NetworkElement(){
 		this.connections = new ArrayList<NetworkElement>();
 		this.occupants = new ArrayList<Player>();
@@ -33,10 +65,14 @@ public abstract class NetworkElement implements ITimer, IMove {
 		this.id = NetworkMap.generateID();
 	}
 
-	/** Implements one time slice in the inherited classes */
+	/**
+	 * Implements one time slice in the inherited classes
+	 */
 	public abstract void tick();
 	
-	/**  */
+	/**
+	 *
+	 */
 	public abstract boolean accept(Player p);
 	
 	/** */
