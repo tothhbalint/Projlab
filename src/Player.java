@@ -18,7 +18,6 @@ public abstract class Player {
 
 	/** */
 	public Player() {
-		Proto.print("Player.Player()");
 		position = null;
 		stuck = false;
 		stuckTimeLeft = 0;

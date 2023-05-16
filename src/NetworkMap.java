@@ -126,6 +126,7 @@ public class NetworkMap {
 	 * @param ne2 The second NetworkElement. It will be the output of the first one (ne1).
 	 *  */
 	public static void setInAndOutput(NetworkElement ne1, NetworkElement ne2) {
+		Proto.print("Setting in and output for " + ne1 + " and " + ne2);
 		ne1.setOutput(ne2);
 		ne2.setInput(ne1);
 	}

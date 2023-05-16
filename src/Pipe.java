@@ -13,8 +13,6 @@ import java.util.Random;
  *
  */
 public class Pipe extends NetworkElement {
-    private NetworkElement input;
-    private NetworkElement output;
     private boolean sticky = false;
     private boolean slippery = false;
     private int stickyTimeLeft = 0;
@@ -35,6 +33,7 @@ public class Pipe extends NetworkElement {
             return;
         }
         output.recieveWater(this);
+        Proto.tab--;
         if (sticky) {
             stickyTimeLeft--;
             if (stickyTimeLeft <= 0) {
@@ -88,12 +87,10 @@ public class Pipe extends NetworkElement {
         Proto.print("pipe.accept");
         Proto.tab++;
         if (this.isOccupied()) {
-            Proto.print(this.toString() + " occupied");
-            Proto.tab--;
-            return false;
+            Proto.log("pipe occupied");
         } else {
             NetworkElement ne = p.getPosition();
-            if (this.isConnected(ne)) {
+            if (this.isConnected(ne) || ne == null) {
                 if (this.slippery) {
                     if (this.sticky) { //Slippery AND Sticky
                         Proto.print("Error: Pipe slippery AND sticky");
@@ -101,13 +98,20 @@ public class Pipe extends NetworkElement {
                         NetworkElement neighbour = this.getRandomConnection();
                         p.setPosition(this);
                         if (neighbour.accept(p)) {
-                            if (ne != neighbour)
+                            if (ne != neighbour) {
+                                assert ne != null;
                                 ne.remove(p);
-                        } else
+                            }
+                            Proto.log("player slipped");
+                            Proto.tab--;
+                            return true;
+                        } else {
                             p.setPosition(ne);
-                        Proto.log("player slipped");
-                        Proto.tab--;
-                        return true;
+                            this.setOccupied(true);
+                            Proto.log("player accepted");
+                            Proto.tab--;
+                            return true;
+                        }
                     }
                 } else {
                     if (this.sticky) { //Sticky
@@ -118,7 +122,7 @@ public class Pipe extends NetworkElement {
                         Proto.log("player accepted");
                         Proto.tab--;
                         return true;
-                    } else { //Normal
+                    } else if(!this.occupied){ //Normal
                         this.setOccupied(true);
                         p.setPosition(this);
                         Proto.log("player accepted");
@@ -127,10 +131,10 @@ public class Pipe extends NetworkElement {
                     }
                 }
             }
-            Proto.log("player rejected");
-            Proto.tab--;
-            return false;
         }
+        Proto.log("player rejected");
+        Proto.tab--;
+        return false;
     }
 
     public void remove(Player p) {

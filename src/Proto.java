@@ -44,6 +44,7 @@ public class Proto {
                         int x = i;
                         do {
                             if (++x == args.length) break;
+                            if(args[x].charAt(0) != '-') break;
                             options.add(args[x].replace("-", ""));
                         } while (args[x].charAt(0) == '-');
                         Situation situation = new Situation(arg, options.toArray(new String[options.size()]));
@@ -241,7 +242,6 @@ public class Proto {
         String[] whoSplit = who.split("(?<=\\D)(?=\\d)");
         who = whoSplit[0];
         int whoId = Integer.parseInt(whoSplit[1]);
-
         Player player = null;
 
         if (who.equals("plumber")) {
@@ -251,6 +251,8 @@ public class Proto {
         } else {
             throw new RuntimeException("Invalid team: " + who);
         }
+
+        Proto.log(player.getPosition().toString());
 
         player.breakPipe();
     }
@@ -330,7 +332,7 @@ public class Proto {
 
     public static void print(String arg) {
         if (verbose || test) {
-            if (!test) {
+            if (true) {
                 for (int i = 0; i < tab; i++) {
                     System.out.print("\t");
                 }
@@ -340,8 +342,8 @@ public class Proto {
     }
 
     public static void log(String arg) {
-        if (!test) print(arg);
-        else System.out.println(arg);
+        if (true) print(arg);
+//        else System.out.println(arg);
     }
 
     public static void printHelp() {

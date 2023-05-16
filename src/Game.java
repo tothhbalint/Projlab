@@ -39,12 +39,14 @@ public class Game {
      * TODO
      */
     public void startGame() {
-        boolean test = Proto.test;
-        Proto.test = false;
+        boolean tempV = Proto.verbose;
+        if(Proto.test){
+            Proto.verbose = false;
+        }
         map.build();
         createNomadTeam();
         createPlumberTeam();
-        Proto.test = test;
+        Proto.verbose = tempV;
     }
 
     /**
@@ -101,16 +103,16 @@ public class Game {
 
         int randomNum = rand.nextInt(ne.size());
 
-        if (Proto.test)
+        if (Proto.verbose)
             randomNum = 0;
 
-        p1.setPosition(ne.get(randomNum));
-        if (Proto.test)
+        p1.setPosition(ne.get(0));
+        if (Proto.verbose)
             randomNum = 1;
         else
             randomNum = rand.nextInt(ne.size());
 
-        p2.setPosition(ne.get(randomNum));
+        p2.setPosition(ne.get(1));
     }
 
     /**
@@ -128,15 +130,16 @@ public class Game {
 
         Random rand = new Random();
 
-        if(Proto.test)
+        if(Proto.verbose || Proto.test)
             rand.setSeed(3);
 
         int randomNum = rand.nextInt(ne.size());
 
-        n1.setPosition(ne.get(randomNum));
+
+        ne.get(randomNum).accept(n1);
 
         randomNum = rand.nextInt(ne.size());
 
-        n2.setPosition(ne.get(randomNum));
+        ne.get(randomNum).accept(n2);
     }
 }

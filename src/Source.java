@@ -35,8 +35,8 @@ public class Source extends NetworkElement {
 		Proto.print("source.accept");
 		Proto.tab++;
 		NetworkElement ne = p.getPosition();
-		if (this.isConnected(ne)) {
-			ne.remove(p);
+		if (this.isConnected(ne) || ne == null) {
+			if (ne != null)	ne.remove(p);
 			this.occupants.add(p);
 			Proto.log("player accepted");
 			Proto.tab--;
@@ -145,7 +145,7 @@ public class Source extends NetworkElement {
 
 	@Override
 	public void breakPipe() throws UnsupportedOperationException {
-		throw new UnsupportedOperationException("Source cannot be braked");
+		throw new UnsupportedOperationException("Source cannot be broken");
 	}
 
 	public void repair() throws UnsupportedOperationException {

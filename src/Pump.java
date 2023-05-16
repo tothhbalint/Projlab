@@ -11,8 +11,6 @@ import java.util.Random;
 /** */
 public class Pump extends NetworkElement {
 	private int age = 0;
-	private NetworkElement input;
-	private NetworkElement output;
 	private Random rand = new Random();
 
 	public void tick() {
@@ -44,10 +42,11 @@ public class Pump extends NetworkElement {
 		Proto.print("pump.accept");
 		Proto.tab++;
 		NetworkElement ne = p.getPosition();
-		if(this.isConnected(ne)){
+		if(this.isConnected(ne) || ne == null){
 			this.occupied = true;
 			p.setPosition(this);
-			ne.remove(p);
+			if (ne != null)
+				ne.remove(p);
 			Proto.log("player accepted");
 			Proto.tab--;
 			return true;
@@ -75,7 +74,7 @@ public class Pump extends NetworkElement {
 	}
 
 	public String toString(){
-		return "Pump" + super.toString();
+		return "Pump" + super.toString() ;
 	}
 
 	@Override
@@ -89,11 +88,8 @@ public class Pump extends NetworkElement {
 		Proto.tab++;
 		if(!damaged){
 			hasWater = true;
-			output.recieveWater(this);
 			Proto.log("pump has water");
-		}else
-			hasWater = false;
-			Proto.log("pump is broken");
+		}
 		Proto.tab--;
 	}
 
