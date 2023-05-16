@@ -100,6 +100,11 @@ public abstract class Player {
 	public void move(NetworkElement ne) {
 		Proto.print("Player.move()");
 		Proto.tab++;
+		if (stuck){
+			Proto.log("player stuck");
+			Proto.tab--;
+			return;
+		}
 		ne.accept(this);
 		Proto.tab--;
 	}

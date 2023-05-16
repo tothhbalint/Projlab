@@ -56,7 +56,18 @@ while :; do
   7) echo "fix -player1" | $PROTO ;;
   8) echo "place -plumber1 -pump" | $PROTO ;;
   9) echo "oil -nomad1" | $PROTO ;;
-  10) echo "glue -player1" | $PROTO ;;
+  10)
+    java Proto -t step -plumber1 -pipe6 glue -plumber1 step -plumber1 -source1 step -plumber1 -source1 > test10.txt
+    cat test10.txt; echo " ";
+    grep "player stuck" <test10.txt
+    grep "player accepted" <test10.txt
+    if test "$(grep "player stuck" <test10.txt | wc -l)" -eq 1 &&
+        test "$(grep "player accepted" <test10.txt | wc -l)" -eq 1; then
+      echo "Success"
+    else
+      echo "Failed"
+    fi
+    ;;
   11)
     java Proto -t flow>test13.txt
     cat test13.txt
