@@ -76,9 +76,23 @@ while :; do
     else
       echo "Failed"
     fi ;;
-  6);;
-  7) echo "fix -player1" | $PROTO ;;
-  8) echo "place -plumber1 -pump" | $PROTO ;;
+  6)
+    java Proto -t step -plumber0 -p0 step -plumber0 -p1 pickup -plumber0 -pipe
+    ;;
+  7) #pump placement
+    ;;
+  8) #break
+    ;;
+  9) #fix
+    java Proto -t break -nomad1 step -nomad1 -p0 step -plumber0 -p0 step -plumber0 -p1 step -plumber0 -p2 step -plumber0 -p1 step -plumber0 -p0 fix -plumber0 >test9.txt
+    cat test9.txt; echo " ";
+    if test "$(grep "pipe fixed" <test9.txt | wc -l)" -eq 1 &&
+        test "$(grep "pipe broken" <test9.txt | wc -l)" -eq 1; then
+      echo "Success"
+    else
+      echo "Failed"
+    fi
+    ;;
   11)
     java Proto -t flow>test13.txt
     cat test13.txt

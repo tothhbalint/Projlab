@@ -356,6 +356,7 @@ public class Proto {
                 -h, help: print this help
                 """);
         System.out.println("Situations:");
+        //TODO Fix this because it is not correct (ie. break has only one parameter)
         System.out.println("""
                 step : Move $who to $where
                      -who -where
