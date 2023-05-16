@@ -28,12 +28,11 @@ do
                 0)java Proto -t step -plumber0 -pipe0 > test1.txt;
                   cat test1.txt;
                   grep "player accepted" <test1.txt;
-                  wc -l <test1.txt
-                if [ $? -eq 1 ];then
-                        echo "Success"
-                else
-                        echo "Failed"
-                fi;;
+		  if test "$( wc -l < test1.txt)" -eq 1; then
+			  echo "Success"
+		  else
+			  echo "Failed"
+		  fi;;
                 2) echo "step -player1 -pump1" | $PROTO;;
                 3) echo "oil -nomad1 step -nomad1 -p1 step -plumber1 -p0" | $PROTO | grep "player accepted"
                   if [ $? -eq 1 ];then
@@ -48,7 +47,14 @@ do
                 8) echo "place -plumber1 -pump" | $PROTO;;
                 9) echo "oil -nomad1"  | $PROTO;;
                 11) echo "glue -player1"  | $PROTO;;
-                12) echo "flow" | $PROTO;;
+                12) java Proto -t flow > test13.txt;
+		       cat test13.txt;
+		       grep "Water state set to true" <test13.txt;
+		  if test "$( wc -l < test13.txt)" -eq 13; then
+			  echo "Success"
+		  else
+			  echo "Failed"
+		  fi;;
         esac
         echo "Press any key to continue..."
         read go_next
