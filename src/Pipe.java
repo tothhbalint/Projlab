@@ -22,8 +22,15 @@ public class Pipe extends NetworkElement {
 
 	public void tick() {
 		Proto.print("pipe.tick");
-		if(!isDamaged()){
-			output.recieveWater(this);
+		Proto.tab++;
+		if(output == null){
+			Proto.print("no output");
+			Proto.tab--;
+			return;
+		}else if(isDamaged()){
+			Proto.print("damaged");
+			Proto.tab--;
+			return;
 		}
 		output.recieveWater(this);
 		if (sticky){
@@ -41,8 +48,6 @@ public class Pipe extends NetworkElement {
 		if (repairProtectionTimeLeft > 0){
 			repairProtectionTimeLeft--;
 		}
-
-
 	}
 	public void setStickyTimeLeft(int i){
 		stickyTimeLeft = i;
@@ -50,11 +55,14 @@ public class Pipe extends NetworkElement {
 
 	public void addConnection(NetworkElement ne){
 		Proto.print("pipe.addConnection");
+		Proto.tab++;
 		if (this.connections.size() < 2){
 			this.connections.add(ne);
+			Proto.print("connection added");
 		} else {
 			System.out.println("Pipe already has 2 connections");
 		}
+		Proto.tab--;
 	}
 	
 
@@ -65,21 +73,23 @@ public class Pipe extends NetworkElement {
 
 	public NetworkElement getRandomConnection(){
 		Proto.print("pipe.getRandomConnection");
+		Proto.tab++;
 		int index = rand.nextInt(this.connections.size());
 		NetworkElement neighbour = this.connections.get(index);
+		Proto.print("neighbour: " + neighbour.toString());
+		Proto.tab--;
 		return neighbour;
 	}
 
 	public boolean accept(Player p) {
-
 		Proto.print("pipe.accept");
-
+		Proto.tab++;
 		if (this.isOccupied()){
 			Proto.print(this.toString() + " occupied");
+			Proto.tab--;
 			return false;
 		}else{
 			NetworkElement ne = p.getPosition();
-
 			if (this.isConnected(ne)){
 				ne.remove(p);
 				if (this.slippery){
@@ -92,6 +102,7 @@ public class Pipe extends NetworkElement {
 						neighbour.setOccupied(true);
 						neighbour.occupants.add(p);
 						Proto.print("player_accepted");
+						Proto.tab--;
 						return true;
 					}
 				}else{
@@ -102,77 +113,95 @@ public class Pipe extends NetworkElement {
 						p.setStuckTimeLeft(rand.nextInt(3)+1);
 						this.setOccupied(true);
 						Proto.print("player_accepted");
+						Proto.tab--;
 						return true;
 					}else{ //Normal
 						this.setOccupied(true);
 						p.setPosition(this);
 						Proto.print("player_accepted");
+						Proto.tab--;
 						return true;
 					}
 				}
 			}
+			Proto.print("player_rejected");
+			Proto.tab--;
 			return false;
 		}
 	}
 
 	public void remove(Player p) {
 		Proto.print("pipe.remove");
+		Proto.tab++;
 		this.setOccupied(false);
 		this.occupants.remove(p);
 		Proto.print("player_removed");
+		Proto.tab--;
 	}
 
-	/** TODO */
 	public void recieveWater(NetworkElement ne) {
 		Proto.print("pipe.receiveWater");
+		Proto.tab++;
 		if (isDamaged()){
 			this.setWaterState(false);
-			increasePlumberPoint();
+			increaseNomadPoint();
+			Proto.print("Nomad points increased");
 		}
+		else{
+			this.setWaterState(true);
+			Proto.print("Water state set to true");
+		}
+		Proto.tab--;
 	}
 
 	/** */
-	public void pickUpPump(Inventory inv) {
-		Proto.print("pipe.pickUpPump");
-		Proto.print("No_pump_available");
+	public void pickUpPump(Inventory inv) throws UnsupportedOperationException{
+		throw new UnsupportedOperationException("Pump cannot be picked up here");
 	}
 
 	/** */
-	public void direct(NetworkElement in, NetworkElement out) {
-		Proto.print("pipe.direct");
-		Proto.print("Pipe_cannot_be_directed");
+	public void direct(NetworkElement in, NetworkElement out) throws UnsupportedOperationException{
+		throw new UnsupportedOperationException("Cannot direct here");
 	}
 
 	public void breakPipe(){
 		Proto.print("pipe.breakPipe");
+		Proto.tab++;
 		if (this.repairProtectionTimeLeft <= 0)
-			this.damaged = true;
-		Proto.print("pipe_broken");
+			this.damaged = true; this.hasWater = false;
+		Proto.print("pipe broken");
+		Proto.tab--;
 	}
 
 	public void repair(){
 		Proto.print("pipe.repairPipe");
+		Proto.tab++;
 		this.damaged = false;
 		this.repairProtectionTimeLeft = 5;
-		Proto.print("pipe_repaired");
+		Proto.print("pipe repaired");
+		Proto.tab--;
 	}
 
 	public void setSticky(){
 		Proto.print("pipe.setSticky");
+		Proto.tab++;
 		if (!slippery){
 			sticky = true;
 			stickyTimeLeft = 5;
 		}
-		Proto.print("pipe_now_sticky");
+		Proto.print("pipe now sticky");
+		Proto.tab--;
 	}
 
 	public void setSlippery(){
 		Proto.print("pipe.setSlippery");
+		Proto.tab++;
 		if (!sticky){
 			slippery = true;
 			slipperyTimeLeft = 5;
 		}
 		Proto.print("pipe_now_slippery");
+		Proto.tab--;
 	}
 
 	public boolean isSticky(){
@@ -198,7 +227,7 @@ public class Pipe extends NetworkElement {
 
 	/** */
 	public void disconnectPipe(NetworkElement ne) throws UnsupportedOperationException{
-		throw new UnsupportedOperationException("Cannot connect a Pipe with another Pipe");
+		throw new UnsupportedOperationException("Cannot disconnect a Pipe from itself");
 	}
 	/** */
 	public boolean placePump() {

@@ -54,4 +54,15 @@ public class Inventory {
 	public boolean hasPipe() {
 		return pipe != null;
 	}
+
+	public String toString(){
+		String s = "Inventory: ";
+		if (pump != null) {
+			s += "Pump";
+		}
+		if (pipe != null) {
+			s += "Pipe";
+		}
+		return s;
+	}
 }

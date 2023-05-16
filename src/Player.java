@@ -36,49 +36,41 @@ public abstract class Player {
 
 	/** */
 	public NetworkElement getPosition() {
-		Proto.print("Player.getPosition()");
 		return this.position;
 	}
 
 	/** */
 	public void setPosition(NetworkElement ne) {
-		Proto.print("Player.setPosition()");
 		this.position = ne;
 	}
 
 	/** */
 	public boolean getStuck() {
-		Proto.print("Player.getStuck()");
 		return this.stuck;
 	}
 
 	/** */
 	public void setStuck(boolean b) {
-		Proto.print("Player.setStuck()");
 		this.stuck  = b;
 	}
 
 	/** */
 	public int getStuckTimeLeft() {
-		Proto.print("Player.getStuckTimeLeft()");
 		return this.stuckTimeLeft;
 	}
 
 	/** */
 	public void setStuckTimeLeft(int i) {
-		Proto.print("Player.setStuckTimeLeft()");
 		this.stuckTimeLeft = i;
 	}
 
 	/** */
 	public Inventory getInventory() {
-		Proto.print("Player.getInventory()");
 		return this.inventory;
 	}
 
 	/** */
 	public void setInventory(Inventory inv) {
-		Proto.print("Player.setInventory()");
 		this.inventory = inv;
 	}
 
@@ -96,20 +88,23 @@ public abstract class Player {
 
 	public void tick(){
 		Proto.print("Player.tick()");
+		Proto.tab++;
 		if (stuck){
 			stuckTimeLeft--;
 			if (stuckTimeLeft <= 0){
 				stuck = false;
 			}
 		}
+		Proto.tab--;
 	}
 
-	//TODO
 	public void move(NetworkElement ne) {
 		Proto.print("Player.move()");
+		Proto.tab++;
 		if (ne.accept(this)){
 			this.setPosition(ne);
 		}
+		Proto.tab--;
 	}
 	
 	/** TODO if position is an instance of pump,
@@ -120,36 +115,43 @@ public abstract class Player {
 	 * */
 	public void directPump(Pump pump, NetworkElement in, NetworkElement out) {
 		Proto.print("Player.directPump()");
+		Proto.tab++;
 		position.direct(in, out);
-	}
-
-	public void makePipeSticky(){
-		Proto.print("Player.makePipeSticky()");
-		position.setSticky();
+		Proto.tab--;
 	}
 
 	public void breakPipe(){
 		Proto.print("Player.breakPipe()");
+		Proto.tab++;
 		position.breakPipe();
+		Proto.tab--;
 	}
 
 	public void takePipe(NetworkElement pipeToDisconnect){
 		Proto.print("Player.takePipe()");
+		Proto.tab++;
 		try {
 			position.disconnectPipe(pipeToDisconnect);
 			inventory.addPipe((Pipe) pipeToDisconnect);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		Proto.tab--;
 	}
 
 	public void takePump(){
 		Proto.print("Player.takePump()");
+		Proto.tab++;
 		try {
 			inventory.addPump((Pump) position);
 			position.pickUpPump(inventory);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		Proto.tab--;
+	}
+
+	public String toString(){
+		return "Player stuck: " + stuck + " " + stuckTimeLeft + " " + inventory.toString() + "position: ";
 	}
 }

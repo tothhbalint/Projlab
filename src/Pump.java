@@ -16,36 +16,60 @@ public class Pump extends NetworkElement {
 	private Random rand = new Random();
 
 	public void tick() {
-		Proto.print("pump.breakPump");
-		if (rand.nextInt(10) < 2){
-			this.breakPump();
+		Proto.print("pump.tick");
+		Random rand = new Random();
+		int randomInt = rand.nextInt(this.connections.size());
+		if(output == null)
+			output = this.connections.get(randomInt);
+
+		if(input == null){
+			int temp = rand.nextInt(this.connections.size());
+			if(temp == randomInt){
+				temp = (temp + 1) % this.connections.size();
+			}
+			input = this.connections.get(temp);
 		}
+
+		Proto.tab++;
+		if (rand.nextInt(10) < 2)
+			this.breakPump();
+
+		if(!isDamaged())
+			output.recieveWater(this);
+
+		Proto.tab--;
 	}
+
 	public boolean accept(Player p) {
 		Proto.print("pump.accept");
+		Proto.tab++;
 		NetworkElement ne = p.getPosition();
 		if(this.isConnected(ne)){
-			Proto.print("player_accepted");
+			Proto.print("player accepted");
+			Proto.tab--;
 			return true;
 		}
+		Proto.print("player rejected");
+		Proto.tab--;
 		return false;
 	}
 	public void remove(Player p) {
 		Proto.print("pump.remove");
+		Proto.tab++;
 		this.occupants.remove(p);
-		Proto.print("player_removed");
+		Proto.print("player removed");
+		Proto.tab--;
 	}
 	
-	/**
-	 * CHANGED: +1 param for input
-	 * */
 	public void direct(NetworkElement in, NetworkElement out) {
 		Proto.print("pump.direct");
+		Proto.tab++;
 		this.input = in;
 		Proto.print("new_input_" + in.toString());
 		this.output = out;
 		Proto.print("new_output_" + out.toString());
-		Proto.print("pump_direction_changed");
+		Proto.print("pump direction changed");
+		Proto.tab--;
 	}
 
 	public String toString(){
@@ -59,25 +83,37 @@ public class Pump extends NetworkElement {
 
 	/** */
 	public void recieveWater(NetworkElement ne) {
+		Proto.print("pump.recieveWater");
+		Proto.tab++;
 		if(!damaged){
+			hasWater = true;
 			output.recieveWater(this);
-		}
+			Proto.print("pump has water");
+		}else
+			hasWater = false;
+			Proto.print("pump is broken");
+		Proto.tab--;
 	}
 
-	public void pickUpPump(Inventory inv) {
-		Proto.print("pump.pickUpPump");
-		Proto.print("pump_cannot_be_disconnected");
+	public void pickUpPump(Inventory inv) throws UnsupportedOperationException{
+		throw new UnsupportedOperationException("Pump cannot be picked up");
 	}
 
 	public void setInput(NetworkElement ne) {
 		this.input = ne;
 	}
 
+	public void setOutput(NetworkElement ne) {
+		this.output = ne;
+	}
+
 	public void repair(){
 		Proto.print("pump.repairPump");
+		Proto.tab++;
 		this.damaged = false;
 		age = 0;
-		Proto.print("pump_repaired");
+		Proto.print("pump repaired");
+		Proto.tab--;
 	}
 
 	@Override
@@ -92,33 +128,37 @@ public class Pump extends NetworkElement {
 
 	private void breakPump(){
 		Proto.print("pump.breakPump");
+		Proto.tab++;
 		int randNum = rand.nextInt(20 - age);
 		if (randNum == 0){
 			this.damaged = true;
 		}
 		age++;
-		Proto.print("pump_broken");
+		Proto.print("pump broken");
+		Proto.tab--;
 	}
 
 	public void connectPipe(NetworkElement ne) {
 		Proto.print("pump.connectPipe");
+		Proto.tab++;
 		this.addConnection(ne);
 		ne.addConnection(this);
-		Proto.print("pipe_connected");
+		Proto.print("pipe connected");
+		Proto.tab--;
 	}
 
 	public void disconnectPipe(NetworkElement ne) {
 		Proto.print("pump.disconnectPipe");
+		Proto.tab++;
 		this.removeConnection(ne);
 		ne.removeConnection(this);
-		Proto.print("pipe_disconnected");
+		Proto.print("pipe disconnected");
+		Proto.tab--;
 	}
 
 
-	public boolean placePump() {
-		Proto.print("pump.placePump");
-		Proto.print("pump_cannot_be_placed_on_pump");
-		return false;
+	public boolean placePump() throws UnsupportedOperationException{
+		throw new UnsupportedOperationException("Pump cannot be placed here");
 	}
 
 	public NetworkElement getPipeOutput() throws UnsupportedOperationException {

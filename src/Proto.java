@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Scanner;
 
 
 /**
@@ -11,6 +12,8 @@ import java.util.ArrayList;
  */
 public class Proto {
     static boolean verbose = false;
+
+    static int tab = 0;
 
     static boolean test = false;
 
@@ -32,15 +35,20 @@ public class Proto {
             for (int i = 0; i < args.length; i++) {
                 String arg = args[i];
                 if (arg.charAt(0) != '-') {
-                    ArrayList<String> options = new ArrayList<>();
-                    int x = ++i;
-                    do {
-                        options.add(args[x].replace("-", ""));
-                        x++;
-                        if (x == args.length) break;
-                    } while (args[x].charAt(0) == '-');
-                    Situation situation = new Situation(arg, options.toArray(new String[options.size()]));
-                    situations.add(situation);
+                    if (arg.equals("help")) {
+                        printHelp();
+                    } else if (arg.equals("test")) {
+                        test = true;
+                    } else {
+                        ArrayList<String> options = new ArrayList<>();
+                        int x = i;
+                        do {
+                            if (++x == args.length) break;
+                            options.add(args[x].replace("-", ""));
+                        } while (args[x].charAt(0) == '-');
+                        Situation situation = new Situation(arg, options.toArray(new String[options.size()]));
+                        situations.add(situation);
+                    }
                 } else if (arg.equals("-v") || arg.equals("--verbose")) {
                     verbose = true;
                 } else if (arg.equals("-h") || arg.equals("--help")) {
@@ -60,28 +68,61 @@ public class Proto {
 
         gameHandle.startGame();
 
-        drawMap();
+        boolean gameEnded = false;
 
-        for (Situation situation : situations) {
-            processSituation(situation);
+        Scanner sc = new Scanner(System.in);
+
+        while (!gameEnded) {
+            if (!test) {
+                drawCurrentState();
+                args = sc.nextLine().split(" ");
+                processInput(args);
+            }
+
+            for (Situation situation : situations) {
+                processSituation(situation);
+            }
+
+            situations.clear();
+
+            sc.nextLine();
         }
+
     }
 
     //TODO draw out the map in ascii for navigation or maybe not xd
 
-    private static void drawMap() {
-        if(!verbose) throw new RuntimeException("Cannot draw map in non-verbose mode");
+    private static void drawCurrentState() {
+        if (!verbose) throw new RuntimeException("Cannot draw map in non-verbose mode");
 
-       NetworkMap networkMap = gameHandle.getMap();
+        NetworkMap networkMap = gameHandle.getMap();
 
-        for (NetworkElement networkElement : networkMap.getElements()) {
-            networkElement.printMatrix();
+//        for (NetworkElement networkElement : networkMap.getElements()) {
+//            networkElement.printMatrix();
+//        }
+
+        print("plumber team: ");
+        for (int i = 0; i < gameHandle.getPlumberTeam().getNoPlayers(); i++) {
+            Player player = gameHandle.getPlumberTeam().getPlayer(i);
+            print("\t" + player.toString());
+            tab++;
+            System.out.print("\t");player.getPosition().printMatrix();
+            tab--;
+        }
+
+        print("nomad team: ");
+        for (int i = 0; i < gameHandle.getNomadTeam().getNoPlayers(); i++) {
+            Player player = gameHandle.getNomadTeam().getPlayer(i);
+            print("\t" + player.toString());
+            tab++;
+            System.out.print("\t");player.getPosition().printMatrix();
+            tab--;
         }
     }
 
     private static void processSituation(Situation situation) {
         String[] splitSituation = situation.name.split("(?<=\\D)(?=\\d)");
-        switch (splitSituation[0] ) {
+        switch (splitSituation[0]) {
             case "step":
                 step(situation.options);
                 break;
@@ -104,18 +145,19 @@ public class Proto {
                 glue(situation.options);
                 break;
             case "flow":
-                flow(situation.options);
+                flow();
                 break;
             default:
                 print("Invalid command: " + situation.name);
                 break;
         }
     }
+
     //overseeing required
     private static void step(String[] options) {
         String who = options[0];
         String where = options[1];
-        print("step " + who + " " + where);
+        print("step:" + who + " " + where);
 
         String[] whoSplit = who.split("(?<=\\D)(?=\\d)");
         who = whoSplit[0];
@@ -127,7 +169,7 @@ public class Proto {
         int whereId = Integer.parseInt(whereSplit[1]);
 
         Player player = null;
-        try{
+        try {
             if (who.equals("plumber")) {
                 player = gameHandle.getPlumberTeam().getPlayer(whoId);
             } else if (who.equals("nomad")) {
@@ -139,8 +181,7 @@ public class Proto {
             NetworkElement destination = player.getPosition().getConnections().get(whereId);
 
             player.move(destination);
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             print("Invalid parameters in: step");
         }
     }
@@ -279,22 +320,23 @@ public class Proto {
         player.getPosition().setSticky();
     }
 
-    private static void flow(String[] options) {
-        String from = options[0];
+    private static void flow() {
+        gameHandle.tick();
 
-        String[] fromSplit = from.split("(?<=\\D)(?=\\d)");
-        from = fromSplit[0];
-        int fromId = Integer.parseInt(fromSplit[1]);
-
-        if(from.equals("source")) {
-            gameHandle.getMap().getSources().get(fromId).tick();
-            return;
-        }
-        print("flow " + from);
+        print("flow ");
     }
 
     public static void print(String arg) {
-        if (verbose) System.out.println(arg);
+        if (verbose || test) {
+            if (!test) for (int i = 0; i < tab; i++) {
+                System.out.print("\t");
+            }
+            System.out.println(arg);
+        }
+    }
+
+    public static void log(String arg) {
+        if (test) print(arg);
     }
 
     public static void printHelp() {
@@ -303,8 +345,8 @@ public class Proto {
         //dont make test show up in help
         System.out.println("Options:");
         System.out.println("""
-                -v, --verbose: verbose mode
-                -h, --help: print this help
+                -v, verbose: verbose mode
+                -h, help: print this help
                 """);
         System.out.println("Situations:");
         System.out.println("""
