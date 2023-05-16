@@ -20,6 +20,8 @@ public abstract class NetworkElement implements ITimer, IMove {
 	protected static int plumberPoints;
 	protected ArrayList<NetworkElement> connections;
 	protected ArrayList<Player> occupants;
+	protected NetworkElement output;
+	protected NetworkElement input;
 
 	public NetworkElement(){
 		this.connections = new ArrayList<NetworkElement>();
@@ -57,7 +59,35 @@ public abstract class NetworkElement implements ITimer, IMove {
 	
 	/** */
 	public abstract void recieveWater(NetworkElement ne);
-	
+
+	/** */
+	public void setOutput(NetworkElement ne){
+		if (connections.contains(ne)){
+			this.output = ne;
+		}  else {
+			throw new IllegalArgumentException("NetworkElement is not connected");
+		}
+	}
+
+	/** */
+	public NetworkElement getOutput(){
+		return this.output;
+	}
+
+	/** */
+	public void setInput(NetworkElement ne){
+		if (connections.contains(ne)){
+			this.input = ne;
+		} else {
+			throw new IllegalArgumentException("NetworkElement is not connected");
+		}
+	}
+
+	/** */
+	public NetworkElement getInput(){
+		return this.input;
+	}
+
 	/** */
 	public void setWaterState(boolean b) {
 		this.hasWater = b;

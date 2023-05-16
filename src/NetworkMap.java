@@ -78,6 +78,28 @@ public class NetworkMap {
 		connect(elements.get(4), elements.get(11));
 		connect(elements.get(4), elements.get(14));
 		connect(elements.get(5), elements.get(19));
+
+		//Setting a default way for the water to flow through with in and outputs
+		setInAndOutput(elements.get(0), elements.get(6));
+		setInAndOutput(elements.get(6), elements.get(20));
+		setInAndOutput(elements.get(20), elements.get(7));
+		setInAndOutput(elements.get(7), elements.get(23));
+		setInAndOutput(elements.get(23), elements.get(8));
+		setInAndOutput(elements.get(8), elements.get(3));
+
+		setInAndOutput(elements.get(1), elements.get(12));
+		setInAndOutput(elements.get(12), elements.get(21));
+		setInAndOutput(elements.get(21), elements.get(13));
+		setInAndOutput(elements.get(13), elements.get(24));
+		setInAndOutput(elements.get(24), elements.get(14));
+		setInAndOutput(elements.get(14), elements.get(4));
+
+		setInAndOutput(elements.get(2), elements.get(17));
+		setInAndOutput(elements.get(17), elements.get(22));
+		setInAndOutput(elements.get(22), elements.get(18));
+		setInAndOutput(elements.get(18), elements.get(25));
+		setInAndOutput(elements.get(25), elements.get(19));
+		setInAndOutput(elements.get(19), elements.get(5));
 	}
 
 	public ArrayList<Source> getSources() {
@@ -92,6 +114,16 @@ public class NetworkMap {
 	public static void connect(NetworkElement ne1, NetworkElement ne2) {
 		ne1.addConnection(ne2);
 		ne2.addConnection(ne1);
+	}
+
+	/**
+	 * Connects two NetworkElements. The first one will be the input of the second one, and vice-versa.
+	 * @param ne1 The first NetworkElement. It will be the input of the second one (ne2).
+	 * @param ne2 The second NetworkElement. It will be the output of the first one (ne1).
+	 *  */
+	public static void setInAndOutput(NetworkElement ne1, NetworkElement ne2) {
+		ne1.setOutput(ne2);
+		ne2.setInput(ne1);
 	}
 
 	/** */
