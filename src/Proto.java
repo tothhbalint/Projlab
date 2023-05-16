@@ -201,6 +201,11 @@ public class Proto {
         who = whoSplit[0];
         int whoId = Integer.parseInt(whoSplit[1]);
 
+        String[] whatSplit = what.split("(?<=\\D)(?=\\d)");
+        what = whatSplit[0];
+        int whatId = Integer.parseInt(whatSplit[1]);
+
+
         Player player = null;
 
         if (who.equals("plumber")) {
@@ -220,7 +225,7 @@ public class Proto {
                 player.takePump();
                 break;
             case "pipe":
-                player.takePipe(connections.get(0));
+                player.takePipe(connections.get(whatId));
                 break;
             default:
                 throw new RuntimeException("Invalid pickup: " + what);
@@ -232,6 +237,30 @@ public class Proto {
         String who = options[0];
         String what = options[1];
         print("place " + who + " " + what);
+
+        String[] whoSplit = who.split("(?<=\\D)(?=\\d)");
+        who = whoSplit[0];
+        int whoId = Integer.parseInt(whoSplit[1]);
+
+        Player player = null;
+
+        if (who.equals("plumber")) {
+            player = gameHandle.getPlumberTeam().getPlayer(whoId);
+        } else if (who.equals("nomad")) {
+            player = gameHandle.getNomadTeam().getPlayer(whoId);
+        } else {
+            throw new RuntimeException("Invalid team: " + who);
+        }
+
+        NetworkElement position = player.getPosition();
+
+        if(what.equals("pipe")){
+            player.connectPipe();
+        }else if(what.equals("pump")) {
+            player.placePump();
+        }
+
+
     }
 
     private static void break_(String[] options) {
