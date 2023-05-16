@@ -45,6 +45,9 @@ public class Pump extends NetworkElement {
 		Proto.tab++;
 		NetworkElement ne = p.getPosition();
 		if(this.isConnected(ne)){
+			this.occupied = true;
+			p.setPosition(this);
+			ne.remove(p);
 			Proto.print("player accepted");
 			Proto.tab--;
 			return true;
@@ -57,6 +60,7 @@ public class Pump extends NetworkElement {
 		Proto.print("pump.remove");
 		Proto.tab++;
 		this.occupants.remove(p);
+		this.occupied = false;
 		Proto.print("player removed");
 		Proto.tab--;
 	}

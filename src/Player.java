@@ -101,9 +101,7 @@ public abstract class Player {
 	public void move(NetworkElement ne) {
 		Proto.print("Player.move()");
 		Proto.tab++;
-		if (ne.accept(this)){
-			this.setPosition(ne);
-		}
+		ne.accept(this);
 		Proto.tab--;
 	}
 	

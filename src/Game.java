@@ -98,9 +98,14 @@ public class Game {
 
         int randomNum = rand.nextInt(ne.size());
 
-        p1.setPosition(ne.get(randomNum));
+        if (Proto.test)
+            randomNum = 0;
 
-        randomNum = rand.nextInt(ne.size());
+        p1.setPosition(ne.get(randomNum));
+        if (Proto.test)
+            randomNum = 1;
+        else
+            randomNum = rand.nextInt(ne.size());
 
         p2.setPosition(ne.get(randomNum));
     }
@@ -119,6 +124,9 @@ public class Game {
         ArrayList<NetworkElement> ne = map.getElements();
 
         Random rand = new Random();
+
+        if(Proto.test)
+            rand.setSeed(3);
 
         int randomNum = rand.nextInt(ne.size());
 

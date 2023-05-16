@@ -58,7 +58,7 @@ public class Proto {
                 }
             }
         }
-        if (test) verbose = false;
+//        if (test) verbose = false;
     }
 
     static Game gameHandle = new Game();
@@ -73,7 +73,7 @@ public class Proto {
         Scanner sc = new Scanner(System.in);
 
         while (!gameEnded) {
-            if (!test) {
+            if (true) {
                 drawCurrentState();
                 args = sc.nextLine().split(" ");
                 processInput(args);
@@ -328,7 +328,7 @@ public class Proto {
 
     public static void print(String arg) {
         if (verbose || test) {
-            if (!test) for (int i = 0; i < tab; i++) {
+            if (true) for (int i = 0; i < tab; i++) {
                 System.out.print("\t");
             }
             System.out.println(arg);
