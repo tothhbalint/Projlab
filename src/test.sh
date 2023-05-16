@@ -76,9 +76,48 @@ while :; do
     else
       echo "Failed"
     fi ;;
-  6);;
-  7) echo "fix -player1" | $PROTO ;;
-  8) echo "place -plumber1 -pump" | $PROTO ;;
+  6) #pipe pickup
+    java Proto -t step -plumber0 -p0 step -plumber0 -p1 pickup -plumber0 -pipe
+    cat test6.txt; echo " ";
+    grep "pipe added to the inventory" <test6.txt
+    if test "$(grep "pipe added to the inventory" <test6.txt | wc -l)" -eq 1; then
+      echo "Success"
+    else
+      echo "Failed"
+    fi
+    ;;
+  7) #pump placement
+    java Proto -t step -plumber0 -p0 step -plumber0 -p1 step -plumber0 -p1 step -plumber0 -p1 step -plumber0 -p1 step -plumber0 -p1 pickup -plumber0 -pump step -plumber0 -p0 place -plumber0 -pump >test7.txt
+    cat test7.txt; echo " ";
+    grep "pump added to the inventory" <test7.txt
+    grep "pump placed" <test7.txt
+    if test "$(grep "pump added to the inventory" <test7.txt | wc -l)" -eq 1 &&
+        test "$(grep "pump placed" <test7.txt | wc -l)" -eq 1; then
+      echo "Success"
+    else
+      echo "Failed"
+    fi
+    ;;
+  8) #break
+    java Proto -t break -nomad1 > test8.txt
+    cat test8.txt; echo " ";
+    grep "pipe broken" <test8.txt
+    if test "$(grep "pipe broken" <test8.txt | wc -l)" -eq 1; then
+      echo "Success"
+    else
+      echo "Failed"
+    fi
+    ;;
+  9) #fix
+    java Proto -t break -nomad1 step -nomad1 -p0 step -plumber0 -p0 step -plumber0 -p1 step -plumber0 -p2 step -plumber0 -p1 step -plumber0 -p0 fix -plumber0 >test9.txt
+    cat test9.txt; echo " ";
+    if test "$(grep "pipe fixed" <test9.txt | wc -l)" -eq 1 &&
+        test "$(grep "pipe broken" <test9.txt | wc -l)" -eq 1; then
+      echo "Success"
+    else
+      echo "Failed"
+    fi
+    ;;
   11)
     java Proto -t flow>test13.txt
     cat test13.txt
