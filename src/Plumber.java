@@ -30,6 +30,8 @@ public class Plumber extends Player {
 			NetworkElement nextPump = position.getPipeOutput();
 			position.removePipeOutput(nextPump);
 			nextPump.removeConnection(position);
+			NetworkMap.add(tempPipe);
+			NetworkMap.connect(tempPump, tempPipe);
 			position.addPipeOutput(tempPump);
 			tempPump.addConnection(position);
 			tempPump.addConnection(tempPipe);

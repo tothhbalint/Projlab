@@ -115,19 +115,19 @@ public class Pipe extends NetworkElement {
                         p.setStuck(true);
                         p.setStuckTimeLeft(rand.nextInt(3) + 1);
                         this.setOccupied(true);
-                        Proto.print("player_accepted");
+                        Proto.log("player accepted");
                         Proto.tab--;
                         return true;
                     } else { //Normal
                         this.setOccupied(true);
                         p.setPosition(this);
-                        Proto.print("player_accepted");
+                        Proto.log("player accepted");
                         Proto.tab--;
                         return true;
                     }
                 }
             }
-            Proto.print("player_rejected");
+            Proto.log("player rejected");
             Proto.tab--;
             return false;
         }
@@ -138,7 +138,7 @@ public class Pipe extends NetworkElement {
         Proto.tab++;
         this.setOccupied(false);
         this.occupants.remove(p);
-        Proto.print("player_removed");
+        Proto.log("player removed");
         Proto.tab--;
     }
 
@@ -148,10 +148,10 @@ public class Pipe extends NetworkElement {
         if (isDamaged()) {
             this.setWaterState(false);
             increaseNomadPoint();
-            Proto.print("Nomad points increased");
+            Proto.log("Nomad points increased");
         } else {
             this.setWaterState(true);
-            Proto.print("Water state set to true");
+            Proto.log("Water state set to true");
         }
         Proto.tab--;
     }
@@ -176,7 +176,7 @@ public class Pipe extends NetworkElement {
         if (this.repairProtectionTimeLeft <= 0)
             this.damaged = true;
         this.hasWater = false;
-        Proto.print("pipe broken");
+        Proto.log("pipe broken");
         Proto.tab--;
     }
 
@@ -185,7 +185,7 @@ public class Pipe extends NetworkElement {
         Proto.tab++;
         this.damaged = false;
         this.repairProtectionTimeLeft = 5;
-        Proto.print("pipe repaired");
+        Proto.log("pipe repaired");
         Proto.tab--;
     }
 
@@ -196,7 +196,7 @@ public class Pipe extends NetworkElement {
             sticky = true;
             stickyTimeLeft = 5;
         }
-        Proto.print("pipe now sticky");
+        Proto.log("pipe now sticky");
         Proto.tab--;
     }
 
@@ -207,7 +207,7 @@ public class Pipe extends NetworkElement {
             slippery = true;
             slipperyTimeLeft = 5;
         }
-        Proto.print("pipe_now_slippery");
+        Proto.log("pipe now slippery");
         Proto.tab--;
     }
 

@@ -1,44 +1,50 @@
 #!/bin/sh
 
-PROTO="java Proto -v"
+PROTO="java Proto -t"
 
 eval javac *.java
 
 while :
 do
-	echo "Choose which test to run
-	\n	0. Run all tests
-	\n	1. Movement(pipe)
-	\n	2. Movement(pump)
-	\n	3. Pump pickup
-	\n	4. Pipe pickup
-	\n	5. Pump placement
-	\n	6. Break pipe
-	\n	7. Fix
-	\n	8. Connect pipe
-	\n	9. Slippy pipe
-	\n	10. Sticky pipe
-	\n	11. Water flow"
+        echo "Choose which test to run
+        \n      0. Run all tests
+        \n      1. Movement(pipe)
+        \n      2. Movement(slippy pipe)
+        \n      3. Movement(sticky pipe)
+        \n      4. Movement(pump)
+        \n      5. Pump pickup
+        \n      6. Pipe pickup
+        \n      7. Pump placement
+        \n      8. Break pipe
+        \n      9. Fix
+        \n      10. Connect pipe
+        \n      11. Slippy pipe
+        \n      12. Sticky pipe
+        \n      13. Water flow"
 
-	read input
-	#add grep at the end of the lines, compare with outputs from a file
-	case $input in 
-		0)
-        eval rm -r *.class
-        exit ;;
-		1) echo "step -player1 -pipe1" | $PROTO;;
-		2) echo "step -player1 -pump1" | $PROTO;;
-		3) echo "pickup -plumber1 -pipe" | $PROTO;;
-		4) echo "pickup -plumber1 -pump" | $PROTO;;
-		5) echo "place -plumber1 -pipe" | $PROTO;;
-		6) echo "break -nomad1"  | $PROTO;;
-		7) echo "fix -player1"  | $PROTO;;
-		8) echo "place -plumber1 -pump" | $PROTO;;
-		9) echo "oil -nomad1"  | $PROTO;;
-		11) echo "glue -player1"  | $PROTO;;
-		12) echo "flow -source" | $PROTO;;
-	esac
-	echo "Press any key to continue..."
-	read go_next
+        read input
+        #add grep at the end of the lines, compare with outputs from a file
+        case $input in
+                0)
+                        eval rm -r *.class
+                        exit ;;
+                2) echo "step -player1 -pump1" | $PROTO;;
+                3) echo "oil -nomad1 step -nomad1 -p1 step -plumber1 -p0" | $PROTO | grep "player accepted"
+                  if [ $? -eq 1 ];then
+                        echo "Success"
+                else
+                        echo "Failed"
+                fi;;
+                4) echo "pickup -plumber1 -pump" | $PROTO;;
+                5) echo "place -plumber1 -pipe" | $PROTO;;
+                6) echo "break -nomad1"  | $PROTO;;
+                7) echo "fix -player1"  | $PROTO;;
+                8) echo "place -plumber1 -pump" | $PROTO;;
+                9) echo "oil -nomad1"  | $PROTO;;
+                11) echo "glue -player1"  | $PROTO;;
+                12) echo "flow" | $PROTO;;
+        esac
+        echo "Press any key to continue..."
+        read go_next
 done
 

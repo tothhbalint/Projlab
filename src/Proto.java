@@ -58,7 +58,7 @@ public class Proto {
                 }
             }
         }
-//        if (test) verbose = false;
+        if (test) verbose = false;
     }
 
     static Game gameHandle = new Game();
@@ -73,7 +73,7 @@ public class Proto {
         Scanner sc = new Scanner(System.in);
 
         while (!gameEnded) {
-            if (true) {
+            if (!test) {
                 drawCurrentState();
                 args = sc.nextLine().split(" ");
                 processInput(args);
@@ -82,6 +82,8 @@ public class Proto {
             for (Situation situation : situations) {
                 processSituation(situation);
             }
+
+            if(test){break;}
 
             situations.clear();
 
@@ -106,7 +108,8 @@ public class Proto {
             Player player = gameHandle.getPlumberTeam().getPlayer(i);
             print("\t" + player.toString());
             tab++;
-            System.out.print("\t");player.getPosition().printMatrix();
+            System.out.print("\t");
+            player.getPosition().printMatrix();
             tab--;
         }
 
@@ -115,7 +118,8 @@ public class Proto {
             Player player = gameHandle.getNomadTeam().getPlayer(i);
             print("\t" + player.toString());
             tab++;
-            System.out.print("\t");player.getPosition().printMatrix();
+            System.out.print("\t");
+            player.getPosition().printMatrix();
             tab--;
         }
     }
@@ -164,8 +168,6 @@ public class Proto {
         int whoId = Integer.parseInt(whoSplit[1]);
 
         String[] whereSplit = where.split("(?<=\\D)(?=\\d)");
-        where = whereSplit[0];
-        NetworkElement position = null;
         int whereId = Integer.parseInt(whereSplit[1]);
 
         Player player = null;
@@ -328,15 +330,18 @@ public class Proto {
 
     public static void print(String arg) {
         if (verbose || test) {
-            if (true) for (int i = 0; i < tab; i++) {
-                System.out.print("\t");
+            if (!test) {
+                for (int i = 0; i < tab; i++) {
+                    System.out.print("\t");
+                }
+                System.out.println(arg);
             }
-            System.out.println(arg);
         }
     }
 
     public static void log(String arg) {
-        if (test) print(arg);
+        if (!test) print(arg);
+        else System.out.println(arg);
     }
 
     public static void printHelp() {

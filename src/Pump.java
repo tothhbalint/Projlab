@@ -48,11 +48,11 @@ public class Pump extends NetworkElement {
 			this.occupied = true;
 			p.setPosition(this);
 			ne.remove(p);
-			Proto.print("player accepted");
+			Proto.log("player accepted");
 			Proto.tab--;
 			return true;
 		}
-		Proto.print("player rejected");
+		Proto.log("player rejected");
 		Proto.tab--;
 		return false;
 	}
@@ -61,7 +61,7 @@ public class Pump extends NetworkElement {
 		Proto.tab++;
 		this.occupants.remove(p);
 		this.occupied = false;
-		Proto.print("player removed");
+		Proto.log("player removed");
 		Proto.tab--;
 	}
 	
@@ -72,7 +72,7 @@ public class Pump extends NetworkElement {
 		Proto.print("new_input_" + in.toString());
 		this.output = out;
 		Proto.print("new_output_" + out.toString());
-		Proto.print("pump direction changed");
+		Proto.log("pump direction changed");
 		Proto.tab--;
 	}
 
@@ -92,10 +92,10 @@ public class Pump extends NetworkElement {
 		if(!damaged){
 			hasWater = true;
 			output.recieveWater(this);
-			Proto.print("pump has water");
+			Proto.log("pump has water");
 		}else
 			hasWater = false;
-			Proto.print("pump is broken");
+			Proto.log("pump is broken");
 		Proto.tab--;
 	}
 
@@ -116,7 +116,7 @@ public class Pump extends NetworkElement {
 		Proto.tab++;
 		this.damaged = false;
 		age = 0;
-		Proto.print("pump repaired");
+		Proto.log("pump repaired");
 		Proto.tab--;
 	}
 

@@ -10,7 +10,7 @@ import java.util.ArrayList;
 /** */
 public class NetworkMap {
 	private static int currentID = 0;
-	private ArrayList<NetworkElement> elements = new ArrayList<NetworkElement>();
+	private static ArrayList<NetworkElement> elements = new ArrayList<NetworkElement>();
 
 	private ArrayList<Source> sources = new ArrayList<Source>();
 
@@ -114,6 +114,10 @@ public class NetworkMap {
 	public static void connect(NetworkElement ne1, NetworkElement ne2) {
 		ne1.addConnection(ne2);
 		ne2.addConnection(ne1);
+	}
+
+	public static void add(NetworkElement ne){
+		elements.add(ne);
 	}
 
 	/**
