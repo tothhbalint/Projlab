@@ -54,8 +54,6 @@ public class Pipe extends NetworkElement {
             Proto.log("water cant flow pipe is damaged");
             Proto.tab--;
             return;
-        }if(hasWater) {
-            output.recieveWater(this);
         }
         Proto.tab--;
         if (sticky) {
@@ -197,7 +195,7 @@ public class Pipe extends NetworkElement {
      * This method controls the flowing of water
      * @param ne NetworkElement
      */
-    public void recieveWater(NetworkElement ne) {
+    public void receiveWater(NetworkElement ne) {
         Proto.print("pipe.receiveWater");
         Proto.tab++;
         if (isDamaged()) {

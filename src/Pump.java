@@ -43,10 +43,6 @@ public class Pump extends NetworkElement {
 		Proto.tab++;
 		if (rand.nextInt(10) < 2)
 			this.breakPump();
-
-		if(!isDamaged())
-			output.recieveWater(this);
-
 		Proto.tab--;
 	}
 
@@ -121,8 +117,8 @@ public class Pump extends NetworkElement {
 	 * This method is responsible for the flowing of water
 	 * @param ne NetworkElement
 	 */
-	public void recieveWater(NetworkElement ne) {
-		Proto.print("pump.recieveWater");
+	public void receiveWater(NetworkElement ne) {
+		Proto.print("pump.receiveWater");
 		Proto.tab++;
 		if(!damaged){
 			hasWater = true;

@@ -358,8 +358,6 @@ public class Proto {
 
     private static void flow() {
         gameHandle.tick();
-
-        print("flow ");
     }
 
     public static void print(String arg) {
