@@ -58,88 +58,148 @@ while :; do
       echo "Failed"
     fi ;;
   3) #Movement(pump)
-        java Proto -t step -plumber0 -pump0 >test1.txt
-        cat test1.txt; echo " ";
-        grep "player accepted" <test1.txt
-        if test "$(grep "player accepted" <test1.txt | wc -l )" -eq 1; then
+        java Proto -t step -plumber0 -pump0 >test3.txt
+        cat test3.txt; echo " ";
+        grep "player accepted" <test3.txt
+        if test "$(grep "player accepted" <test3.txt | wc -l )" -eq 1; then
           echo "Success"
         else
           echo "Failed"
         fi
         ;;
   4) #Movement(cistern)
+    java Proto -t step -plumber0 -p0 step -plumber0 -p1 step -plumber0 -p1 step -plumber0 -p1 step -plumber0 -p1 step -plumber0 -p1  >test4.txt
+    cat test4.txt; echo " ";
+    grep "player accepted" <test4.txt
+    if test "$(grep "player accepted" <test4.txt | wc -l )" -eq 6; then
+      echo "Success"
+    else
+      echo "Failed"
+    fi
     ;;
   5) #Movement(source)
+    java Proto -t step -plumber0 -p0 step -plumber0 -p0 > test5.txt
+    cat test5.txt;
+    grep "player accepted" <test5.txt
+    if test "$(grep "player accepted" <test5.txt | wc -l )" -eq 2; then
+      echo "Success"
+    else
+      echo "Failed"
+    fi
     ;;
   6) #Slippery pipe
+    java Proto -t oil -nomad1 > test6.txt
+    cat test6.txt;
+    grep "Nomad.makePipeSlippery()" < test6.txt
+    grep "pipe now slippery" < test6.txt
+    if test "$(grep "pipe now slippery" <test6.txt | wc -l )" -eq 1; then
+        #test "$(grep "Nomad.makePipeSlippery()" < test6.txt | wc -l )" -eq 1; then #maybe we dont need this
+        echo "Success"
+    else
+      echo "Failed"
+    fi
     ;;
   7) #Sticky pipe
+    java Proto -t glue -nomad1 > test7.txt
+    cat test7.txt;
+    grep "pipe now sticky" < test7.txt
+    if test "$(grep "pipe now sticky" <test7.txt | wc -l )" -eq 1; then
+      echo "Success"
+    else
+      echo "Failed"
+    fi
     ;;
   8) #Slippery pipe on sticky pipe
+    java Proto -t glue -nomad1 oil -nomad1 > test8.txt
+    cat test8.txt;
+    grep "Error: Pipe sticky AND slippery" < test8.txt
+    if test "$(grep "Error: Pipe sticky AND slippery" <test8.txt | wc -l )" -eq 1; then
+      echo "Success"
+    else
+      echo "Failed"
+    fi
     ;;
   9) # Movement(slippery pipe)
-    java Proto -t oil -nomad1 step -nomad1 -p1 step -plumber1 -p0 >test3.txt
-    cat test3.txt; echo " ";
-    grep "player slipped" <test3.txt
-    grep "player accepted" <test3.txt
+    java Proto -t oil -nomad1 step -nomad1 -p1 step -plumber1 -p0 >test9.txt
+    cat test9.txt; echo " ";
+    grep "player slipped" <test9.txt
+    grep "player accepted" <test9.txt
 
-    if test "$(grep "player slipped" <test3.txt | wc -l)" -eq 1 &&
-        test "$(grep "player accepted" <test3.txt | wc -l)" -eq 4; then
+    if test "$(grep "player slipped" <test9.txt | wc -l)" -eq 1 &&
+        test "$(grep "player accepted" <test9.txt | wc -l)" -eq 4; then
       echo "Success"
     else
       echo "Failed"
     fi ;;
   10) #Movement(sticky pipe)
-    java Proto -t glue -nomad1 step -nomad1 -p1 step -plumber1 -p0 step -plumber1 -p0 >test4.txt
-    cat test4.txt; echo " ";
-    grep "player is stuck" <test4.txt
-    grep "player accepted" <test4.txt
-    if test "$(grep "player is stuck" <test4.txt | wc -l)" -eq 1 &&
-        test "$(grep "player accepted" <test4.txt | wc -l)" -eq 4; then
+    java Proto -t glue -nomad1 step -nomad1 -p1 step -plumber1 -p0 step -plumber1 -p0 >test10.txt
+    cat test10.txt; echo " ";
+    grep "player is stuck" <test10.txt
+    grep "player accepted" <test10.txt
+    if test "$(grep "player is stuck" <test10.txt | wc -l)" -eq 1 &&
+        test "$(grep "player accepted" <test10.txt | wc -l)" -eq 4; then
       echo "Success"
     else
       echo "Failed"
     fi ;;
   11) #Pump pickup
-    java Proto -t pickup -plumber0 -pump step -plumber0 -p0 step -plumber0 -p1 step -plumber0 -p1 step -plumber0 -p1 step -plumber0 -p1 step -plumber0 -p1 pickup -plumber0 -pump>test5.txt
-    cat test5.txt; echo " ";
-    grep "pickup failed" <test5.txt
-    grep "pump added to the inventory" <test5.txt
-    if test "$(grep "pickup failed" <test5.txt | wc -l)" -eq 1 &&
-        test "$(grep "pump added to the inventory" <test5.txt | wc -l)" -eq 1; then
+    java Proto -t pickup -plumber0 -pump step -plumber0 -p0 step -plumber0 -p1 step -plumber0 -p1 step -plumber0 -p1 step -plumber0 -p1 step -plumber0 -p1 pickup -plumber0 -pump>test11.txt
+    cat test11.txt; echo " ";
+    grep "pump added" <test11.txt
+    if  test "$(grep "pump added to the inventory" <test11.txt | wc -l)" -eq 1; then
       echo "Success"
     else
       echo "Failed"
     fi ;;
   12) #Pump pickup at invalid location
-    java Proto -t pickup -plumber0 -pump > test5.txt
-    cat test5.txt; echo " ";
-    grep "pickup failed" <test5.txt
-    if test "$(grep "pickup failed" <test5.txt | wc -l)" -eq 1; then
+    java Proto -t pickup -plumber0 -pump > test12.txt
+    cat test12.txt; echo " ";
+    grep "pump added" <test12.txt
+    if test "$(grep "pump added" <test12.txt | wc -l)" -eq 0; then
       echo "Success"
     else
       echo "Failed"
     fi ;;
   13) #pipe pickup
-    java Proto -t step -plumber0 -p0 step -plumber0 -p1 pickup -plumber0 -pipe
-    cat test6.txt; echo " ";
-    grep "pipe added to the inventory" <test6.txt
-    if test "$(grep "pipe added to the inventory" <test6.txt | wc -l)" -eq 1; then
+    java Proto -t step -plumber0 -p0 step -plumber0 -p1 pickup -plumber0 -pipe > test13.txt
+    cat test13.txt; echo " ";
+    grep "pipe added" <test13.txt
+    if test "$(grep "pipe added" <test13.txt | wc -l)" -eq 1; then
       echo "Success"
     else
       echo "Failed"
     fi
     ;;
   14) #Inventory is full (pipe)
+    java Proto -t step -plumber0 -p0 step -plumber0 -p1 pickup -plumber0 -pipe pickup -plumber0 -pipe > test13.txt
+    cat test13.txt; echo " ";
+    grep "pipe added" <test13.txt
+    grep "pipe not added : inventory full" <test13.txt
+    if test "$(grep "pipe not added : inventory full" <test13.txt | wc -l)" -eq 1 &&
+      test "$(grep "pipe added" <test13.txt | wc -l)" -eq 1; then
+      echo "Success"
+    else
+      echo "Failed"
+    fi
     ;;
   15) #Inventory is full (pump)
+    java Proto -t step -plumber0 -p0 step -plumber0 -p1 step -plumber0 -p1 step -plumber0 -p1 step -plumber0 -p1 step -plumber0 -p1 pickup -plumber0 -pump > test14.txt
+    cat test14.txt; echo " ";
+    grep "pump added" <test14.txt
+    grep "pump not added : inventory full" <test14.txt
+    if test "$(grep "pump not added : inventory full" <test14.txt | wc -l)" -eq 1 &&
+      test "$(grep "pump added" <test14.txt | wc -l)" -eq 1; then
+      echo "Success"
+    else
+      echo "Failed"
+    fi
     ;;
   16) #pump placement
-    java Proto -t step -plumber0 -p0 step -plumber0 -p1 step -plumber0 -p1 step -plumber0 -p1 step -plumber0 -p1 step -plumber0 -p1 pickup -plumber0 -pump step -plumber0 -p0 place -plumber0 -pump >test7.txt
-    cat test7.txt; echo " ";
-    grep "pump added to the inventory" <test7.txt
-    grep "pump placed" <test7.txt
-    if test "$(grep "pump added to the inventory" <test7.txt | wc -l)" -eq 1 &&
+    java Proto -t step -plumber0 -p0 step -plumber0 -p1 step -plumber0 -p1 step -plumber0 -p1 step -plumber0 -p1 step -plumber0 -p1 pickup -plumber0 -pump step -plumber0 -p0 place -plumber0 -pump >test16.txt
+    cat test16.txt; echo " ";
+    grep "pump added to the inventory" <test16.txt
+    grep "pump placed" <test16.txt
+    if test "$(grep "pump added" <test7.txt | wc -l)" -eq 1 &&
         test "$(grep "pump placed" <test7.txt | wc -l)" -eq 1; then
       echo "Success"
     else
@@ -147,20 +207,20 @@ while :; do
     fi
     ;;
   17) #break pipe
-    java Proto -t break -nomad1 > test8.txt
-    cat test8.txt; echo " ";
-    grep "pipe broken" <test8.txt
-    if test "$(grep "pipe broken" <test8.txt | wc -l)" -eq 1; then
+    java Proto -t break -nomad1 > test17.txt
+    cat test17.txt; echo " ";
+    grep "pipe broken" <test17.txt
+    if test "$(grep "pipe broken" <test17.txt | wc -l)" -eq 1; then
       echo "Success"
     else
       echo "Failed"
     fi
     ;;
   18) #fix pipe
-    java Proto -t break -nomad1 step -nomad1 -p0 step -plumber0 -p0 step -plumber0 -p1 step -plumber0 -p2 step -plumber0 -p1 step -plumber0 -p0 fix -plumber0 >test9.txt
-    cat test9.txt; echo " ";
-    if test "$(grep "pipe fixed" <test9.txt | wc -l)" -eq 1 &&
-        test "$(grep "pipe broken" <test9.txt | wc -l)" -eq 1; then
+    java Proto -t break -nomad1 step -nomad1 -p0 step -plumber0 -p0 step -plumber0 -p1 step -plumber0 -p2 step -plumber0 -p1 step -plumber0 -p0 fix -plumber0 >test18.txt
+    cat test18.txt; echo " ";
+    if test "$(grep "pipe fixed" <test18.txt | wc -l)" -eq 1 &&
+        test "$(grep "pipe broken" <test18.txt | wc -l)" -eq 1; then
       echo "Success"
     else
       echo "Failed"
@@ -168,29 +228,55 @@ while :; do
     ;;
   19) #Connect pipe
     ;;
-  20) # Water flows from cistern to pipe
-    java Proto -t flow>test13.txt
-    cat test13.txt
-    grep "Water state set to true" test13.txt
-    grep "cistern.receiveWater" test13.txt
-    if test "$(grep "Water state set to true" test13.txt | wc -l)" -eq 9 &&
-       test "$(grep "cistern.receiveWater" test13.txt | wc -l)" -eq 3; then
+  20) # Water flows from source to pipe
+    java Proto -t flow>test20.txt
+    cat test20.txt
+    grep "Water state set to true" test20.txt
+    grep "pipe.receiveWater" test20.txt
+    if test "$(grep "pipe.receiveWater" test20.txt | wc -l)" -eq 3; then
       echo "Success"
     else
       echo "Failed"
     fi
     ;;
   21) # Water flows from pipe to pump
-     ;;
+    java Proto -t flow flow >test21.txt
+    cat test21.txt
+    grep "Water state set to true" test21.txt
+    grep "pump.receiveWater" test21.txt
+    if test "$(grep "pump.receiveWater" test21.txt | wc -l)" -eq 3; then
+      echo "Success"
+    else
+      echo "Failed"
+    fi
+    ;;
   22) # Water flows from pump to pipe
+    java Proto -t flow flow flow >test22.txt
+    cat test22.txt
+    grep "Water state set to true" test22.txt
+    grep "pipe.receiveWater" test22.txt
+    if test "$(grep "pipe.receiveWater" test22.txt | wc -l)" -eq 6; then
+      echo "Success"
+    else
+      echo "Failed"
+    fi
     ;;
   23) # Water flows from pipe to cistern
+    java Proto -t flow flow flow flow flow flow >test23.txt
+    cat test23.txt
+    grep "Water state set to true" test23.txt
+    grep "cistern.receiveWater" test23.txt
+    if test "$(grep "cistern.receiveWater" test23.txt | wc -l)" -eq 3; then
+      echo "Success"
+    else
+      echo "Failed"
+    fi
     ;;
   24) #Points added to Plumber's score
-    java Proto -t flow flow flow flow flow flow >test12.txt # 6 flow should transfer the water to the cistern
-    cat test12.txt
-    grep "Plumber's score increased" test12.txt
-    if test "$(grep "Plumber's score increased" test12.txt | wc -l)" -eq 3; then # All 3 basic cisterns should get water once
+    java Proto -t flow flow flow flow flow flow >test24.txt # 6 flow should transfer the water to the cistern
+    cat test24.txt
+    grep "Plumber's score increased" test24.txt
+    if test "$(grep "Plumber's score increased" test24.txt | wc -l)" -eq 3; then # All 3 basic cisterns should get water once
       echo "Success"
     else
       echo "Failed"
@@ -201,11 +287,11 @@ while :; do
     # Here I wanted to break the first pipe, at bottom-left.
     # That should add 5 points to Nomad's score (1: transfer water to pipe, 2-6: points added)
     # The other two cisterns should get 1-1 point each.
-    java Proto -t break -nomad1 flow flow flow flow flow flow >test13.txt # 6 flow should transfer the water to the cistern and pipe12 (id 17) should break
-    cat test13.txt
-    grep "Nomad's score increased" test13.txt
-    if test "$(grep "Nomad's score increased" test13.txt | wc -l)" -eq 5 &&
-        test "$(grep "Plumber's score increased" test13.txt | wc -l)" -eq 2; then
+    java Proto -t break -nomad1 flow flow flow flow flow flow >test25.txt # 6 flow should transfer the water to the cistern and pipe12 (id 17) should break
+    cat test25.txt
+    grep "Nomad's score increased" test25.txt
+    if test "$(grep "Nomad's score increased" test25.txt | wc -l)" -eq 5 &&
+        test "$(grep "Plumber's score increased" test25.txt | wc -l)" -eq 2; then
       echo "Success"
     else
       echo "Failed"

@@ -200,8 +200,10 @@ public class Pipe extends NetworkElement {
         if (!slippery) {
             sticky = true;
             stickyTimeLeft = 5;
+            Proto.log("pipe now sticky");
+        } else {
+            Proto.log("Error: Pipe sticky AND slippery");
         }
-        Proto.log("pipe now sticky");
         Proto.tab--;
     }
 
@@ -211,8 +213,10 @@ public class Pipe extends NetworkElement {
         if (!sticky) {
             slippery = true;
             slipperyTimeLeft = 5;
+            Proto.log("pipe now slippery");
+        } else {
+            Proto.log("Error: Pipe sticky AND slippery");
         }
-        Proto.log("pipe now slippery");
         Proto.tab--;
     }
 
