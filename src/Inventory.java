@@ -56,7 +56,11 @@ public class Inventory {
 		if (pipe == null) {
 			pipe = pi;
 			pipe.inInventory = true;
+			Proto.log("pipe added");
+		}else {
+			Proto.log("pipe not added : inventory full");
 		}
+		Proto.tab--;
 	}
 
 	/**
