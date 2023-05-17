@@ -129,6 +129,9 @@ public abstract class NetworkElement implements ITimer, IMove {
     public void setOutput(NetworkElement ne) {
         if (connections.contains(ne) || ne == null) {
             this.output = ne;
+            if(this.output == null) {
+                this.hasWater = false;
+            }
         } else {
             throw new IllegalArgumentException("NetworkElement is not connected");
         }
@@ -147,8 +150,11 @@ public abstract class NetworkElement implements ITimer, IMove {
      * @param ne NetworkElement, that need to be set as input
      */
     public void setInput(NetworkElement ne) {
-        if (connections.contains(ne)) {
+        if (connections.contains(ne) || ne == null) {
             this.input = ne;
+            if (this.input == null) {
+                this.hasWater = false;
+            }
         } else {
             throw new IllegalArgumentException("NetworkElement is not connected");
         }

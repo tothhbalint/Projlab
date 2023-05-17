@@ -41,8 +41,10 @@ public class Pump extends NetworkElement {
 		}
 
 		Proto.tab++;
-		if (rand.nextInt(10) < 2)
-			this.breakPump();
+		if(!Proto.test) {
+			if (rand.nextInt(10) < 2)
+				this.breakPump();
+		}
 		Proto.tab--;
 	}
 

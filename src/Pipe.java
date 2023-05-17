@@ -203,7 +203,8 @@ public class Pipe extends NetworkElement {
             increaseNomadPoint();
             Proto.log("Nomad points increased");
         } else {
-            this.setWaterState(true);
+            if(this.output != null)
+                this.setWaterState(true);
             Proto.log("Water state set to true");
         }
         Proto.tab--;

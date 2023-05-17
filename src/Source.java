@@ -17,7 +17,6 @@ public class Source extends NetworkElement {
 
 		public FlowTree(){
 			path = new LinkedList<NetworkElement>();
-			path.add(Source.this);
 		}
 
 		public void nextDepth(){
@@ -34,9 +33,8 @@ public class Source extends NetworkElement {
 						if(newPath.size() == 0)
 							newPath.add(ne);
 						newPath.add(ne.output);
-					}
-					ne.output.hasWater = true;
-				}
+					}else break;
+				}else break;
 			}
 			path = newPath;
 			Proto.tab--;
@@ -44,6 +42,7 @@ public class Source extends NetworkElement {
 
 		public void flow(){
 			for (NetworkElement networkElement : path) {
+				if(networkElement.output == null) break;
 				networkElement.output.receiveWater(networkElement);
 			}
 		}
@@ -57,6 +56,10 @@ public class Source extends NetworkElement {
 	Source() {
 		hasWater = true;
 		flowTree = new FlowTree();
+	}
+	@Override
+	public void setInput(NetworkElement ne) {
+		hasWater = true;
 	}
 
 	/**
