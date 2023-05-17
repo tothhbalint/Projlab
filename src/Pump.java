@@ -90,8 +90,15 @@ public class Pump extends NetworkElement {
 	public void direct(NetworkElement in, NetworkElement out) {
 		Proto.print("pump.direct");
 		Proto.tab++;
+		if(this.input != null)
+			this.input.setOutput(null);
+		if(this.output != null)
+			this.output.setInput(null);
+		this.input = null;
 		this.input = in;
+		in.setOutput(this);
 		this.output = out;
+		out.setInput(this);
 		Proto.log("pump direction changed new input:" + input + " new output:" + output);
 		Proto.tab--;
 	}

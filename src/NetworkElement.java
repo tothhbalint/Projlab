@@ -127,7 +127,7 @@ public abstract class NetworkElement implements ITimer, IMove {
      * @param ne NetworkElement, which need to be set as output
      */
     public void setOutput(NetworkElement ne) {
-        if (connections.contains(ne)) {
+        if (connections.contains(ne) || ne == null) {
             this.output = ne;
         } else {
             throw new IllegalArgumentException("NetworkElement is not connected");

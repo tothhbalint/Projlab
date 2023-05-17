@@ -90,7 +90,7 @@ public class Cistern extends NetworkElement {
         Proto.print("cistern.pickUpPump");
         Proto.tab++;
         inv.addPump(new Pump());
-        Proto.log("pump added to the inventory");
+        Proto.log("pump in inventory");
         Proto.tab--;
     }
 

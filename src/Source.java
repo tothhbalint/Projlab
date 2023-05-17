@@ -31,7 +31,8 @@ public class Source extends NetworkElement {
 			for (NetworkElement ne : path) {
 				if(ne.hasWater) {
 					if (!ne.damaged) {
-						newPath.add(ne);
+						if(newPath.size() == 0)
+							newPath.add(ne);
 						newPath.add(ne.output);
 					}
 					ne.output.hasWater = true;
@@ -65,8 +66,8 @@ public class Source extends NetworkElement {
 	public void tick() {
 		Proto.print("source.tick");
 		Proto.tab++;
-		flowTree.flow();
 		flowTree.nextDepth();
+		flowTree.flow();
 		Proto.tab--;
 	}
 

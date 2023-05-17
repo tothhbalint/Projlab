@@ -152,6 +152,9 @@ public class Proto {
             case "flow":
                 flow();
                 break;
+            case "direct":
+                direct(situation.options);
+                break;
             default:
                 print("Invalid command: " + situation.name);
                 break;
@@ -356,6 +359,39 @@ public class Proto {
         player.getPosition().setSticky();
     }
 
+    public static void direct(String[] options){
+        String who = options[0];
+        String from = options[1];
+        String where = options[2];
+
+        String[] whoSplit = who.split("(?<=\\D)(?=\\d)");
+        who = whoSplit[0];
+        int whoId = Integer.parseInt(whoSplit[1]);
+
+        String[] fromSplit = from.split("(?<=\\D)(?=\\d)");
+        from = fromSplit[0];
+        int fromId = Integer.parseInt(fromSplit[1]);
+
+        String[] whereSplit = where.split("(?<=\\D)(?=\\d)");
+        where = whereSplit[0];
+        int whereId = Integer.parseInt(whereSplit[1]);
+
+        Player player = null;
+
+        if (who.equals("plumber")) {
+            player = gameHandle.getPlumberTeam().getPlayer(whoId);
+        } else if (who.equals("nomad")) {
+            player = gameHandle.getNomadTeam().getPlayer(whoId);
+        } else {
+            throw new RuntimeException("Invalid team: " + who);
+        }
+
+        NetworkElement fromElement = player.position.getConnections().get(fromId);
+        NetworkElement whereElement = player.position.getConnections().get(whereId);
+
+        player.position.direct(fromElement, whereElement);
+    }
+
     private static void flow() {
         gameHandle.tick();
     }
@@ -406,6 +442,8 @@ public class Proto {
                      -who
                 flow : Simulate water flow from $from
                      -from
+                direct : Direct water flow from $from to $to with $who
+                     -who -from -to
                  """);
     }
 

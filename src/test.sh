@@ -9,7 +9,7 @@ while :; do
         \n      0. Run all tests
         \n      1. Movement(pipe) #done
         \n      2. Movement(occupied pipe) #done
-        \n      3. Movement (pump) #done
+        \n      3. Movement (pump)
         \n      4. Movement (cistern)
         \n      5. Movement (source)
         \n      6. Slippery pipe
@@ -137,13 +137,13 @@ while :; do
     grep "player stuck" <test10.txt
     grep "player accepted" <test10.txt
     if test "$(grep "player stuck" <test10.txt | wc -l)" -eq 1 &&
-        test "$(grep "player accepted" <test10.txt | wc -l)" -eq 2; then
+        test "$(grep "player accepted" <test10.txt | wc -l)" -eq 4; then
       echo "Success"
     else
       echo "Failed"
     fi ;;
   11) #Pump pickup
-    java Proto -t step -plumber0 -p0 step -plumber0 -p1 step -plumber0 -p1 step -plumber0 -p1 step -plumber0 -p1 step -plumber0 -p1 pickup -plumber0 -pump>test11.txt
+    java Proto -t pickup -plumber0 -pump step -plumber0 -p0 step -plumber0 -p1 step -plumber0 -p1 step -plumber0 -p1 step -plumber0 -p1 step -plumber0 -p1 pickup -plumber0 -pump>test11.txt
     cat test11.txt; echo " ";
     grep "pump added" <test11.txt
     if  test "$(grep "pump added to the inventory" <test11.txt | wc -l)" -eq 1; then
@@ -182,13 +182,13 @@ while :; do
       echo "Failed"
     fi
     ;;
-  15) #Inventory is full (pump)
-    java Proto -t step -plumber0 -p0 step -plumber0 -p1 step -plumber0 -p1 step -plumber0 -p1 step -plumber0 -p1 step -plumber0 -p1 pickup -plumber0 -pump pickup -plumber0 -pump > test14.txt
+  15) #Pump added to inventory
+    java Proto -t step -plumber0 -p0 step -plumber0 -p1 step -plumber0 -p1 step -plumber0 -p1 step -plumber0 -p1 step -plumber0 -p1 pickup -plumber0 -pump > test14.txt
     cat test14.txt; echo " ";
-    grep "pump added" <test14.txt
-    grep "pump not added : inventory full" <test14.txt
-    if test "$(grep "pump not added : inventory full" <test14.txt | wc -l)" -eq 1 &&
-      test "$(grep "pump added" <test14.txt | wc -l)" -eq 1; then
+    grep -w "pump added" test14.txt
+    grep "pump in inventory" test14.txt
+    if test "$(grep "pump in inventory" test14.txt | wc -l)" -eq 1 &&
+      test "$(grep -w "pump added" test14.txt | wc -l)" -eq 1; then
       echo "Success"
     else
       echo "Failed"
@@ -300,6 +300,15 @@ while :; do
       echo "Failed"
     fi
     ;;
+  26) #Pump directed
+   java Proto -t step -nomad0 -p1 flow flow direct -nomad0 -p1 -p2 flow > test26.txt
+    cat test26.txt
+    grep "pump directed" test26.txt
+    if test "$(grep "pump directed" test26.txt | wc -l)" -eq 1; then
+      echo "Success"
+    else
+      echo "Failed"
+    fi;;
   esac
   echo "Press any key to continue..."
   read go_next
