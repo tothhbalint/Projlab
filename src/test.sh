@@ -47,7 +47,7 @@ while :; do
     fi
     ;;
   2) #Movement (occupied pipe)
-    java Proto -t step -plumber1 -pump0 >test2.txt
+    java Proto -t step -plumber0 -p0 step -nomad1 -p1 step -nomad1 -p1 step -nomad1 -p0 step -nomad1 -p0 >test2.txt
     cat test2.txt; echo " ";
     grep "player rejected" <test2.txt
     grep "pipe occupied" <test2.txt
