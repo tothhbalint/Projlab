@@ -174,20 +174,20 @@ while :; do
     java Proto -t step -plumber0 -p0 step -plumber0 -p1 pickup -plumber0 -pipe pickup -plumber0 -pipe > test13.txt
     cat test13.txt; echo " ";
     grep "pipe added" <test13.txt
-    grep "inventory is full" <test13.txt
-    if test "$(grep "inventory is full" <test13.txt | wc -l)" -eq 1 &&
+    grep "pipe not added : inventory full" <test13.txt
+    if test "$(grep "pipe not added : inventory full" <test13.txt | wc -l)" -eq 1 &&
       test "$(grep "pipe added" <test13.txt | wc -l)" -eq 1; then
       echo "Success"
     else
       echo "Failed"
     fi
     ;;
-  15) #Pump added to inventory
-    java Proto -t step -plumber0 -p0 step -plumber0 -p1 step -plumber0 -p1 step -plumber0 -p1 step -plumber0 -p1 step -plumber0 -p1 pickup -plumber0 -pump > test14.txt
+  15) #Inventory is full (pump)
+    java Proto -t step -plumber0 -p0 step -plumber0 -p1 step -plumber0 -p1 step -plumber0 -p1 step -plumber0 -p1 step -plumber0 -p1 pickup -plumber0 -pump pickup -plumber0 -pump> test14.txt
     cat test14.txt; echo " ";
-    grep -w "pump added" test14.txt
-    grep "pump in inventory" test14.txt
-    if test "$(grep "pump in inventory" test14.txt | wc -l)" -eq 1 &&
+    grep "pump added" test14.txt
+    grep "pump not added : inventory full" test14.txt
+    if test "$(grep "pump not added : inventory full" test14.txt | wc -l)" -eq 1 &&
       test "$(grep -w "pump added" test14.txt | wc -l)" -eq 1; then
       echo "Success"
     else
@@ -229,7 +229,16 @@ while :; do
     fi
     ;;
   19) #Connect pipe
-
+    java Proto -t step -plumber0 -p0 step -plumber0 -p1 step -plumber0 -p2 step -plumber0 -p1 pickup -plumber0 -pipe1 step -plumber0 -p2 step -plumber0 -p1 place -plumber0 -pipe > test19.txt
+    cat test19.txt; echo " ";
+    grep "pipe added to the inventory" <test19.txt
+    grep "pipe placed" <test19.txt
+    if test "$(grep "pipe added to the inventory" <test19.txt | wc -l)" -eq 1 &&
+        test "$(grep "pipe placed" <test19.txt | wc -l)" -eq 1; then
+      echo "Success"
+    else
+      echo "Failed"
+    fi
     ;;
   20) # Water flows from source to pipe
     java Proto -t flow>test20.txt
