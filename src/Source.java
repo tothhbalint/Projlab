@@ -135,8 +135,9 @@ public class Source extends NetworkElement {
 	public void connectPipe(NetworkElement ne) {
 		Proto.print("source.connectPipe");
 		Proto.tab++;
-		this.addConnection(ne);
-		ne.addConnection(this);
+		NetworkMap.connect(ne, this);
+		if (ne.connections.size() == 2)
+			NetworkMap.setInAndOutput(ne, this);
 		Proto.log("pipe connected");
 		Proto.tab--;
 	}
