@@ -216,28 +216,6 @@ public class Cistern extends NetworkElement {
         throw new UnsupportedOperationException("Cistern doesn't have any outputs");
     }
 
-    /**
-     * This method isn't implemented.
-     * Cisterns don't have output.
-     */
-    public void removePipeOutput(NetworkElement ne) throws UnsupportedOperationException {
-        throw new UnsupportedOperationException("Cistern doesn't have any outputs");
-    }
-
-    /**
-     * This method isn't implemented.
-     * Cisterns don't have output.
-     */
-    public void addPipeOutput(NetworkElement ne) throws UnsupportedOperationException {
-        throw new UnsupportedOperationException("Cistern doesn't have any outputs");
-    }
-
-    /**
-     *
-     */
-    public void addPipeInput(NetworkElement ne) throws UnsupportedOperationException {
-        throw new UnsupportedOperationException("Cistern is not a Pipe");
-    }
 
     /**
      *

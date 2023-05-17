@@ -272,26 +272,11 @@ public abstract class NetworkElement implements ITimer, IMove {
      */
     public abstract NetworkElement getPipeOutput();
 
-    /**
-     * This method is implemented in inherited classes
-     */
-    public abstract void removePipeOutput(NetworkElement ne);
-
-    /**
-     * This method is implemented in inherited classes
-     */
-    public abstract void addPipeOutput(NetworkElement ne);
-
-    /**
-     * This method is implemented in inherited classes
-     */
-    public abstract void addPipeInput(NetworkElement ne);
 
     /**
      * Draw element only verbose mode
      * TODO tweak looks, comment
      */
-
     public void printMatrix() {
         Proto.print(this.toString() + " hasWater:" + this.hasWater + " damaged: " + this.damaged +
                 " occupied: " + this.occupied + " input:" + this.input + " output: " + this.output + " connections: ");

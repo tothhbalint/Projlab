@@ -240,27 +240,4 @@ public class Pump extends NetworkElement {
 		throw new UnsupportedOperationException("Pump is not a Pipe");
 	}
 
-	/**
-	 * This method is not implemented
-	 * @throws UnsupportedOperationException
-	 */
-	public void removePipeOutput(NetworkElement ne) throws UnsupportedOperationException {
-		throw new UnsupportedOperationException("Pump is not a Pipe");
-	}
-
-	/**
-	 * This method is not implemented
-	 * @throws UnsupportedOperationException
-	 */
-	public void addPipeOutput(NetworkElement ne) throws UnsupportedOperationException{
-		throw new UnsupportedOperationException("Pump is not a Pipe");
-	}
-
-	/**
-	 * This method is not implemented
-	 * @throws UnsupportedOperationException
-	 */
-	public void addPipeInput(NetworkElement ne) throws UnsupportedOperationException {
-		throw new UnsupportedOperationException("Pump is not a pipe");
-	}
 }

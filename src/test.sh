@@ -9,7 +9,7 @@ while :; do
         \n      0. Run all tests
         \n      1. Movement(pipe) #done
         \n      2. Movement(occupied pipe) #done
-        \n      3. Movement (pump)
+        \n      3. Movement (pump) #done
         \n      4. Movement (cistern)
         \n      5. Movement (source)
         \n      6. Slippery pipe
@@ -137,13 +137,13 @@ while :; do
     grep "player stuck" <test10.txt
     grep "player accepted" <test10.txt
     if test "$(grep "player stuck" <test10.txt | wc -l)" -eq 1 &&
-        test "$(grep "player accepted" <test10.txt | wc -l)" -eq 4; then
+        test "$(grep "player accepted" <test10.txt | wc -l)" -eq 2; then
       echo "Success"
     else
       echo "Failed"
     fi ;;
   11) #Pump pickup
-    java Proto -t pickup -plumber0 -pump step -plumber0 -p0 step -plumber0 -p1 step -plumber0 -p1 step -plumber0 -p1 step -plumber0 -p1 step -plumber0 -p1 pickup -plumber0 -pump>test11.txt
+    java Proto -t step -plumber0 -p0 step -plumber0 -p1 step -plumber0 -p1 step -plumber0 -p1 step -plumber0 -p1 step -plumber0 -p1 pickup -plumber0 -pump>test11.txt
     cat test11.txt; echo " ";
     grep "pump added" <test11.txt
     if  test "$(grep "pump added to the inventory" <test11.txt | wc -l)" -eq 1; then
@@ -183,11 +183,11 @@ while :; do
     fi
     ;;
   15) #Inventory is full (pump)
-    java Proto -t step -plumber0 -p0 step -plumber0 -p1 step -plumber0 -p1 step -plumber0 -p1 step -plumber0 -p1 step -plumber0 -p1 pickup -plumber0 -pump > test14.txt
+    java Proto -t step -plumber0 -p0 step -plumber0 -p1 step -plumber0 -p1 step -plumber0 -p1 step -plumber0 -p1 step -plumber0 -p1 pickup -plumber0 -pump pickup -plumber0 -pump > test14.txt
     cat test14.txt; echo " ";
     grep "pump added" <test14.txt
-    grep "inventory is full" <test14.txt
-    if test "$(grep "inventory is full" <test14.txt | wc -l)" -eq 1 &&
+    grep "pump not added : inventory full" <test14.txt
+    if test "$(grep "pump not added : inventory full" <test14.txt | wc -l)" -eq 1 &&
       test "$(grep "pump added" <test14.txt | wc -l)" -eq 1; then
       echo "Success"
     else

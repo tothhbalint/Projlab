@@ -172,29 +172,6 @@ public class Source extends NetworkElement {
 		throw new UnsupportedOperationException("");
 	}
 
-	/**
-	 * This method is not implemented
-	 * @throws UnsupportedOperationException
-	 */
-	public void removePipeOutput(NetworkElement ne) throws UnsupportedOperationException {
-		throw new UnsupportedOperationException("Source is not a Pipe");
-	}
-
-	/**
-	 * This method is not implemented
-	 * @throws UnsupportedOperationException
-	 */
-	public void addPipeOutput(NetworkElement ne) throws UnsupportedOperationException{
-		throw new UnsupportedOperationException("Source is not a Pipe");
-	}
-
-	/**
-	 * This method is not implemented
-	 * @throws UnsupportedOperationException
-	 */
-	public void addPipeInput(NetworkElement ne) throws UnsupportedOperationException{
-		throw new UnsupportedOperationException("Source doesn't have input");
-	}
 
 	/**
 	 * This method creates and returns the values of the source in a string

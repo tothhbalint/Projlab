@@ -39,18 +39,17 @@ public class Plumber extends Player {
 		if(position.placePump()) {
 			Pump tempPump = inventory.removePump();
 			Pipe tempPipe = new Pipe();
-			NetworkElement nextPump = position.getPipeOutput();
-			position.removePipeOutput(nextPump);
-			nextPump.removeConnection(position);
+			NetworkElement nextElement = position.getPipeOutput();
+			NetworkMap.disconnect(position, nextElement);
 			NetworkMap.add(tempPipe);
+			NetworkMap.add(tempPump);
+			NetworkMap.connect(position, tempPump);
 			NetworkMap.connect(tempPump, tempPipe);
-			position.addPipeOutput(tempPump);
-			tempPump.addConnection(position);
-			tempPump.addConnection(tempPipe);
-			tempPipe.addPipeInput(tempPump);
-			nextPump.addConnection(tempPipe);
-			tempPipe.addPipeOutput(nextPump);
-			tempPump.direct(position, tempPipe);
+			NetworkMap.connect(tempPipe, nextElement);
+
+			NetworkMap.setInAndOutput(position, tempPump);
+			NetworkMap.setInAndOutput(tempPump, tempPipe);
+			NetworkMap.setInAndOutput(tempPipe, nextElement);
 			Proto.log("pump placed");
 		}
 		Proto.tab--;

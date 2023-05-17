@@ -342,30 +342,4 @@ public class Pipe extends NetworkElement {
         return output;
     }
 
-    /**
-     * This method removes the pipe's output and set it to null
-     * @param ne NetworkElement, that need to be removed
-     */
-    public void removePipeOutput(NetworkElement ne) {
-        output = null;
-        removeConnection(ne);
-    }
-
-    /**
-     * This method adds the output of the pipe
-     * @param ne NetworkElement, that need to be added as output
-     */
-    public void addPipeOutput(NetworkElement ne) {
-        output = ne;
-        addConnection(ne);
-    }
-
-    /**
-     * This method adds the input of the pipe
-     * @param ne NetworkElement, that need to be added as input
-     */
-    public void addPipeInput(NetworkElement ne) {
-        input = ne;
-        addConnection(ne);
-    }
 }
