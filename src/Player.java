@@ -9,15 +9,30 @@
 //
 //
 
-
+/**
+ * This class is responsible for the players
+ */
 public abstract class Player {
+    /**
+     * Stores the inventory of the player
+     */
     protected Inventory inventory;
+    /**
+     * Stores the position of the player
+     */
     protected NetworkElement position;
+    /**
+     * Stores if the player is stuck
+     */
     protected boolean stuck;
+    /**
+     * Stores how much time left till the player is stuck
+     */
     protected int stuckTimeLeft;
 
     /**
-     *
+     * Constructor
+     * Sets the starting values
      */
     public Player() {
         position = null;
@@ -27,7 +42,9 @@ public abstract class Player {
     }
 
     /**
-     *
+     * Constructor with 1 parameter
+     * Sets the starting values, and the position of a player
+     * @param ne NetworkElement, the position that need to be set
      */
     public Player(NetworkElement ne) {
         Proto.print("Player.Player(NetworkElement)");
@@ -38,81 +55,92 @@ public abstract class Player {
     }
 
     /**
-     *
+     * This method gets the position of the player
+     * @return position
      */
     public NetworkElement getPosition() {
         return this.position;
     }
 
     /**
-     *
+     * This method sets the position of the player
+     * @param ne NetworkElement, that need to be set as position
      */
     public void setPosition(NetworkElement ne) {
         this.position = ne;
     }
 
     /**
-     *
+     * This method checks if the player is stuck
+     * @return true, if the player is stuck, false if it is not
      */
     public boolean getStuck() {
         return this.stuck;
     }
 
     /**
-     *
+     * This method sets if the player is stuck
+     * @param b true/flase
      */
     public void setStuck(boolean b) {
         this.stuck = b;
     }
 
     /**
-     *
+     * This method gets how much time left till the player is stuck
+     * @return time till the player is stuck
      */
     public int getStuckTimeLeft() {
         return this.stuckTimeLeft;
     }
 
     /**
-     *
+     * This method sets how much time left till the player is stuck
+     * @return time till the player is stuck
      */
     public void setStuckTimeLeft(int i) {
         this.stuckTimeLeft = i;
     }
 
     /**
-     *
+     * This method gets the inventory of the player
+     * @return inventory
      */
     public Inventory getInventory() {
         return this.inventory;
     }
 
     /**
-     *
+     * This method sets the inventory of the player
+     * @param inv inventory, that need to be set
      */
     public void setInventory(Inventory inv) {
         this.inventory = inv;
     }
 
     /**
-     *
+     * This method is implemented in inherited classes
      */
     public abstract void takePump(Inventory inv);
 
     /**
-     *
+     * This method is implemented in inherited classes
      */
     public abstract void placePump();
 
     /**
-     *
+     * This method is implemented in inherited classes
      */
     public abstract void connectPipe();
 
     /**
-     *
+     * This method is implemented in inherited classes
      */
     public abstract void disconnectPipe(NetworkElement ne);
 
+    /**
+     * This method is called in every round and decreases how much time left till the player is stuck
+     */
     public void tick() {
         Proto.print("Player.tick()");
         Proto.tab++;
@@ -125,6 +153,10 @@ public abstract class Player {
         Proto.tab--;
     }
 
+    /**
+     * This method is responsible the movement of the player
+     * @param ne NetworkElement, where the player wants to step
+     */
     public void move(NetworkElement ne) {
         Proto.print("Player.move()");
         Proto.tab++;
@@ -138,19 +170,20 @@ public abstract class Player {
     }
 
     /**
-     * TODO if position is an instance of pump,
-     * we can choose from the pumps' connections an output, and set it as an output
-     * NOTE: maybe we should rather use the connection as the parameter, not the pump itself
-     * RE - NOTE: maybe we rather use the pump, and the desired in- and output as parameters,
-     * 			  because the pump should be given in position (which is a NetworkElement though)
+     * This method is responsible for directing
+     * @param in NetworkElement, that need to be set as input
+     * @param out NetworkElement, that need to be set as output
      */
-    public void directPump(Pump pump, NetworkElement in, NetworkElement out) {
+    public void directPump(NetworkElement in, NetworkElement out) {
         Proto.print("Player.directPump()");
         Proto.tab++;
         position.direct(in, out);
         Proto.tab--;
     }
 
+    /**
+     * This method is responsible for breaking NetworkElements, players can only break pipes
+     */
     public void breakPipe() {
         Proto.print("Player.breakPipe()");
         Proto.tab++;
@@ -158,6 +191,12 @@ public abstract class Player {
         Proto.tab--;
     }
 
+    /**
+     * This method is responsible for taking a pipe
+     * It disconnects the pipe of the player's position and adds it to the inventory of player, if it is possible
+     * Taking is not possible if the inventory of the player is full or the pipe is already in its inventory or the pipe is in another player's inventory
+     * @param pipeToDisconnect Pipe, that need to be taken
+     */
     public void takePipe(NetworkElement pipeToDisconnect) {
         Proto.print("Player.takePipe()");
         Proto.tab++;
@@ -189,6 +228,9 @@ public abstract class Player {
         Proto.tab--;
     }
 
+    /**
+     * This method is responsible for taking pumps into player's inventory
+     */
     public void takePump() {
         Proto.print("Player.takePump()");
         Proto.tab++;
@@ -201,6 +243,10 @@ public abstract class Player {
         Proto.tab--;
     }
 
+    /**
+     * This method creates and returns the values of the player in a string
+     * @return values of a player in string
+     */
     public String toString() {
         return "Player stuck: " + stuck + " " + stuckTimeLeft + " " + inventory.toString() + "position: ";
     }

@@ -13,15 +13,27 @@ import java.util.ArrayList;
  * This class represents a team in the game.
  * */
 public class Team {
+	/**
+	 * Stores the players in the team
+	 */
 	private ArrayList<Player> members = new ArrayList<Player>();
+	/**
+	 * Stores the points of the team
+	 */
 	private int points = 0;
+	/**
+	 * Stores the number of players in the team
+	 */
 	private int noPlayers = 0;
+	/**
+	 * Stores the name of the team
+	 */
 	private String name;
 
 	/**
 	 * The constructor of the class.
 	 * @param name The name of the team.
-	 * */
+	 */
 	public Team(String name) {
 		this.name = name;
 	}

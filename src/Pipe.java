@@ -10,16 +10,39 @@ import java.io.Console;
 import java.util.Random;
 
 /**
- *
+ * This class is responsible for pipes
  */
 public class Pipe extends NetworkElement {
+    /**
+     * Stores if the pipe is sticky
+     */
     private boolean sticky = false;
+    /**
+     * Stores if the pipe is slippery
+     */
     private boolean slippery = false;
+    /**
+     * Stores how much time left till the pipe is sticky
+     */
     private int stickyTimeLeft = 0;
+    /**
+     * Stores how much time left till the pipe is slippery
+     */
     private int slipperyTimeLeft = 0;
+    /**
+     * Stores how much time left till the pipe is protected
+     */
     private int repairProtectionTimeLeft = 0;
+    /**
+     * Random generator
+     */
     private Random rand = new Random();
 
+    /**
+     * This method is responsible for the flowing of water and timing
+     * This method returns if the pipe has no output or the pipe is damaged
+     * This method is called in every turn
+     */
     public void tick() {
         Proto.print("pipe.tick");
         Proto.tab++;
@@ -51,10 +74,18 @@ public class Pipe extends NetworkElement {
         }
     }
 
+    /**
+     * Thiss method sets how much time left till the pipe is sticky
+     * @param i time
+     */
     public void setStickyTimeLeft(int i) {
         stickyTimeLeft = i;
     }
 
+    /**
+     * This method adds a NetworkElement to the list of connections
+     * @param ne NetworkElement, that need to be added
+     */
     public void addConnection(NetworkElement ne) {
         Proto.print("pipe.addConnection");
         Proto.tab++;
@@ -67,12 +98,18 @@ public class Pipe extends NetworkElement {
         Proto.tab--;
     }
 
-
+    /**
+     * This method sets the input of the pipe
+     * @param ne NetworkElement, that need to be set as input
+     */
     public void setInput(NetworkElement ne) {
         this.input = ne;
     }
 
-
+    /**
+     * This method gets a random NetworkElement that is connected to the pipe
+     * @return random NetworkElement
+     */
     public NetworkElement getRandomConnection() {
         Proto.print("pipe.getRandomConnection");
         Proto.tab++;
@@ -83,6 +120,11 @@ public class Pipe extends NetworkElement {
         return neighbour;
     }
 
+    /**
+     * This method is responsible for the move of a player
+     * @param p Player, which wants to move
+     * @return true, if the step is available, false if it is not
+     */
     public boolean accept(Player p) {
         Proto.print("pipe.accept");
         Proto.tab++;
@@ -138,6 +180,10 @@ public class Pipe extends NetworkElement {
         return false;
     }
 
+    /**
+     * This player removes a player from the pipe
+     * @param p The player, which needs to be removed
+     */
     public void remove(Player p) {
         Proto.print("pipe.remove");
         Proto.tab++;
@@ -147,6 +193,10 @@ public class Pipe extends NetworkElement {
         Proto.tab--;
     }
 
+    /**
+     * This method controls the flowing of water
+     * @param ne NetworkElement
+     */
     public void recieveWater(NetworkElement ne) {
         Proto.print("pipe.receiveWater");
         Proto.tab++;
@@ -162,19 +212,22 @@ public class Pipe extends NetworkElement {
     }
 
     /**
-     *
+     * This method is not implemented
      */
     public void pickUpPump(Inventory inv) throws UnsupportedOperationException {
         throw new UnsupportedOperationException("Pump cannot be picked up here");
     }
 
     /**
-     *
+     * This method is not implemented
      */
     public void direct(NetworkElement in, NetworkElement out) throws UnsupportedOperationException {
         throw new UnsupportedOperationException("Cannot direct here");
     }
 
+    /**
+     * This method sets the pipe damaged if it has no protection
+     */
     public void breakPipe() {
         Proto.print("pipe.breakPipe");
         Proto.tab++;
@@ -185,6 +238,9 @@ public class Pipe extends NetworkElement {
         Proto.tab--;
     }
 
+    /**
+     * This method sets the pipe repaired (not damaged)
+     */
     public void repair() {
         Proto.print("pipe.repairPipe");
         Proto.tab++;
@@ -194,6 +250,9 @@ public class Pipe extends NetworkElement {
         Proto.tab--;
     }
 
+    /**
+     * This method sets the pipe sticky
+     */
     public void setSticky() {
         Proto.print("pipe.setSticky");
         Proto.tab++;
@@ -207,6 +266,9 @@ public class Pipe extends NetworkElement {
         Proto.tab--;
     }
 
+    /**
+     * this method sets the pipe slippery
+     */
     public void setSlippery() {
         Proto.print("pipe.setSlippery");
         Proto.tab++;
@@ -220,57 +282,90 @@ public class Pipe extends NetworkElement {
         Proto.tab--;
     }
 
+    /**
+     * This method gets if the pipe is sticky
+     * @return true, if the pipe is sticky, false if it is not
+     */
     public boolean isSticky() {
         return sticky;
     }
 
+    /**
+     * This method gets if the pipe is slippery
+     * @return true, if the pipe is slippery, false if it is not
+     */
     public boolean isSlippery() {
         return slippery;
     }
 
+    /**
+     * This method gets if the pipe is protected
+     * @return true, if it has protection, false if it has not
+     */
     public boolean isRepairProtected() {
         return repairProtectionTimeLeft > 0;
     }
 
+    /**
+     * This method creates and returns the current values of the pipe in a string
+     * @return string that contains the values
+     */
     public String toString() {
         return "Pipe" + super.toString() + " sticky: " + sticky + " slippery: " + slippery;
     }
 
     /**
-     *
+     * This method is not implemented
      */
     public void connectPipe(NetworkElement ne) throws UnsupportedOperationException {
         throw new UnsupportedOperationException("Cannot connect a Pipe with another Pipe");
     }
 
     /**
-     *
+     * This method is not implemented
      */
     public void disconnectPipe(NetworkElement ne) throws UnsupportedOperationException {
         throw new UnsupportedOperationException("Cannot disconnect a Pipe from itself");
     }
 
     /**
-     *
+     * This method checks if the pipe is allowed to place pump
+     * @return true, because it is allowed
      */
     public boolean placePump() {
         return true;
     }
 
+    /**
+     * This method gets the output of the pipe
+     * @return output of pipe
+     */
     public NetworkElement getPipeOutput() {
         return output;
     }
 
+    /**
+     * This method removes the pipe's output and set it to null
+     * @param ne NetworkElement, that need to be removed
+     */
     public void removePipeOutput(NetworkElement ne) {
         output = null;
         removeConnection(ne);
     }
 
+    /**
+     * This method adds the output of the pipe
+     * @param ne NetworkElement, that need to be added as output
+     */
     public void addPipeOutput(NetworkElement ne) {
         output = ne;
         addConnection(ne);
     }
 
+    /**
+     * This method adds the input of the pipe
+     * @param ne NetworkElement, that need to be added as input
+     */
     public void addPipeInput(NetworkElement ne) {
         input = ne;
         addConnection(ne);

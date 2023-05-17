@@ -79,7 +79,7 @@ public class Game {
     }
 
     /**
-     * This method retruns the map
+     * This method returns the map
      * @return Map
      */
     public NetworkMap getMap() {
@@ -87,7 +87,7 @@ public class Game {
     }
 
     /**
-     * This method creates the Plumber team with 2 Players, and set the players' position to random position
+     * This method creates the Plumber team with 2 Players, and set the players' position to a random NetworkElement
      */
     public void createPlumberTeam() {
         Proto.print("Game.createPlumberTeam()");
@@ -116,7 +116,7 @@ public class Game {
     }
 
     /**
-     * This method creates the Nomad team with 2 Players, and set the players' position to random position
+     * This method creates the Nomad team with 2 Players, and set the players' position to a random NetworkElement
      */
     public void createNomadTeam() {
         Proto.print("Game.createNomadTeam()");

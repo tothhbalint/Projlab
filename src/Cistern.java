@@ -201,28 +201,32 @@ public class Cistern extends NetworkElement {
     }
 
     /**
-     *
+     * This method isn't implemented in the cistern.
+     * Cannot place pump on cisterns.
      */
     public boolean placePump() throws UnsupportedOperationException {
         throw new UnsupportedOperationException("Cannot place pump next to a Cistern");
     }
 
     /**
-     *
+     * This method isn't implemented in the cistern.
+     * Cisterns don't have output.
      */
     public NetworkElement getPipeOutput() throws UnsupportedOperationException {
         throw new UnsupportedOperationException("Cistern doesn't have any outputs");
     }
 
     /**
-     *
+     * This method isn't implemented.
+     * Cisterns don't have output.
      */
     public void removePipeOutput(NetworkElement ne) throws UnsupportedOperationException {
         throw new UnsupportedOperationException("Cistern doesn't have any outputs");
     }
 
     /**
-     *
+     * This method isn't implemented.
+     * Cisterns don't have output.
      */
     public void addPipeOutput(NetworkElement ne) throws UnsupportedOperationException {
         throw new UnsupportedOperationException("Cistern doesn't have any outputs");

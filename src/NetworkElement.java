@@ -18,7 +18,7 @@ public abstract class NetworkElement implements ITimer, IMove {
      */
     protected int id;
     /**
-     * Stores if the NetworkElement is in the inventory
+     * Stores if the NetworkElement is in the inventory of any players
       */
     protected boolean inInventory = false;
     /**
@@ -53,10 +53,17 @@ public abstract class NetworkElement implements ITimer, IMove {
      * Stores the players in a list, which stand on the NetworkElement
      */
     protected ArrayList<Player> occupants;
+    /**
+     * Stores the output of the NetworkElement
+     */
     protected NetworkElement output;
+    /**
+     * Stores the input of the NetworkElement
+     */
     protected NetworkElement input;
 
     /**
+     * Constructor,
      * Sets the starting values
      */
     public NetworkElement() {
@@ -75,17 +82,18 @@ public abstract class NetworkElement implements ITimer, IMove {
     public abstract void tick();
 
     /**
-     *
+     * Implemented in inherited classes
      */
     public abstract boolean accept(Player p);
 
     /**
-     *
+     * Implemented in inherited classes
      */
     public abstract void remove(Player p);
 
     /**
-     *
+     * This method adds a NetworkElement into the connection list
+     * @param ne NetworkElement, that need to be added
      */
     public void addConnection(NetworkElement ne) {
         this.connections.add(ne);
@@ -93,7 +101,6 @@ public abstract class NetworkElement implements ITimer, IMove {
 
     /**
      * This method removes a NetworkElement for the connection list
-     *
      * @param ne NetworkElement, which need to be removed
      */
     public void removeConnection(NetworkElement ne) {
@@ -102,7 +109,6 @@ public abstract class NetworkElement implements ITimer, IMove {
 
     /**
      * This method checks if a NetworkElement is in the connection list
-     *
      * @param ne NetworkElement, which need to be checked
      * @return true, if the connection list contains the NetworkElement, false if it is not
      */
@@ -112,13 +118,13 @@ public abstract class NetworkElement implements ITimer, IMove {
 
     /**
      * This method is implemented in the inharited classes
-     *
      * @param ne NetworkElement
      */
     public abstract void recieveWater(NetworkElement ne);
 
     /**
-     * @param ne
+     * This method sets the output of the NetworkElement, if it is connected
+     * @param ne NetworkElement, which need to be set as output
      */
     public void setOutput(NetworkElement ne) {
         if (connections.contains(ne)) {
@@ -129,14 +135,16 @@ public abstract class NetworkElement implements ITimer, IMove {
     }
 
     /**
-     *
+     * This method gets the output of the NetworkElement
+     * @return NetworkElement, the output
      */
     public NetworkElement getOutput() {
         return this.output;
     }
 
     /**
-     *
+     * This method sets the input of the NetworkElement if it is connected
+     * @param ne NetworkElement, that need to be set as input
      */
     public void setInput(NetworkElement ne) {
         if (connections.contains(ne)) {
@@ -147,74 +155,86 @@ public abstract class NetworkElement implements ITimer, IMove {
     }
 
     /**
-     *
+     * This method gets the input of the NetworkElement
+     * @return NetworkElement, the input
      */
     public NetworkElement getInput() {
         return this.input;
     }
 
     /**
-     *
+     * This method sets if the NetworkElement has water in it
+     * @param b true/false
      */
     public void setWaterState(boolean b) {
         this.hasWater = b;
     }
 
     /**
-     *
+     * This method gets the points of nomad team
+     * @return points of nomad team
      */
     protected static int getNomadPoints() {
         return nomadPoints;
     }
 
     /**
-     *
+     * This method gets the points of plumber team
+     * @return points of plumber team
      */
     protected static int getPlumberPoints() {
         return plumberPoints;
     }
 
     /**
-     *
+     * This method increases the points of nomad team
      */
     protected static void increaseNomadPoint() {
         nomadPoints++;
     }
 
     /**
-     *
+     * This method increases the point of plumber team
      */
     protected static void increasePlumberPoint() {
         plumberPoints++;
     }
 
     /**
-     *
+     * This method checks if the NetworkElement is occupied
+     * @return true, if NetworkElement is occupied, false if it is not
      */
     public boolean isOccupied() {
         return occupied;
     }
 
     /**
-     *
+     * This method sets if the NetworkElement is occupied
+     * @param b true/false
      */
     public void setOccupied(boolean b) {
         this.occupied = b;
     }
 
     /**
-     *
+     * This method checks if the NetworkElement is damaged
+     * @return true, if the NetworkElement is damaged, false if it is not
      */
     public boolean isDamaged() {
         return damaged;
     }
 
+    /**
+     * This method sets if the NetworkElement is damaged
+     * @param b true/false
+     */
     public void setDamaged(boolean b) {
         this.damaged = b;
     }
 
     /**
-     *
+     * This method gets the ID of the NetworkElement
+     * @return ID
      */
     public int getID() {
         return id;
@@ -233,28 +253,43 @@ public abstract class NetworkElement implements ITimer, IMove {
     public abstract void direct(NetworkElement in, NetworkElement out);
 
     /**
-     *
+     * This method is implemented in inherited classes
      */
     public abstract void connectPipe(NetworkElement ne);
 
     /**
-     *
+     * This method is implemented in inherited classes
      */
     public abstract void disconnectPipe(NetworkElement ne);
 
+    /**
+     * This method is implemented in inherited classes
+     */
     public abstract boolean placePump();
 
+    /**
+     * This method is implemented in inherited classes
+     */
     public abstract NetworkElement getPipeOutput();
 
+    /**
+     * This method is implemented in inherited classes
+     */
     public abstract void removePipeOutput(NetworkElement ne);
 
+    /**
+     * This method is implemented in inherited classes
+     */
     public abstract void addPipeOutput(NetworkElement ne);
 
+    /**
+     * This method is implemented in inherited classes
+     */
     public abstract void addPipeInput(NetworkElement ne);
 
     /**
      * Draw element only verbose mode
-     * TODO tweak looks
+     * TODO tweak looks, comment
      */
 
     public void printMatrix() {
@@ -270,19 +305,39 @@ public abstract class NetworkElement implements ITimer, IMove {
         Proto.tab--;
     }
 
+    /**
+     * This method returns the ID of the NetworkElement in a string
+     * @return id of NetworkElement in string
+     */
     public String toString() {
         return Integer.toString(id);
     }
 
+    /**
+     * This method gets the connection list of the NetworkElement
+     * @return connection list
+     */
     public ArrayList<NetworkElement> getConnections() {
         return connections;
     }
 
+    /**
+     * This method is implemented in inherited classes
+     */
     public abstract void breakPipe();
 
+    /**
+     * This method is implemented in inherited classes
+     */
     public abstract void repair();
 
+    /**
+     * This method is implemented in inherited classes
+     */
     public abstract void setSlippery();
 
+    /**
+     * This method is implemented in inherited classes
+     */
     public abstract void setSticky();
 }

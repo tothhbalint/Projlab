@@ -8,11 +8,23 @@
 
 import java.util.Random;
 
-/** */
+/**
+ * This class is responsible for the pumps
+ */
 public class Pump extends NetworkElement {
+	/**
+	 * Stores the age of the pump
+	 */
 	private int age = 0;
+	/**
+	 * Random generator
+	 */
 	private Random rand = new Random();
 
+	/**
+	 * This method is responsible for the flowing of water in pumps and called in every round
+	 * The pump will send water to its output if the pump is not damaged
+	 */
 	public void tick() {
 		Proto.print("pump.tick");
 		Random rand = new Random();
@@ -38,6 +50,11 @@ public class Pump extends NetworkElement {
 		Proto.tab--;
 	}
 
+	/**
+	 * This method checks if a player can move to the pump
+	 * @param p Player, which wants to move
+	 * @return true, if the step is possible, false if it is not
+	 */
 	public boolean accept(Player p) {
 		Proto.print("pump.accept");
 		Proto.tab++;
@@ -55,6 +72,11 @@ public class Pump extends NetworkElement {
 		Proto.tab--;
 		return false;
 	}
+
+	/**
+	 * This method removes the player from the pump
+	 * @param p The player, which needs to be removed
+	 */
 	public void remove(Player p) {
 		Proto.print("pump.remove");
 		Proto.tab++;
@@ -63,7 +85,12 @@ public class Pump extends NetworkElement {
 		Proto.log("player removed");
 		Proto.tab--;
 	}
-	
+
+	/**
+	 * This method is responsible for directing the pump to the right way
+	 * @param in NetworkElement, that need to be set as input
+	 * @param out NetworkElement, that need to be set as output
+	 */
 	public void direct(NetworkElement in, NetworkElement out) {
 		Proto.print("pump.direct");
 		Proto.tab++;
@@ -73,16 +100,27 @@ public class Pump extends NetworkElement {
 		Proto.tab--;
 	}
 
+	/**
+	 * This method creates and returns the values of the pump in a string
+	 * @return values of the pump in string
+	 */
 	public String toString(){
 		return "Pump" + super.toString() ;
 	}
 
+	/**
+	 * This method is not implemented
+	 * @throws UnsupportedOperationException
+	 */
 	@Override
 	public void breakPipe() throws UnsupportedOperationException{
 		throw new UnsupportedOperationException("Pump is not a Pipe");
 	}
 
-	/** */
+	/**
+	 * This method is responsible for the flowing of water
+	 * @param ne NetworkElement
+	 */
 	public void recieveWater(NetworkElement ne) {
 		Proto.print("pump.recieveWater");
 		Proto.tab++;
@@ -93,18 +131,33 @@ public class Pump extends NetworkElement {
 		Proto.tab--;
 	}
 
+	/**
+	 * This method is not implemented
+	 * @throws UnsupportedOperationException
+	 */
 	public void pickUpPump(Inventory inv) throws UnsupportedOperationException{
 		throw new UnsupportedOperationException("Pump cannot be picked up");
 	}
 
+	/**
+	 * This method sets the input of the pump
+	 * @param ne NetworkElement, that need to be set as input
+	 */
 	public void setInput(NetworkElement ne) {
 		this.input = ne;
 	}
 
+	/**
+	 * This method sets the output of the pump
+	 * @param ne NetworkElement, which need to be set as output
+	 */
 	public void setOutput(NetworkElement ne) {
 		this.output = ne;
 	}
 
+	/**
+	 * This method set the pump repaired (not damaged)
+	 */
 	public void repair(){
 		Proto.print("pump.repairPump");
 		Proto.tab++;
@@ -114,16 +167,27 @@ public class Pump extends NetworkElement {
 		Proto.tab--;
 	}
 
+	/**
+	 * This method is not implemented
+	 * @throws UnsupportedOperationException
+	 */
 	@Override
 	public void setSlippery() throws UnsupportedOperationException {
 		throw new UnsupportedOperationException("Pump cannot be slippery");
 	}
 
+	/**
+	 * This method is not implemented
+	 * @throws UnsupportedOperationException
+	 */
 	@Override
 	public void setSticky() throws UnsupportedOperationException {
 		throw new UnsupportedOperationException("Pump cannot be sticky");
 	}
 
+	/**
+	 * This method sets the pump damaged randomly
+	 */
 	private void breakPump(){
 		Proto.print("pump.breakPump");
 		Proto.tab++;
@@ -136,6 +200,10 @@ public class Pump extends NetworkElement {
 		Proto.tab--;
 	}
 
+	/**
+	 * This method connects a pipe with the pump
+	 * @param ne pipe, that need to be connected
+	 */
 	public void connectPipe(NetworkElement ne) {
 		Proto.print("pump.connectPipe");
 		Proto.tab++;
@@ -145,6 +213,10 @@ public class Pump extends NetworkElement {
 		Proto.tab--;
 	}
 
+	/**
+	 * This method disconnects a pipe from the pump
+	 * @param ne pipe, that need to be disconnected
+	 */
 	public void disconnectPipe(NetworkElement ne) {
 		Proto.print("pump.disconnectPipe");
 		Proto.tab++;
@@ -155,22 +227,43 @@ public class Pump extends NetworkElement {
 	}
 
 
+	/**
+	 * This method is not implemented
+	 * Cannot place pump on pumps
+	 * @throws UnsupportedOperationException
+	 */
 	public boolean placePump() throws UnsupportedOperationException{
 		throw new UnsupportedOperationException("Pump cannot be placed here");
 	}
 
+	/**
+	 * This method is not implemented
+	 * @throws UnsupportedOperationException
+	 */
 	public NetworkElement getPipeOutput() throws UnsupportedOperationException {
 		throw new UnsupportedOperationException("Pump is not a Pipe");
 	}
 
+	/**
+	 * This method is not implemented
+	 * @throws UnsupportedOperationException
+	 */
 	public void removePipeOutput(NetworkElement ne) throws UnsupportedOperationException {
 		throw new UnsupportedOperationException("Pump is not a Pipe");
 	}
 
+	/**
+	 * This method is not implemented
+	 * @throws UnsupportedOperationException
+	 */
 	public void addPipeOutput(NetworkElement ne) throws UnsupportedOperationException{
 		throw new UnsupportedOperationException("Pump is not a Pipe");
 	}
 
+	/**
+	 * This method is not implemented
+	 * @throws UnsupportedOperationException
+	 */
 	public void addPipeInput(NetworkElement ne) throws UnsupportedOperationException {
 		throw new UnsupportedOperationException("Pump is not a pipe");
 	}
