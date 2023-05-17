@@ -98,6 +98,10 @@ public class Inventory {
 		return pipe != null;
 	}
 
+	/**
+	 * This method creates a string, which returns the current values of the inventory
+	 * @return inventory values
+	 */
 	public String toString(){
 		String s = "Inventory: ";
 		if (pump != null) {
@@ -109,18 +113,36 @@ public class Inventory {
 		return s;
 	}
 
+	/**
+	 * This method checks if the inventory is empty or not
+	 * @return true, if the inventory is empty, false if it is not
+	 */
 	public boolean isEmpty() {
 		return pump == null && pipe == null;
 	}
 
+	/**
+	 * This method checks if the inventory is full or nor
+	 * @return true, if the inventory is full, false if it is not
+	 */
 	public boolean isFull() {
 		return pump != null || pipe != null;
 	}
 
+	/**
+	 * This method checks if a pump is in the inventory
+	 * @param p Pump, that need to be checked
+	 * @return true, if the inventory contains the pump, false if it is not
+	 */
 	public boolean contains(Pump p) {
 		return pump == p;
 	}
 
+	/**
+	 * This method checks if a pipe is in the inventory
+	 * @param p Pipe, that need to be checked
+	 * @return true, if the inventory contains the pipe, false if it is not
+	 */
 	public boolean contains(Pipe p) {
 		return pipe == p;
 	}

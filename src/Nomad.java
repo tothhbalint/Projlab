@@ -7,27 +7,47 @@
 //
 
 
-/** */
+/**
+ * This class is responsible for the nomad team
+ */
 public class Nomad extends Player {
-	/** */
+	/**
+	 * This method makes the pipe of the player's position slippery
+	 */
 	public void makePipeSlippery(){
 		Proto.print("Nomad.makePipeSlippery()");
 		position.setSlippery();
 	}
 
-	public void takePump(Inventory inv) {
-		Proto.print("Nomad.takePump()");
+	/**
+	 * This method is not implemented
+	 * @throws UnsupportedOperationException
+	 */
+	public void takePump(Inventory inv) throws UnsupportedOperationException{
+		throw new UnsupportedOperationException("Nomads cannot take pump");
 	}
 
-	public void placePump() {
-		Proto.print("Nomad.placePump()");
+	/**
+	 * This method is not implemented
+	 * @throws UnsupportedOperationException
+	 */
+	public void placePump() throws UnsupportedOperationException{
+		throw new UnsupportedOperationException("Nomads cannot place pump");
 	}
 
-	public void connectPipe() {
-		Proto.print("Nomad.connectPipe()");
+	/**
+	 * This method is not implemented
+	 * @throws UnsupportedOperationException
+	 */
+	public void connectPipe() throws UnsupportedOperationException{
+		throw new UnsupportedOperationException("Nomads cannot connect pipes");
 	}
 
-	public void disconnectPipe(NetworkElement ne) {
-		Proto.print("Nomad.disconnectPipe()");
+	/**
+	 * This method is not implemented
+	 * @throws UnsupportedOperationException
+	 */
+	public void disconnectPipe(NetworkElement ne) throws UnsupportedOperationException {
+		throw new UnsupportedOperationException("Nomads cannot disconnect pipes");
 	}
 }

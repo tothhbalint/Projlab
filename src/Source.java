@@ -10,6 +10,10 @@
  * This class represents a source in the game.
  * */
 public class Source extends NetworkElement {
+	/**
+	 * Constructor
+	 * Sets that source has water
+	 */
 	Source() {
 		hasWater = true;
 	}
@@ -112,53 +116,89 @@ public class Source extends NetworkElement {
 	}
 
 
+	/**
+	 * This method is not implemented
+	 * Cannot place pump by cistern
+	 * @throws UnsupportedOperationException
+	 */
 	public boolean placePump() throws UnsupportedOperationException {
 		throw new UnsupportedOperationException("Cannot place Pump next to a Source");
 	}
 
-
+	/**
+	 * This method is not implemented
+	 * @throws UnsupportedOperationException
+	 */
 	public NetworkElement getPipeOutput() throws UnsupportedOperationException {
 		throw new UnsupportedOperationException("");
 	}
 
-
+	/**
+	 * This method is not implemented
+	 * @throws UnsupportedOperationException
+	 */
 	public void removePipeOutput(NetworkElement ne) throws UnsupportedOperationException {
 		throw new UnsupportedOperationException("Source is not a Pipe");
 	}
 
 	/**
-	 * This method is not implemented.
-	 * */
+	 * This method is not implemented
+	 * @throws UnsupportedOperationException
+	 */
 	public void addPipeOutput(NetworkElement ne) throws UnsupportedOperationException{
 		throw new UnsupportedOperationException("Source is not a Pipe");
 	}
 
-
+	/**
+	 * This method is not implemented
+	 * @throws UnsupportedOperationException
+	 */
 	public void addPipeInput(NetworkElement ne) throws UnsupportedOperationException{
 		throw new UnsupportedOperationException("Source doesn't have input");
 	}
 
-
+	/**
+	 * This method creates and returns the values of the source in a string
+	 * @return values of cistern in string
+	 */
 	public String toString(){
 		return "Source" + super.toString();
 	}
 
-
+	/**
+	 * This method is not implemented
+	 * @throws UnsupportedOperationException
+	 */
 	@Override
 	public void breakPipe() throws UnsupportedOperationException {
 		throw new UnsupportedOperationException("Source cannot be broken");
 	}
 
+	/**
+	 * This method is not implemented
+	 * Source cannot break so don't need to be repaired
+	 * @throws UnsupportedOperationException
+	 */
 	public void repair() throws UnsupportedOperationException {
 		throw new UnsupportedOperationException("Source cannot be repaired");
 
 	}
 
+	/**
+	 * This method is not implemented
+	 * Source cannot be slippery
+	 * @throws UnsupportedOperationException
+	 */
 	@Override
 	public void setSlippery() throws UnsupportedOperationException {
 		throw new UnsupportedOperationException("Source cannot be slippery");
 	}
 
+	/**
+	 * This method is not implemented
+	 * Source cannot be sticky
+	 * @throws UnsupportedOperationException
+	 */
 	public void setSticky() throws UnsupportedOperationException {
 		throw new UnsupportedOperationException("Source cannot be sticky");
 	}
