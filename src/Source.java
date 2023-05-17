@@ -25,6 +25,7 @@ public class Source extends NetworkElement {
 			LinkedList<NetworkElement> newPath = new LinkedList<NetworkElement>();
 			if(path.size() == 0) {
 				path.add(Source.this);
+				Proto.tab--;
 				return;
 			}
 			for (NetworkElement ne : path) {
