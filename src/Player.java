@@ -235,7 +235,6 @@ public abstract class Player {
         Proto.print("Player.takePump()");
         Proto.tab++;
         try {
-            inventory.addPump((Pump) position);
             position.pickUpPump(inventory);
         } catch (Exception e) {
             Proto.log("pickup failed");

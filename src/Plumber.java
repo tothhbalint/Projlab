@@ -35,6 +35,7 @@ public class Plumber extends Player {
 	 */
 	public void placePump() {
 		Proto.print("Plumber.placePump()");
+		Proto.tab++;
 		if(position.placePump()) {
 			Pump tempPump = inventory.removePump();
 			Pipe tempPipe = new Pipe();
@@ -50,7 +51,9 @@ public class Plumber extends Player {
 			nextPump.addConnection(tempPipe);
 			tempPipe.addPipeOutput(nextPump);
 			tempPump.direct(position, tempPipe);
+			Proto.log("pump placed");
 		}
+		Proto.tab--;
 	}
 
 	/**

@@ -54,8 +54,9 @@ public class Pipe extends NetworkElement {
             Proto.log("water cant flow pipe is damaged");
             Proto.tab--;
             return;
+        }if(hasWater) {
+            output.recieveWater(this);
         }
-        output.recieveWater(this);
         Proto.tab--;
         if (sticky) {
             stickyTimeLeft--;
@@ -162,7 +163,6 @@ public class Pipe extends NetworkElement {
                         p.setStuckTimeLeft(rand.nextInt(3) + 1);
                         this.setOccupied(true);
                         Proto.log("player accepted");
-                        Proto.log("player stuck");
                         Proto.tab--;
                         return true;
                     } else if(!this.occupied){ //Normal

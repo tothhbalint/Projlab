@@ -203,7 +203,10 @@ public class Proto {
 
         String[] whatSplit = what.split("(?<=\\D)(?=\\d)");
         what = whatSplit[0];
-        int whatId = Integer.parseInt(whatSplit[1]);
+        int whatId =0;
+        if(whatSplit.length>1) {
+            whatId = Integer.parseInt(whatSplit[1]);
+        }
 
 
         Player player = null;
