@@ -31,7 +31,8 @@ while :; do
         \n      22. Water flows from pump to pipe
         \n      23. Water flows from pipe to cistern
         \n      24. Points added to plumber team
-        \n      25. Points added to nomad team"
+        \n      25. Points added to nomad team
+        \n      26. Direct pump"
 
   read input
   #add grep at the end of the lines, compare with outputs from a file
@@ -310,10 +311,12 @@ while :; do
     fi
     ;;
   26) #Pump directed
-   java Proto -t step -nomad0 -p1 flow flow direct -nomad0 -p1 -p2 flow > test26.txt
-    cat test26.txt
-    grep "pump directed" test26.txt
-    if test "$(grep "pump directed" test26.txt | wc -l)" -eq 1; then
+   java Proto -t step -nomad1 -p1 flow flow direct -nomad1 -p1 -p2 flow > test26.txt
+    cat test26.txt; echo " ";
+    grep "pump direction changed " test26.txt
+    grep "pipe.receiveWater" test26.txt
+    if test "$(grep "pipe.receiveWater" test26.txt | wc -l)" -eq 11 &&
+       test "$(grep "pump direction changed" test26.txt | wc -l)" -eq 1; then
       echo "Success"
     else
       echo "Failed"
