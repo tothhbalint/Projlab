@@ -58,10 +58,10 @@ while :; do
       echo "Failed"
     fi ;;
   3) #Movement(pump)
-        java Proto -t step -plumber0 -pump0 >test3.txt
+        java Proto -t step -plumber0 -p0 step -plumber0 -p1 >test3.txt
         cat test3.txt; echo " ";
         grep "player accepted" <test3.txt
-        if test "$(grep "player accepted" <test3.txt | wc -l )" -eq 3; then
+        if test "$(grep "player accepted" <test3.txt | wc -l )" -eq 2; then
           echo "Success"
         else
           echo "Failed"
@@ -71,7 +71,7 @@ while :; do
     java Proto -t step -plumber0 -p0 step -plumber0 -p1 step -plumber0 -p1 step -plumber0 -p1 step -plumber0 -p1 step -plumber0 -p1  >test4.txt
     cat test4.txt; echo " ";
     grep "player accepted" <test4.txt
-    if test "$(grep "player accepted" <test4.txt | wc -l )" -eq 8; then
+    if test "$(grep "player accepted" <test4.txt | wc -l )" -eq 6; then
       echo "Success"
     else
       echo "Failed"
@@ -81,7 +81,7 @@ while :; do
     java Proto -t step -plumber0 -p0 step -plumber0 -p0 > test5.txt
     cat test5.txt;
     grep "player accepted" <test5.txt
-    if test "$(grep "player accepted" <test5.txt | wc -l )" -eq 4; then
+    if test "$(grep "player accepted" <test5.txt | wc -l )" -eq 2; then
       echo "Success"
     else
       echo "Failed"
@@ -126,7 +126,7 @@ while :; do
     grep "player accepted" <test9.txt
 
     if test "$(grep "player slipped" <test9.txt | wc -l)" -eq 1 &&
-        test "$(grep "player accepted" <test9.txt | wc -l)" -eq 4; then
+        test "$(grep "player accepted" <test9.txt | wc -l)" -eq 2; then
       echo "Success"
     else
       echo "Failed"
