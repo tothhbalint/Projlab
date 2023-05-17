@@ -11,149 +11,197 @@
 
 
 public abstract class Player {
-	protected Inventory inventory;
-	protected NetworkElement position;
-	protected boolean stuck;
-	protected int stuckTimeLeft;
+    protected Inventory inventory;
+    protected NetworkElement position;
+    protected boolean stuck;
+    protected int stuckTimeLeft;
 
-	/** */
-	public Player() {
-		position = null;
-		stuck = false;
-		stuckTimeLeft = 0;
-		inventory = new Inventory(this);
-	}
+    /**
+     *
+     */
+    public Player() {
+        position = null;
+        stuck = false;
+        stuckTimeLeft = 0;
+        inventory = new Inventory(this);
+    }
 
-	/** */
-	public Player(NetworkElement ne) {
-		Proto.print("Player.Player(NetworkElement)");
-		position = ne;
-		stuck = false;
-		stuckTimeLeft = 0;
-		inventory = new Inventory(this);
-	}
+    /**
+     *
+     */
+    public Player(NetworkElement ne) {
+        Proto.print("Player.Player(NetworkElement)");
+        position = ne;
+        stuck = false;
+        stuckTimeLeft = 0;
+        inventory = new Inventory(this);
+    }
 
-	/** */
-	public NetworkElement getPosition() {
-		return this.position;
-	}
+    /**
+     *
+     */
+    public NetworkElement getPosition() {
+        return this.position;
+    }
 
-	/** */
-	public void setPosition(NetworkElement ne) {
-		this.position = ne;
-	}
+    /**
+     *
+     */
+    public void setPosition(NetworkElement ne) {
+        this.position = ne;
+    }
 
-	/** */
-	public boolean getStuck() {
-		return this.stuck;
-	}
+    /**
+     *
+     */
+    public boolean getStuck() {
+        return this.stuck;
+    }
 
-	/** */
-	public void setStuck(boolean b) {
-		this.stuck  = b;
-	}
+    /**
+     *
+     */
+    public void setStuck(boolean b) {
+        this.stuck = b;
+    }
 
-	/** */
-	public int getStuckTimeLeft() {
-		return this.stuckTimeLeft;
-	}
+    /**
+     *
+     */
+    public int getStuckTimeLeft() {
+        return this.stuckTimeLeft;
+    }
 
-	/** */
-	public void setStuckTimeLeft(int i) {
-		this.stuckTimeLeft = i;
-	}
+    /**
+     *
+     */
+    public void setStuckTimeLeft(int i) {
+        this.stuckTimeLeft = i;
+    }
 
-	/** */
-	public Inventory getInventory() {
-		return this.inventory;
-	}
+    /**
+     *
+     */
+    public Inventory getInventory() {
+        return this.inventory;
+    }
 
-	/** */
-	public void setInventory(Inventory inv) {
-		this.inventory = inv;
-	}
+    /**
+     *
+     */
+    public void setInventory(Inventory inv) {
+        this.inventory = inv;
+    }
 
-	/** */
-	public abstract void takePump(Inventory inv);
+    /**
+     *
+     */
+    public abstract void takePump(Inventory inv);
 
-	/** */
-	public abstract void placePump();
+    /**
+     *
+     */
+    public abstract void placePump();
 
-	/** */
-	public abstract void connectPipe();
+    /**
+     *
+     */
+    public abstract void connectPipe();
 
-	/** */
-	public abstract void disconnectPipe(NetworkElement ne);
+    /**
+     *
+     */
+    public abstract void disconnectPipe(NetworkElement ne);
 
-	public void tick(){
-		Proto.print("Player.tick()");
-		Proto.tab++;
-		if (stuck){
-			stuckTimeLeft--;
-			if (stuckTimeLeft <= 0){
-				stuck = false;
-			}
-		}
-		Proto.tab--;
-	}
+    public void tick() {
+        Proto.print("Player.tick()");
+        Proto.tab++;
+        if (stuck) {
+            stuckTimeLeft--;
+            if (stuckTimeLeft <= 0) {
+                stuck = false;
+            }
+        }
+        Proto.tab--;
+    }
 
-	public void move(NetworkElement ne) {
-		Proto.print("Player.move()");
-		Proto.tab++;
-		if (stuck){
-			Proto.log("player stuck");
-			Proto.tab--;
-			return;
-		}
-		ne.accept(this);
-		Proto.tab--;
-	}
-	
-	/** TODO if position is an instance of pump,
-	 * we can choose from the pumps' connections an output, and set it as an output
-	 * NOTE: maybe we should rather use the connection as the parameter, not the pump itself
-	 * RE - NOTE: maybe we rather use the pump, and the desired in- and output as parameters,
-	 * 			  because the pump should be given in position (which is a NetworkElement though)
-	 * */
-	public void directPump(Pump pump, NetworkElement in, NetworkElement out) {
-		Proto.print("Player.directPump()");
-		Proto.tab++;
-		position.direct(in, out);
-		Proto.tab--;
-	}
+    public void move(NetworkElement ne) {
+        Proto.print("Player.move()");
+        Proto.tab++;
+        if (stuck) {
+            Proto.log("player stuck");
+            Proto.tab--;
+            return;
+        }
+        ne.accept(this);
+        Proto.tab--;
+    }
 
-	public void breakPipe(){
-		Proto.print("Player.breakPipe()");
-		Proto.tab++;
-		position.breakPipe();
-		Proto.tab--;
-	}
+    /**
+     * TODO if position is an instance of pump,
+     * we can choose from the pumps' connections an output, and set it as an output
+     * NOTE: maybe we should rather use the connection as the parameter, not the pump itself
+     * RE - NOTE: maybe we rather use the pump, and the desired in- and output as parameters,
+     * 			  because the pump should be given in position (which is a NetworkElement though)
+     */
+    public void directPump(Pump pump, NetworkElement in, NetworkElement out) {
+        Proto.print("Player.directPump()");
+        Proto.tab++;
+        position.direct(in, out);
+        Proto.tab--;
+    }
 
-	public void takePipe(NetworkElement pipeToDisconnect){
-		Proto.print("Player.takePipe()");
-		Proto.tab++;
-		try {
-			position.disconnectPipe(pipeToDisconnect);
-			inventory.addPipe((Pipe) pipeToDisconnect);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		Proto.tab--;
-	}
+    public void breakPipe() {
+        Proto.print("Player.breakPipe()");
+        Proto.tab++;
+        position.breakPipe();
+        Proto.tab--;
+    }
 
-	public void takePump(){
-		Proto.print("Player.takePump()");
-		Proto.tab++;
-		try {
-			inventory.addPump((Pump) position);
-			position.pickUpPump(inventory);
-		} catch (Exception e) {
-			Proto.log("pickup failed");
-		}
-		Proto.tab--;
-	}
+    public void takePipe(NetworkElement pipeToDisconnect) {
+        Proto.print("Player.takePipe()");
+        Proto.tab++;
+        try {
+            if (inventory.isFull()) {
+                if (!inventory.contains((Pipe) pipeToDisconnect)) {
+                    Proto.log("inventory is full");
+                    Proto.tab--;
+                    return;
+                } else {
+                    position.disconnectPipe(pipeToDisconnect);
+                    Proto.log("pipe already in inventory");
+                    Proto.log("pipe taken");
+                    Proto.tab--;
+                    return;
+                }
+            } else if (pipeToDisconnect.inInventory && inventory.isEmpty()) {
+                Proto.log("pipe is in an other inventory");
+                Proto.log("pickup failed");
+                return;
+            }
+            inventory.addPipe((Pipe) pipeToDisconnect);
+            position.disconnectPipe(pipeToDisconnect);
+            Proto.log("pipe taken");
+            Proto.tab--;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        Proto.tab--;
+    }
 
-	public String toString(){
-		return "Player stuck: " + stuck + " " + stuckTimeLeft + " " + inventory.toString() + "position: ";
-	}
+    public void takePump() {
+        Proto.print("Player.takePump()");
+        Proto.tab++;
+        try {
+            inventory.addPump((Pump) position);
+            position.pickUpPump(inventory);
+        } catch (Exception e) {
+            Proto.log("pickup failed");
+        }
+        Proto.tab--;
+    }
+
+    public String toString() {
+        return "Player stuck: " + stuck + " " + stuckTimeLeft + " " + inventory.toString() + "position: ";
+    }
 }

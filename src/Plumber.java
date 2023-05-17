@@ -45,7 +45,14 @@ public class Plumber extends Player {
 	/**  */
 	public void connectPipe() {
 		Proto.print("Plumber.connectPipe()");
+		Proto.tab++;
+		if(inventory.isEmpty()) {
+			Proto.log("inventory empty");
+			Proto.log("pipe cant be placed");
+			return;
+		}
 		position.connectPipe(this.inventory.removePipe());
+		Proto.tab--;
 	}
 	
 	/** */

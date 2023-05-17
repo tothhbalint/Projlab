@@ -18,6 +18,10 @@ public abstract class NetworkElement implements ITimer, IMove {
      */
     protected int id;
     /**
+     * Stores if the NetworkElement is in the inventory
+      */
+    protected boolean inInventory = false;
+    /**
      * Stores the capacity of the NetworkElement
      */
     protected int capacity; //Do we still need this?

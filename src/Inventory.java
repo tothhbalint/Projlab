@@ -55,6 +55,7 @@ public class Inventory {
 	public void addPipe(Pipe pi) {
 		if (pipe == null) {
 			pipe = pi;
+			pipe.inInventory = true;
 		}
 	}
 
@@ -74,6 +75,9 @@ public class Inventory {
 	 */
 	public Pipe removePipe() {
 		Pipe p = pipe;
+		if (p.connections.size() == 0 ) {
+			return p;
+		}
 		pipe = null;
 		return p;
 	}
@@ -103,5 +107,21 @@ public class Inventory {
 			s += "Pipe";
 		}
 		return s;
+	}
+
+	public boolean isEmpty() {
+		return pump == null && pipe == null;
+	}
+
+	public boolean isFull() {
+		return pump != null || pipe != null;
+	}
+
+	public boolean contains(Pump p) {
+		return pump == p;
+	}
+
+	public boolean contains(Pipe p) {
+		return pipe == p;
 	}
 }
