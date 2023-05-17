@@ -163,7 +163,7 @@ public class Cistern extends NetworkElement {
      *
      * @param ne NetworkElement, where te water comes to the finish
      */
-    public void recieveWater(NetworkElement ne) {
+    public void receiveWater(NetworkElement ne) {
         Proto.print("cistern.receiveWater");
         Proto.tab++;
         increasePlumberPoint();

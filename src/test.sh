@@ -229,6 +229,7 @@ while :; do
     fi
     ;;
   19) #Connect pipe
+
     ;;
   20) # Water flows from source to pipe
     java Proto -t flow>test20.txt
@@ -257,16 +258,15 @@ while :; do
     cat test22.txt
     grep "Water state set to true" test22.txt
     grep "pipe.receiveWater" test22.txt
-    if test "$(grep "pipe.receiveWater" test22.txt | wc -l)" -eq 6; then
+    if test "$(grep "pipe.receiveWater" test22.txt | wc -l)" -eq 12; then
       echo "Success"
     else
       echo "Failed"
     fi
     ;;
   23) # Water flows from pipe to cistern
-    java Proto -t flow >test23.txt
+    java Proto -t flow flow flow flow flow flow>test23.txt
     cat test23.txt
-    grep "Water state set to true" test23.txt
     grep "cistern.receiveWater" test23.txt
     if test "$(grep "cistern.receiveWater" test23.txt | wc -l)" -eq 3; then
       echo "Success"
@@ -275,7 +275,7 @@ while :; do
     fi
     ;;
   24) #Points added to Plumber's score
-    java Proto -t flow  >test24.txt # 6 flow should transfer the water to the cistern
+    java Proto -t flow flow flow flow flow flow>test24.txt # 6 flow should transfer the water to the cistern
     cat test24.txt
     grep "Plumber points increased" test24.txt
     if test "$(grep "Plumber points increased" test24.txt | wc -l)" -eq 3; then # All 3 basic cisterns should get water once
@@ -293,7 +293,7 @@ while :; do
     cat test25.txt
     grep "Nomad points increased" test25.txt
     grep "Plumber points increased" test25.txt
-    if test "$(grep "Nomad points increased" test25.txt | wc -l)" -eq 5 &&
+    if test "$(grep "Nomad points increased" test25.txt | wc -l)" -eq 6 &&
         test "$(grep "Plumber points increased" test25.txt | wc -l)" -eq 2; then
       echo "Success"
     else

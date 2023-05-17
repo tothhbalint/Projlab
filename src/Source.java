@@ -6,16 +6,56 @@
 //
 //
 
+import java.util.LinkedList;
+
 /**
  * This class represents a source in the game.
  * */
 public class Source extends NetworkElement {
+	private class FlowTree {
+		private LinkedList<NetworkElement> path;
+
+		public FlowTree(){
+			path = new LinkedList<NetworkElement>();
+			path.add(Source.this);
+		}
+
+		public void nextDepth(){
+			Proto.print("FlowTree.nextDepth");
+			Proto.tab++;
+			LinkedList<NetworkElement> newPath = new LinkedList<NetworkElement>();
+			if(path.size() == 0) {
+				path.add(Source.this);
+				return;
+			}
+			for (NetworkElement ne : path) {
+				if(ne.hasWater) {
+					if (!ne.damaged) {
+						newPath.add(ne);
+						newPath.add(ne.output);
+					}
+					ne.output.hasWater = true;
+				}
+			}
+			path = newPath;
+			Proto.tab--;
+		}
+
+		public void flow(){
+			for (NetworkElement networkElement : path) {
+				networkElement.output.receiveWater(networkElement);
+			}
+		}
+	}
+
+	private FlowTree flowTree;
 	/**
 	 * Constructor
 	 * Sets that source has water
 	 */
 	Source() {
 		hasWater = true;
+		flowTree = new FlowTree();
 	}
 
 	/**
@@ -25,9 +65,8 @@ public class Source extends NetworkElement {
 	public void tick() {
 		Proto.print("source.tick");
 		Proto.tab++;
-		for(NetworkElement n : this.connections){
-			n.recieveWater(this);
-		}
+		flowTree.flow();
+		flowTree.nextDepth();
 		Proto.tab--;
 	}
 
@@ -67,7 +106,7 @@ public class Source extends NetworkElement {
 	 * This isn't implemented in the source.
 	 * The source cannot receive water.
 	 * */
-	public void recieveWater(NetworkElement ne) throws UnsupportedOperationException{
+	public void receiveWater(NetworkElement ne) throws UnsupportedOperationException{
 		throw new UnsupportedOperationException("Source cannot recieve water");
 	}
 

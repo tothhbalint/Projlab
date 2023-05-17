@@ -23,6 +23,7 @@ public class NetworkMap {
 	 * Stores all the sources in a list
 	 */
 	private ArrayList<Source> sources = new ArrayList<Source>();
+
 	/**
 	 * Stores all the cisterns in a list
 	 */

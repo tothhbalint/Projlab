@@ -120,7 +120,7 @@ public abstract class NetworkElement implements ITimer, IMove {
      * This method is implemented in the inharited classes
      * @param ne NetworkElement
      */
-    public abstract void recieveWater(NetworkElement ne);
+    public abstract void receiveWater(NetworkElement ne);
 
     /**
      * This method sets the output of the NetworkElement, if it is connected
