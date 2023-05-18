@@ -1,4 +1,6 @@
 package View;
+import Model.*;
 
-public class JPlumber {
+import javax.swing.*;
+public class JPlumber extends JPanel {
 }

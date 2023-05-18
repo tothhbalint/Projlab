@@ -1,4 +1,4 @@
-//
+package Model;//
 //
 //  @ Project : ProjlabSkeleton
 //  @ File Name : Inventory.java

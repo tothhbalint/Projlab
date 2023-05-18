@@ -1,4 +1,4 @@
-//
+package Model;//
 //  @ Project : ProjlabSkeleton
 //  @ File Name : Pump.java
 //  @ Date : 16/04/2023

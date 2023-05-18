@@ -1,3 +1,5 @@
+package Model;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -386,10 +388,10 @@ public class Proto {
             throw new RuntimeException("Invalid team: " + who);
         }
 
-        NetworkElement fromElement = player.position.getConnections().get(fromId);
-        NetworkElement whereElement = player.position.getConnections().get(whereId);
+        NetworkElement fromElement = player.getPosition().getConnections().get(fromId);
+        NetworkElement whereElement = player.getPosition().getConnections().get(whereId);
 
-        player.position.direct(fromElement, whereElement);
+        player.getPosition().direct(fromElement, whereElement);
     }
 
     private static void flow() {
@@ -413,7 +415,7 @@ public class Proto {
     }
 
     public static void printHelp() {
-        System.out.println("Usage: java Proto [options] [situations] [situation options]");
+        System.out.println("Usage: java Model.Proto [options] [situations] [situation options]");
         //TODO add list of situations and options
         //dont make test show up in help
         System.out.println("Options:");
