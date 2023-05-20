@@ -9,6 +9,10 @@ import java.util.HashMap;
 public class GameFrame extends JFrame {
     ArrayList<JGameElement> gameElements = new ArrayList<>();
 
+    ArrayList<JNomad> nomads = new ArrayList<>();
+
+    ArrayList<JPlumber> plumbers = new ArrayList<>();
+
     HashMap<Class<?>, Class<?>> elementTypes = new HashMap<>();
 
     HashMap<Class<?>, Class<?>> playerTypes = new HashMap<>();
@@ -18,6 +22,10 @@ public class GameFrame extends JFrame {
     private boolean gameOver = false;
 
     int nomadPoints = 0, plumberPoints = 0;
+
+    private boolean pluwin = false;
+
+    private int round = 0;
 
     public GameFrame() {
         super("Drukkmakori Sivatag - Game PLUWIN");
@@ -34,15 +42,29 @@ public class GameFrame extends JFrame {
 
         elementTypes.put(Nomad.class, JNomad.class);
         elementTypes.put(Plumber.class, JPlumber.class);
+
+        runGame();
     }
 
     public void loadElements() {
         for (NetworkElement networkElement : game.getMap().getElements()) {
             try {
-                gameElements.add((JGameElement) elementTypes.get(networkElement.getClass()).getConstructors()[0].newInstance(0, 0));
+                gameElements.add((JGameElement) elementTypes.get(networkElement.getClass()).getConstructor().newInstance(0, 0));
             } catch (Exception e) {
                 System.out.println("Error loading element");
             }
+        }
+
+        for (int i = 0; i < game.getPlumberTeam().getNoPlayers(); i++) {
+            JPlumber plumber = new JPlumber(0, 0);
+            plumber.setObject(game.getPlumberTeam().getPlayer(i));
+            plumbers.add(plumber);
+        }
+
+        for (int i = 0; i < game.getNomadTeam().getNoPlayers(); i++) {
+            JNomad nomad = new JNomad(0, 0);
+            nomad.setObject(game.getNomadTeam().getPlayer(i));
+            nomads.add(nomad);
         }
     }
 
@@ -51,18 +73,36 @@ public class GameFrame extends JFrame {
      */
     public void step() {
         for (JGameElement gameElement : gameElements) {
-            ((NetworkElement)gameElement.getObject()).tick();
+            ((NetworkElement) gameElement.getObject()).tick();
+        }
+
+        JPlayer currentPlayer = null;
+
+        switch (round % 2) {
+            case 0:
+                currentPlayer = plumbers.get(round % plumbers.size());
+            case 1:
+                currentPlayer = nomads.get(round % nomads.size());
+            default:
+        }
+
+        nomadPoints = game.getMap().getNomadPoints();
+        plumberPoints = game.getMap().getPlumberPoints();
+
+        if (nomadPoints >= 100 || plumberPoints >= 100) {
+            gameOver = true;
+            pluwin = plumberPoints > nomadPoints;
         }
     }
 
     /*
     The main loop of the game
      */
-    public void runGame(){
+    public void runGame() {
         game.startGame();
         loadElements();
 
-        while(!gameOver){
+        while (!gameOver) {
             step();
             draw();
         }
@@ -73,6 +113,4 @@ public class GameFrame extends JFrame {
             gameElement.draw(getGraphics());
         }
     }
-
-
 }

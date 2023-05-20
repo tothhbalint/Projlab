@@ -5,7 +5,7 @@ import java.io.File;
 
 import Model.*;
 
-public class JPlumber extends JGameElement {
+public class JPlumber extends JPlayer {
     private Plumber plumber;
 
     public JPlumber(int _x, int _y) {

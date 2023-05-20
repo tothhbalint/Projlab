@@ -4,7 +4,7 @@ import java.awt.*;
 import java.io.File;
 import Model.*;
 
-public class JNomad extends JGameElement{
+public class JNomad extends JPlayer{
     private Nomad nomad;
     public JNomad(int _x, int _y) {
         super(_x, _y);
