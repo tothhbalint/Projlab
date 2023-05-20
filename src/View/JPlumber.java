@@ -24,6 +24,23 @@ public class JPlumber extends JGameElement{
         return plumber;
     }
 
+    public void checkStuck(){
+        if(plumber.getStuck()){
+            try {
+                setImage(new File("src\\View\\Images\\plumber_stuck.png"));
+            } catch (Exception e) {
+                System.out.println("Error loading image");
+            }
+        }
+        else{
+            try {
+                setImage(new File("src\\View\\Images\\plumber.png"));
+            } catch (Exception e) {
+                System.out.println("Error loading image");
+            }
+        }
+    }
+
     @Override
     public void draw(Graphics g, Object o) {
 

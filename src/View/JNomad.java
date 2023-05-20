@@ -23,6 +23,23 @@ public class JNomad extends JGameElement{
         return nomad;
     }
 
+    public void checkStuck(){
+        if(nomad.getStuck()){
+            try {
+                setImage(new File("src\\View\\Images\\nomadStuck.png"));
+            } catch (Exception e) {
+                System.out.println("Error loading image");
+            }
+        }
+        else{
+            try {
+                setImage(new File("src\\View\\Images\\nomad.png"));
+            } catch (Exception e) {
+                System.out.println("Error loading image");
+            }
+        }
+    }
+
     @Override
     public void draw(Graphics g, Object o) {
 
