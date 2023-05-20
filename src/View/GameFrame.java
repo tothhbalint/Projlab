@@ -15,8 +15,6 @@ public class GameFrame extends JFrame {
 
     HashMap<Class<?>, Class<?>> elementTypes = new HashMap<>();
 
-    HashMap<Class<?>, Class<?>> playerTypes = new HashMap<>();
-
     private final Game game = new Game();
 
     private boolean gameOver = false;
@@ -40,16 +38,19 @@ public class GameFrame extends JFrame {
         elementTypes.put(Pump.class, JPump.class);
         elementTypes.put(Cistern.class, JCistern.class);
 
-        elementTypes.put(Nomad.class, JNomad.class);
-        elementTypes.put(Plumber.class, JPlumber.class);
-
         runGame();
     }
 
     public void loadElements() {
         for (NetworkElement networkElement : game.getMap().getElements()) {
             try {
-                gameElements.add((JGameElement) elementTypes.get(networkElement.getClass()).getConstructor().newInstance(0, 0));
+                Class<?> target = elementTypes.get(networkElement.getClass());
+                JGameElement element = (JGameElement) target.getConstructor().newInstance(0, 0);
+                element.setObject(networkElement);
+                if (target.equals(JPipe.class)) {
+                    Pipe object = (Pipe) ((JPipe) element).getObject();
+                }
+                elementTypes.get(networkElement.getClass()).getConstructor().newInstance(0, 0);
             } catch (Exception e) {
                 System.out.println("Error loading element");
             }
@@ -106,6 +107,13 @@ public class GameFrame extends JFrame {
             step();
             draw();
         }
+    }
+
+    public JGameElement findElement(NetworkElement networkElement) {
+        for (JGameElement gameElement : gameElements) {
+            if (gameElement.getObject().equals(networkElement)) return gameElement;
+        }
+        return null;
     }
 
     public void draw() {
