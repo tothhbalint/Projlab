@@ -23,6 +23,8 @@ public class GamePanel extends JPanel {
     private JList directPumpList;
     private JList inventoryList;
     private JButton fixButton;
+    private JLabel plumberPoints;
+    private JLabel nomadPoints;
     private ArrayList<String> plumberNames;
     private ArrayList<String> nomadNames;
 
@@ -53,6 +55,8 @@ public class GamePanel extends JPanel {
         directPumpList = new JList (directPumpListItems);
         inventoryList = new JList (inventoryListItems);
         fixButton = new JButton ("Fix");
+        plumberPoints = new JLabel ("Plumber points: 0");
+        nomadPoints = new JLabel ("Nomad points: 0");
 
         //adjust size and set layout
         setPreferredSize (new Dimension (1276, 684));
@@ -77,6 +81,8 @@ public class GamePanel extends JPanel {
         add (directPumpList);
         add (inventoryList);
         add (fixButton);
+        add (plumberPoints);
+        add (nomadPoints);
 
         //set component bounds (only needed by Absolute Positioning)
         moveToList.setBounds (10, 70, 115, 150);
@@ -95,6 +101,8 @@ public class GamePanel extends JPanel {
         directPumpList.setBounds (10, 400, 115, 135);
         inventoryList.setBounds (10, 575, 100, 75);
         fixButton.setBounds (140, 450, 135, 40);
+        plumberPoints.setBounds (150, 570, 125, 25);
+        nomadPoints.setBounds (150, 600, 125, 25);
     }
 
 
