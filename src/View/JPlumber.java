@@ -9,7 +9,7 @@ import java.io.IOException;
 
 public class JPlumber extends JComponent{
     private int x,y;
-    private final BufferedImage plumberImage;
+    private final Image plumberImage;
 
     public JPlumber(int X, int Y) throws IOException {
         x = X;

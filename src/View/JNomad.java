@@ -1,5 +1,8 @@
 package View;
 import javax.swing.*;
-public class JNomad extends JComponent{
+import java.awt.*;
 
+public class JNomad extends JComponent{
+    private int x, y;
+    private Image plumberImage;
 }
