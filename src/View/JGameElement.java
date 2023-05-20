@@ -9,9 +9,9 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 
 public abstract class JGameElement extends JComponent implements IDrawable{
-    private int x,y;
+    protected int x,y;
 
-    private Image elementImage;
+    protected Image elementImage;
 
     public JGameElement(int _x, int _y){
         x = _x;
