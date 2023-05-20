@@ -9,18 +9,18 @@ import java.io.IOException;
 
 public class JPlumber extends JComponent{
     private int x,y;
-    private final Image plumberImage;
+    private Image image;
 
     public JPlumber(int X, int Y) throws IOException {
         x = X;
         y = Y;
 
         File imagefile = new File("./src/View/plumber.png");
-         plumberImage = ImageIO.read(imagefile);
+         image = ImageIO.read(imagefile);
 
     }
     public Image getImage(){
-        return plumberImage;
+        return image;
     }
     public void move(int X, int Y){
        x = X;

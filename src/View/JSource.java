@@ -4,5 +4,5 @@ import java.awt.*;
 
 public class JSource extends JComponent{
     private int x, y;
-    private Image plumberImage;
+    private Image image;
 }

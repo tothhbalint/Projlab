@@ -5,6 +5,6 @@ import java.awt.*;
 
 public class JCistern extends JComponent {
     private int x, y;
-    private Image plumberImage;
+    private Image image;
 
 }
