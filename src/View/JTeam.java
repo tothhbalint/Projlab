@@ -1,4 +1,5 @@
 package View;
+import javax.swing.*;
+public class JTeam extends JComponent{
 
-public class JTeam {
 }

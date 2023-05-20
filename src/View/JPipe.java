@@ -1,4 +1,4 @@
 package View;
-
-public class JPipe {
+import javax.swing.*;
+public class JPipe extends JComponent{
 }

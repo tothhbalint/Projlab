@@ -1,4 +1,7 @@
 package View;
 
-public class JCistern {
+import javax.swing.*;
+
+public class JCistern extends JComponent {
+
 }
