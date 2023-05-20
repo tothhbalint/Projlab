@@ -1,31 +1,35 @@
 package View;
+
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
+
 import Model.*;
 
 public class JPump extends JGameElement {
     private Pump pump;
 
-    public JPump(int _x,int _y) {
+    public JPump(int _x, int _y) {
         super(_x, _y);
-        try{
+        try {
             setImage(new File("src\\View\\Images\\pump.png"));
         } catch (Exception e) {
             System.out.println("Image not found");
         }
     }
 
-    public void setPump(Pump p) {
-        pump = p;
+    @Override
+    public void setObject(Object o) {
+        pump = (Pump) o;
     }
 
-    public Pump getPump() {
+    @Override
+    public Pump getObject() {
         return pump;
     }
 
     @Override
-    public void draw(Graphics g, Object o) {
+    public void draw(Graphics g) {
 
     }
 }

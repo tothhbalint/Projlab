@@ -1,32 +1,34 @@
 package View;
 
-import javax.swing.*;
 import java.awt.*;
 import java.io.File;
+
 import Model.*;
 
-public class JCistern extends JGameElement{
+public class JCistern extends JGameElement {
     private Cistern cistern;
 
-    public JCistern(int _x,int _y) {
+    public JCistern(int _x, int _y) {
         super(_x, _y);
-        try{
+        try {
             setImage(new File("src\\View\\Images\\cistern.png"));
         } catch (Exception e) {
             System.out.println("Image not found");
         }
     }
 
-    public void setCistern(Cistern c) {
-        cistern = c;
+    @Override
+    public void setObject(Object o) {
+        cistern = (Cistern) o;
     }
 
-    public Cistern getCistern() {
+    @Override
+    public Object getObject() {
         return cistern;
     }
 
     @Override
-    public void draw(Graphics g, Object o) {
+    public void draw(Graphics g) {
 
     }
 }

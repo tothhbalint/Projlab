@@ -14,17 +14,17 @@ public class JNomad extends JGameElement{
             System.out.println("Image not found");
         }
     }
-
-    public void setNomad(Nomad n) {
-        nomad = n;
+    @Override
+    public void setObject(Object o) {
+        nomad = (Nomad) o;
     }
-
-    public Nomad getNomad() {
+    @Override
+    public Object getObject() {
         return nomad;
     }
 
     @Override
-    public void draw(Graphics g, Object o) {
+    public void draw(Graphics g) {
 
     }
 }

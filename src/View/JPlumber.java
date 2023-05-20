@@ -2,13 +2,14 @@ package View;
 
 import java.awt.*;
 import java.io.File;
+
 import Model.*;
 
-public class JPlumber extends JGameElement{
+public class JPlumber extends JGameElement {
     private Plumber plumber;
 
-    public JPlumber(int _x, int _y){
-        super(_x,_y);
+    public JPlumber(int _x, int _y) {
+        super(_x, _y);
         try {
             setImage(new File("src\\View\\Images\\plumber.png"));
         } catch (Exception e) {
@@ -16,16 +17,18 @@ public class JPlumber extends JGameElement{
         }
     }
 
-    public void setPlumber(Plumber p) {
-        plumber = p;
+    @Override
+    public void setObject(Object o) {
+        plumber = (Plumber) o;
     }
 
-    public Plumber getPlumber() {
+    @Override
+    public Object getObject() {
         return plumber;
     }
 
     @Override
-    public void draw(Graphics g, Object o) {
+    public void draw(Graphics g) {
 
     }
 }

@@ -1,5 +1,7 @@
 package View;
 
+import Model.NetworkElement;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -10,7 +12,6 @@ public abstract class JGameElement extends JComponent implements IDrawable{
     private int x,y;
 
     private Image elementImage;
-
 
     public JGameElement(int _x, int _y){
         x = _x;
@@ -42,7 +43,9 @@ public abstract class JGameElement extends JComponent implements IDrawable{
         }
     }
 
+    public abstract void draw(Graphics g);
 
+    public abstract Object getObject();
 
-    public abstract void draw(Graphics g, Object o);
+    public abstract void setObject(Object o);
 }

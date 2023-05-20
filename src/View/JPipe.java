@@ -1,14 +1,16 @@
 package View;
+
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
+
 import Model.*;
 
-public class JPipe extends JGameElement{
-private Pipe pipe;
+public class JPipe extends JGameElement {
+    private Pipe pipe;
 
-    public JPipe(int _x, int _y){
-        super(_x,_y);
+    public JPipe(int _x, int _y) {
+        super(_x, _y);
         try {
             setImage(new File("src\\View\\Images\\pipe.png"));
         } catch (Exception e) {
@@ -16,16 +18,18 @@ private Pipe pipe;
         }
     }
 
-    public void setPipe(Pipe p) {
-        pipe = p;
+    @Override
+    public void setObject(Object o) {
+        pipe = (Pipe) o;
     }
 
-    public Pipe getPipe() {
+    @Override
+    public Object getObject() {
         return pipe;
     }
 
     @Override
-    public void draw(Graphics g, Object o) {
+    public void draw(Graphics g) {
 
     }
 }
