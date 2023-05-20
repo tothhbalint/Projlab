@@ -1,6 +1,7 @@
 package View;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.event.*;
 public class MenuPanel extends JPanel{
@@ -14,6 +15,8 @@ public class MenuPanel extends JPanel{
     private JButton nomadPlusButton;
     private JButton nomadMinusButton;
     private JButton startGameButton;
+    ArrayList<String> plumberNames = new ArrayList<>();
+    ArrayList<String> nomadNames = new ArrayList<>();
 
     public MenuPanel() {
         //construct components
@@ -89,9 +92,18 @@ public class MenuPanel extends JPanel{
         startGameButton.addActionListener(e -> {
             int plumberCount = Integer.parseInt(plumberCountTextField.getText());
             int nomadCount = Integer.parseInt(nomadCountTextField.getText());
-            JFrame frame = new JFrame ("DrukkMakori Sivatag");
-            frame.setDefaultCloseOperation (JFrame.EXIT_ON_CLOSE);
-            frame.getContentPane().add (new GamePanel(plumberCount, nomadCount));
+            for (int i = 0; i < plumberCount; i++) {
+                String name = JOptionPane.showInputDialog("Please enter the name of plumber player " + (i+1));
+                plumberNames.add(name);
+
+            }
+            for (int i = 0; i < nomadCount; i++) {
+                String name = JOptionPane.showInputDialog("Please enter the name of nomad player " + (i+1));
+                nomadNames.add(name);
+            }
+            GameFrame frame = new GameFrame();
+            frame.setDefaultCloseOperation (JFrame.DO_NOTHING_ON_CLOSE);
+            frame.getContentPane().add (new GamePanel(plumberNames, nomadNames));
             frame.pack();
             frame.setVisible (true);
             this.setVisible(false);
