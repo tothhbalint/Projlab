@@ -49,7 +49,7 @@ public class GameFrame extends JFrame {
         for (NetworkElement networkElement : game.getMap().getElements()) {
             try {
                 Class<?> target = elementTypes.get(networkElement.getClass());
-                JGameElement element = (JGameElement) target.getConstructor().newInstance(0, 0);
+                JGameElement element = (JGameElement) target.getConstructors()[0].newInstance(0, 0);
                 element.setObject(networkElement);
                 if (target.equals(JPipe.class)) {
                     Pipe object = (Pipe) element.getObject();
@@ -113,9 +113,6 @@ public class GameFrame extends JFrame {
     public void runGame() {
         game.startGame();
         loadElements();
-
-        game.getMap().getElements().get(0).getPipeOutput();
-
 
         while (!gameOver) {
             step();
