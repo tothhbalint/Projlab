@@ -247,6 +247,8 @@ public abstract class Player {
         Proto.tab--;
     }
 
+    public abstract void repair();
+
     /**
      * This method creates and returns the values of the player in a string
      * @return values of a player in string

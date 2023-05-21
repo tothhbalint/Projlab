@@ -19,6 +19,10 @@ public class Nomad extends Player {
 		position.setSlippery();
 	}
 
+	public void repair() throws UnsupportedOperationException{
+		throw new UnsupportedOperationException("Nomads cannot repair");
+	}
+
 	/**
 	 * This method is not implemented
 	 * @throws UnsupportedOperationException

@@ -4,6 +4,7 @@ import Model.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -29,10 +30,6 @@ public class GameFrame extends JFrame {
     private boolean userAction = false;
 
     private JPlayer currentPlayer;
-
-    private ControlsPanel controlsPanel;
-
-    private GamePanel gamePanel;
 
     public GameFrame(ArrayList<String> plumberNames, ArrayList<String> nomadNames) {
         elementTypes.put(Source.class, JSource.class);
@@ -110,6 +107,21 @@ public class GameFrame extends JFrame {
         round++;
     }
 
+    public static boolean isAbstractMethodImplemented(Object derived, String methodName) {
+        try {
+            Method method = derived.getClass().getMethod(methodName);
+
+            Class<?>[] declaredExceptions = method.getExceptionTypes();
+
+            for (Class<?> e : declaredExceptions) {
+                if (e.equals(UnsupportedOperationException.class)) return false;
+            }
+        } catch (NoSuchMethodException e) {
+            return false;
+        }
+        return true;
+    }
+
     /**
     The main loop of the game
      */
@@ -134,8 +146,6 @@ public class GameFrame extends JFrame {
     }
 
     public void draw(){
-        controlsPanel.repaint();
-        gamePanel.repaint();
         repaint();
     }
 
