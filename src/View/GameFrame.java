@@ -3,6 +3,7 @@ package View;
 import Model.*;
 
 import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -28,9 +29,11 @@ public class GameFrame extends JFrame {
     public GameFrame(ArrayList<String> plumberNames, ArrayList<String> nomadNames) {
         setLocationRelativeTo(null);
         setDefaultCloseOperation (JFrame.DO_NOTHING_ON_CLOSE);
-        getContentPane().add(new GamePanel(plumberNames, nomadNames));
+        getContentPane().add(new ControlsPanel(plumberNames, nomadNames));
+        getContentPane().add(new GamePanel());
         pack();
         setVisible (true);
+        //setPreferredSize(new Dimension(1280, 720));
 
         elementTypes.put(Source.class, JSource.class);
         elementTypes.put(Pipe.class, JPipe.class);
@@ -77,9 +80,9 @@ public class GameFrame extends JFrame {
         }
     }
 
-    /*
-    this is a function that runs in the main loop of the game
-     */
+    /**
+    * this is a function that runs in the main loop of the game
+    */
     public void step() {
         for (JGameElement gameElement : gameElements) {
             ((NetworkElement) gameElement.getObject()).tick();
@@ -106,7 +109,7 @@ public class GameFrame extends JFrame {
         }
     }
 
-    /*
+    /**
     The main loop of the game
      */
     public void runGame() {

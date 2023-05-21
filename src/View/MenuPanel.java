@@ -1,9 +1,8 @@
 package View;
 import java.awt.*;
-import java.awt.event.*;
 import java.util.ArrayList;
 import javax.swing.*;
-import javax.swing.event.*;
+
 public class MenuPanel extends JPanel{
     private JLabel title;
     private JLabel plumberLabel;
@@ -101,7 +100,7 @@ public class MenuPanel extends JPanel{
                 String name = JOptionPane.showInputDialog("Please enter the name of nomad player " + (i+1));
                 nomadNames.add(name);
             }
-            GamePanel.main(null);
+            ControlsPanel.main(null);
         });
     }
 
