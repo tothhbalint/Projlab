@@ -331,4 +331,8 @@ public abstract class NetworkElement implements ITimer, IMove {
      * This method is implemented in inherited classes
      */
     public abstract void setSticky();
+
+    public boolean getWaterState(){
+        return this.hasWater;
+    }
 }
