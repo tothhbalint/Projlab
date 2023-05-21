@@ -35,7 +35,7 @@ public class JPipe extends JGameElement {
         connections.add(connection);
     }
 
-    public void calcMiddle(){
+    public void calcMiddle() {
         int x = 0;
         int y = 0;
         for (JGameElement connection : connections) {
@@ -44,29 +44,37 @@ public class JPipe extends JGameElement {
         }
         x /= connections.size();
         y /= connections.size();
-        move(x,y);
+        move(x, y);
     }
 
     @Override
     public void draw(Graphics g) {
         super.paint(g);
 
-        int cR = 0,cG = 0,cB = 0;
+        int cR = 0, cG = 0, cB = 0;
 
 
         if (pipe.isSlippery()) {
             cG += 120;
-        }if(pipe.isSticky()){
-            cG += 120;
-        }if(pipe.getWaterState()){
-            cB = 250;
         }
-        g.setColor(new Color(cR,cG,cB));
+        if (pipe.isSticky()) {
+            cG += 60;
+            cR += 120;
+        }
+        if (pipe.getWaterState()) {
+            cB = 255;
+        }
+        g.setColor(new Color(cR, cG, cB));
 
-        if(pipe.isDamaged()){
-            g.setColor(new Color(255,0,0));
+        if (pipe.isDamaged()) {
+            g.setColor(new Color(255, 0, 0));
         }
 
-        g.drawLine(connections.get(0).getX(), connections.get(0).getY(), connections.get(1).getX(), connections.get(1).getY());
+        Graphics2D g2 = (Graphics2D) g;
+
+        //EZ NEM FIX HOGY JO HA RONDA A VONAL IRD AT
+        g2.setStroke(new BasicStroke(10));
+
+        g2.drawLine(connections.get(0).getX(), connections.get(0).getY(), connections.get(1).getX(), connections.get(1).getY());
     }
 }

@@ -7,6 +7,7 @@ import javax.swing.event.*;
 import java.util.ArrayList;
 
 public class GamePanel extends JPanel {
+
     private JList moveToList;
     private JLabel moveToLabel;
     private JButton breakPipeButton;
