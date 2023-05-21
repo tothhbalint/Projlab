@@ -101,12 +101,7 @@ public class MenuPanel extends JPanel{
                 String name = JOptionPane.showInputDialog("Please enter the name of nomad player " + (i+1));
                 nomadNames.add(name);
             }
-            GameFrame frame = new GameFrame();
-            frame.setDefaultCloseOperation (JFrame.DO_NOTHING_ON_CLOSE);
-            frame.getContentPane().add (new GamePanel(plumberNames, nomadNames));
-            frame.pack();
-            frame.setVisible (true);
-            this.setVisible(false);
+            GamePanel.main(null);
         });
     }
 
