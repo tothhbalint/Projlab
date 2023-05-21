@@ -53,17 +53,20 @@ public class JPipe extends JGameElement {
 
         int cR = 0,cG = 0,cB = 0;
 
+
         if (pipe.isSlippery()) {
             cG += 120;
-        }else if(pipe.isDamaged()){
-            cR += 120;
-        }else if(pipe.isSticky()){
+        }if(pipe.isSticky()){
             cG += 120;
-        }else if(pipe.getWaterState()){
+        }if(pipe.getWaterState()){
             cB = 250;
         }
-
         g.setColor(new Color(cR,cG,cB));
+
+        if(pipe.isDamaged()){
+            g.setColor(new Color(255,0,0));
+        }
+
         g.drawLine(connections.get(0).getX(), connections.get(0).getY(), connections.get(1).getX(), connections.get(1).getY());
     }
 }

@@ -43,7 +43,11 @@ public abstract class JGameElement extends JComponent implements IDrawable{
         }
     }
 
-    public abstract void draw(Graphics g);
+    public void draw(Graphics g){
+        super.paint(g);
+
+        g.drawImage(elementImage, x, y, null);
+    }
 
     public abstract Object getObject();
 

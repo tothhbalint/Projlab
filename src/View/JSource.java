@@ -27,9 +27,4 @@ public class JSource extends JGameElement {
     public Object getObject() {
         return source;
     }
-
-    @Override
-    public void draw(Graphics g) {
-
-    }
 }

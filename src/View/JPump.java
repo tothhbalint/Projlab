@@ -28,6 +28,10 @@ public class JPump extends JGameElement {
         return pump;
     }
 
+    public void checkBroken(){
+
+    }
+
     @Override
     public void draw(Graphics g) {
 

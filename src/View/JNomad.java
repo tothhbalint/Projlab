@@ -39,9 +39,4 @@ public class JNomad extends JPlayer{
             }
         }
     }
-
-    @Override
-    public void draw(Graphics g) {
-
-    }
 }

@@ -29,6 +29,5 @@ public class JCistern extends JGameElement {
 
     @Override
     public void draw(Graphics g) {
-
     }
 }

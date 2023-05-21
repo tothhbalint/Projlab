@@ -43,9 +43,4 @@ public class JPlumber extends JPlayer {
             }
         }
     }
-
-    @Override
-    public void draw(Graphics g) {
-
-    }
 }
