@@ -41,6 +41,7 @@ public class GameFrame extends JFrame {
         runGame();
     }
 
+    //TODO
     public void loadElements() {
         for (NetworkElement networkElement : game.getMap().getElements()) {
             try {
@@ -48,9 +49,12 @@ public class GameFrame extends JFrame {
                 JGameElement element = (JGameElement) target.getConstructor().newInstance(0, 0);
                 element.setObject(networkElement);
                 if (target.equals(JPipe.class)) {
-                    Pipe object = (Pipe) ((JPipe) element).getObject();
+                    Pipe object = (Pipe) element.getObject();
+                    for (NetworkElement connectionElement : object.getConnections()) {
+                        JGameElement connection = findElement(connectionElement);
+                        ((JPipe) element).addConnection(connection);
+                    }
                 }
-                elementTypes.get(networkElement.getClass()).getConstructor().newInstance(0, 0);
             } catch (Exception e) {
                 System.out.println("Error loading element");
             }
@@ -86,6 +90,8 @@ public class GameFrame extends JFrame {
                 currentPlayer = nomads.get(round % nomads.size());
             default:
         }
+
+        //TODO
 
         nomadPoints = game.getMap().getNomadPoints();
         plumberPoints = game.getMap().getPlumberPoints();
