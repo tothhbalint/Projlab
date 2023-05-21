@@ -2,6 +2,7 @@ package View;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.concurrent.atomic.AtomicReference;
 import javax.swing.*;
 
 public class MenuPanel extends JPanel {
@@ -101,25 +102,27 @@ public class MenuPanel extends JPanel {
                 String name = JOptionPane.showInputDialog("Please enter the name of nomad player " + (i + 1));
                 nomadNames.add(name);
             }
+            AtomicReference<GameFrame> frame = new AtomicReference<>();
             SwingUtilities.invokeLater(() -> {
-                GameFrame frame = new GameFrame(plumberNames, nomadNames);
-                frame.setLayout(new BorderLayout());
-                frame.setTitle("Drukkmakori sivatag - Game");
-                frame.setSize(1280, 720);
-                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                frame.loadElements(plumberNames, nomadNames);
+                frame.set(new GameFrame(plumberNames, nomadNames));
+                frame.get().setLayout(new BorderLayout());
+                frame.get().setTitle("Drukkmakori sivatag - Game");
+                frame.get().setSize(1280, 720);
+                frame.get().setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                frame.get().loadElements(plumberNames, nomadNames);
 
                 GamePanel gamePanel = new GamePanel();
-                ControlsPanel controlsPanel = new ControlsPanel(frame);
+                ControlsPanel controlsPanel = new ControlsPanel(frame.get());
 
                 controlsPanel.setPreferredSize(new Dimension(400, 720));
                 gamePanel.setPreferredSize(new Dimension(880, 720));
 
-                frame.getContentPane().add(controlsPanel, BorderLayout.WEST);
-                frame.getContentPane().add(gamePanel, BorderLayout.CENTER);
-                frame.setVisible(true);
-                frame.pack();
+                frame.get().getContentPane().add(controlsPanel, BorderLayout.WEST);
+                frame.get().getContentPane().add(gamePanel, BorderLayout.CENTER);
+                frame.get().setVisible(true);
+                frame.get().pack();
             });
+            frame.get().runGame();
         });
     }
 

@@ -69,12 +69,14 @@ public class GameFrame extends JFrame {
         for (int i = 0; i < game.getPlumberTeam().getNoPlayers(); i++) {
             JPlumber plumber = new JPlumber(0, 0);
             plumber.setObject(game.getPlumberTeam().getPlayer(i));
+            plumber.setName(plumberNames.get(i));
             plumbers.add(plumber);
         }
 
         for (int i = 0; i < game.getNomadTeam().getNoPlayers(); i++) {
             JNomad nomad = new JNomad(0, 0);
             nomad.setObject(game.getNomadTeam().getPlayer(i));
+            nomad.setName(nomadNames.get(i));
             nomads.add(nomad);
         }
 
@@ -104,6 +106,8 @@ public class GameFrame extends JFrame {
             gameOver = true;
             pluwin = plumberPoints > nomadPoints;
         }
+
+        round++;
     }
 
     /**
