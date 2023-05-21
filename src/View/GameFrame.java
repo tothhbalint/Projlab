@@ -41,7 +41,7 @@ public class GameFrame extends JFrame {
         runGame();
     }
 
-    //TODO
+    //TODO Needs mapping for the base position of the elements, pipes can stay at 0,0 , its position gets calculated based on the others
     public void loadElements() {
         for (NetworkElement networkElement : game.getMap().getElements()) {
             try {
@@ -54,7 +54,9 @@ public class GameFrame extends JFrame {
                         JGameElement connection = findElement(connectionElement);
                         ((JPipe) element).addConnection(connection);
                     }
+                    ((JPipe) element).calcMiddle();
                 }
+                gameElements.add(element);
             } catch (Exception e) {
                 System.out.println("Error loading element");
             }

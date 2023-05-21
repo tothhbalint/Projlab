@@ -35,6 +35,18 @@ public class JPipe extends JGameElement {
         connections.add(connection);
     }
 
+    public void calcMiddle(){
+        int x = 0;
+        int y = 0;
+        for (JGameElement connection : connections) {
+            x += connection.getX();
+            y += connection.getY();
+        }
+        x /= connections.size();
+        y /= connections.size();
+        move(x,y);
+    }
+
     @Override
     public void draw(Graphics g) {
 
