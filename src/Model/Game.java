@@ -44,8 +44,19 @@ public class Game {
             Proto.verbose = false;
         }
         map.build();
-        createNomadTeam();
-        createPlumberTeam();
+        createNomadTeam(2);
+        createPlumberTeam(2);
+        Proto.verbose = tempV;
+    }
+
+    public void startGame(ArrayList<String> plumberNames, ArrayList<String> nomadNames) {
+        boolean tempV = Proto.verbose;
+        if(Proto.test){
+            Proto.verbose = false;
+        }
+        map.build();
+        createNomadTeam(nomadNames.size());
+        createPlumberTeam(plumberNames.size());
         Proto.verbose = tempV;
     }
 
@@ -89,57 +100,52 @@ public class Game {
     /**
      * This method creates the Plumber team with 2 Players, and set the players' position to a random NetworkElement
      */
-    public void createPlumberTeam() {
+    public void createPlumberTeam(int sizeOfTeam) {
         Proto.print("Game.createPlumberTeam()");
-        Plumber p1 = new Plumber();
-        Plumber p2 = new Plumber();
+        for (int i = 0; i < sizeOfTeam; i++) {
+            Plumber p = new Plumber();
+            plumberTeam.addMember(p);
+            ArrayList<NetworkElement> ne = map.getElements();
+            Random rand = new Random();
 
-        plumberTeam.addMember(p1);
-        plumberTeam.addMember(p2);
+            if (Proto.verbose || Proto.test)
+                rand.setSeed(3);
 
-        ArrayList<Source> ne = map.getSources();
-
-        Random rand = new Random();
-
-        int randomNum = rand.nextInt(ne.size());
-
-        if (Proto.verbose)
-            randomNum = 0;
-
-        p1.setPosition(ne.get(0));
-        if (Proto.verbose)
-            randomNum = 1;
-        else
-            randomNum = rand.nextInt(ne.size());
-
-        p2.setPosition(ne.get(1));
+            boolean placed = false;
+            int randomNum = rand.nextInt(ne.size());
+            while (!placed) {
+                if (ne.get(randomNum).accept(p)) {
+                    placed = true;
+                } else {
+                    randomNum = rand.nextInt(ne.size());
+                }
+            }
+        }
     }
 
     /**
      * This method creates the Nomad team with 2 Players, and set the players' position to a random NetworkElement
      */
-    public void createNomadTeam() {
+    public void createNomadTeam(int sizeOfTeam) {
         Proto.print("Game.createNomadTeam()");
-        Nomad n1 = new Nomad();
-        Nomad n2 = new Nomad();
+        for (int i = 0; i < sizeOfTeam; i++) {
+            Nomad n = new Nomad();
+            nomadTeam.addMember(n);
+            ArrayList<NetworkElement> ne = map.getElements();
+            Random rand = new Random();
 
-        nomadTeam.addMember(n1);
-        nomadTeam.addMember(n2);
+            if (Proto.verbose || Proto.test)
+                rand.setSeed(3);
 
-        ArrayList<NetworkElement> ne = map.getElements();
-
-        Random rand = new Random();
-
-        if(Proto.verbose || Proto.test)
-            rand.setSeed(3);
-
-        int randomNum = rand.nextInt(ne.size());
-
-
-        ne.get(randomNum).accept(n1);
-
-        randomNum = rand.nextInt(ne.size());
-
-        ne.get(randomNum).accept(n2);
+            boolean placed = false;
+            int randomNum = rand.nextInt(ne.size());
+            while (!placed) {
+                if (ne.get(randomNum).accept(n)) {
+                    placed = true;
+                } else {
+                    randomNum = rand.nextInt(ne.size());
+                }
+            }
+        }
     }
 }
