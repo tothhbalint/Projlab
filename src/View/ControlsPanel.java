@@ -125,19 +125,25 @@ public class ControlsPanel extends JPanel {
         nomadPoints.setBounds(150, 600, 125, 25);
 
         //Add action listeners
-        breakPipeButton.addActionListener(e -> {
+        breakPipeButton.addActionListener(e ->
+
+        {
             Player player = (Player) gameFrame.getCurrentPlayer().getObject();
             player.breakPipe();
             gameFrame.setUserAction(true);
         });
+//HANDLE NOMAD CAST
+        takePumpButton.addActionListener(e ->
 
-        takePumpButton.addActionListener(e -> {
+        {
             Plumber plumber = (Plumber) gameFrame.getCurrentPlayer().getObject();
             plumber.takePump();
             gameFrame.setUserAction(true);
         });
 
-        placePumpButton.addActionListener(e -> {
+        placePumpButton.addActionListener(e ->
+
+        {
             Plumber plumber = (Plumber) gameFrame.getCurrentPlayer().getObject();
             plumber.placePump();
             gameFrame.setUserAction(true);
@@ -145,14 +151,12 @@ public class ControlsPanel extends JPanel {
 
         //TODO debug for Plumber
         pipeSlipperyButton.addActionListener(e ->
-
         {
             Nomad nomad = (Nomad) gameFrame.getCurrentPlayer().getObject();
             nomad.makePipeSlippery();
             gameFrame.setUserAction(true);
         });
 
-        //TODO debug for Plumber
         pipeStickyButton.addActionListener(e ->
 
         {
@@ -213,11 +217,16 @@ public class ControlsPanel extends JPanel {
             }
         }
 
-
-        if (!GameFrame.isAbstractMethodImplemented(((Player) gameFrame.getCurrentPlayer().getObject()).getPosition(), "connectPipe")) {
+        if (!GameFrame.isAbstractMethodImplemented(((Player) gameFrame.getCurrentPlayer().getObject()), "connectPipe")) {
             connectPipeButton.setEnabled(false);
         } else {
-            connectPipeButton.setEnabled(true);
+            if (!GameFrame.isAbstractMethodImplemented(((Player) gameFrame.getCurrentPlayer().getObject()).getPosition(), "connectPipe")) {
+                connectPipeButton.setEnabled(false);
+            }else if (!((Player) gameFrame.getCurrentPlayer().getObject()).getInventory().hasPipe()) {
+                connectPipeButton.setEnabled(false);
+            } else {
+                connectPipeButton.setEnabled(true);
+            }
         }
 
         if (!GameFrame.isAbstractMethodImplemented(((Player) (gameFrame.getCurrentPlayer().getObject())).getPosition(), "repair")) {
@@ -229,10 +238,13 @@ public class ControlsPanel extends JPanel {
                 fixButton.setEnabled(true);
         }
 
-        if (!GameFrame.isAbstractMethodImplemented(((Player) gameFrame.getCurrentPlayer().getObject()).getPosition(), "setSlippery")) {
+        if (!GameFrame.isAbstractMethodImplemented((gameFrame.getCurrentPlayer().getObject()), "makePipeSlippery")) {
             pipeSlipperyButton.setEnabled(false);
         } else {
-            pipeSlipperyButton.setEnabled(true);
+            if(!GameFrame.isAbstractMethodImplemented(((Player) gameFrame.getCurrentPlayer().getObject()).getPosition(), "setSlippery"))
+                pipeSlipperyButton.setEnabled(false);
+            else
+                pipeSlipperyButton.setEnabled(true);
         }
 
         if (!GameFrame.isAbstractMethodImplemented(((Player) gameFrame.getCurrentPlayer().getObject()).getPosition(), "setSticky")) {
@@ -244,7 +256,7 @@ public class ControlsPanel extends JPanel {
 
     public void repaint() {
         super.repaint();
-        if(this.gameFrame != null){
+        if (this.gameFrame != null) {
             disableButtons();
         }
     }

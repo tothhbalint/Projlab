@@ -83,8 +83,8 @@ public class Plumber extends Player {
 	/**
 	 * This method is responsible for making the NetworkElement slippery if it is possible
 	 */
-	public void makePipeSlippery(){
-		position.setSlippery();
+	public void makePipeSlippery() throws UnsupportedOperationException{
+		throw new UnsupportedOperationException("Plumbers cannot make pipes slippery");
 	}
 }
 
