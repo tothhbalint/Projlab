@@ -107,7 +107,8 @@ public class GamePanel extends JPanel {
 
 
     public static void main(String[] args) {
-        GameFrame frame = new GameFrame();
+        GameFrame frame = new GameFrame(new ArrayList<>() , new ArrayList<>());
+        frame.setTitle("GamePanel");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().add(new GamePanel(new ArrayList<String>(), new ArrayList<String>()));
         frame.pack();

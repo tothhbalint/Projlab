@@ -25,13 +25,12 @@ public class GameFrame extends JFrame {
 
     private int round = 0;
 
-    public GameFrame() {
-        super("Drukkmakori Sivatag - Game PLUWIN");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(800, 600);
+    public GameFrame(ArrayList<String> plumberNames, ArrayList<String> nomadNames) {
         setLocationRelativeTo(null);
-        setResizable(false);
-        setVisible(true);
+        setDefaultCloseOperation (JFrame.DO_NOTHING_ON_CLOSE);
+        getContentPane().add(new GamePanel(plumberNames, nomadNames));
+        pack();
+        setVisible (true);
 
         elementTypes.put(Source.class, JSource.class);
         elementTypes.put(Pipe.class, JPipe.class);
