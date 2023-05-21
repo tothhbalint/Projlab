@@ -26,13 +26,18 @@ public class GameFrame extends JFrame {
 
     private int round = 0;
 
+    private boolean userAction = false;
+
+    private JPlayer currentPlayer;
+
     public GameFrame(ArrayList<String> plumberNames, ArrayList<String> nomadNames) {
+        loadElements(plumberNames, nomadNames);
         setLocationRelativeTo(null);
         setDefaultCloseOperation (JFrame.DO_NOTHING_ON_CLOSE);
-        getContentPane().add(new ControlsPanel(plumberNames, nomadNames));
+        getContentPane().add(new ControlsPanel(this));
         getContentPane().add(new GamePanel());
         pack();
-        setVisible (true);
+        setVisible(true);
         //setPreferredSize(new Dimension(1280, 720));
 
         elementTypes.put(Source.class, JSource.class);
@@ -40,11 +45,13 @@ public class GameFrame extends JFrame {
         elementTypes.put(Pump.class, JPump.class);
         elementTypes.put(Cistern.class, JCistern.class);
 
-        runGame();
+
+        //runGame();
     }
 
     //TODO Needs mapping for the base position of the elements, pipes can stay at 0,0 , its position gets calculated based on the others
-    public void loadElements() {
+    public void loadElements(ArrayList<String> plumberNames, ArrayList<String> nomadNames) {
+        game.startGame(plumberNames, nomadNames);
         for (NetworkElement networkElement : game.getMap().getElements()) {
             try {
                 Class<?> target = elementTypes.get(networkElement.getClass());
@@ -78,6 +85,8 @@ public class GameFrame extends JFrame {
             nomad.setObject(game.getNomadTeam().getPlayer(i));
             nomads.add(nomad);
         }
+
+        currentPlayer = plumbers.get(0);
     }
 
     /**
@@ -88,8 +97,6 @@ public class GameFrame extends JFrame {
             ((NetworkElement) gameElement.getObject()).tick();
         }
 
-        JPlayer currentPlayer = null;
-
         switch (round % 2) {
             case 0:
                 currentPlayer = plumbers.get(round % plumbers.size());
@@ -97,8 +104,6 @@ public class GameFrame extends JFrame {
                 currentPlayer = nomads.get(round % nomads.size());
             default:
         }
-
-        //TODO
 
         nomadPoints = game.getMap().getNomadPoints();
         plumberPoints = game.getMap().getPlumberPoints();
@@ -113,11 +118,21 @@ public class GameFrame extends JFrame {
     The main loop of the game
      */
     public void runGame() {
-        game.startGame();
-        loadElements();
+        //game.startGame(); did these in constructor, otherwise NullPointerException
+        //loadElements(plumbers, nomads);
 
         while (!gameOver) {
             step();
+
+            //TODO wait for player input
+            while (!userAction) {
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            userAction = false;
             draw();
         }
     }
@@ -133,5 +148,13 @@ public class GameFrame extends JFrame {
         for (JGameElement gameElement : gameElements) {
             gameElement.draw(getGraphics());
         }
+    }
+
+    public void setUserAction(boolean userAction) {
+        this.userAction = userAction;
+    }
+
+    public JPlayer getCurrentPlayer() {
+        return currentPlayer;
     }
 }

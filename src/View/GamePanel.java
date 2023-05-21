@@ -5,11 +5,11 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class GamePanel extends JPanel {
+
     public GamePanel(){
         super();
         setLayout(null);
-        setBackground(Color.BLACK);
-        //setPreferredSize(new Dimension(800, 600));
+        setBackground(Color.ORANGE);
     }
 
     public void draw(){

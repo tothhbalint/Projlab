@@ -3,6 +3,7 @@ package View;
 import java.awt.*;
 import javax.swing.*;
 import java.util.ArrayList;
+import Model.*;
 
 public class ControlsPanel extends JPanel {
 
@@ -24,19 +25,14 @@ public class ControlsPanel extends JPanel {
     private JButton fixButton;
     private JLabel plumberPoints;
     private JLabel nomadPoints;
-    private ArrayList<String> plumberNames;
-    private ArrayList<String> nomadNames;
-    private JComponent gameBoard;
+    private GameFrame gameFrame;
 
-    public ControlsPanel(ArrayList<String> plumberNames, ArrayList<String> nomadNames) {
+    public ControlsPanel(GameFrame gameFrame) {
         //construct preComponents
         String[] moveToListItems = {"pos.connections1", "pos.connections2", "pos.connections3"};
         String[] pipeDisconnectListItems = {"pipe 1", "pipe2"};
         String[] directPumpListItems = {"Item 1", "Item 2", "Item 3"};
         String[] inventoryListItems = {"Item 1", "Item 2", "Item 3"};
-
-        this.plumberNames = plumberNames;
-        this.nomadNames = nomadNames;
 
         //construct components
         moveToList = new JList(moveToListItems);
@@ -44,7 +40,7 @@ public class ControlsPanel extends JPanel {
         breakPipeButton = new JButton("Break pipe");
         takePumpButton = new JButton("Take pump");
         placePumpButton = new JButton("Place pump");
-        playerTurnLabel = new JLabel("XY player's turn!");
+        playerTurnLabel = new JLabel(gameFrame.getCurrentPlayer().getName() + " player's turn!");
         pipeSlipperyButton = new JButton("Pipe slippery");
         pipeStickyButton = new JButton("Pipe sticky");
         inventoryLabel = new JLabel("Inventory:");
@@ -104,10 +100,62 @@ public class ControlsPanel extends JPanel {
         fixButton.setBounds(140, 450, 135, 40);
         plumberPoints.setBounds(150, 570, 125, 25);
         nomadPoints.setBounds(150, 600, 125, 25);
+
+        //Add action listeners
+        breakPipeButton.addActionListener(e -> {
+            Nomad nomad = (Nomad) gameFrame.getCurrentPlayer().getObject();
+            nomad.breakPipe();
+            gameFrame.setUserAction(true);
+        });
+
+        takePumpButton.addActionListener(e -> {
+            Plumber plumber = (Plumber) gameFrame.getCurrentPlayer().getObject();
+            plumber.takePump();
+            gameFrame.setUserAction(true);
+        });
+
+        placePumpButton.addActionListener(e -> {
+            Plumber plumber = (Plumber) gameFrame.getCurrentPlayer().getObject();
+            plumber.placePump();
+            gameFrame.setUserAction(true);
+        });
+
+        //TODO debug for Plumber
+        pipeSlipperyButton.addActionListener(e -> {
+            Nomad nomad = (Nomad) gameFrame.getCurrentPlayer().getObject();
+            nomad.makePipeSlippery();
+            gameFrame.setUserAction(true);
+        });
+
+        //TODO debug for Plumber
+        pipeStickyButton.addActionListener(e -> {
+            Nomad nomad = (Nomad) gameFrame.getCurrentPlayer().getObject();
+            nomad.makePipeSticky();
+            gameFrame.setUserAction(true);
+        });
+
+        connectPipeButton.addActionListener(e -> {
+            Plumber plumber = (Plumber) gameFrame.getCurrentPlayer().getObject();
+            plumber.connectPipe();
+            gameFrame.setUserAction(true);
+        });
+
+        fixButton.addActionListener(e -> {
+            Plumber plumber = (Plumber) gameFrame.getCurrentPlayer().getObject();
+            plumber.repair();
+            gameFrame.setUserAction(true);
+        });
+
+        //TODO debug for Plumber
+        directPumpList.addListSelectionListener(e -> {
+            Plumber plumber = (Plumber) gameFrame.getCurrentPlayer().getObject();
+            //plumber.directPump();
+            gameFrame.setUserAction(true);
+        });
     }
 
 
-    //TODO There is some concurrency error here: Sometimes the error loop keeps going, sometimes it stops and the GUI is shown
+    /*//TODO There is some concurrency error here: Sometimes the error loop keeps going, sometimes it stops and the GUI is shown
     public static void main(String[] args) {
         GameFrame frame = new GameFrame(new ArrayList<>() , new ArrayList<>());
         frame.setLayout(new BorderLayout());
@@ -125,5 +173,5 @@ public class ControlsPanel extends JPanel {
         frame.getContentPane().add(gamePanel, BorderLayout.EAST);
         //frame.pack();
         frame.setVisible(true);
-    }
+    }*/
 }

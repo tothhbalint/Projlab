@@ -100,12 +100,29 @@ public class MenuPanel extends JPanel{
                 String name = JOptionPane.showInputDialog("Please enter the name of nomad player " + (i+1));
                 nomadNames.add(name);
             }
-            ControlsPanel.main(null);
+
+            GameFrame frame = new GameFrame(plumberNames , nomadNames);
+            frame.setLayout(new BorderLayout());
+            frame.setTitle("Drukkmakori sivatag - Game");
+            frame.setSize(1280, 720);
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+            ControlsPanel controlsPanel = new ControlsPanel(frame);
+            GamePanel gamePanel = new GamePanel();
+
+            controlsPanel.setPreferredSize(new Dimension(400, 720));
+            gamePanel.setPreferredSize(new Dimension(880, 720));
+
+            frame.getContentPane().add(controlsPanel);
+            frame.getContentPane().add(gamePanel);
+            frame.pack();
+            frame.setVisible(true);
+            frame.runGame();
         });
     }
 
 
-    public static void main (String[] args) {
+   public static void main (String[] args) {
         MenuFrame frame = new MenuFrame();
         frame.setDefaultCloseOperation (JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().add (new MenuPanel());
