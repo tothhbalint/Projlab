@@ -31,6 +31,11 @@ public class GameFrame extends JFrame {
     private JPlayer currentPlayer;
 
     public GameFrame(ArrayList<String> plumberNames, ArrayList<String> nomadNames) {
+        elementTypes.put(Source.class, JSource.class);
+        elementTypes.put(Pipe.class, JPipe.class);
+        elementTypes.put(Pump.class, JPump.class);
+        elementTypes.put(Cistern.class, JCistern.class);
+
         loadElements(plumberNames, nomadNames);
         setLocationRelativeTo(null);
         setDefaultCloseOperation (JFrame.DO_NOTHING_ON_CLOSE);
@@ -39,11 +44,6 @@ public class GameFrame extends JFrame {
         pack();
         setVisible(true);
         //setPreferredSize(new Dimension(1280, 720));
-
-        elementTypes.put(Source.class, JSource.class);
-        elementTypes.put(Pipe.class, JPipe.class);
-        elementTypes.put(Pump.class, JPump.class);
-        elementTypes.put(Cistern.class, JCistern.class);
 
 
         //runGame();
@@ -123,6 +123,7 @@ public class GameFrame extends JFrame {
 
         while (!gameOver) {
             step();
+            draw();
 
             //TODO wait for player input
             while (!userAction) {
@@ -133,7 +134,6 @@ public class GameFrame extends JFrame {
                 }
             }
             userAction = false;
-            draw();
         }
     }
 
