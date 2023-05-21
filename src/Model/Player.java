@@ -247,6 +247,8 @@ public abstract class Player {
         Proto.tab--;
     }
 
+    public abstract void makePipeSlippery();
+
     public abstract void repair();
 
     /**
