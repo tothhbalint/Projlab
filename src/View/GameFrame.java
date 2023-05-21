@@ -3,6 +3,9 @@ package View;
 import Model.*;
 
 import javax.swing.*;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -26,7 +29,7 @@ public class GameFrame extends JFrame {
     private int round = 0;
 
     public GameFrame() {
-        super("Drukkmakori Sivatag - Game PLUWIN");
+        super("Drukkmakori Sivatag - Game");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(800, 600);
         setLocationRelativeTo(null);
@@ -111,10 +114,29 @@ public class GameFrame extends JFrame {
         game.startGame();
         loadElements();
 
+        game.getMap().getElements().get(0).getPipeOutput();
+
+
         while (!gameOver) {
             step();
             draw();
         }
+    }
+
+    public static boolean isAbstractMethodImplemented(Object derived, String methodName) {
+        try {
+            Method method = derived.getClass().getMethod(methodName);
+
+            Class<?>[] declaredExceptions = method.getExceptionTypes();
+
+            for (Class<?> e : declaredExceptions) {
+                if (e.equals(UnsupportedOperationException.class)) return false;
+            }
+
+        } catch (NoSuchMethodException e) {
+            return false;
+        }
+        return true;
     }
 
     public JGameElement findElement(NetworkElement networkElement) {
@@ -126,6 +148,7 @@ public class GameFrame extends JFrame {
 
     public void draw() {
         for (JGameElement gameElement : gameElements) {
+            //TODO ha nem rajzol ki semmit ide kell mast irni valszeg xd
             gameElement.draw(getGraphics());
         }
     }
