@@ -30,23 +30,15 @@ public class GameFrame extends JFrame {
 
     private JPlayer currentPlayer;
 
+    private ControlsPanel controlsPanel;
+
+    private GamePanel gamePanel;
+
     public GameFrame(ArrayList<String> plumberNames, ArrayList<String> nomadNames) {
         elementTypes.put(Source.class, JSource.class);
         elementTypes.put(Pipe.class, JPipe.class);
         elementTypes.put(Pump.class, JPump.class);
         elementTypes.put(Cistern.class, JCistern.class);
-
-        loadElements(plumberNames, nomadNames);
-        setLocationRelativeTo(null);
-        setDefaultCloseOperation (JFrame.DO_NOTHING_ON_CLOSE);
-        getContentPane().add(new ControlsPanel(this));
-        getContentPane().add(new GamePanel());
-        pack();
-        setVisible(true);
-        //setPreferredSize(new Dimension(1280, 720));
-
-
-        //runGame();
     }
 
     //TODO Needs mapping for the base position of the elements, pipes can stay at 0,0 , its position gets calculated based on the others
@@ -62,7 +54,7 @@ public class GameFrame extends JFrame {
                 System.out.println("Error loading element");
             }
         }
-    //TODO find better solution for pipe connection loading this is too getto even for me
+    //TODO find better solution for pipe connection loading this is too ghetto even for me
         for (JGameElement gameElement : gameElements) {
             if (gameElement.getClass().equals(JPipe.class)) {
                 NetworkElement element = (NetworkElement) gameElement.getObject();
@@ -123,7 +115,6 @@ public class GameFrame extends JFrame {
 
         while (!gameOver) {
             step();
-            draw();
 
             //TODO wait for player input
             while (!userAction) {
@@ -134,7 +125,14 @@ public class GameFrame extends JFrame {
                 }
             }
             userAction = false;
+            draw();
         }
+    }
+
+    public void draw(){
+        controlsPanel.repaint();
+        gamePanel.repaint();
+        repaint();
     }
 
     public JGameElement findElement(NetworkElement networkElement) {
@@ -142,12 +140,6 @@ public class GameFrame extends JFrame {
             if (gameElement.getObject().equals(networkElement)) return gameElement;
         }
         return null;
-    }
-
-    public void draw() {
-        for (JGameElement gameElement : gameElements) {
-            gameElement.draw(getGraphics());
-        }
     }
 
     public void setUserAction(boolean userAction) {

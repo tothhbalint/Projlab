@@ -155,23 +155,23 @@ public class ControlsPanel extends JPanel {
     }
 
 
-    /*//TODO There is some concurrency error here: Sometimes the error loop keeps going, sometimes it stops and the GUI is shown
-    public static void main(String[] args) {
-        GameFrame frame = new GameFrame(new ArrayList<>() , new ArrayList<>());
-        frame.setLayout(new BorderLayout());
-        frame.setTitle("Drukkmakori sivatag - Game");
-        frame.setSize(1280, 720);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        ControlsPanel controlsPanel = new ControlsPanel(new ArrayList<String>(), new ArrayList<String>());
-        GamePanel gamePanel = new GamePanel();
-
-        controlsPanel.setPreferredSize(new Dimension(400, 720));
-        gamePanel.setPreferredSize(new Dimension(880, 720));
-
-        frame.getContentPane().add(controlsPanel, BorderLayout.WEST);
-        frame.getContentPane().add(gamePanel, BorderLayout.EAST);
-        //frame.pack();
-        frame.setVisible(true);
-    }*/
+    //TODO There is some concurrency error here: Sometimes the error loop keeps going, sometimes it stops and the GUI is shown
+//    public static void main(String[] args) {
+//        GameFrame frame = new GameFrame(new ArrayList<>() , new ArrayList<>());
+//        frame.setLayout(new BorderLayout());
+//        frame.setTitle("Drukkmakori sivatag - Game");
+//        frame.setSize(1280, 720);
+//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//
+//        ControlsPanel controlsPanel = new ControlsPanel(new ArrayList<String>(), new ArrayList<String>());
+//        GamePanel gamePanel = new GamePanel();
+//
+//        controlsPanel.setPreferredSize(new Dimension(400, 720));
+//        gamePanel.setPreferredSize(new Dimension(880, 720));
+//
+//        frame.getContentPane().add(controlsPanel, BorderLayout.WEST);
+//        frame.getContentPane().add(gamePanel, BorderLayout.EAST);
+//        //frame.pack();
+//        frame.setVisible(true);
+//    }
 }

@@ -10,6 +10,8 @@ public class GamePanel extends JPanel {
         super();
         setLayout(null);
         setBackground(Color.ORANGE);
+        setVisible(true);
+        setPreferredSize(new Dimension(880, 720));
     }
 
     public void draw(){
