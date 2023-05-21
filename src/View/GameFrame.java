@@ -51,17 +51,20 @@ public class GameFrame extends JFrame {
                 Class<?> target = elementTypes.get(networkElement.getClass());
                 JGameElement element = (JGameElement) target.getConstructors()[0].newInstance(0, 0);
                 element.setObject(networkElement);
-                if (target.equals(JPipe.class)) {
-                    Pipe object = (Pipe) element.getObject();
-                    for (NetworkElement connectionElement : object.getConnections()) {
-                        JGameElement connection = findElement(connectionElement);
-                        ((JPipe) element).addConnection(connection);
-                    }
-                    ((JPipe) element).calcMiddle();
-                }
                 gameElements.add(element);
             } catch (Exception e) {
                 System.out.println("Error loading element");
+            }
+        }
+    //TODO find better solution for pipe connection loading this is too getto even for me
+        for (JGameElement gameElement : gameElements) {
+            if (gameElement.getClass().equals(JPipe.class)) {
+                NetworkElement element = (NetworkElement) gameElement.getObject();
+                for (NetworkElement connectionElement : element.getConnections()) {
+                    JGameElement connection = findElement(connectionElement);
+                    ((JPipe) gameElement).addConnection(connection);
+                }
+                ((JPipe) gameElement).calcMiddle();
             }
         }
 

@@ -71,6 +71,7 @@ public class NetworkMap {
 		connect(elements.get(21), elements.get(9));
 		connect(elements.get(21), elements.get(10));
 		connect(elements.get(21), elements.get(13));
+		connect(elements.get(21), elements.get(15));
 
 		connect(elements.get(22), elements.get(17));
 		connect(elements.get(22), elements.get(15));
