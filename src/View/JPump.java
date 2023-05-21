@@ -1,6 +1,5 @@
 package View;
 
-import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 
@@ -28,12 +27,40 @@ public class JPump extends JGameElement {
         return pump;
     }
 
-    public void checkBroken(){
-
+    public void checkStates(){
+        if(pump.isDamaged() && pump.getWaterState()){
+            try {
+                setImage(new File("src\\View\\Images\\pumpBrokenWater.png"));
+            } catch (Exception e) {
+                System.out.println("Error loading image");
+            }
+        }
+        else if(pump.isDamaged() && !pump.getWaterState()){
+            try {
+                setImage(new File("src\\View\\Images\\pumpBroken.png"));
+            } catch (Exception e) {
+                System.out.println("Error loading image");
+            }
+        }
+        else if(!pump.isDamaged() && pump.getWaterState()){
+            try {
+                setImage(new File("src\\View\\Images\\pumpWater.png"));
+            } catch (Exception e) {
+                System.out.println("Error loading image");
+            }
+        }
+        else{
+            try {
+                setImage(new File("src\\View\\Images\\pump.png"));
+            } catch (Exception e) {
+                System.out.println("Error loading image");
+            }
+        }
     }
 
     @Override
     public void draw(Graphics g) {
-
+        checkStates();
+        super.draw(g);
     }
 }
