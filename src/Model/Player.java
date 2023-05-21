@@ -181,6 +181,11 @@ public abstract class Player {
         Proto.tab--;
     }
 
+    public void makePipeSticky(){
+        Proto.print("Nomad.makePipeSticky()");
+        position.setSticky();
+    }
+
     /**
      * This method is responsible for breaking NetworkElements, players can only break pipes
      */
