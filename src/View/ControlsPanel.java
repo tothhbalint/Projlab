@@ -29,6 +29,7 @@ public class ControlsPanel extends JPanel {
     private GameFrame gameFrame;
 
     public ControlsPanel(GameFrame gameFrame) {
+        this.gameFrame = gameFrame;
         //construct preComponents
         String[] moveToListItems = {"pos.connections1", "pos.connections2", "pos.connections3"};
         String[] pipeDisconnectListItems = {"pipe 1", "pipe2"};
@@ -193,13 +194,13 @@ public class ControlsPanel extends JPanel {
     }
 
     public void disableButtons() {
-        if (!gameFrame.isAbstractMethodImplemented(((Player) gameFrame.getCurrentPlayer().getObject()).getPosition(), "pickupPump")) {
+        if (!GameFrame.isAbstractMethodImplemented(((Player) gameFrame.getCurrentPlayer().getObject()).getPosition(), "pickupPump")) {
             takePumpButton.setEnabled(false);
         } else {
             takePumpButton.setEnabled(true);
         }
 
-        if (!gameFrame.isAbstractMethodImplemented(((Player) gameFrame.getCurrentPlayer().getObject()).getPosition(), "placePump")) {
+        if (!GameFrame.isAbstractMethodImplemented(((Player) gameFrame.getCurrentPlayer().getObject()).getPosition(), "placePump")) {
             placePumpButton.setEnabled(false);
         } else {
             if (!((Player) gameFrame.getCurrentPlayer().getObject()).getInventory().hasPump()) {
@@ -208,7 +209,7 @@ public class ControlsPanel extends JPanel {
                 placePumpButton.setEnabled(true);
         }
 
-        if (!gameFrame.isAbstractMethodImplemented(((Player) gameFrame.getCurrentPlayer().getObject()).getPosition(), "breakPipe")) {
+        if (!GameFrame.isAbstractMethodImplemented(((Player) gameFrame.getCurrentPlayer().getObject()).getPosition(), "breakPipe")) {
             breakPipeButton.setEnabled(false);
         } else {
             if (((Player) gameFrame.getCurrentPlayer().getObject()).getPosition().isDamaged()) {
@@ -219,13 +220,13 @@ public class ControlsPanel extends JPanel {
         }
 
 
-        if (!gameFrame.isAbstractMethodImplemented(((Player) gameFrame.getCurrentPlayer().getObject()).getPosition(), "connectPipe")) {
+        if (!GameFrame.isAbstractMethodImplemented(((Player) gameFrame.getCurrentPlayer().getObject()).getPosition(), "connectPipe")) {
             connectPipeButton.setEnabled(false);
         } else {
             connectPipeButton.setEnabled(true);
         }
 
-        if (!gameFrame.isAbstractMethodImplemented(((Player) (gameFrame.getCurrentPlayer().getObject())).getPosition(), "repair")) {
+        if (!GameFrame.isAbstractMethodImplemented(((Player) (gameFrame.getCurrentPlayer().getObject())).getPosition(), "repair")) {
             fixButton.setEnabled(false);
         } else {
             if (!((Player) gameFrame.getCurrentPlayer().getObject()).getPosition().isDamaged())
@@ -234,13 +235,13 @@ public class ControlsPanel extends JPanel {
                 fixButton.setEnabled(true);
         }
 
-        if (!gameFrame.isAbstractMethodImplemented(((Player) gameFrame.getCurrentPlayer().getObject()).getPosition(), "setSlippery")) {
+        if (!GameFrame.isAbstractMethodImplemented(((Player) gameFrame.getCurrentPlayer().getObject()).getPosition(), "setSlippery")) {
             pipeSlipperyButton.setEnabled(false);
         } else {
             pipeSlipperyButton.setEnabled(true);
         }
 
-        if (!gameFrame.isAbstractMethodImplemented(((Player) gameFrame.getCurrentPlayer().getObject()).getPosition(), "setSticky")) {
+        if (!GameFrame.isAbstractMethodImplemented(((Player) gameFrame.getCurrentPlayer().getObject()).getPosition(), "setSticky")) {
             pipeStickyButton.setEnabled(false);
         } else {
             pipeStickyButton.setEnabled(true);
@@ -248,7 +249,9 @@ public class ControlsPanel extends JPanel {
     }
 
     public void repaint() {
-        disableButtons();
         super.repaint();
+        if(this.gameFrame != null){
+            disableButtons();
+        }
     }
 }
