@@ -125,25 +125,19 @@ public class ControlsPanel extends JPanel {
         nomadPoints.setBounds(150, 600, 125, 25);
 
         //Add action listeners
-        breakPipeButton.addActionListener(e ->
-
-        {
-            Nomad nomad = (Nomad) gameFrame.getCurrentPlayer().getObject();
-            nomad.breakPipe();
+        breakPipeButton.addActionListener(e -> {
+            Player player = (Player) gameFrame.getCurrentPlayer().getObject();
+            player.breakPipe();
             gameFrame.setUserAction(true);
         });
 
-        takePumpButton.addActionListener(e ->
-
-        {
+        takePumpButton.addActionListener(e -> {
             Plumber plumber = (Plumber) gameFrame.getCurrentPlayer().getObject();
             plumber.takePump();
             gameFrame.setUserAction(true);
         });
 
-        placePumpButton.addActionListener(e ->
-
-        {
+        placePumpButton.addActionListener(e -> {
             Plumber plumber = (Plumber) gameFrame.getCurrentPlayer().getObject();
             plumber.placePump();
             gameFrame.setUserAction(true);
@@ -162,8 +156,8 @@ public class ControlsPanel extends JPanel {
         pipeStickyButton.addActionListener(e ->
 
         {
-            Nomad nomad = (Nomad) gameFrame.getCurrentPlayer().getObject();
-            nomad.makePipeSticky();
+            Player player = (Player) gameFrame.getCurrentPlayer().getObject();
+            player.makePipeSticky();
             gameFrame.setUserAction(true);
         });
 
