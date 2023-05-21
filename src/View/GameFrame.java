@@ -45,7 +45,7 @@ public class GameFrame extends JFrame {
         for (NetworkElement networkElement : game.getMap().getElements()) {
             try {
                 Class<?> target = elementTypes.get(networkElement.getClass());
-                JGameElement element = (JGameElement) target.getConstructor().newInstance(0, 0);
+                JGameElement element = (JGameElement) target.getConstructors()[0].newInstance(0, 0);
                 element.setObject(networkElement);
                 gameElements.add(element);
             } catch (Exception e) {
