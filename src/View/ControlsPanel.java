@@ -20,8 +20,12 @@ public class ControlsPanel extends JPanel {
     private JLabel pipeDisconnectLabel;
     private JList pipeDisconnectList;
     private JButton connectPipeButton;
-    private JLabel directPumpLabel;
-    private JList directPumpList;
+    private JLabel directFromLabel;
+    private String[] directItems = {"directOptions"};
+    private JComboBox<String> directFromList;
+    private JLabel directToLabel;
+    private JComboBox<String> directToList;
+    private JButton directPumpButton;
     private JList inventoryList;
     private JButton fixButton;
     private JLabel plumberPoints;
@@ -30,7 +34,7 @@ public class ControlsPanel extends JPanel {
 
     private ArrayList<String> moveToListItems = new ArrayList<>();
     private ArrayList<String> pipeDisconnectListItems = new ArrayList<>();
-    private ArrayList<String> directPumpListItems = new ArrayList<>();
+//    private ArrayList<String> directPumpListItems = new ArrayList<>();
     private ArrayList<String> inventoryListItems = new ArrayList<>();
     private DefaultListModel<String> inventoryListModel = new DefaultListModel<>();
 
@@ -62,8 +66,11 @@ public class ControlsPanel extends JPanel {
         pipeDisconnectLabel.setBounds(10, 225, 115, 25);
         pipeDisconnectList.setBounds(10, 245, 115, 125);
         connectPipeButton.setBounds(140, 400, 135, 40);
-        directPumpLabel.setBounds(10, 380, 100, 25);
-        directPumpList.setBounds(10, 400, 115, 135);
+        directPumpButton.setBounds(10, 490, 115, 20);
+        directFromLabel.setBounds(10, 375, 90, 25);
+        directFromList.setBounds(10, 400, 115, 25);
+        directToLabel.setBounds(10, 425, 20, 25);
+        directToList.setBounds(10, 450, 115, 25);
         inventoryList.setBounds(10, 575, 100, 75);
         fixButton.setBounds(140, 450, 135, 40);
         plumberPoints.setBounds(150, 570, 125, 25);
@@ -126,15 +133,23 @@ public class ControlsPanel extends JPanel {
             gameFrame.setUserAction(true);
         });
 
-
-        //TODO VALAKI OLDJA MEG HELYETTEM KISZALLTAM
-        directPumpList.addListSelectionListener(e ->
+        directPumpButton.addActionListener(e ->
 
         {
             Plumber plumber = (Plumber) gameFrame.getCurrentPlayer().getObject();
-            //plumber.directPump();
+//            plumber.directPump();
             gameFrame.setUserAction(true);
         });
+
+
+        //TODO VALAKI OLDJA MEG HELYETTEM KISZALLTAM
+//        directPumpList.addListSelectionListener(e ->
+//
+//        {
+//            Plumber plumber = (Plumber) gameFrame.getCurrentPlayer().getObject();
+//            //plumber.directPump();
+//            gameFrame.setUserAction(true);
+//        });
     }
 
 
@@ -142,7 +157,6 @@ public class ControlsPanel extends JPanel {
         //Delete the previous lists
         moveToListItems.clear();
         pipeDisconnectListItems.clear();
-        directPumpListItems.clear();
         inventoryListModel.clear();
 
         //inventoryListItems
@@ -172,14 +186,11 @@ public class ControlsPanel extends JPanel {
             }
         }
 
-        //TODO directPumpListItems, rosszul mukodik
-        if (((Player) gameFrame.getCurrentPlayer().getObject()).getPosition() instanceof Pump){
-            for (NetworkElement neighbour : ((Player) gameFrame.getCurrentPlayer().getObject()).getPosition().getConnections()){
-                if (neighbour instanceof Pipe && neighbour.getOutput() != ((Player) gameFrame.getCurrentPlayer().getObject()).getPosition()){
-                    directPumpListItems.add(neighbour.toString());
-                }
-            }
-        }
+//        if (((Player) gameFrame.getCurrentPlayer().getObject()).getPosition() instanceof Pump){
+//                    directPumpListItems.add(neighbour.toString());
+//                }
+//            }
+//        }
     }
     private void addComponents() {
 
@@ -208,9 +219,15 @@ public class ControlsPanel extends JPanel {
 
         add(connectPipeButton);
 
-        add(directPumpLabel);
+        add(directPumpButton);
 
-        add(directPumpList);
+        add(directFromLabel);
+
+        add(directFromList);
+
+        add (directToLabel);
+
+        add(directToList);
 
         add(inventoryList);
 
@@ -223,7 +240,6 @@ public class ControlsPanel extends JPanel {
     private void constructComponents(){
         //construct components
         moveToList = new JList(moveToListItems.toArray());
-        directPumpList = new JList(directPumpListItems.toArray());
         pipeDisconnectList = new JList(pipeDisconnectListItems.toArray());
         inventoryList = new JList(inventoryListModel.toArray());
         moveToLabel = new JLabel("Move to:");
@@ -236,13 +252,24 @@ public class ControlsPanel extends JPanel {
         inventoryLabel = new JLabel("Inventory:");
         pipeDisconnectLabel = new JLabel("Pipe disconnect:");
         connectPipeButton = new JButton("Connect pipe");
-        directPumpLabel = new JLabel("Direct pump:");
+        directPumpButton = new JButton("Direct pump");
+        directFromLabel = new JLabel("from");
+        directFromList = new JComboBox<>(directItems);
+        directToLabel = new JLabel("to");
+        directToList = new JComboBox<>(directItems);
         fixButton = new JButton("Fix");
         plumberPoints = new JLabel("Plumber points: 0");
         nomadPoints = new JLabel("Nomad points: 0");
     }
 
     public void disableButtons() {
+        if(!GameFrame.isAbstractMethodImplemented(((Player) gameFrame.getCurrentPlayer().getObject()).getPosition(), "direct")) {
+            directPumpButton.setEnabled(false);
+        } else {
+            directPumpButton.setEnabled(true);
+        }
+
+
         if (!GameFrame.isAbstractMethodImplemented(((Player) gameFrame.getCurrentPlayer().getObject()).getPosition(), "pickupPump")) {
             takePumpButton.setEnabled(false);
         } else {
