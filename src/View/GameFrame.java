@@ -35,6 +35,7 @@ public class GameFrame extends JFrame {
 
 
     private JPlayer currentPlayer;
+    private int currentNomadIndex = 0, currentPlumberIndex = 0;
 
     public GameFrame(ArrayList<String> plumberNames, ArrayList<String> nomadNames) {
         elementTypes.put(Source.class, JSource.class);
@@ -115,8 +116,14 @@ public class GameFrame extends JFrame {
         boolean chosen = false;
         while(!chosen){ //added this, so that stuck players can be skipped
             switch (round % 2) {
-                case 0 -> currentPlayer = plumbers.get(round % plumbers.size());
-                case 1 -> currentPlayer = nomads.get(round % nomads.size());
+                case 0 -> {
+                    currentPlayer = plumbers.get(currentPlumberIndex);
+                    currentPlumberIndex = (currentPlumberIndex + 1) % plumbers.size();
+                }
+                case 1 -> {
+                    currentPlayer = nomads.get(currentNomadIndex);
+                    currentNomadIndex = (currentNomadIndex + 1) % nomads.size();
+                }
                 default -> {
                 }
             }

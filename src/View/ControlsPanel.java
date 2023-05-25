@@ -194,16 +194,6 @@ public class ControlsPanel extends JPanel {
                 lock.notifyAll();
             }
         });
-
-
-        //TODO VALAKI OLDJA MEG HELYETTEM KISZALLTAM
-//        directPumpList.addListSelectionListener(e ->
-//
-//        {
-//            Plumber plumber = (Plumber) gameFrame.getCurrentPlayer().getObject();
-//            //plumber.directPump();
-//            gameFrame.setUserAction(true);
-//        });
     }
 
 
@@ -217,7 +207,11 @@ public class ControlsPanel extends JPanel {
             //inventoryListItems
             if (gameFrame.getCurrentPlayer().getObject() instanceof Plumber) {
                 for (String item : ((Plumber) gameFrame.getCurrentPlayer().getObject()).getInventory().toString().split(" ")) {
-                    if (item.contains("Pump") || item.contains("Pipe")) {
+                    if (item.contains("Pump") ){
+                        inventoryListModel.addElement("Pump");
+                    } else if (item.contains("Pipe")){
+                        inventoryListModel.addElement("Pipe");
+                    }else {
                         inventoryListModel.addElement(item.trim());
                     }
                 }
@@ -241,18 +235,33 @@ public class ControlsPanel extends JPanel {
 
             //Update the lists
             if (((Player) gameFrame.getCurrentPlayer().getObject()).getPosition() instanceof Pump) {
-                ArrayList<NetworkElement> tempList = ((Pump) ((Player) gameFrame.getCurrentPlayer().getObject()).getPosition()).getConnections();
+                Pump pump = ((Pump) ((Player) gameFrame.getCurrentPlayer().getObject()).getPosition());
+                ArrayList<NetworkElement> tempList = pump.getConnections();
+                NetworkElement in = pump.getInput();
+                NetworkElement out = pump.getOutput();
                 String[] temp = new String[tempList.size()];
                 for (int i = 0; i < tempList.size(); i++) {
                     temp[i] = tempList.get(i).toString();
                 }
 
-                //TODO ezt ugy lehetne valahogy szebben de most huha
                 directItems = temp;
-                directFromList = new JComboBox<>(directItems);
-                directFromList.setBounds(10, 400, 115, 25);
-                directToList = new JComboBox<>(directItems);
-                directToList.setBounds(10, 450, 115, 25);
+                directFromList.removeAllItems();
+                directToList.removeAllItems();
+                for (String item : directItems) {
+                    directFromList.addItem(item);
+                    directToList.addItem(item);
+                }
+                for (int i = 0; i < tempList.size(); i++) {
+                    if (temp[i].equals(out.toString())) {
+                        directToList.setSelectedIndex(i);
+                    }
+                    if (temp[i].equals(out.toString())) {
+                        directToList.setSelectedIndex(i);
+                    }
+                }
+            }else{
+                directFromList.removeAllItems();
+                directToList.removeAllItems();
             }
 
             //Update the lists
@@ -347,7 +356,7 @@ public class ControlsPanel extends JPanel {
     public void disableButtons() {
         synchronized (lock) {
             Player player = (Player) gameFrame.getCurrentPlayer().getObject();
-            boolean checkDirectPumpEnabled = player.getPosition() instanceof Pump && player instanceof Plumber;
+            boolean checkDirectPumpEnabled = player.getPosition() instanceof Pump;
             if (checkDirectPumpEnabled) {
                 directPumpButton.setEnabled(true);
             } else {
@@ -355,7 +364,7 @@ public class ControlsPanel extends JPanel {
             }
 
 
-            boolean checkTakePumpEnabled = player.getPosition() instanceof Cistern && player instanceof Plumber;
+            boolean checkTakePumpEnabled = player.getPosition() instanceof Cistern && player instanceof Plumber && !player.getInventory().isFull();
             if (checkTakePumpEnabled) {
                 takePumpButton.setEnabled(true);
             } else {
@@ -370,7 +379,7 @@ public class ControlsPanel extends JPanel {
             }
 
 
-            boolean checkBreakPipeEnabled = player.getPosition() instanceof Pipe && !((Pipe) player.getPosition()).isRepairProtected();
+            boolean checkBreakPipeEnabled = player.getPosition() instanceof Pipe && !player.getPosition().isDamaged() && !((Pipe) player.getPosition()).isRepairProtected();
             if (checkBreakPipeEnabled) {
                 breakPipeButton.setEnabled(true);
             } else {
