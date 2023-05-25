@@ -8,6 +8,7 @@ import Model.*;
 
 public class ControlsPanel extends JPanel {
 
+    private final Object lock;
     private JList moveToList;
     private JLabel moveToLabel;
     private JButton breakPipeButton;
@@ -38,7 +39,8 @@ public class ControlsPanel extends JPanel {
     private ArrayList<String> inventoryListItems = new ArrayList<>();
     private DefaultListModel<String> inventoryListModel = new DefaultListModel<>();
 
-    public ControlsPanel(GameFrame gameFrame) {
+    public ControlsPanel(GameFrame gameFrame, Object lock) {
+        this.lock = lock;
         this.gameFrame = gameFrame;
 
         this.updateLists();
@@ -82,7 +84,11 @@ public class ControlsPanel extends JPanel {
         {
             Player player = (Player) gameFrame.getCurrentPlayer().getObject();
             player.breakPipe();
-            gameFrame.setUserAction(true);
+            synchronized (lock) {
+                gameFrame.setUserAction(true);
+                lock.notifyAll();
+            }
+            System.out.println("break pipe");
         });
         //HANDLE NOMAD CAST
         takePumpButton.addActionListener(e ->
@@ -90,7 +96,11 @@ public class ControlsPanel extends JPanel {
         {
             Plumber plumber = (Plumber) gameFrame.getCurrentPlayer().getObject();
             plumber.takePump();
-            gameFrame.setUserAction(true);
+            synchronized (lock) {
+                gameFrame.setUserAction(true);
+                lock.notifyAll();
+            }
+            System.out.println("take pump");
         });
 
         placePumpButton.addActionListener(e ->
@@ -98,7 +108,10 @@ public class ControlsPanel extends JPanel {
         {
             Plumber plumber = (Plumber) gameFrame.getCurrentPlayer().getObject();
             plumber.placePump();
-            gameFrame.setUserAction(true);
+            synchronized (lock) {
+                gameFrame.setUserAction(true);
+                lock.notifyAll();
+            }
         });
 
         //TODO debug for Plumbers and Nomads
@@ -106,7 +119,11 @@ public class ControlsPanel extends JPanel {
         {
             Nomad nomad = (Nomad) gameFrame.getCurrentPlayer().getObject();
             nomad.makePipeSlippery();
-            gameFrame.setUserAction(true);
+            synchronized (lock) {
+                gameFrame.setUserAction(true);
+                lock.notifyAll();
+            }
+            System.out.println("make pipe slippery");
         });
 
         pipeStickyButton.addActionListener(e ->
@@ -114,7 +131,11 @@ public class ControlsPanel extends JPanel {
         {
             Player player = (Player) gameFrame.getCurrentPlayer().getObject();
             player.makePipeSticky();
-            gameFrame.setUserAction(true);
+            synchronized (lock) {
+                gameFrame.setUserAction(true);
+                lock.notifyAll();
+            }
+            System.out.println("make pipe sticky");
         });
 
         connectPipeButton.addActionListener(e ->
@@ -122,7 +143,11 @@ public class ControlsPanel extends JPanel {
         {
             Plumber plumber = (Plumber) gameFrame.getCurrentPlayer().getObject();
             plumber.connectPipe();
-            gameFrame.setUserAction(true);
+            synchronized (lock) {
+                gameFrame.setUserAction(true);
+                lock.notifyAll();
+            }
+            System.out.println("connect pipe");
         });
 
         fixButton.addActionListener(e ->
@@ -130,7 +155,11 @@ public class ControlsPanel extends JPanel {
         {
             Plumber plumber = (Plumber) gameFrame.getCurrentPlayer().getObject();
             plumber.repair();
-            gameFrame.setUserAction(true);
+            synchronized (lock) {
+                gameFrame.setUserAction(true);
+                lock.notifyAll();
+            }
+            System.out.println("fix pipe");
         });
 
         directPumpButton.addActionListener(e ->
@@ -144,7 +173,10 @@ public class ControlsPanel extends JPanel {
                 return;
             }
             player.directPump(from,to);
-            gameFrame.setUserAction(true);
+            synchronized (lock) {
+                gameFrame.setUserAction(true);
+                lock.notifyAll();
+            }
         });
 
 
@@ -160,54 +192,54 @@ public class ControlsPanel extends JPanel {
 
 
     private void updateLists(){
-        //Delete the previous lists
-        moveToListItems.clear();
-        pipeDisconnectListItems.clear();
-        inventoryListModel.clear();
+        synchronized (lock) {
+            //Delete the previous lists
+            moveToListItems.clear();
+            pipeDisconnectListItems.clear();
+            inventoryListModel.clear();
 
-        //inventoryListItems
-        if (gameFrame.getCurrentPlayer().getObject() instanceof Plumber){
-            for (String item : ((Plumber) gameFrame.getCurrentPlayer().getObject()).getInventory().toString().split(" ")) {
-                if (item.contains("Pump") || item.contains("Pipe")) {
+            //inventoryListItems
+            if (gameFrame.getCurrentPlayer().getObject() instanceof Plumber) {
+                for (String item : ((Plumber) gameFrame.getCurrentPlayer().getObject()).getInventory().toString().split(" ")) {
+                    if (item.contains("Pump") || item.contains("Pipe")) {
+                        inventoryListModel.addElement(item.trim());
+                    }
+                }
+            } else {
+                for (String item : ((Nomad) gameFrame.getCurrentPlayer().getObject()).getInventory().toString().split(" ")) {
                     inventoryListModel.addElement(item.trim());
                 }
             }
-        }
-        else{
-            for (String item : ((Nomad) gameFrame.getCurrentPlayer().getObject()).getInventory().toString().split(" ")) {
-                inventoryListModel.addElement(item.trim());
-            }
-        }
 
 
-        //moveToListItems
-        for (NetworkElement neighbour : ((Player) gameFrame.getCurrentPlayer().getObject()).getPosition().getConnections()){
-            moveToListItems.add(neighbour.toString());
-        }
-
-        //pipeDisconnectListItems
-        for (NetworkElement neighbour : ((Player) gameFrame.getCurrentPlayer().getObject()).getPosition().getConnections()){
-            if (neighbour instanceof Pipe){
-                pipeDisconnectListItems.add(neighbour.toString());
-            }
-        }
-
-        //Update the lists
-        if(((Player) gameFrame.getCurrentPlayer().getObject()).getPosition() instanceof Pump){
-            ArrayList<NetworkElement> tempList = ((Pump) ((Player) gameFrame.getCurrentPlayer().getObject()).getPosition()).getConnections();
-            String[] temp = new String[tempList.size()];
-            for (int i = 0; i < tempList.size(); i++) {
-               temp[i]  = tempList.get(i).toString();
+            //moveToListItems
+            for (NetworkElement neighbour : ((Player) gameFrame.getCurrentPlayer().getObject()).getPosition().getConnections()) {
+                moveToListItems.add(neighbour.toString());
             }
 
-            //TODO ezt ugy lehetne valahogy szebben de most huha
-            directItems = temp;
-            directFromList = new JComboBox<>(directItems);
-            directFromList.setBounds(10, 400, 115, 25);
-            directToList = new JComboBox<>(directItems);
-            directToList.setBounds(10, 450, 115, 25);
-        }
+            //pipeDisconnectListItems
+            for (NetworkElement neighbour : ((Player) gameFrame.getCurrentPlayer().getObject()).getPosition().getConnections()) {
+                if (neighbour instanceof Pipe) {
+                    pipeDisconnectListItems.add(neighbour.toString());
+                }
+            }
 
+            //Update the lists
+            if (((Player) gameFrame.getCurrentPlayer().getObject()).getPosition() instanceof Pump) {
+                ArrayList<NetworkElement> tempList = ((Pump) ((Player) gameFrame.getCurrentPlayer().getObject()).getPosition()).getConnections();
+                String[] temp = new String[tempList.size()];
+                for (int i = 0; i < tempList.size(); i++) {
+                    temp[i] = tempList.get(i).toString();
+                }
+
+                //TODO ezt ugy lehetne valahogy szebben de most huha
+                directItems = temp;
+                directFromList = new JComboBox<>(directItems);
+                directFromList.setBounds(10, 400, 115, 25);
+                directToList = new JComboBox<>(directItems);
+                directToList.setBounds(10, 450, 115, 25);
+            }
+        }
     }
     private void addComponents() {
 
@@ -280,81 +312,87 @@ public class ControlsPanel extends JPanel {
     }
 
     public void disableButtons() {
-        if(!GameFrame.isAbstractMethodImplemented(((Player) gameFrame.getCurrentPlayer().getObject()).getPosition(), "direct")) {
-            directPumpButton.setEnabled(false);
-        } else {
-            directPumpButton.setEnabled(true);
-        }
+        synchronized (lock) {
+            if (!GameFrame.isAbstractMethodImplemented(((Player) gameFrame.getCurrentPlayer().getObject()).getPosition(), "direct")) {
+                directPumpButton.setEnabled(false);
+            } else {
+                directPumpButton.setEnabled(true);
+            }
 
 
-        if (!GameFrame.isAbstractMethodImplemented(((Player) gameFrame.getCurrentPlayer().getObject()).getPosition(), "pickupPump")) {
-            takePumpButton.setEnabled(false);
-        } else {
-            takePumpButton.setEnabled(true);
-        }
+            if (!GameFrame.isAbstractMethodImplemented(((Player) gameFrame.getCurrentPlayer().getObject()).getPosition(), "pickupPump")) {
+                takePumpButton.setEnabled(false);
+            } else {
+                takePumpButton.setEnabled(true);
+            }
 
-        if (!GameFrame.isAbstractMethodImplemented(((Player) gameFrame.getCurrentPlayer().getObject()).getPosition(), "placePump")) {
-            placePumpButton.setEnabled(false);
-        } else {
-            if (!((Player) gameFrame.getCurrentPlayer().getObject()).getInventory().hasPump()) {
+            if (!GameFrame.isAbstractMethodImplemented(((Player) gameFrame.getCurrentPlayer().getObject()).getPosition(), "placePump")) {
                 placePumpButton.setEnabled(false);
-            } else
-                placePumpButton.setEnabled(true);
-        }
+            } else {
+                if (!((Player) gameFrame.getCurrentPlayer().getObject()).getInventory().hasPump()) {
+                    placePumpButton.setEnabled(false);
+                } else
+                    placePumpButton.setEnabled(true);
+            }
 
-        if (!GameFrame.isAbstractMethodImplemented(((Player) gameFrame.getCurrentPlayer().getObject()).getPosition(), "breakPipe")) {
-            breakPipeButton.setEnabled(false);
-        } else {
-            if (((Player) gameFrame.getCurrentPlayer().getObject()).getPosition().isDamaged()) {
+            if (!GameFrame.isAbstractMethodImplemented(((Player) gameFrame.getCurrentPlayer().getObject()).getPosition(), "breakPipe")) {
                 breakPipeButton.setEnabled(false);
             } else {
-                breakPipeButton.setEnabled(true);
+                if (((Player) gameFrame.getCurrentPlayer().getObject()).getPosition().isDamaged()) {
+                    breakPipeButton.setEnabled(false);
+                } else {
+                    breakPipeButton.setEnabled(true);
+                }
             }
-        }
 
-        if (!GameFrame.isAbstractMethodImplemented(((Player) gameFrame.getCurrentPlayer().getObject()), "connectPipe")) {
-            connectPipeButton.setEnabled(false);
-        } else {
-            if (!GameFrame.isAbstractMethodImplemented(((Player) gameFrame.getCurrentPlayer().getObject()).getPosition(), "connectPipe")) {
-                connectPipeButton.setEnabled(false);
-            }else if (!((Player) gameFrame.getCurrentPlayer().getObject()).getInventory().hasPipe()) {
+            if (!GameFrame.isAbstractMethodImplemented(((Player) gameFrame.getCurrentPlayer().getObject()), "connectPipe")) {
                 connectPipeButton.setEnabled(false);
             } else {
-                connectPipeButton.setEnabled(true);
+                if (!GameFrame.isAbstractMethodImplemented(((Player) gameFrame.getCurrentPlayer().getObject()).getPosition(), "connectPipe")) {
+                    connectPipeButton.setEnabled(false);
+                } else if (!((Player) gameFrame.getCurrentPlayer().getObject()).getInventory().hasPipe()) {
+                    connectPipeButton.setEnabled(false);
+                } else {
+                    connectPipeButton.setEnabled(true);
+                }
             }
-        }
 
-        if (!GameFrame.isAbstractMethodImplemented(((Player) (gameFrame.getCurrentPlayer().getObject())).getPosition(), "repair")) {
-            fixButton.setEnabled(false);
-        } else {
-            if (!((Player) gameFrame.getCurrentPlayer().getObject()).getPosition().isDamaged())
+            if (!GameFrame.isAbstractMethodImplemented(((Player) (gameFrame.getCurrentPlayer().getObject())).getPosition(), "repair")) {
                 fixButton.setEnabled(false);
-            else
-                fixButton.setEnabled(true);
-        }
+            } else {
+                if (!((Player) gameFrame.getCurrentPlayer().getObject()).getPosition().isDamaged())
+                    fixButton.setEnabled(false);
+                else
+                    fixButton.setEnabled(true);
+            }
 
-        if (!GameFrame.isAbstractMethodImplemented((gameFrame.getCurrentPlayer().getObject()), "makePipeSlippery")) {
-            pipeSlipperyButton.setEnabled(false);
-        } else {
-            if(!GameFrame.isAbstractMethodImplemented(((Player) gameFrame.getCurrentPlayer().getObject()).getPosition(), "setSlippery"))
+            if (!GameFrame.isAbstractMethodImplemented((gameFrame.getCurrentPlayer().getObject()), "makePipeSlippery")) {
                 pipeSlipperyButton.setEnabled(false);
-            else
-                pipeSlipperyButton.setEnabled(true);
-        }
+            } else {
+                if (!GameFrame.isAbstractMethodImplemented(((Player) gameFrame.getCurrentPlayer().getObject()).getPosition(), "setSlippery"))
+                    pipeSlipperyButton.setEnabled(false);
+                else
+                    pipeSlipperyButton.setEnabled(true);
+            }
 
-        if (!GameFrame.isAbstractMethodImplemented(((Player) gameFrame.getCurrentPlayer().getObject()).getPosition(), "setSticky")) {
-            pipeStickyButton.setEnabled(false);
-        } else {
-            pipeStickyButton.setEnabled(true);
+            if (!GameFrame.isAbstractMethodImplemented(((Player) gameFrame.getCurrentPlayer().getObject()).getPosition(), "setSticky")) {
+                pipeStickyButton.setEnabled(false);
+            } else {
+                pipeStickyButton.setEnabled(true);
+            }
         }
     }
 
+    @Override
     public void repaint() {
-        super.repaint();
         super.revalidate();
+        super.repaint();
         if (this.gameFrame != null) {
-            disableButtons();
-            updateLists();
+            synchronized (lock) {
+                disableButtons();
+                updateLists();
+            }
         }
+        System.out.println("repaint");
     }
 }

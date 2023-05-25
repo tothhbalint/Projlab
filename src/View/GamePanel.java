@@ -14,10 +14,10 @@ public class GamePanel extends JPanel {
         setPreferredSize(new Dimension(880, 720));
     }
 
-    public void draw(){
+    @Override
+    public void repaint(){
+        super.revalidate();
         super.repaint();
-        revalidate();
-
     }
 
     @Override

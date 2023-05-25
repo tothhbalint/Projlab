@@ -26,11 +26,14 @@ public class GameFrame extends JFrame {
 
     private int round = 0;
 
-    private boolean userAction = false;
+    private volatile boolean userAction = false;
+
+    private final Object lock;
 
     private JPlayer currentPlayer;
 
-    public GameFrame(ArrayList<String> plumberNames, ArrayList<String> nomadNames) {
+    public GameFrame(ArrayList<String> plumberNames, ArrayList<String> nomadNames, Object lock) {
+        this.lock = lock;
         elementTypes.put(Source.class, JSource.class);
         elementTypes.put(Pipe.class, JPipe.class);
         elementTypes.put(Pump.class, JPump.class);
@@ -132,11 +135,13 @@ public class GameFrame extends JFrame {
             step();
 
             //TODO wait for player input
-            while (!userAction) {
-                try {
-                    Thread.sleep(100);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+            synchronized (lock) {
+                while (!userAction) {
+                    try {
+                        lock.wait(); // Release the lock and wait until notified
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
             userAction = false;
@@ -145,8 +150,8 @@ public class GameFrame extends JFrame {
     }
 
     public void draw(){
-        repaint();
         revalidate();
+        repaint();
     }
 
     public JGameElement findElement(NetworkElement networkElement) {
