@@ -102,34 +102,31 @@ public class MenuPanel extends JPanel {
                 String name = JOptionPane.showInputDialog("Please enter the name of nomad player " + (i + 1));
                 nomadNames.add(name);
             }
-            AtomicReference<GameFrame> frame = new AtomicReference<>();
-            SwingUtilities.invokeLater(() -> {
-                frame.set(new GameFrame(plumberNames, nomadNames));
-                frame.get().setLayout(new BorderLayout());
-                frame.get().setTitle("Drukkmakori sivatag - Game");
-                frame.get().setSize(1280, 720);
-                frame.get().setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                frame.get().loadElements(plumberNames, nomadNames);
+
+                GameFrame frame = new GameFrame(plumberNames, nomadNames);
+                frame.setLayout(new BorderLayout());
+                frame.setTitle("Drukkmakori sivatag - Game");
+                frame.setSize(1280, 720);
+                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                frame.loadElements(plumberNames, nomadNames);
 
                 GamePanel gamePanel = new GamePanel();
-                ControlsPanel controlsPanel = new ControlsPanel(frame.get());
+                ControlsPanel controlsPanel = new ControlsPanel(frame);
 
                 controlsPanel.setPreferredSize(new Dimension(400, 720));
                 gamePanel.setPreferredSize(new Dimension(880, 720));
 
-                frame.get().getContentPane().add(controlsPanel, BorderLayout.WEST);
-                frame.get().getContentPane().add(gamePanel, BorderLayout.CENTER);
-                frame.get().setVisible(true);
-                frame.get().pack();
+                frame.getContentPane().add(controlsPanel, BorderLayout.WEST);
+                frame.getContentPane().add(gamePanel, BorderLayout.CENTER);
+                frame.setVisible(true);
+                frame.pack();
                 Thread stepperThread = new Thread(new Runnable() {
                     @Override
                     public void run() {
-                        frame.get().runGame();
+                        frame.runGame();
                     }
                 });
-
                 stepperThread.start();
-            });
         });
     }
 

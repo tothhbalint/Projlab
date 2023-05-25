@@ -351,6 +351,7 @@ public class ControlsPanel extends JPanel {
 
     public void repaint() {
         super.repaint();
+        super.revalidate();
         if (this.gameFrame != null) {
             disableButtons();
             updateLists();

@@ -146,6 +146,7 @@ public class GameFrame extends JFrame {
 
     public void draw(){
         repaint();
+        revalidate();
     }
 
     public JGameElement findElement(NetworkElement networkElement) {
