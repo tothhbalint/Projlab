@@ -43,8 +43,8 @@ public class ControlsPanel extends JPanel {
         this.lock = lock;
         this.gameFrame = gameFrame;
 
-        this.updateLists();
         this.constructComponents();
+        this.updateLists();
         this.disableButtons();
 
         //adjust size and set layout
@@ -210,9 +210,9 @@ public class ControlsPanel extends JPanel {
     private void updateLists(){
         synchronized (lock) {
             //Delete the previous lists
-            //moveToListItems.clear();
-            //pipeDisconnectListItems.clear();
-            //inventoryListModel.clear();
+            moveToListItems.clear();
+            pipeDisconnectListItems.clear();
+            inventoryListModel.clear();
 
             //inventoryListItems
             if (gameFrame.getCurrentPlayer().getObject() instanceof Plumber) {
@@ -226,7 +226,6 @@ public class ControlsPanel extends JPanel {
                     inventoryListModel.addElement(item.trim());
                 }
             }
-
 
             //moveToListItems
             for (NetworkElement neighbour : ((Player) gameFrame.getCurrentPlayer().getObject()).getPosition().getConnections()) {
@@ -257,9 +256,14 @@ public class ControlsPanel extends JPanel {
             }
 
             //Update the lists
-            moveToList = new JList(moveToListItems.toArray());
-            pipeDisconnectList = new JList(pipeDisconnectListItems.toArray());
-            inventoryList = new JList(inventoryListModel);
+            // Update moveToList
+            moveToList.setListData(moveToListItems.toArray());
+
+            // Update pipeDisconnectList
+            pipeDisconnectList.setListData(pipeDisconnectListItems.toArray());
+
+            // Update inventoryList
+            inventoryList.setModel(inventoryListModel);
         }
     }
 
