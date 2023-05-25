@@ -58,6 +58,7 @@ public class GameFrame extends JFrame {
         getContentPane().add(controlsPanel, BorderLayout.WEST);
         getContentPane().add(gamePanel, BorderLayout.CENTER);
         setVisible(true);
+        setResizable(false);
         pack();
     }
 
@@ -111,13 +112,22 @@ public class GameFrame extends JFrame {
             ((NetworkElement) gameElement.getObject()).tick();
         }
 
-        switch (round % 2) {
-            case 0:
-                currentPlayer = plumbers.get(round % plumbers.size());
-            case 1:
-                currentPlayer = nomads.get(round % nomads.size());
-            default:
+        boolean chosen = false;
+        while(!chosen){ //added this, so that stuck players can be skipped
+            switch (round % 2) {
+                case 0 -> currentPlayer = plumbers.get(round % plumbers.size());
+                case 1 -> currentPlayer = nomads.get(round % nomads.size());
+                default -> {
+                }
+            }
+            if(((Player) currentPlayer.getObject()).getStuck()){
+                round++;
+            } else {
+                chosen = true;
+            }
         }
+
+        System.out.println("Round: " + round + " Current player: " + currentPlayer.getName() + " Position: " + currentPlayer.getObject().toString());
 
         nomadPoints = game.getMap().getNomadPoints();
         plumberPoints = game.getMap().getPlumberPoints();
@@ -151,6 +161,7 @@ public class GameFrame extends JFrame {
     public void runGame() {
         while (!gameOver) {
             step();
+            draw();
             synchronized (lock) {
                 while (!userAction) {
                     try {
@@ -161,7 +172,6 @@ public class GameFrame extends JFrame {
                 }
             }
             userAction = false;
-            draw();
         }
     }
 
