@@ -5,13 +5,15 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class GamePanel extends JPanel {
+    ArrayList<JGameElement> elements = new ArrayList<>();
 
-    public GamePanel(){
+    public GamePanel(ArrayList<JGameElement> _elements){
         super();
         setLayout(null);
         setBackground(Color.ORANGE);
         setVisible(true);
         setPreferredSize(new Dimension(880, 720));
+        elements = _elements;
     }
 
     @Override
@@ -29,13 +31,10 @@ public class GamePanel extends JPanel {
         }
     }
 
-    public void addElement(JGameElement element){
-        add(element);
+    private void giveCoordinates(){
+        for(int i = 0; i < elements.size(); i++){
+            JGameElement element = elements.get(i);
+            //element.move(element.setX(), element.getY());
+        }
     }
-
-    public void removeElement(JGameElement element){
-        remove(element);
-    }
-
-
 }

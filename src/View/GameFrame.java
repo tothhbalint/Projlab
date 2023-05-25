@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class GameFrame extends JFrame {
-    ArrayList<JGameElement> gameElements = new ArrayList<>();
+    static ArrayList<JGameElement> gameElements = new ArrayList<>();
 
     ArrayList<JNomad> nomads = new ArrayList<>();
 
@@ -50,7 +50,7 @@ public class GameFrame extends JFrame {
 
         loadElements(plumberNames, nomadNames);
 
-        gamePanel = new GamePanel();
+        gamePanel = new GamePanel(gameElements);
         controlsPanel = new ControlsPanel(this, lock);
 
         controlsPanel.setPreferredSize(new Dimension(400, 720));
@@ -147,21 +147,6 @@ public class GameFrame extends JFrame {
         round++;
     }
 
-    public static boolean isAbstractMethodImplemented(Object derived, String methodName) {
-        try {
-            Method method = derived.getClass().getMethod(methodName);
-
-            Class<?>[] declaredExceptions = method.getExceptionTypes();
-
-            for (Class<?> e : declaredExceptions) {
-                if (e.equals(UnsupportedOperationException.class)) return false;
-            }
-        } catch (NoSuchMethodException e) {
-            return false;
-        }
-        return true;
-    }
-
     /**
     The main loop of the game
      */
@@ -189,7 +174,7 @@ public class GameFrame extends JFrame {
         controlsPanel.repaint();
     }
 
-    public JGameElement findElement(NetworkElement networkElement) {
+    public static JGameElement findElement(NetworkElement networkElement) {
         for (JGameElement gameElement : gameElements) {
             if (gameElement.getObject().equals(networkElement)) return gameElement;
         }

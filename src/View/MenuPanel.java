@@ -1,8 +1,10 @@
 package View;
 
+
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.concurrent.atomic.AtomicReference;
+import com.formdev.flatlaf.themes.FlatMacDarkLaf;
+
 import javax.swing.*;
 
 public class MenuPanel extends JPanel {
@@ -116,6 +118,16 @@ public class MenuPanel extends JPanel {
 
 
     public static void main(String[] args) {
+        try {
+            UIManager.setLookAndFeel( new FlatMacDarkLaf());
+            UIManager.put( "Button.arc", 15);
+            UIManager.put( "Component.arc", 15);
+            UIManager.put( "ProgressBar.arc", 15);
+            UIManager.put( "TextComponent.arc", 15);
+        } catch( Exception ex ) {
+            System.err.println( "Failed to initialize LaF" );
+        }
+
         MenuFrame frame = new MenuFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().add(new MenuPanel());
