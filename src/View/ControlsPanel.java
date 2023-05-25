@@ -190,6 +190,25 @@ public class ControlsPanel extends JPanel {
             }
         });
 
+
+        pipeDisconnectList.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (e.getClickCount() == 2) {
+                    if (moveToList.getSelectedIndex() != -1) {
+                        Plumber player = (Plumber) gameFrame.getCurrentPlayer().getObject();
+                        NetworkElement disConnect = player.getPosition().getConnections().get(pipeDisconnectList.getSelectedIndex());
+                        player.disconnectPipe(disConnect);
+                        synchronized (lock) {
+                            gameFrame.setUserAction(true);
+                            lock.notifyAll();
+                        }
+                        System.out.println("move to");
+                    }
+                }
+            }
+        });
+
         fixButton.addActionListener(e -> {
             Plumber plumber = (Plumber) gameFrame.getCurrentPlayer().getObject();
             plumber.repair();
@@ -244,12 +263,15 @@ public class ControlsPanel extends JPanel {
 
             //moveToListItems
             for (NetworkElement neighbour : ((Player) gameFrame.getCurrentPlayer().getObject()).getPosition().getConnections()) {
-                if(!neighbour.isOccupied())
+                if (!neighbour.isOccupied())
                     moveToListItems.add(neighbour.toString());
             }
 
             //pipeDisconnectListItems
             for (NetworkElement neighbour : ((Player) gameFrame.getCurrentPlayer().getObject()).getPosition().getConnections()) {
+                if (gameFrame.getCurrentPlayer().getObject() instanceof Nomad) {
+                    break;
+                }
                 if (neighbour instanceof Pipe) {
                     pipeDisconnectListItems.add(neighbour.toString());
                 }
