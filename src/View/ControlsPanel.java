@@ -252,8 +252,8 @@ public class ControlsPanel extends JPanel {
                     directToList.addItem(item);
                 }
                 for (int i = 0; i < tempList.size(); i++) {
-                    if (temp[i].equals(out.toString())) {
-                        directToList.setSelectedIndex(i);
+                    if (temp[i].equals(in.toString())) {
+                        directFromList.setSelectedIndex(i);
                     }
                     if (temp[i].equals(out.toString())) {
                         directToList.setSelectedIndex(i);
