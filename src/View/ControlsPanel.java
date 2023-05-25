@@ -134,10 +134,16 @@ public class ControlsPanel extends JPanel {
         });
 
         directPumpButton.addActionListener(e ->
-
         {
-            Plumber plumber = (Plumber) gameFrame.getCurrentPlayer().getObject();
-//            plumber.directPump();
+            Player player = (Player) gameFrame.getCurrentPlayer().getObject();
+            ArrayList<NetworkElement> networkElements = player.getPosition().getConnections();
+            NetworkElement from = networkElements.get(directFromList.getSelectedIndex());
+            NetworkElement to = networkElements.get(directToList.getSelectedIndex());
+            if(from == to){
+                JOptionPane.showMessageDialog(null, "You can't direct pump to the same element!");
+                return;
+            }
+            player.directPump(from,to);
             gameFrame.setUserAction(true);
         });
 
@@ -186,11 +192,22 @@ public class ControlsPanel extends JPanel {
             }
         }
 
-//        if (((Player) gameFrame.getCurrentPlayer().getObject()).getPosition() instanceof Pump){
-//                    directPumpListItems.add(neighbour.toString());
-//                }
-//            }
-//        }
+        //Update the lists
+        if(((Player) gameFrame.getCurrentPlayer().getObject()).getPosition() instanceof Pump){
+            ArrayList<NetworkElement> tempList = ((Pump) ((Player) gameFrame.getCurrentPlayer().getObject()).getPosition()).getConnections();
+            String[] temp = new String[tempList.size()];
+            for (int i = 0; i < tempList.size(); i++) {
+               temp[i]  = tempList.get(i).toString();
+            }
+
+            //TODO ezt ugy lehetne valahogy szebben de most huha
+            directItems = temp;
+            directFromList = new JComboBox<>(directItems);
+            directFromList.setBounds(10, 400, 115, 25);
+            directToList = new JComboBox<>(directItems);
+            directToList.setBounds(10, 450, 115, 25);
+        }
+
     }
     private void addComponents() {
 
