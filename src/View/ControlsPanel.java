@@ -94,7 +94,7 @@ public class ControlsPanel extends JPanel {
             gameFrame.setUserAction(true);
         });
 
-        //TODO debug for Plumber
+        //TODO debug for Plumbers and Nomads
         pipeSlipperyButton.addActionListener(e ->
         {
             Nomad nomad = (Nomad) gameFrame.getCurrentPlayer().getObject();
@@ -126,10 +126,8 @@ public class ControlsPanel extends JPanel {
             gameFrame.setUserAction(true);
         });
 
-        //TODO debug for Plumber
-        //Megjegyzes: hogy a f*szom verjem bele ebbe a k*rva fuggvenybe, hogy a mai napig mindig elfelejtem
-        //hogy itt egyszerre inputot meg outputot is lehet allitani
-        //VALAKI OLDJA MEG HELYETTEM KISZALLTAM
+
+        //TODO VALAKI OLDJA MEG HELYETTEM KISZALLTAM
         directPumpList.addListSelectionListener(e ->
 
         {
@@ -174,7 +172,7 @@ public class ControlsPanel extends JPanel {
             }
         }
 
-        //directPumpListItems
+        //TODO directPumpListItems, rosszul mukodik
         if (((Player) gameFrame.getCurrentPlayer().getObject()).getPosition() instanceof Pump){
             for (NetworkElement neighbour : ((Player) gameFrame.getCurrentPlayer().getObject()).getPosition().getConnections()){
                 if (neighbour instanceof Pipe && neighbour.getOutput() != ((Player) gameFrame.getCurrentPlayer().getObject()).getPosition()){
