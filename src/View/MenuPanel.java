@@ -121,8 +121,15 @@ public class MenuPanel extends JPanel {
                 frame.get().getContentPane().add(gamePanel, BorderLayout.CENTER);
                 frame.get().setVisible(true);
                 frame.get().pack();
+                Thread stepperThread = new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        frame.get().runGame();
+                    }
+                });
+
+                stepperThread.start();
             });
-            frame.get().runGame();
         });
     }
 
