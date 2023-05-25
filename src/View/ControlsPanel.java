@@ -2,6 +2,8 @@ package View;
 
 import java.awt.*;
 import javax.swing.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 import Model.*;
@@ -35,7 +37,7 @@ public class ControlsPanel extends JPanel {
 
     private ArrayList<String> moveToListItems = new ArrayList<>();
     private ArrayList<String> pipeDisconnectListItems = new ArrayList<>();
-//    private ArrayList<String> directPumpListItems = new ArrayList<>();
+    //    private ArrayList<String> directPumpListItems = new ArrayList<>();
     private ArrayList<String> inventoryListItems = new ArrayList<>();
     private DefaultListModel<String> inventoryListModel = new DefaultListModel<>();
 
@@ -146,7 +148,7 @@ public class ControlsPanel extends JPanel {
         //Mind a szabotőrök, mind a szerelők azt a csövet, amin állnak, rövid időre ragadóssá tudják tenni.
         pipeStickyButton.addActionListener(e -> {
             Player player = (Player) gameFrame.getCurrentPlayer().getObject();
-            if (player.getPosition() instanceof Pipe){
+            if (player.getPosition() instanceof Pipe) {
                 player.makePipeSticky();
                 System.out.println("make pipe sticky");
             } else {
@@ -169,6 +171,25 @@ public class ControlsPanel extends JPanel {
             System.out.println("connect pipe");
         });
 
+        moveToList.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (e.getClickCount() == 2) {
+                    if (moveToList.getSelectedIndex() != -1) {
+                        Player player = (Player) gameFrame.getCurrentPlayer().getObject();
+                        NetworkElement moveTo = player.getPosition().getConnections().get(moveToList.getSelectedIndex());
+                        player.move(moveTo);
+                        synchronized (lock) {
+                            gameFrame.setUserAction(true);
+                            lock.notifyAll();
+                        }
+                        System.out.println("move to");
+                    }
+
+                }
+            }
+        });
+
         fixButton.addActionListener(e -> {
             Plumber plumber = (Plumber) gameFrame.getCurrentPlayer().getObject();
             plumber.repair();
@@ -184,11 +205,11 @@ public class ControlsPanel extends JPanel {
             ArrayList<NetworkElement> networkElements = player.getPosition().getConnections();
             NetworkElement from = networkElements.get(directFromList.getSelectedIndex());
             NetworkElement to = networkElements.get(directToList.getSelectedIndex());
-            if(from == to){
+            if (from == to) {
                 JOptionPane.showMessageDialog(null, "You can't direct pump to the same element!");
                 return;
             }
-            player.directPump(from,to);
+            player.directPump(from, to);
             synchronized (lock) {
                 gameFrame.setUserAction(true);
                 lock.notifyAll();
@@ -197,7 +218,7 @@ public class ControlsPanel extends JPanel {
     }
 
 
-    private void updateLists(){
+    private void updateLists() {
         synchronized (lock) {
             //Delete the previous lists
             moveToListItems.clear();
@@ -207,11 +228,11 @@ public class ControlsPanel extends JPanel {
             //inventoryListItems
             if (gameFrame.getCurrentPlayer().getObject() instanceof Plumber) {
                 for (String item : ((Plumber) gameFrame.getCurrentPlayer().getObject()).getInventory().toString().split(" ")) {
-                    if (item.contains("Pump") ){
+                    if (item.contains("Pump")) {
                         inventoryListModel.addElement("Pump");
-                    } else if (item.contains("Pipe")){
+                    } else if (item.contains("Pipe")) {
                         inventoryListModel.addElement("Pipe");
-                    }else {
+                    } else {
                         inventoryListModel.addElement(item.trim());
                     }
                 }
@@ -223,7 +244,8 @@ public class ControlsPanel extends JPanel {
 
             //moveToListItems
             for (NetworkElement neighbour : ((Player) gameFrame.getCurrentPlayer().getObject()).getPosition().getConnections()) {
-                moveToListItems.add(neighbour.toString());
+                if(!neighbour.isOccupied())
+                    moveToListItems.add(neighbour.toString());
             }
 
             //pipeDisconnectListItems
@@ -259,7 +281,7 @@ public class ControlsPanel extends JPanel {
                         directToList.setSelectedIndex(i);
                     }
                 }
-            }else{
+            } else {
                 directFromList.removeAllItems();
                 directToList.removeAllItems();
             }
@@ -276,13 +298,14 @@ public class ControlsPanel extends JPanel {
         }
     }
 
-    private void updateLabels(){
+    private void updateLabels() {
         synchronized (lock) {
-            playerTurnLabel.setText(gameFrame.getCurrentPlayer().getName() +"'s turn");
+            playerTurnLabel.setText(gameFrame.getCurrentPlayer().getName() + "'s turn");
             plumberPoints.setText("Plumber points: " + NetworkElement.getPlumberPoints());
             nomadPoints.setText("Nomad points: " + NetworkElement.getNomadPoints());
         }
     }
+
     private void addComponents() {
 
         //add components
@@ -316,7 +339,7 @@ public class ControlsPanel extends JPanel {
 
         add(directFromList);
 
-        add (directToLabel);
+        add(directToLabel);
 
         add(directToList);
 
@@ -328,7 +351,8 @@ public class ControlsPanel extends JPanel {
 
         add(nomadPoints);
     }
-    private void constructComponents(){
+
+    private void constructComponents() {
         //construct components
         moveToList = new JList(moveToListItems.toArray());
         pipeDisconnectList = new JList(pipeDisconnectListItems.toArray());
