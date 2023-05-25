@@ -107,12 +107,12 @@ public class Inventory {
 	 * @return inventory values
 	 */
 	public String toString(){
-		String s = "Inventory: ";
+		String s = "Inventory:";
 		if (pump != null) {
-			s += "Pump";
+			s += " Pump";
 		}
 		if (pipe != null) {
-			s += "Pipe";
+			s += " Pipe";
 		}
 		return s;
 	}

@@ -28,81 +28,26 @@ public class ControlsPanel extends JPanel {
     private JLabel nomadPoints;
     private GameFrame gameFrame;
 
+    private ArrayList<String> moveToListItems = new ArrayList<>();
+    private ArrayList<String> pipeDisconnectListItems = new ArrayList<>();
+    private ArrayList<String> directPumpListItems = new ArrayList<>();
+    private ArrayList<String> inventoryListItems = new ArrayList<>();
+    private DefaultListModel<String> inventoryListModel = new DefaultListModel<>();
+
     public ControlsPanel(GameFrame gameFrame) {
         this.gameFrame = gameFrame;
-        //construct preComponents
-        String[] moveToListItems = {"pos.connections1", "pos.connections2", "pos.connections3"};
-        String[] pipeDisconnectListItems = {"pipe 1", "pipe2"};
-        String[] directPumpListItems = {"Item 1", "Item 2", "Item 3"};
-        String[] inventoryListItems = {"Item 1", "Item 2", "Item 3"};
 
-        //construct components
-        moveToList = new JList(moveToListItems);
-        moveToLabel = new JLabel("Move to:");
-        breakPipeButton = new JButton("Break pipe");
-        takePumpButton = new JButton("Take pump");
-        placePumpButton = new JButton("Place pump");
-        playerTurnLabel = new JLabel(gameFrame.getCurrentPlayer().getName() + " player's turn!");
-        pipeSlipperyButton = new JButton("Pipe slippery");
-        pipeStickyButton = new JButton("Pipe sticky");
-        inventoryLabel = new JLabel("Inventory:");
-        pipeDisconnectLabel = new JLabel("Pipe disconnect:");
-        pipeDisconnectList = new JList(pipeDisconnectListItems);
-        connectPipeButton = new JButton("Connect pipe");
-        directPumpLabel = new JLabel("Direct pump:");
-        directPumpList = new JList(directPumpListItems);
-        inventoryList = new JList(inventoryListItems);
-        fixButton = new JButton("Fix");
-        plumberPoints = new JLabel("Plumber points: 0");
-        nomadPoints = new JLabel("Nomad points: 0");
-
-        disableButtons();
+        this.updateLists();
+        this.constructComponents();
+        this.disableButtons();
 
         //adjust size and set layout
         setPreferredSize(new Dimension(400, 720));
-
         setLayout(null);
         //make playerTurnLabel font bigger
-        playerTurnLabel.setFont(new
+        playerTurnLabel.setFont(new Font("Arial", Font.BOLD, 28));
 
-                Font("Arial", Font.BOLD, 28));
-
-        //add components
-        add(moveToList);
-
-        add(moveToLabel);
-
-        add(breakPipeButton);
-
-        add(takePumpButton);
-
-        add(placePumpButton);
-
-        add(playerTurnLabel);
-
-        add(pipeSlipperyButton);
-
-        add(pipeStickyButton);
-
-        add(inventoryLabel);
-
-        add(pipeDisconnectLabel);
-
-        add(pipeDisconnectList);
-
-        add(connectPipeButton);
-
-        add(directPumpLabel);
-
-        add(directPumpList);
-
-        add(inventoryList);
-
-        add(fixButton);
-
-        add(plumberPoints);
-
-        add(nomadPoints);
+        this.addComponents();
 
         //set component bounds (only needed by Absolute Positioning)
         moveToList.setBounds(10, 70, 115, 150);
@@ -132,7 +77,7 @@ public class ControlsPanel extends JPanel {
             player.breakPipe();
             gameFrame.setUserAction(true);
         });
-//HANDLE NOMAD CAST
+        //HANDLE NOMAD CAST
         takePumpButton.addActionListener(e ->
 
         {
@@ -182,6 +127,9 @@ public class ControlsPanel extends JPanel {
         });
 
         //TODO debug for Plumber
+        //Megjegyzes: hogy a f*szom verjem bele ebbe a k*rva fuggvenybe, hogy a mai napig mindig elfelejtem
+        //hogy itt egyszerre inputot meg outputot is lehet allitani
+        //VALAKI OLDJA MEG HELYETTEM KISZALLTAM
         directPumpList.addListSelectionListener(e ->
 
         {
@@ -189,6 +137,111 @@ public class ControlsPanel extends JPanel {
             //plumber.directPump();
             gameFrame.setUserAction(true);
         });
+    }
+
+
+    private void updateLists(){
+        //Delete the previous lists
+        moveToListItems.clear();
+        pipeDisconnectListItems.clear();
+        directPumpListItems.clear();
+        inventoryListModel.clear();
+
+        //inventoryListItems
+        if (gameFrame.getCurrentPlayer().getObject() instanceof Plumber){
+            for (String item : ((Plumber) gameFrame.getCurrentPlayer().getObject()).getInventory().toString().split(" ")) {
+                if (item.contains("Pump") || item.contains("Pipe")) {
+                    inventoryListModel.addElement(item.trim());
+                }
+            }
+        }
+        else{
+            for (String item : ((Nomad) gameFrame.getCurrentPlayer().getObject()).getInventory().toString().split(" ")) {
+                inventoryListModel.addElement(item.trim());
+            }
+        }
+
+
+        //moveToListItems
+        for (NetworkElement neighbour : ((Player) gameFrame.getCurrentPlayer().getObject()).getPosition().getConnections()){
+            moveToListItems.add(neighbour.toString());
+        }
+
+        //pipeDisconnectListItems
+        for (NetworkElement neighbour : ((Player) gameFrame.getCurrentPlayer().getObject()).getPosition().getConnections()){
+            if (neighbour instanceof Pipe){
+                pipeDisconnectListItems.add(neighbour.toString());
+            }
+        }
+
+        //directPumpListItems
+        if (((Player) gameFrame.getCurrentPlayer().getObject()).getPosition() instanceof Pump){
+            for (NetworkElement neighbour : ((Player) gameFrame.getCurrentPlayer().getObject()).getPosition().getConnections()){
+                if (neighbour instanceof Pipe && neighbour.getOutput() != ((Player) gameFrame.getCurrentPlayer().getObject()).getPosition()){
+                    directPumpListItems.add(neighbour.toString());
+                }
+            }
+        }
+    }
+    private void addComponents() {
+
+        //add components
+        add(moveToList);
+
+        add(moveToLabel);
+
+        add(breakPipeButton);
+
+        add(takePumpButton);
+
+        add(placePumpButton);
+
+        add(playerTurnLabel);
+
+        add(pipeSlipperyButton);
+
+        add(pipeStickyButton);
+
+        add(inventoryLabel);
+
+        add(pipeDisconnectLabel);
+
+        add(pipeDisconnectList);
+
+        add(connectPipeButton);
+
+        add(directPumpLabel);
+
+        add(directPumpList);
+
+        add(inventoryList);
+
+        add(fixButton);
+
+        add(plumberPoints);
+
+        add(nomadPoints);
+    }
+    private void constructComponents(){
+        //construct components
+        moveToList = new JList(moveToListItems.toArray());
+        directPumpList = new JList(directPumpListItems.toArray());
+        pipeDisconnectList = new JList(pipeDisconnectListItems.toArray());
+        inventoryList = new JList(inventoryListModel.toArray());
+        moveToLabel = new JLabel("Move to:");
+        breakPipeButton = new JButton("Break pipe");
+        takePumpButton = new JButton("Take pump");
+        placePumpButton = new JButton("Place pump");
+        playerTurnLabel = new JLabel(gameFrame.getCurrentPlayer().getName() + " player's turn!");
+        pipeSlipperyButton = new JButton("Pipe slippery");
+        pipeStickyButton = new JButton("Pipe sticky");
+        inventoryLabel = new JLabel("Inventory:");
+        pipeDisconnectLabel = new JLabel("Pipe disconnect:");
+        connectPipeButton = new JButton("Connect pipe");
+        directPumpLabel = new JLabel("Direct pump:");
+        fixButton = new JButton("Fix");
+        plumberPoints = new JLabel("Plumber points: 0");
+        nomadPoints = new JLabel("Nomad points: 0");
     }
 
     public void disableButtons() {
@@ -258,6 +311,7 @@ public class ControlsPanel extends JPanel {
         super.repaint();
         if (this.gameFrame != null) {
             disableButtons();
+            updateLists();
         }
     }
 }
