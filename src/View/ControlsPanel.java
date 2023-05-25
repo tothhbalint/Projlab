@@ -210,9 +210,9 @@ public class ControlsPanel extends JPanel {
     private void updateLists(){
         synchronized (lock) {
             //Delete the previous lists
-            moveToListItems.clear();
-            pipeDisconnectListItems.clear();
-            inventoryListModel.clear();
+            //moveToListItems.clear();
+            //pipeDisconnectListItems.clear();
+            //inventoryListModel.clear();
 
             //inventoryListItems
             if (gameFrame.getCurrentPlayer().getObject() instanceof Plumber) {
@@ -260,6 +260,14 @@ public class ControlsPanel extends JPanel {
             moveToList = new JList(moveToListItems.toArray());
             pipeDisconnectList = new JList(pipeDisconnectListItems.toArray());
             inventoryList = new JList(inventoryListModel);
+        }
+    }
+
+    private void updateLabels(){
+        synchronized (lock) {
+            playerTurnLabel.setText(gameFrame.getCurrentPlayer().getName() +"'s turn");
+            plumberPoints.setText("Plumber points: " + NetworkElement.getPlumberPoints());
+            nomadPoints.setText("Nomad points: " + NetworkElement.getNomadPoints());
         }
     }
     private void addComponents() {
@@ -401,6 +409,7 @@ public class ControlsPanel extends JPanel {
             synchronized (lock) {
                 disableButtons();
                 updateLists();
+                updateLabels();
             }
         }
         super.revalidate();

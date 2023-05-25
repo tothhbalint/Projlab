@@ -127,7 +127,7 @@ public class GameFrame extends JFrame {
             }
         }
 
-        System.out.println("Round: " + round + " Current player: " + currentPlayer.getName() + " Position: " + currentPlayer.getObject().toString());
+        System.out.println("Round: " + round + " Current player: " + currentPlayer.getName() + " Position: " + ((Player)currentPlayer.getObject()).getPosition().toString());
 
         nomadPoints = game.getMap().getNomadPoints();
         plumberPoints = game.getMap().getPlumberPoints();

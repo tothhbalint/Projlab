@@ -180,7 +180,7 @@ public abstract class NetworkElement implements ITimer, IMove {
      * This method gets the points of nomad team
      * @return points of nomad team
      */
-    protected static int getNomadPoints() {
+    public static int getNomadPoints() {
         return nomadPoints;
     }
 
@@ -188,7 +188,7 @@ public abstract class NetworkElement implements ITimer, IMove {
      * This method gets the points of plumber team
      * @return points of plumber team
      */
-    protected static int getPlumberPoints() {
+    public static int getPlumberPoints() {
         return plumberPoints;
     }
 
