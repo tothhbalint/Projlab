@@ -103,24 +103,7 @@ public class MenuPanel extends JPanel {
                 nomadNames.add(name);
             }
 
-                Object lock = new Object();
-                GameFrame frame = new GameFrame(plumberNames, nomadNames, lock);
-                frame.setLayout(new BorderLayout());
-                frame.setTitle("Drukkmakori sivatag - Game");
-                frame.setSize(1280, 720);
-                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                frame.loadElements(plumberNames, nomadNames);
-
-                GamePanel gamePanel = new GamePanel();
-                ControlsPanel controlsPanel = new ControlsPanel(frame, lock);
-
-                controlsPanel.setPreferredSize(new Dimension(400, 720));
-                gamePanel.setPreferredSize(new Dimension(880, 720));
-
-                frame.getContentPane().add(controlsPanel, BorderLayout.WEST);
-                frame.getContentPane().add(gamePanel, BorderLayout.CENTER);
-                frame.setVisible(true);
-                frame.pack();
+                GameFrame frame = new GameFrame(plumberNames, nomadNames);
                 Thread stepperThread = new Thread(new Runnable() {
                     @Override
                     public void run() {

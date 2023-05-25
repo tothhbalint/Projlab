@@ -3,6 +3,7 @@ package View;
 import Model.*;
 
 import javax.swing.*;
+import java.awt.*;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -15,6 +16,9 @@ public class GameFrame extends JFrame {
     ArrayList<JPlumber> plumbers = new ArrayList<>();
 
     HashMap<Class<?>, Class<?>> elementTypes = new HashMap<>();
+    private final Object lock = new Object();
+    private GamePanel gamePanel;
+    private ControlsPanel controlsPanel;
 
     private final Game game = new Game();
 
@@ -28,16 +32,33 @@ public class GameFrame extends JFrame {
 
     private volatile boolean userAction = false;
 
-    private final Object lock;
+
 
     private JPlayer currentPlayer;
 
-    public GameFrame(ArrayList<String> plumberNames, ArrayList<String> nomadNames, Object lock) {
-        this.lock = lock;
+    public GameFrame(ArrayList<String> plumberNames, ArrayList<String> nomadNames) {
         elementTypes.put(Source.class, JSource.class);
         elementTypes.put(Pipe.class, JPipe.class);
         elementTypes.put(Pump.class, JPump.class);
         elementTypes.put(Cistern.class, JCistern.class);
+
+        setLayout(new BorderLayout());
+        setTitle("Drukkmakori sivatag - Game");
+        setSize(1280, 720);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        loadElements(plumberNames, nomadNames);
+
+        gamePanel = new GamePanel();
+        controlsPanel = new ControlsPanel(this, lock);
+
+        controlsPanel.setPreferredSize(new Dimension(400, 720));
+        gamePanel.setPreferredSize(new Dimension(880, 720));
+
+        getContentPane().add(controlsPanel, BorderLayout.WEST);
+        getContentPane().add(gamePanel, BorderLayout.CENTER);
+        setVisible(true);
+        pack();
     }
 
     //TODO Needs mapping for the base position of the elements, pipes can stay at 0,0 , its position gets calculated based on the others
@@ -128,13 +149,8 @@ public class GameFrame extends JFrame {
     The main loop of the game
      */
     public void runGame() {
-        //game.startGame(); did these in constructor, otherwise NullPointerException
-        //loadElements(plumbers, nomads);
-
         while (!gameOver) {
             step();
-
-            //TODO wait for player input
             synchronized (lock) {
                 while (!userAction) {
                     try {
@@ -149,9 +165,11 @@ public class GameFrame extends JFrame {
         }
     }
 
+    //TODO this does absolutely nothing... like what would you draw on a JFrame?
+    //TODO however, we can call the draw method of the gamePanel and controlPanel, which will draw the elements
     public void draw(){
-        revalidate();
-        repaint();
+        gamePanel.repaint();
+        controlsPanel.repaint();
     }
 
     public JGameElement findElement(NetworkElement networkElement) {
