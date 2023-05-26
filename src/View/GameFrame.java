@@ -104,6 +104,35 @@ public class GameFrame extends JFrame {
         currentPlayer = plumbers.get(0);
     }
 
+    //I wanted to solve place pump here
+    //When someone placed a pump, it wouldn't get drawn
+    //So I made this function, that updates the elements
+    //TODO Doesn't work yet xd
+    private void updateElements(){
+        gameElements.clear();
+        for (NetworkElement networkElement : game.getMap().getElements()) {
+            try {
+                Class<?> target = elementTypes.get(networkElement.getClass());
+                JGameElement element = (JGameElement) target.getConstructors()[0].newInstance(0, 0);
+                element.setObject(networkElement);
+                gameElements.add(element);
+            } catch (Exception e) {
+                System.out.println("Error loading element");
+            }
+        }
+
+        for (JGameElement gameElement : gameElements) {
+            if (gameElement.getClass().equals(JPipe.class)) {
+                NetworkElement element = (NetworkElement) gameElement.getObject();
+                for (NetworkElement connectionElement : element.getConnections()) {
+                    JGameElement connection = findElement(connectionElement);
+                    ((JPipe) gameElement).addConnection(connection);
+                }
+                ((JPipe) gameElement).calcMiddle();
+            }
+        }
+    }
+
     /**
     * this is a function that runs in the main loop of the game
     */
@@ -163,6 +192,7 @@ public class GameFrame extends JFrame {
                 }
             }
             userAction = false;
+            //updateElements();
         }
     }
 
