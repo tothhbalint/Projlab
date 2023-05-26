@@ -30,7 +30,7 @@ public class JPlumber extends JPlayer {
     public void checkStuck(){
         if(plumber.getStuck()){
             try {
-                setImage(new File("src\\View\\Images\\plumber_stuck.png"));
+                setImage(new File("src\\View\\Images\\plumberStuck.png"));
             } catch (Exception e) {
                 System.out.println("Error loading image");
             }
@@ -42,5 +42,13 @@ public class JPlumber extends JPlayer {
                 System.out.println("Error loading image");
             }
         }
+    }
+
+    @Override
+    public void draw(Graphics g) {
+        super.paint(g);
+        checkStuck();
+        g.drawImage(elementImage, x, y - 55, null);
+        g.drawString(getObject().toString(), x, y - 40);
     }
 }

@@ -1,4 +1,5 @@
 package View;
+import java.awt.*;
 import java.io.File;
 import Model.*;
 
@@ -36,5 +37,13 @@ public class JNomad extends JPlayer{
                 System.out.println("Error loading image");
             }
         }
+    }
+
+    @Override
+    public void draw(Graphics g) {
+        super.paint(g);
+        checkStuck();
+        g.drawImage(elementImage, x, y - 55, null);
+        g.drawString(getObject().toString(), x, y - 40);
     }
 }

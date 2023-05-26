@@ -26,8 +26,7 @@ public abstract class JPlayer extends JGameElement{
 
     @Override
     public void draw(Graphics g) {
-        checkStuck();
-        super.draw(g);
+
     }
 
 }

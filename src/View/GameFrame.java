@@ -50,11 +50,13 @@ public class GameFrame extends JFrame {
 
         loadElements(plumberNames, nomadNames);
 
-        gamePanel = new GamePanel(gameElements);
+        gamePanel = new GamePanel(gameElements, nomads, plumbers);
         controlsPanel = new ControlsPanel(this, lock);
 
         controlsPanel.setPreferredSize(new Dimension(400, 720));
         gamePanel.setPreferredSize(new Dimension(880, 720));
+
+        giveCoordinatesToPlayers();
 
         getContentPane().add(controlsPanel, BorderLayout.WEST);
         getContentPane().add(gamePanel, BorderLayout.CENTER);
@@ -63,7 +65,22 @@ public class GameFrame extends JFrame {
         pack();
     }
 
-    //TODO Needs mapping for the base position of the elements, pipes can stay at 0,0 , its position gets calculated based on the others
+    private void giveCoordinatesToPlayers() {
+        for (int i = 0; i < nomads.size(); i++) {
+            JNomad nomad = nomads.get(i);
+            int x = findElement(game.getNomadTeam().getPlayer(i).getPosition()).getX();
+            int y = findElement(game.getNomadTeam().getPlayer(i).getPosition()).getY();
+            nomad.move(x, y);
+        }
+
+        for (int i = 0; i < plumbers.size(); i++) {
+            JPlumber plumber = plumbers.get(i);
+            int x = findElement(game.getPlumberTeam().getPlayer(i).getPosition()).getX();
+            int y = findElement(game.getPlumberTeam().getPlayer(i).getPosition()).getY();
+            plumber.move(x, y);
+        }
+    }
+
     public void loadElements(ArrayList<String> plumberNames, ArrayList<String> nomadNames) {
         game.startGame(plumberNames, nomadNames);
         for (NetworkElement networkElement : game.getMap().getElements()) {
@@ -76,7 +93,7 @@ public class GameFrame extends JFrame {
                 System.out.println("Error loading element");
             }
         }
-    //TODO find better solution for pipe connection loading this is too ghetto even for me
+
         for (JGameElement gameElement : gameElements) {
             if (gameElement.getClass().equals(JPipe.class)) {
                 NetworkElement element = (NetworkElement) gameElement.getObject();
@@ -167,8 +184,6 @@ public class GameFrame extends JFrame {
         }
     }
 
-    //TODO this does absolutely nothing... like what would you draw on a JFrame?
-    //TODO however, we can call the draw method of the gamePanel and controlPanel, which will draw the elements
     public void draw(){
         gamePanel.paintComponent(gamePanel.getGraphics());
         controlsPanel.repaint();

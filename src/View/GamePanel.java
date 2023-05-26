@@ -5,15 +5,20 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class GamePanel extends JPanel {
-    ArrayList<JGameElement> elements = new ArrayList<>();
+    ArrayList<JGameElement> elements;
+    ArrayList<JNomad> nomads;
+    ArrayList<JPlumber> plumbers;
 
-    public GamePanel(ArrayList<JGameElement> _elements){
+
+    public GamePanel(ArrayList<JGameElement> _elements, ArrayList<JNomad> _nomads, ArrayList<JPlumber> _plumbers){
         super();
         setLayout(null);
         setBackground(Color.ORANGE);
         setVisible(true);
         setPreferredSize(new Dimension(880, 720));
         elements = _elements;
+        nomads = _nomads;
+        plumbers = _plumbers;
         addToPanel();
         giveCoordinates();
     }
@@ -75,7 +80,13 @@ public class GamePanel extends JPanel {
             pump.draw(g);
         }
 
-        //TODO draw the nomads and plumbers
+        //Draw the nomads and plumbers
+        for(JNomad nomad : nomads){
+            nomad.draw(g);
+        }
+        for(JPlumber plumber : plumbers){
+            plumber.draw(g);
+        }
 
     }
 
@@ -95,5 +106,6 @@ public class GamePanel extends JPanel {
         elements.get(23).move(600, 600);
         elements.get(24).move(600, 350);
         elements.get(25).move(600, 100);
+
     }
 }
