@@ -11,7 +11,7 @@ public class JCistern extends JGameElement {
     public JCistern(int _x, int _y) {
         super(_x, _y);
         try {
-            setImage(new File("src\\View\\Images\\cistern.png"));
+            setImage(new File(".\\src\\View\\Images\\cistern.png"));
         } catch (Exception e) {
             System.out.println("Image not found");
         }
@@ -29,5 +29,9 @@ public class JCistern extends JGameElement {
 
     @Override
     public void draw(Graphics g) {
+        super.paint(g);
+
+        g.drawImage(elementImage, x, y - 55, null);
+        g.drawString(((NetworkElement)getObject()).toString(), x, y - 40);
     }
 }
