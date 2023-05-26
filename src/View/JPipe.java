@@ -62,7 +62,8 @@ public class JPipe extends JGameElement {
             cR += 120;
         }
         if (pipe.getWaterState()) {
-            cB = 255;
+            cG += 120;
+            cB = 200;
         }
         g.setColor(new Color(cR, cG, cB));
 

@@ -170,7 +170,7 @@ public class GameFrame extends JFrame {
     //TODO this does absolutely nothing... like what would you draw on a JFrame?
     //TODO however, we can call the draw method of the gamePanel and controlPanel, which will draw the elements
     public void draw(){
-        gamePanel.repaint();
+        gamePanel.paintComponent(gamePanel.getGraphics());
         controlsPanel.repaint();
     }
 

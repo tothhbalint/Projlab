@@ -15,12 +15,12 @@ public abstract class JGameElement extends JComponent implements IDrawable{
 
     public JGameElement(int _x, int _y){
         x = _x;
-        y = _y;
+        y = 720 - _y;
     }
 
     public void move(int X, int Y){
        x = X;
-       y = Y;
+       y = 720 - Y;
     }
 
     public int getX(){
@@ -46,7 +46,7 @@ public abstract class JGameElement extends JComponent implements IDrawable{
     public void draw(Graphics g){
         super.paint(g);
 
-        g.drawImage(elementImage, x, y, null);
+        g.drawImage(elementImage, x, y - 20, null);
     }
 
     public abstract Object getObject();
