@@ -77,5 +77,8 @@ public class JPipe extends JGameElement {
         g2.setStroke(new BasicStroke(10));
 
         g2.drawLine(connections.get(0).getX(), connections.get(0).getY(), connections.get(1).getX(), connections.get(1).getY());
+        g.setFont(new Font("TimesRoman", Font.PLAIN, 9));
+        g.setColor(new Color(0, 0, 0));
+        g.drawString(((Pipe)getObject()).toString(), x - 10, 720 - y - 10);
     }
 }

@@ -47,6 +47,7 @@ public abstract class JGameElement extends JComponent implements IDrawable{
         super.paint(g);
 
         g.drawImage(elementImage, x, y - 20, null);
+        g.drawString(((NetworkElement)getObject()).toString(), x, y - 20);
     }
 
     public abstract Object getObject();

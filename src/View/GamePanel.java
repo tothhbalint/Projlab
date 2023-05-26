@@ -62,6 +62,7 @@ public class GamePanel extends JPanel {
         }
         //In order to draw the pipes under the others
         for(JPipe pipe : pipes){
+            pipe.calcMiddle();
             pipe.draw(g);
         }
         for(JSource source : sources){

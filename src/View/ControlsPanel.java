@@ -252,7 +252,8 @@ public class ControlsPanel extends JPanel {
                     } else if (item.contains("Pipe")) {
                         inventoryListModel.addElement("Pipe");
                     } else {
-                        inventoryListModel.addElement(item.trim());
+                        //inventoryListModel.addElement(item.trim());
+                        //Ez azert volt enelkul, hogy ne irja lent az inventoryt ketszer....
                     }
                 }
             } else {
