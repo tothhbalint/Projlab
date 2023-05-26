@@ -20,7 +20,7 @@ public class GameFrame extends JFrame {
     private GamePanel gamePanel;
     private ControlsPanel controlsPanel;
 
-    private final Game game = new Game();
+    private static final Game game = new Game();
 
     private boolean gameOver = false;
 
@@ -56,29 +56,11 @@ public class GameFrame extends JFrame {
         controlsPanel.setPreferredSize(new Dimension(400, 720));
         gamePanel.setPreferredSize(new Dimension(880, 720));
 
-        giveCoordinatesToPlayers();
-
         getContentPane().add(controlsPanel, BorderLayout.WEST);
         getContentPane().add(gamePanel, BorderLayout.CENTER);
         setVisible(true);
         setResizable(false);
         pack();
-    }
-
-    private void giveCoordinatesToPlayers() {
-        for (int i = 0; i < nomads.size(); i++) {
-            JNomad nomad = nomads.get(i);
-            int x = findElement(game.getNomadTeam().getPlayer(i).getPosition()).getX();
-            int y = findElement(game.getNomadTeam().getPlayer(i).getPosition()).getY();
-            nomad.move(x, y);
-        }
-
-        for (int i = 0; i < plumbers.size(); i++) {
-            JPlumber plumber = plumbers.get(i);
-            int x = findElement(game.getPlumberTeam().getPlayer(i).getPosition()).getX();
-            int y = findElement(game.getPlumberTeam().getPlayer(i).getPosition()).getY();
-            plumber.move(x, y);
-        }
     }
 
     public void loadElements(ArrayList<String> plumberNames, ArrayList<String> nomadNames) {
@@ -202,5 +184,9 @@ public class GameFrame extends JFrame {
 
     public JPlayer getCurrentPlayer() {
         return currentPlayer;
+    }
+
+    public static Game getGame() {
+        return game;
     }
 }

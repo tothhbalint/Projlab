@@ -43,7 +43,7 @@ public class JNomad extends JPlayer{
     public void draw(Graphics g) {
         super.paint(g);
         checkStuck();
-        g.drawImage(elementImage, x, y - 55, null);
-        g.drawString(getObject().toString(), x, y - 40);
+        g.drawImage(elementImage, x, y, null);
+        //g.drawString(name, x, y - 40);
     }
 }

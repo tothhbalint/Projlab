@@ -21,6 +21,7 @@ public class GamePanel extends JPanel {
         plumbers = _plumbers;
         addToPanel();
         giveCoordinates();
+        giveCoordinatesToPlayers();
     }
 
     private void addToPanel() {
@@ -81,6 +82,7 @@ public class GamePanel extends JPanel {
         }
 
         //Draw the nomads and plumbers
+        giveCoordinatesToPlayers();
         for(JNomad nomad : nomads){
             nomad.draw(g);
         }
@@ -106,6 +108,21 @@ public class GamePanel extends JPanel {
         elements.get(23).move(600, 600);
         elements.get(24).move(600, 350);
         elements.get(25).move(600, 100);
+    }
 
+    private void giveCoordinatesToPlayers() {
+        for (int i = 0; i < nomads.size(); i++) {
+            JNomad nomad = nomads.get(i);
+            int x = GameFrame.findElement(GameFrame.getGame().getNomadTeam().getPlayer(i).getPosition()).getX();
+            int y = GameFrame.findElement(GameFrame.getGame().getNomadTeam().getPlayer(i).getPosition()).getY();
+            nomad.move(x, y);
+        }
+
+        for (int i = 0; i < plumbers.size(); i++) {
+            JPlumber plumber = plumbers.get(i);
+            int x = GameFrame.findElement(GameFrame.getGame().getPlumberTeam().getPlayer(i).getPosition()).getX();
+            int y = GameFrame.findElement(GameFrame.getGame().getPlumberTeam().getPlayer(i).getPosition()).getY();
+            plumber.move(x, y);
+        }
     }
 }
