@@ -44,7 +44,7 @@ public abstract class JGameElement extends JComponent implements IDrawable{
         try {
             elementImage = ImageIO.read(image);
         } catch (Exception e) {
-            System.out.println("Error loading image");
+            System.out.println("Error loading image in JGameElement");
         }
     }
 

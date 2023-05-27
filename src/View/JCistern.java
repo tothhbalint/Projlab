@@ -13,7 +13,7 @@ public class JCistern extends JGameElement {
         try {
             setImage(new File(".\\src\\View\\Images\\cistern.png"));
         } catch (Exception e) {
-            System.out.println("Image not found");
+            System.out.println("Error loading cistern.png");
         }
     }
 

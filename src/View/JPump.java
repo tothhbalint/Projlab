@@ -13,7 +13,7 @@ public class JPump extends JGameElement {
         try {
             setImage(new File("src\\View\\Images\\pump.png"));
         } catch (Exception e) {
-            System.out.println("Image not found");
+            System.out.println("Error loading pump.png");
         }
     }
 
@@ -32,28 +32,28 @@ public class JPump extends JGameElement {
             try {
                 setImage(new File("src\\View\\Images\\pumpBrokenWater.png"));
             } catch (Exception e) {
-                System.out.println("Error loading image");
+                System.out.println("Error loading pumpBrokenWater.png");
             }
         }
         else if(pump.isDamaged() && !pump.getWaterState()){
             try {
                 setImage(new File("src\\View\\Images\\pumpBroken.png"));
             } catch (Exception e) {
-                System.out.println("Error loading image");
+                System.out.println("Error loading pumpBroken.png");
             }
         }
         else if(!pump.isDamaged() && pump.getWaterState()){
             try {
                 setImage(new File("src\\View\\Images\\pumpWater.png"));
             } catch (Exception e) {
-                System.out.println("Error loading image");
+                System.out.println("Error loading pumpWater.png");
             }
         }
         else{
             try {
                 setImage(new File("src\\View\\Images\\pump.png"));
             } catch (Exception e) {
-                System.out.println("Error loading image");
+                System.out.println("Error loading pump.png");
             }
         }
     }

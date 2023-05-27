@@ -13,7 +13,7 @@ public class JPlumber extends JPlayer {
         try {
             setImage(new File("src\\View\\Images\\plumber.png"));
         } catch (Exception e) {
-            System.out.println("Error loading image");
+            System.out.println("Error loading plumber.png");
         }
     }
 
@@ -32,14 +32,14 @@ public class JPlumber extends JPlayer {
             try {
                 setImage(new File("src\\View\\Images\\plumberStuck.png"));
             } catch (Exception e) {
-                System.out.println("Error loading image");
+                System.out.println("Error loading plumberStuck.png");
             }
         }
         else{
             try {
                 setImage(new File("src\\View\\Images\\plumber.png"));
             } catch (Exception e) {
-                System.out.println("Error loading image");
+                System.out.println("Error loading plumber.png");
             }
         }
     }

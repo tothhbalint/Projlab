@@ -10,7 +10,7 @@ public class JNomad extends JPlayer{
         try{
             setImage(new File("src\\View\\Images\\nomad.png"));
         } catch (Exception e) {
-            System.out.println("Image not found");
+            System.out.println("Error loading nomad.png");
         }
     }
     @Override
@@ -27,14 +27,14 @@ public class JNomad extends JPlayer{
             try {
                 setImage(new File("src\\View\\Images\\nomadStuck.png"));
             } catch (Exception e) {
-                System.out.println("Error loading image");
+                System.out.println("Error loading nomadStuck.png");
             }
         }
         else{
             try {
                 setImage(new File("src\\View\\Images\\nomad.png"));
             } catch (Exception e) {
-                System.out.println("Error loading image");
+                System.out.println("Error loading nomad.png");
             }
         }
     }
