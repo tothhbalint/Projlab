@@ -18,9 +18,14 @@ public abstract class JGameElement extends JComponent implements IDrawable{
         y = 720 - _y;
     }
 
+    public void initPosition(int _x, int _y){
+        x = _x;
+        y = 720 - _y;
+    }
+
     public void move(int X, int Y){
        x = X;
-       y = 720 - Y;
+       y = Y;
     }
 
     public int getX(){

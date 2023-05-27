@@ -264,8 +264,11 @@ public class ControlsPanel extends JPanel {
 
             //moveToListItems
             for (NetworkElement neighbour : ((Player) gameFrame.getCurrentPlayer().getObject()).getPosition().getConnections()) {
-                if (!neighbour.isOccupied())
+                if (!neighbour.isOccupied() && neighbour instanceof Pipe && neighbour.getConnections().size() == 2) {
                     moveToListItems.add(neighbour.toString());
+                } else {
+                    moveToListItems.add(neighbour.toString());
+                }
             }
 
             //pipeDisconnectListItems

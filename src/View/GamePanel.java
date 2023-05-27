@@ -94,20 +94,20 @@ public class GamePanel extends JPanel {
 
     private void giveCoordinates(){
         //The sources
-        elements.get(0).move(20, 600);
-        elements.get(1).move(20, 350);
-        elements.get(2).move(20, 100);
+        elements.get(0).initPosition(20, 600);
+        elements.get(1).initPosition(20, 350);
+        elements.get(2).initPosition(20, 100);
         //The cisterns
-        elements.get(3).move(800, 600);
-        elements.get(4).move(800, 350);
-        elements.get(5).move(800, 100);
+        elements.get(3).initPosition(800, 600);
+        elements.get(4).initPosition(800, 350);
+        elements.get(5).initPosition(800, 100);
         //The pumps
-        elements.get(20).move(300, 600);
-        elements.get(21).move(300, 350);
-        elements.get(22).move(300, 100);
-        elements.get(23).move(600, 600);
-        elements.get(24).move(600, 350);
-        elements.get(25).move(600, 100);
+        elements.get(20).initPosition(300, 600);
+        elements.get(21).initPosition(300, 350);
+        elements.get(22).initPosition(300, 100);
+        elements.get(23).initPosition(600, 600);
+        elements.get(24).initPosition(600, 350);
+        elements.get(25).initPosition(600, 100);
     }
 
     private void giveCoordinatesToPlayers() {
