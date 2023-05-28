@@ -34,8 +34,8 @@ public class Cistern extends NetworkElement {
     public void tick() {
         Proto.print("cistern.tick");
         Proto.tab++;
-        if(Proto.test) rand.setSeed(5);
-        if (rand.nextInt(10) < 2) {
+//        if(Proto.test) rand.setSeed(5);
+        if (rand.nextInt(25) < 2) {
             Pipe newPipe = new Pipe();
             newPipe.addConnection(this);
             this.addConnection(newPipe);
@@ -196,6 +196,7 @@ public class Cistern extends NetworkElement {
         Proto.print("cistern.disconnectPipe");
         Proto.tab++;
         this.removeConnection(ne);
+        ne.hasWater = false;
         ne.removeConnection(this);
         Proto.log("pipe disconnected");
         Proto.tab--;

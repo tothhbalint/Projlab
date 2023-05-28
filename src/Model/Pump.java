@@ -40,6 +40,12 @@ public class Pump extends NetworkElement {
             input = this.connections.get(temp);
         }
 
+        if(this.input == null){
+            this.hasWater = false;
+        }else if(!this.input.hasWater){
+           this.hasWater = false;
+        }
+
         Proto.tab++;
         if (!Proto.test) {
             if (rand.nextInt(10) < 2)
@@ -135,9 +141,11 @@ public class Pump extends NetworkElement {
     public void receiveWater(NetworkElement ne) {
         Proto.print("pump.receiveWater");
         Proto.tab++;
-        if (!damaged) {
+        if (!damaged && ne.hasWater) {
             hasWater = true;
             Proto.log("pump has water");
+        }else{
+            hasWater = false;
         }
         Proto.tab--;
     }
@@ -242,6 +250,15 @@ public class Pump extends NetworkElement {
         Proto.print("pump.disconnectPipe");
         Proto.tab++;
         this.removeConnection(ne);
+        ne.hasWater = false;
+        if (ne == this.output) {
+            ne.input = null;
+            this.output = null;
+        }
+        if (ne == this.input) {
+            ne.output = null;
+            this.input = null;
+        }
         ne.removeConnection(this);
         Proto.log("pipe disconnected");
         Proto.tab--;
