@@ -46,19 +46,27 @@ public class JPipe extends JGameElement {
     public void draw(Graphics g) {
         super.paint(g);
 
+
+
         int cR = 0, cG = 0, cB = 0;
 
-
+        // calculating color
         if (pipe.isSlippery()) {
             cG += 120;
         }
-        if (pipe.isSticky()) {
+        else if (pipe.isSticky()) {
             cG += 60;
             cR += 120;
         }
-        if (pipe.getWaterState()) {
+        else if (pipe.getWaterState()) {
             cG += 120;
             cB = 200;
+        }
+        // if none of the above, the pipe is grey
+        else {
+            cR = 150;
+            cG = 150;
+            cB = 150;
         }
         g.setColor(new Color(cR, cG, cB));
 
