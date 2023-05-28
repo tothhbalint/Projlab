@@ -71,10 +71,16 @@ public class Pipe extends NetworkElement {
         if (repairProtectionTimeLeft > 0) {
             repairProtectionTimeLeft--;
         }
+        if(this.input == null){
+            this.hasWater = false;
+        }else if(!this.input.hasWater){
+            this.hasWater = false;
+        }
     }
 
     /**
      * Thiss method sets how much time left till the pipe is sticky
+     *
      * @param i time
      */
     public void setStickyTimeLeft(int i) {
@@ -83,6 +89,7 @@ public class Pipe extends NetworkElement {
 
     /**
      * This method adds a NetworkElement to the list of connections
+     *
      * @param ne NetworkElement, that need to be added
      */
     public void addConnection(NetworkElement ne) {
@@ -99,6 +106,7 @@ public class Pipe extends NetworkElement {
 
     /**
      * This method sets the input of the pipe
+     *
      * @param ne NetworkElement, that need to be set as input
      */
     public void setInput(NetworkElement ne) {
@@ -107,6 +115,7 @@ public class Pipe extends NetworkElement {
 
     /**
      * This method gets a random NetworkElement that is connected to the pipe
+     *
      * @return random NetworkElement
      */
     public NetworkElement getRandomConnection() {
@@ -121,6 +130,7 @@ public class Pipe extends NetworkElement {
 
     /**
      * This method is responsible for the move of a player
+     *
      * @param p Player, which wants to move
      * @return true, if the step is available, false if it is not
      */
@@ -163,7 +173,7 @@ public class Pipe extends NetworkElement {
                         Proto.log("player accepted");
                         Proto.tab--;
                         return true;
-                    } else if(!this.occupied){ //Normal
+                    } else if (!this.occupied) { //Normal
                         this.setOccupied(true);
                         p.setPosition(this);
                         Proto.log("player accepted");
@@ -180,6 +190,7 @@ public class Pipe extends NetworkElement {
 
     /**
      * This player removes a player from the pipe
+     *
      * @param p The player, which needs to be removed
      */
     public void remove(Player p) {
@@ -193,6 +204,7 @@ public class Pipe extends NetworkElement {
 
     /**
      * This method controls the flowing of water
+     *
      * @param ne NetworkElement
      */
     public void receiveWater(NetworkElement ne) {
@@ -202,9 +214,12 @@ public class Pipe extends NetworkElement {
             this.setWaterState(false);
             increaseNomadPoint();
             Proto.log("Nomad points increased");
+        } else if (this.input == null || !this.input.hasWater) {
+            this.setWaterState(false);
+            Proto.log("water cant flow no input");
         } else {
-            if(this.output != null)
                 this.setWaterState(true);
+//            if (this.output != null) lehet fog meg kelleni
             Proto.log("Water state set to true");
         }
         Proto.tab--;
@@ -283,6 +298,7 @@ public class Pipe extends NetworkElement {
 
     /**
      * This method gets if the pipe is sticky
+     *
      * @return true, if the pipe is sticky, false if it is not
      */
     public boolean isSticky() {
@@ -291,6 +307,7 @@ public class Pipe extends NetworkElement {
 
     /**
      * This method gets if the pipe is slippery
+     *
      * @return true, if the pipe is slippery, false if it is not
      */
     public boolean isSlippery() {
@@ -299,6 +316,7 @@ public class Pipe extends NetworkElement {
 
     /**
      * This method gets if the pipe is protected
+     *
      * @return true, if it has protection, false if it has not
      */
     public boolean isRepairProtected() {
@@ -307,6 +325,7 @@ public class Pipe extends NetworkElement {
 
     /**
      * This method creates and returns the current values of the pipe in a string
+     *
      * @return string that contains the values
      */
     public String toString() {
@@ -329,6 +348,7 @@ public class Pipe extends NetworkElement {
 
     /**
      * This method checks if the pipe is allowed to place pump
+     *
      * @return true, because it is allowed
      */
     public boolean placePump() {
@@ -337,6 +357,7 @@ public class Pipe extends NetworkElement {
 
     /**
      * This method gets the output of the pipe
+     *
      * @return output of pipe
      */
     public NetworkElement getPipeOutput() {

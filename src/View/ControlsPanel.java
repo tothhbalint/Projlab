@@ -195,15 +195,15 @@ public class ControlsPanel extends JPanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() == 2) {
-                    if (moveToList.getSelectedIndex() != -1) {
+                    if (pipeDisconnectList.getSelectedIndex() != -1) {
                         Plumber player = (Plumber) gameFrame.getCurrentPlayer().getObject();
                         NetworkElement disConnect = player.getPosition().getConnections().get(pipeDisconnectList.getSelectedIndex());
-                        player.disconnectPipe(disConnect);
+                        player.takePipe(disConnect);
                         synchronized (lock) {
                             gameFrame.setUserAction(true);
                             lock.notifyAll();
                         }
-                        System.out.println("move to");
+                        System.out.println("disconnect Pump");
                     }
                 }
             }
@@ -264,9 +264,9 @@ public class ControlsPanel extends JPanel {
 
             //moveToListItems
             for (NetworkElement neighbour : ((Player) gameFrame.getCurrentPlayer().getObject()).getPosition().getConnections()) {
-                if (!neighbour.isOccupied() && neighbour instanceof Pipe && neighbour.getConnections().size() == 2) {
+                if (!neighbour.isOccupied() && neighbour instanceof Pipe) {
                     moveToListItems.add(neighbour.toString());
-                } else {
+                }else if (!(neighbour instanceof Pipe)){
                     moveToListItems.add(neighbour.toString());
                 }
             }
