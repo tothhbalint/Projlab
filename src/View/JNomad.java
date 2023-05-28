@@ -23,6 +23,7 @@ public class JNomad extends JPlayer{
     }
 
     public void checkStuck(){
+        nomad.tick(); //maybe we need this, so that the nomad can move again
         if(nomad.getStuck()){
             try {
                 setImage(new File("src\\View\\Images\\nomadStuck.png"));
