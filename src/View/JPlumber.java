@@ -50,6 +50,6 @@ public class JPlumber extends JPlayer {
         super.paint(g);
         checkStuck();
         g.drawImage(elementImage, x, y, null);
-        g.drawString(name, x + 20, y + 20);
+        g.drawString(name, x + 5, y + 20);
     }
 }

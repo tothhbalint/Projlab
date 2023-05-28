@@ -22,6 +22,10 @@ public abstract class NetworkElement implements ITimer, IMove {
       */
     protected boolean inInventory = false;
     /**
+     * If the NetworkElement was just created by a Cistern, true until it has been moved
+     */
+    protected boolean justCreatedByCistern = false;
+    /**
      * Stores the capacity of the NetworkElement
      */
     protected int capacity; //Do we still need this?
@@ -334,5 +338,13 @@ public abstract class NetworkElement implements ITimer, IMove {
 
     public boolean getWaterState(){
         return this.hasWater;
+    }
+
+    public void setJustCreatedByCistern(boolean b){
+        this.justCreatedByCistern = b;
+    }
+
+    public boolean getJustCreatedByCistern(){
+        return this.justCreatedByCistern;
     }
 }

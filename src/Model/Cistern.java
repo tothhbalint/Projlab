@@ -37,6 +37,7 @@ public class Cistern extends NetworkElement {
 //        if(Proto.test) rand.setSeed(5);
         if (rand.nextInt(25) < 2) {
             Pipe newPipe = new Pipe();
+            newPipe.setJustCreatedByCistern(true);
             newPipe.addConnection(this);
             this.addConnection(newPipe);
             Proto.log("new pipe added");
@@ -195,9 +196,13 @@ public class Cistern extends NetworkElement {
     public void disconnectPipe(NetworkElement ne) {
         Proto.print("cistern.disconnectPipe");
         Proto.tab++;
-        this.removeConnection(ne);
-        ne.hasWater = false;
-        ne.removeConnection(this);
+        if(ne.getJustCreatedByCistern()){
+            ne.setJustCreatedByCistern(false);
+        } else {
+            this.removeConnection(ne);
+            ne.hasWater = false;
+            ne.removeConnection(this);
+        }
         Proto.log("pipe disconnected");
         Proto.tab--;
     }

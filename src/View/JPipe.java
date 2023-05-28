@@ -82,5 +82,11 @@ public class JPipe extends JGameElement {
             g.setColor(new Color(0, 0, 0));
             g.drawString(((Pipe)getObject()).toString(), x - 10, y - 10);
         } //TODO else if size 1 (azaz playernel van cso vagy cisternnel van csoveg...)
+        else if(pipe.getConnections().size() < 2 && pipe.getJustCreatedByCistern()){
+            g2.drawLine(connections.get(0).getX(), connections.get(0).getY(), connections.get(0).getX(), connections.get(0).getY() - 100);
+            g.setFont(new Font("TimesRoman", Font.PLAIN, 9));
+            g.setColor(new Color(0, 0, 0));
+            g.drawString(((Pipe)getObject()).toString(), x - 10, y - 10);
+        }
     }
 }
