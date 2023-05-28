@@ -46,8 +46,6 @@ public class JPipe extends JGameElement {
     public void draw(Graphics g) {
         super.paint(g);
 
-
-
         int cR = 0, cG = 0, cB = 0;
 
         // calculating color
@@ -76,12 +74,13 @@ public class JPipe extends JGameElement {
 
         Graphics2D g2 = (Graphics2D) g;
 
-        //EZ NEM FIX HOGY JO HA RONDA A VONAL IRD AT
-        g2.setStroke(new BasicStroke(10));
 
-        g2.drawLine(connections.get(0).getX(), connections.get(0).getY(), connections.get(1).getX(), connections.get(1).getY());
-        g.setFont(new Font("TimesRoman", Font.PLAIN, 9));
-        g.setColor(new Color(0, 0, 0));
-        g.drawString(((Pipe)getObject()).toString(), x - 10, y - 10);
+        g2.setStroke(new BasicStroke(10));
+        if (pipe.getConnections().size() >= 2){
+            g2.drawLine(connections.get(0).getX(), connections.get(0).getY(), connections.get(1).getX(), connections.get(1).getY());
+            g.setFont(new Font("TimesRoman", Font.PLAIN, 9));
+            g.setColor(new Color(0, 0, 0));
+            g.drawString(((Pipe)getObject()).toString(), x - 10, y - 10);
+        } //TODO else if size 1 (azaz playernel van cso vagy cisternnel van csoveg...)
     }
 }
