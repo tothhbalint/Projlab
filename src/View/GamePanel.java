@@ -125,4 +125,8 @@ public class GamePanel extends JPanel {
             plumber.move(x, y);
         }
     }
+
+    public void setElements(ArrayList<JGameElement> elements){
+        this.elements = new ArrayList<>(elements);
+    }
 }

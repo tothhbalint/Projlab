@@ -45,8 +45,8 @@ public class Plumber extends Player {
 			else{
 				NetworkMap.disconnect(position, position.getConnections().get(0));
 			}
-			NetworkMap.add(tempPipe);
-			NetworkMap.add(tempPump);
+			NetworkMap.addElement_S(tempPipe);
+			NetworkMap.addElement_S(tempPump);
 			NetworkMap.connect(position, tempPump);
 			NetworkMap.connect(tempPump, tempPipe);
 

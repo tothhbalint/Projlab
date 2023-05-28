@@ -27,7 +27,14 @@ public class JPipe extends JGameElement {
     }
 
     public void addConnection(JGameElement connection) {
-        connections.add(connection);
+        if (this.connections.size() < 2) {
+            connections.add(connection);
+        }
+    }
+
+    public void updateConnections(ArrayList<JGameElement> newConnections){
+        connections.clear();
+        connections = new ArrayList<>(newConnections);
     }
 
     public void calcMiddle() {
@@ -83,10 +90,17 @@ public class JPipe extends JGameElement {
             g.drawString(((Pipe)getObject()).toString(), x - 10, y - 10);
         } //TODO else if size 1 (azaz playernel van cso vagy cisternnel van csoveg...)
         else if(pipe.getConnections().size() < 2 && pipe.getJustCreatedByCistern()){
-            g2.drawLine(connections.get(0).getX(), connections.get(0).getY(), connections.get(0).getX(), connections.get(0).getY() - 100);
+            g2.drawLine(connections.get(0).getX(), connections.get(0).getY(), connections.get(0).getX(), connections.get(0).getY() + 80);
+            g.setFont(new Font("TimesRoman", Font.PLAIN, 9));
+            g.setColor(new Color(0, 0, 0));
+            g.drawString(((Pipe)getObject()).toString(), connections.get(0).getX() - 80, connections.get(0).getY() + 40);
+        } /* TODO x = playerPos.getX(), y = playerPos.getY()
+        else if(pipe.getConnections().size() < 2 && !pipe.getJustCreatedByCistern()) {
+            g2.drawLine(connections.get(0).getX(), connections.get(0).getY(), x, y);
             g.setFont(new Font("TimesRoman", Font.PLAIN, 9));
             g.setColor(new Color(0, 0, 0));
             g.drawString(((Pipe)getObject()).toString(), x - 10, y - 10);
         }
+        */
     }
 }

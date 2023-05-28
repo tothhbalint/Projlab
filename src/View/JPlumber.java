@@ -2,6 +2,7 @@ package View;
 
 import java.awt.*;
 import java.io.File;
+import java.util.ArrayList;
 
 import Model.*;
 
@@ -51,5 +52,9 @@ public class JPlumber extends JPlayer {
         checkStuck();
         g.drawImage(elementImage, x, y, null);
         g.drawString(name, x + 5, y + 20);
+    }
+
+    public void updateConnections(ArrayList<JGameElement> newConnections) throws UnsupportedOperationException{
+        throw new UnsupportedOperationException("JPlumbers have no connections");
     }
 }

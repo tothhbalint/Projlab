@@ -2,6 +2,7 @@ package View;
 
 import java.awt.*;
 import java.io.File;
+import java.util.ArrayList;
 
 import Model.*;
 
@@ -33,5 +34,9 @@ public class JCistern extends JGameElement {
 
         g.drawImage(elementImage, x, y - 55, null);
         g.drawString(((NetworkElement)getObject()).toString(), x, y - 40);
+    }
+
+    public void updateConnections(ArrayList<JGameElement> newConnections) throws UnsupportedOperationException{
+        throw new UnsupportedOperationException("JCisterns have no connections");
     }
 }

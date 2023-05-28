@@ -109,17 +109,32 @@ public class GameFrame extends JFrame {
     //So I made this function, that updates the elements
     //TODO Doesn't work yet xd
     private void updateElements(){
-        gameElements.clear();
+        ArrayList<JGameElement> gameElementsCopy = new ArrayList<>(gameElements);
         for (NetworkElement networkElement : game.getMap().getElements()) {
-            try {
-                Class<?> target = elementTypes.get(networkElement.getClass());
-                JGameElement element = (JGameElement) target.getConstructors()[0].newInstance(0, 0);
-                element.setObject(networkElement);
-                gameElements.add(element);
-            } catch (Exception e) {
-                System.out.println("Error loading element");
+            if(findElement(networkElement) != null){
+                ArrayList<JGameElement> currentConnections = new ArrayList<>();
+                for (NetworkElement connectionElement : networkElement.getConnections()) {
+                    try {
+                        JGameElement connection = findElement(connectionElement);
+                        currentConnections.add(connection);
+                        findElement(networkElement).updateConnections(currentConnections);
+                    } catch (UnsupportedOperationException e) {
+                        ;
+                    }
+                }
+            } else {
+                try {
+                    Class<?> target = elementTypes.get(networkElement.getClass());
+                    JGameElement element = (JGameElement) target.getConstructors()[0].newInstance(currentPlayer.getX(), 720 - currentPlayer.getY());
+                    element.setObject(networkElement);
+                    gameElementsCopy.add(element);
+                } catch (Exception e) {
+                    System.out.println("Error loading element");
+                }
             }
         }
+        gameElements.clear();
+        gameElements.addAll(gameElementsCopy);
 
         for (JGameElement gameElement : gameElements) {
             if (gameElement.getClass().equals(JPipe.class)) {
@@ -131,6 +146,11 @@ public class GameFrame extends JFrame {
                 ((JPipe) gameElement).calcMiddle();
             }
         }
+        gamePanel.setElements(gameElements);
+    }
+
+    public static void addElementToNetworkMap(NetworkElement element){
+        game.getMap().addElement(element);
     }
 
     /**
@@ -192,7 +212,7 @@ public class GameFrame extends JFrame {
                 }
             }
             userAction = false;
-            //updateElements();
+            updateElements();
         }
     }
 

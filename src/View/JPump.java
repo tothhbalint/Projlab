@@ -2,6 +2,7 @@ package View;
 
 import java.awt.*;
 import java.io.File;
+import java.util.ArrayList;
 
 import Model.*;
 
@@ -62,5 +63,9 @@ public class JPump extends JGameElement {
     public void draw(Graphics g) {
         checkStates();
         super.draw(g);
+    }
+
+    public void updateConnections(ArrayList<JGameElement> newConnections) throws UnsupportedOperationException{
+        throw new UnsupportedOperationException("JCisterns have no connections");
     }
 }

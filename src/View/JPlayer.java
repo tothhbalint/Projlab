@@ -2,6 +2,7 @@ package View;
 
 import java.awt.*;
 import java.io.File;
+import java.util.ArrayList;
 
 public abstract class JPlayer extends JGameElement{
     String name;
@@ -29,4 +30,7 @@ public abstract class JPlayer extends JGameElement{
 
     }
 
+    public void updateConnections(ArrayList<JGameElement> newConnections) throws UnsupportedOperationException{
+        throw new UnsupportedOperationException("JPlayers have no connections");
+    }
 }

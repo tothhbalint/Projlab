@@ -7,6 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.util.ArrayList;
 
 public abstract class JGameElement extends JComponent implements IDrawable{
     protected int x,y;
@@ -58,4 +59,6 @@ public abstract class JGameElement extends JComponent implements IDrawable{
     public abstract Object getObject();
 
     public abstract void setObject(Object o);
+
+    public abstract void updateConnections(ArrayList<JGameElement> newConnections);
 }

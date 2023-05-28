@@ -40,6 +40,7 @@ public class Cistern extends NetworkElement {
             newPipe.setJustCreatedByCistern(true);
             newPipe.addConnection(this);
             this.addConnection(newPipe);
+            NetworkMap.addElement_S(newPipe);
             Proto.log("new pipe added");
         }
         Proto.tab--;

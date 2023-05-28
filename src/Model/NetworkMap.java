@@ -149,7 +149,7 @@ public class NetworkMap {
 	 * This method adds a NetworkElement to the list that contains all the NetworkElements
 	 * @param ne NetworkElement, that need to be added
 	 */
-	public static void add(NetworkElement ne){
+	public static void addElement_S(NetworkElement ne){
 		elements.add(ne);
 	}
 
