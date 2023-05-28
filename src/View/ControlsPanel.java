@@ -251,14 +251,15 @@ public class ControlsPanel extends JPanel {
                         inventoryListModel.addElement("Pump");
                     } else if (item.contains("Pipe")) {
                         inventoryListModel.addElement("Pipe");
-                    } else {
-                        //inventoryListModel.addElement(item.trim());
-                        //Ez azert volt enelkul, hogy ne irja lent az inventoryt ketszer....
                     }
                 }
             } else {
                 for (String item : ((Nomad) gameFrame.getCurrentPlayer().getObject()).getInventory().toString().split(" ")) {
-                    inventoryListModel.addElement(item.trim());
+                    if (item.contains("Pump")) {
+                        inventoryListModel.addElement("Pump");
+                    } else if (item.contains("Pipe")) {
+                        inventoryListModel.addElement("Pipe");
+                    }
                 }
             }
 
@@ -266,7 +267,7 @@ public class ControlsPanel extends JPanel {
             for (NetworkElement neighbour : ((Player) gameFrame.getCurrentPlayer().getObject()).getPosition().getConnections()) {
                 if (!neighbour.isOccupied() && neighbour instanceof Pipe && neighbour.getConnections().size() == 2) {
                     moveToListItems.add(neighbour.toString());
-                } else {
+                } else if (!(neighbour instanceof Pipe)){
                     moveToListItems.add(neighbour.toString());
                 }
             }

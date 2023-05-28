@@ -28,6 +28,7 @@ public class JPlumber extends JPlayer {
     }
 
     public void checkStuck(){
+        plumber.tick(); //maybe we need this, so that the nomad can move again
         if(plumber.getStuck()){
             try {
                 setImage(new File("src\\View\\Images\\plumberStuck.png"));
