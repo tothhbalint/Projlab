@@ -42,6 +42,9 @@ public class Plumber extends Player {
 			NetworkElement nextElement = position.getPipeOutput();
 			if(nextElement!=null)
 				NetworkMap.disconnect(position, nextElement);
+			else{
+				NetworkMap.disconnect(position, position.getConnections().get(0));
+			}
 			NetworkMap.add(tempPipe);
 			NetworkMap.add(tempPump);
 			NetworkMap.connect(position, tempPump);
@@ -52,8 +55,10 @@ public class Plumber extends Player {
 
 			NetworkMap.setInAndOutput(position, tempPump);
 			NetworkMap.setInAndOutput(tempPump, tempPipe);
-			if(nextElement!=null)
+			if(nextElement!=null) {
 				NetworkMap.setInAndOutput(tempPipe, nextElement);
+			}
+			this.position = tempPump;
 			Proto.log("pump placed");
 		}
 		Proto.tab--;
