@@ -35,6 +35,8 @@ public class ControlsPanel extends JPanel {
     private JLabel nomadPoints;
     private GameFrame gameFrame;
 
+    private JButton skipButton;
+
     private ArrayList<String> moveToListItems = new ArrayList<>();
     private ArrayList<String> pipeDisconnectListItems = new ArrayList<>();
     //    private ArrayList<String> directPumpListItems = new ArrayList<>();
@@ -70,6 +72,7 @@ public class ControlsPanel extends JPanel {
         pipeDisconnectLabel.setBounds(10, 225, 115, 25);
         pipeDisconnectList.setBounds(10, 245, 115, 125);
         connectPipeButton.setBounds(140, 400, 135, 40);
+        skipButton.setBounds(140, 500, 135, 40);
         directPumpButton.setBounds(10, 490, 115, 20);
         directFromLabel.setBounds(10, 375, 90, 25);
         directFromList.setBounds(10, 400, 115, 25);
@@ -92,6 +95,13 @@ public class ControlsPanel extends JPanel {
                 lock.notifyAll();
             }
             System.out.println("break pipe");
+        });
+
+        skipButton.addActionListener(e -> {
+            synchronized (lock) {
+                gameFrame.setUserAction(true);
+                lock.notifyAll();
+            }
         });
 
         takePumpButton.addActionListener(e -> {
@@ -338,6 +348,8 @@ public class ControlsPanel extends JPanel {
         //add components
         add(moveToList);
 
+        add(skipButton);
+
         add(moveToLabel);
 
         add(breakPipeButton);
@@ -394,6 +406,7 @@ public class ControlsPanel extends JPanel {
         inventoryLabel = new JLabel("Inventory:");
         pipeDisconnectLabel = new JLabel("Pipe disconnect:");
         connectPipeButton = new JButton("Connect pipe");
+        skipButton = new JButton("Skip");
         directPumpButton = new JButton("Direct pump");
         directFromLabel = new JLabel("from");
         directFromList = new JComboBox<>(directItems);
