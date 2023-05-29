@@ -21,6 +21,10 @@ public class Pump extends NetworkElement {
      */
     private Random rand = new Random();
 
+    public Pump(){
+        super();
+    }
+
     /**
      * This method is responsible for the flowing of water in pumps and called in every round
      * The pump will send water to its output if the pump is not damaged

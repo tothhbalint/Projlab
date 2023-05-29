@@ -123,18 +123,36 @@ public class GameFrame extends JFrame {
                     }
                 }
             } else {
+                ArrayList<JGameElement> currentConnections = new ArrayList<>();
                 try {
                     Class<?> target = elementTypes.get(networkElement.getClass());
                     JGameElement element = (JGameElement) target.getConstructors()[0].newInstance(currentPlayer.getX(), 720 - currentPlayer.getY());
                     element.setObject(networkElement);
                     gameElementsCopy.add(element);
+                    for (NetworkElement connectionElement : networkElement.getConnections()) {
+                        JGameElement connection = findElement(connectionElement);
+                        currentConnections.add(connection);
+                        findElement(networkElement).updateConnections(currentConnections);
+                    }
                 } catch (Exception e) {
-                    System.out.println("Error loading element");
+                    //System.out.println("Error loading element");
                 }
             }
         }
         gameElements.clear();
         gameElements.addAll(gameElementsCopy);
+        for (NetworkElement networkElement : game.getMap().getElements()) {
+            ArrayList<JGameElement> currentConnections = new ArrayList<>();
+            for (NetworkElement connectionElement : networkElement.getConnections()) {
+                try {
+                    JGameElement connection = findElement(connectionElement);
+                    currentConnections.add(connection);
+                    findElement(networkElement).updateConnections(currentConnections);
+                } catch (UnsupportedOperationException e) {
+                    ;
+                }
+            }
+        }
 
         for (JGameElement gameElement : gameElements) {
             if (gameElement.getClass().equals(JPipe.class)) {

@@ -38,6 +38,10 @@ public class Pipe extends NetworkElement {
      */
     private Random rand = new Random();
 
+    public Pipe(){
+        super();
+    }
+
     /**
      * This method is responsible for the flowing of water and timing
      * This method returns if the pipe has no output or the pipe is damaged

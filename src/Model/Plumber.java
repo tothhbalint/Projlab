@@ -39,24 +39,20 @@ public class Plumber extends Player {
 		if(position.placePump()) {
 			Pump tempPump = inventory.removePump();
 			Pipe tempPipe = new Pipe();
-			NetworkElement nextElement = position.getPipeOutput();
-			if(nextElement!=null)
-				NetworkMap.disconnect(position, nextElement);
-			else{
-				NetworkMap.disconnect(position, position.getConnections().get(0));
-			}
-			NetworkMap.addElement_S(tempPipe);
-			NetworkMap.addElement_S(tempPump);
-			NetworkMap.connect(position, tempPump);
-			NetworkMap.connect(tempPump, tempPipe);
+			NetworkElement nextElement = position.getConnections().get(0);
 
-			if(nextElement!=null)
-				NetworkMap.connect(tempPipe, nextElement);
-
-			NetworkMap.setInAndOutput(position, tempPump);
-			NetworkMap.setInAndOutput(tempPump, tempPipe);
 			if(nextElement!=null) {
-				NetworkMap.setInAndOutput(tempPipe, nextElement);
+
+
+				NetworkMap.disconnect(position, nextElement);
+				NetworkMap.addElement_S(tempPipe);
+				NetworkMap.addElement_S(tempPump);
+				NetworkMap.connect(position, tempPump);
+				NetworkMap.connect(tempPump, tempPipe);
+				NetworkMap.connect(tempPipe, nextElement);
+				NetworkMap.setInAndOutput(position, tempPump);
+				NetworkMap.setInAndOutput(tempPump, tempPipe);
+				NetworkMap.setInAndOutput(tempPipe, nextElement); // TODO ez baj, az output nem csatlakozik, elveszti a jó inputot
 			}
 			this.position = tempPump;
 			Proto.log("pump placed");
