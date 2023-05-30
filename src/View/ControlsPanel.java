@@ -8,41 +8,126 @@ import java.util.ArrayList;
 
 import Model.*;
 
+/**
+ * This class is responsible for the whole game logic and the graphical representation of the game.
+ */
 public class ControlsPanel extends JPanel {
-
+    /**
+     * The object that is used for synchronization.
+     */
     private final Object lock;
+    /**
+     * The list of items that can be moved to.
+     */
     private JList moveToList;
+    /**
+     * The label for the move to list.
+     */
     private JLabel moveToLabel;
+    /**
+     * The button to break a pipe.
+     */
     private JButton breakPipeButton;
+    /**
+     * The button to take a pump.
+     */
     private JButton takePumpButton;
+    /**
+     * The button to place a pump.
+     */
     private JButton placePumpButton;
+    /**
+     * The label that shows the current player.
+     */
     private JLabel playerTurnLabel;
+    /**
+     * The button to make a pipe slippery.
+     */
     private JButton pipeSlipperyButton;
+    /**
+     * The button to make a pipe sticky.
+     */
     private JButton pipeStickyButton;
+    /**
+     * The label for the inventory list.
+     */
     private JLabel inventoryLabel;
+    /**
+     * The label that shows the pipes that can be disconnected.
+     */
     private JLabel pipeDisconnectLabel;
+    /**
+     * The list of pipes that can be disconnected.
+     */
     private JList pipeDisconnectList;
+    /**
+     * The button to connect a pipe.
+     */
     private JButton connectPipeButton;
+    /**
+     * The label that shows the optional inputs that can be directed.
+     */
     private JLabel directFromLabel;
+    /** */
     private String[] directItems = {"directOptions"};
+    /**
+     * The JComboBox that shows the optional inputs that can be directed.
+     */
     private JComboBox<String> directFromList;
+    /**
+     * The label that shows the optional outputs that can be directed.
+     */
     private JLabel directToLabel;
+    /**
+     * The JComboBox that shows the optional outputs that can be directed.
+     */
     private JComboBox<String> directToList;
+    /**
+     * The buttob ro direct a pump.
+     */
     private JButton directPumpButton;
+    /**
+     * The JList that shows the inventory.
+     */
     private JList inventoryList;
+    /**
+     * The button to fix a pipe.
+     */
     private JButton fixButton;
+    /**
+     * The label that shows the points of the plumbers.
+     */
     private JLabel plumberPoints;
+    /**
+     * The label that shows the points of the nomads.
+     */
     private JLabel nomadPoints;
+    /**
+     * The frame that shows the game.
+     */
     private GameFrame gameFrame;
-
+    /**
+     * The button to skip a turn.
+     */
     private JButton skipButton;
-
+    /**
+     * The list stores the name of the items that can be moved to.
+     */
     private ArrayList<String> moveToListItems = new ArrayList<>();
+    /**
+     * The list stores the name of the items that can be disconnected.
+     */
     private ArrayList<String> pipeDisconnectListItems = new ArrayList<>();
-    //    private ArrayList<String> directPumpListItems = new ArrayList<>();
+    /** */
     private ArrayList<String> inventoryListItems = new ArrayList<>();
+    /** */
     private DefaultListModel<String> inventoryListModel = new DefaultListModel<>();
 
+    /**
+     * Constructor that initializes the components in the control panel and adds listeners to all buttons.
+     * @param gameFrame The frame that shows the game.
+     * @param lock The object that is used for synchronization.
+     */
     public ControlsPanel(GameFrame gameFrame, Object lock) {
         this.lock = lock;
         this.gameFrame = gameFrame;
@@ -140,7 +225,6 @@ public class ControlsPanel extends JPanel {
             }
         });
 
-        //A szabotőr azt a csövet, amin áll, rövid időre csúszóssá tudja tenni.
         pipeSlipperyButton.addActionListener(e -> {
             if (gameFrame.getCurrentPlayer().getObject() instanceof Plumber) {
                 System.out.println("Plumber cannot make pipe slippery");
@@ -155,7 +239,6 @@ public class ControlsPanel extends JPanel {
             }
         });
 
-        //Mind a szabotőrök, mind a szerelők azt a csövet, amin állnak, rövid időre ragadóssá tudják tenni.
         pipeStickyButton.addActionListener(e -> {
             Player player = (Player) gameFrame.getCurrentPlayer().getObject();
             if (player.getPosition() instanceof Pipe) {
@@ -246,7 +329,9 @@ public class ControlsPanel extends JPanel {
         });
     }
 
-
+    /**
+     * Updates the lists
+     */
     private void updateLists() {
         synchronized (lock) {
             //Delete the previous lists
@@ -323,7 +408,6 @@ public class ControlsPanel extends JPanel {
                 directToList.removeAllItems();
             }
 
-            //Update the lists
             // Update moveToList
             moveToList.setListData(moveToListItems.toArray());
 
@@ -335,6 +419,9 @@ public class ControlsPanel extends JPanel {
         }
     }
 
+    /**
+     * Updates the labels
+     */
     private void updateLabels() {
         synchronized (lock) {
             playerTurnLabel.setText(gameFrame.getCurrentPlayer().getName() + "'s turn");
@@ -343,6 +430,9 @@ public class ControlsPanel extends JPanel {
         }
     }
 
+    /**
+     * Adds the components to the panel
+     */
     private void addComponents() {
 
         //add components
@@ -391,6 +481,9 @@ public class ControlsPanel extends JPanel {
         add(nomadPoints);
     }
 
+    /**
+     * Constructs the components
+     */
     private void constructComponents() {
         //construct components
         moveToList = new JList(moveToListItems.toArray());
@@ -417,6 +510,9 @@ public class ControlsPanel extends JPanel {
         nomadPoints = new JLabel("Nomad points: 0");
     }
 
+    /**
+     * This method checks if the buttons should be enabled or disabled
+     */
     public void disableButtons() {
         synchronized (lock) {
             Player player = (Player) gameFrame.getCurrentPlayer().getObject();
@@ -426,7 +522,6 @@ public class ControlsPanel extends JPanel {
             } else {
                 directPumpButton.setEnabled(false);
             }
-
 
             boolean checkTakePumpEnabled = player.getPosition() instanceof Cistern && player instanceof Plumber && !player.getInventory().isFull();
             if (checkTakePumpEnabled) {
@@ -441,7 +536,6 @@ public class ControlsPanel extends JPanel {
             } else {
                 placePumpButton.setEnabled(false);
             }
-
 
             boolean checkBreakPipeEnabled = player.getPosition() instanceof Pipe && !player.getPosition().isDamaged() && !((Pipe) player.getPosition()).isRepairProtected();
             if (checkBreakPipeEnabled) {
@@ -480,6 +574,9 @@ public class ControlsPanel extends JPanel {
         }
     }
 
+    /**
+     * This method is responsible for updating the game after every move
+     */
     @Override
     public void repaint() {
         if (this.gameFrame != null) {

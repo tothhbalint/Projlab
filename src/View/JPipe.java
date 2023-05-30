@@ -7,36 +7,68 @@ import java.util.ArrayList;
 
 import Model.*;
 
+/**
+ * This class is the graphical representation of a pipe.
+ */
 public class JPipe extends JGameElement {
+    /**
+     * The pipe object that this JPipe represents.
+     */
     private Pipe pipe;
-
+    /**
+     * The connections of this pipe.
+     */
     private ArrayList<JGameElement> connections = new ArrayList<>();
 
+    /**
+     * Constructor for JPipe.
+     * @param _x The x coordinate of the pipe.
+     * @param _y The y coordinate of the pipe.
+     */
     public JPipe(int _x, int _y) {
         super(_x, _y);
     }
 
+    /**
+     * Sets the pipe object that this JPipe represents.
+     * @param o The pipe object that this JPipe represents.
+     */
     @Override
     public void setObject(Object o) {
         pipe = (Pipe) o;
     }
 
+    /**
+     * Returns the pipe object that this JPipe represents.
+     * @return The pipe object that this JPipe represents.
+     */
     @Override
     public Object getObject() {
         return pipe;
     }
 
+    /**
+     * Adds a connection to this pipe.
+     * @param connection The connection to be added.
+     */
     public void addConnection(JGameElement connection) {
         if (this.connections.size() < 2) {
             connections.add(connection);
         }
     }
 
+    /**
+     * This method updates the connections of this pipe.
+     * @param newConnections The connections to be removed.
+     */
     public void updateConnections(ArrayList<JGameElement> newConnections){
         connections.clear();
         connections = new ArrayList<>(newConnections);
     }
 
+    /**
+     * This method calculates the middle of the pipe.
+     */
     public void calcMiddle() {
         int x = 0;
         int y = 0;
@@ -49,6 +81,10 @@ public class JPipe extends JGameElement {
         move(x, y);
     }
 
+    /**
+     * This method draws the pipe.
+     * @param g The graphics object to be drawn on.
+     */
     @Override
     public void draw(Graphics g) {
         super.paint(g);
@@ -88,19 +124,12 @@ public class JPipe extends JGameElement {
             g.setFont(new Font("TimesRoman", Font.PLAIN, 9));
             g.setColor(new Color(0, 0, 0));
             g.drawString(((Pipe)getObject()).toString(), x - 10, y - 10);
-        } //TODO else if size 1 (azaz playernel van cso vagy cisternnel van csoveg...)
-        else if(pipe.getConnections().size() < 2 && pipe.getJustCreatedByCistern()){
+        }
+        else if(pipe.getConnections().size() < 2 && pipe.getJustCreatedByCistern()) {
             g2.drawLine(connections.get(0).getX(), connections.get(0).getY(), connections.get(0).getX(), connections.get(0).getY() + 80);
             g.setFont(new Font("TimesRoman", Font.PLAIN, 9));
             g.setColor(new Color(0, 0, 0));
-            g.drawString(((Pipe)getObject()).toString(), connections.get(0).getX() - 80, connections.get(0).getY() + 40);
-        } /* TODO x = playerPos.getX(), y = playerPos.getY()
-        else if(pipe.getConnections().size() < 2 && !pipe.getJustCreatedByCistern()) {
-            g2.drawLine(connections.get(0).getX(), connections.get(0).getY(), x, y);
-            g.setFont(new Font("TimesRoman", Font.PLAIN, 9));
-            g.setColor(new Color(0, 0, 0));
-            g.drawString(((Pipe)getObject()).toString(), x - 10, y - 10);
+            g.drawString(((Pipe) getObject()).toString(), connections.get(0).getX() - 80, connections.get(0).getY() + 40);
         }
-        */
     }
 }

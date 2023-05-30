@@ -7,20 +7,63 @@ import com.formdev.flatlaf.themes.FlatMacDarkLaf;
 
 import javax.swing.*;
 
+/**
+ * This class is the graphical representation of the menu.
+ */
 public class MenuPanel extends JPanel {
+    /**
+     * The title of the game.
+     */
     private JLabel title;
+    /**
+     * The label for the plumber team.
+     */
     private JLabel plumberLabel;
+    /**
+     * The button to increase the number of plumbers.
+     */
     private JButton plumberPlusButton;
+    /**
+     * The button to decrease the number of nomads.
+     */
     private JButton plumberMinusButton;
+    /**
+     * The label for the nomad team.
+     */
     private JLabel nomadLabel;
+    /**
+     * The text field for the number of nomads.
+     */
     private JTextField nomadCountTextField;
+    /**
+     * The text field for the number of plumbers.
+     */
     private JTextField plumberCountTextField;
+    /**
+     * The button to increase the number of nomads.
+     */
     private JButton nomadPlusButton;
+    /**
+     * The button to decrease the number of nomads.
+     */
     private JButton nomadMinusButton;
+    /**
+     * The button to start the game.
+     */
     private JButton startGameButton;
+    /**
+     * The list that stores the names of the plumbers.
+     */
     ArrayList<String> plumberNames = new ArrayList<>();
+    /**
+     * The list that stores the names of the nomads.
+     */
     ArrayList<String> nomadNames = new ArrayList<>();
 
+    /**
+     * Constructor for MenuPanel.
+     * Shows the whole main menu before the game starts.
+     */
     public MenuPanel() {
         //construct components
         title = new JLabel("Drukkmakori Sivatag");
@@ -116,7 +159,10 @@ public class MenuPanel extends JPanel {
         });
     }
 
-
+    /**
+     * Main method for the game.
+     * @param args
+     */
     public static void main(String[] args) {
         try {
             UIManager.setLookAndFeel( new FlatMacDarkLaf());
