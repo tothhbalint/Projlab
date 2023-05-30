@@ -263,7 +263,7 @@ public class Pipe extends NetworkElement {
         Proto.print("pipe.repairPipe");
         Proto.tab++;
         this.damaged = false;
-        this.repairProtectionTimeLeft = 5;
+        this.repairProtectionTimeLeft = 20;
         Proto.log("pipe repaired");
         Proto.tab--;
     }

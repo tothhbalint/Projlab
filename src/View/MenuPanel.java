@@ -149,6 +149,7 @@ public class MenuPanel extends JPanel {
             }
 
                 GameFrame frame = new GameFrame(plumberNames, nomadNames);
+                frame.setIconImage(new ImageIcon("src/View/Images/DrukkmakorIcon.png").getImage());
                 Thread stepperThread = new Thread(new Runnable() {
                     @Override
                     public void run() {
@@ -175,6 +176,7 @@ public class MenuPanel extends JPanel {
         }
 
         MenuFrame frame = new MenuFrame();
+        frame.setIconImage(new ImageIcon("src/View/Images/DrukkmakorIcon.png").getImage());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().add(new MenuPanel());
         frame.pack();
