@@ -372,6 +372,10 @@ public class ControlsPanel extends JPanel {
                 if (gameFrame.getCurrentPlayer().getObject() instanceof Nomad) {
                     break;
                 }
+                boolean playerIsOnSource = ((Player)gameFrame.getCurrentPlayer().getObject()).getPosition() instanceof Source;
+                if(playerIsOnSource){
+                    break;
+                }
                 if (neighbour instanceof Pipe) {
                     pipeDisconnectListItems.add(neighbour.toString());
                 }

@@ -172,7 +172,7 @@ public class Pipe extends NetworkElement {
                     if (this.sticky) { //Sticky
                         p.setPosition(this);
                         p.setStuck(true);
-                        p.setStuckTimeLeft(rand.nextInt(3) + 1);
+                        p.setStuckTimeLeft(rand.nextInt(12, 20) + 1);
                         this.setOccupied(true);
                         Proto.log("player accepted");
                         Proto.tab--;
@@ -276,7 +276,7 @@ public class Pipe extends NetworkElement {
         Proto.tab++;
         if (!slippery) {
             sticky = true;
-            stickyTimeLeft = 5;
+            stickyTimeLeft = 15;
             Proto.log("pipe now sticky");
         } else {
             Proto.log("Error: Pipe sticky AND slippery");
@@ -292,7 +292,7 @@ public class Pipe extends NetworkElement {
         Proto.tab++;
         if (!sticky) {
             slippery = true;
-            slipperyTimeLeft = 5;
+            slipperyTimeLeft = 20;
             Proto.log("pipe now slippery");
         } else {
             Proto.log("Error: Pipe sticky AND slippery");
