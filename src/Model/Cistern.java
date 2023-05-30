@@ -35,7 +35,7 @@ public class Cistern extends NetworkElement {
         Proto.print("cistern.tick");
         Proto.tab++;
 //        if(Proto.test) rand.setSeed(5);
-        if (rand.nextInt(25) < 2) {
+        if (rand.nextInt(30) < 2) {
             Pipe newPipe = new Pipe();
             newPipe.setJustCreatedByCistern(true);
             newPipe.addConnection(this);
