@@ -66,6 +66,6 @@ public class JPump extends JGameElement {
     }
 
     public void updateConnections(ArrayList<JGameElement> newConnections) throws UnsupportedOperationException{
-        throw new UnsupportedOperationException("JCisterns have no connections");
+        throw new UnsupportedOperationException("JPumps have no connections");
     }
 }

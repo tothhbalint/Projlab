@@ -54,7 +54,8 @@ public class Plumber extends Player {
 				NetworkMap.setInAndOutput(tempPump, tempPipe);
 				NetworkMap.setInAndOutput(tempPipe, nextElement); // TODO ez baj, az output nem csatlakozik, elveszti a jó inputot
 			}
-			this.position = tempPump;
+			this.move(tempPump);
+
 			Proto.log("pump placed");
 		}
 		Proto.tab--;
