@@ -150,6 +150,7 @@ public class MenuPanel extends JPanel {
 
                 GameFrame frame = new GameFrame(plumberNames, nomadNames);
                 frame.setIconImage(new ImageIcon("src/View/Images/DrukkmakorIcon.png").getImage());
+                this.setVisible(false);
                 Thread stepperThread = new Thread(new Runnable() {
                     @Override
                     public void run() {

@@ -20,7 +20,7 @@ public class GameFrame extends JFrame {
     private GamePanel gamePanel;
     private ControlsPanel controlsPanel;
 
-    private static final Game game = new Game();
+    private static Game game = new Game();
 
     private boolean gameOver = false;
 
@@ -107,7 +107,6 @@ public class GameFrame extends JFrame {
     //I wanted to solve place pump here
     //When someone placed a pump, it wouldn't get drawn
     //So I made this function, that updates the elements
-    //TODO Doesn't work yet xd
     private void updateElements(){
         ArrayList<JGameElement> gameElementsCopy = new ArrayList<>(gameElements);
         for (NetworkElement networkElement : game.getMap().getElements()) {
@@ -205,7 +204,7 @@ public class GameFrame extends JFrame {
         nomadPoints = game.getMap().getNomadPoints();
         plumberPoints = game.getMap().getPlumberPoints();
 
-        if (nomadPoints >= 100 || plumberPoints >= 100) {
+        if (nomadPoints >= 99 || plumberPoints >= 99) {
             gameOver = true;
             pluwin = plumberPoints > nomadPoints;
         }
@@ -231,6 +230,24 @@ public class GameFrame extends JFrame {
             }
             userAction = false;
             updateElements();
+        }
+        gameOverScreen();
+    }
+
+    /**
+     * This function is called when the game is over
+     * It shows a message dialog with the winner and asks if the user wants to play again
+     * If the user wants to play again, the app is still closed...
+     */
+    private void gameOverScreen() {
+        String winner = pluwin ? "Plumbers" : "Nomads";
+        JOptionPane.showMessageDialog(null, winner + " won the game!");
+        int answer = JOptionPane.showConfirmDialog(null, "Do you want to play another game?", "Play again?", JOptionPane.YES_NO_OPTION);
+        if (answer == JOptionPane.YES_OPTION) {
+            JOptionPane.showMessageDialog(null, "Then restart the game... ;)");
+            System.exit(0);
+        } else {
+            System.exit(0);
         }
     }
 

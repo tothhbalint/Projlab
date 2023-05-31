@@ -83,15 +83,6 @@ public class Pipe extends NetworkElement {
     }
 
     /**
-     * Thiss method sets how much time left till the pipe is sticky
-     *
-     * @param i time
-     */
-    public void setStickyTimeLeft(int i) {
-        stickyTimeLeft = i;
-    }
-
-    /**
      * This method adds a NetworkElement to the list of connections
      *
      * @param ne NetworkElement, that need to be added
