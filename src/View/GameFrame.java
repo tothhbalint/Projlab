@@ -8,35 +8,75 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * This class is responsible for the frame of the game.
+ */
 public class GameFrame extends JFrame {
+    /**
+     * The list of game elements.
+     */
     static ArrayList<JGameElement> gameElements = new ArrayList<>();
-
+    /**
+     * The list of nomads.
+     */
     ArrayList<JNomad> nomads = new ArrayList<>();
-
+    /**
+     * The list of plumbers.
+     */
     ArrayList<JPlumber> plumbers = new ArrayList<>();
-
+    /** */
     HashMap<Class<?>, Class<?>> elementTypes = new HashMap<>();
+    /**
+     * The lock object for the threads.
+     */
     private final Object lock = new Object();
+    /**
+     * The game panel.
+     */
     private GamePanel gamePanel;
+    /**
+     * The controls panel.
+     */
     private ControlsPanel controlsPanel;
-
+    /**
+     * The game object.
+     */
     private static Game game = new Game();
-
+    /**
+     * The game over flag.
+     */
     private boolean gameOver = false;
-
+    /**
+     * Stores the points of the teams
+     */
     int nomadPoints = 0, plumberPoints = 0;
-
+    /**
+     * The flag for the win of the plumbers.
+     */
     private boolean pluwin = false;
-
+    /**
+     * Stores the number of rounds.
+     */
     private int round = 0;
-
+    /**
+     * The flag for the user action.
+     */
     private volatile boolean userAction = false;
-
-
-
+    /**
+     * The current player.
+     */
     private JPlayer currentPlayer;
+    /**
+     * Stores the current indexes of players in both team.
+     */
     private int currentNomadIndex = 0, currentPlumberIndex = 0;
 
+    /**
+     * Constructor for GameFrame. Loads the elements. Sets the layout and the title. Sets the size and the close operation.
+     * Creates the game panel and the controls panel. Adds them to the frame. Sets the visibility and the resizable. Packs the frame.
+     * @param plumberNames The list of plumber names.
+     * @param nomadNames The list of nomad names.
+     */
     public GameFrame(ArrayList<String> plumberNames, ArrayList<String> nomadNames) {
         elementTypes.put(Source.class, JSource.class);
         elementTypes.put(Pipe.class, JPipe.class);
@@ -63,6 +103,11 @@ public class GameFrame extends JFrame {
         pack();
     }
 
+    /**
+     * This method loads the elements from the game object.
+     * @param plumberNames The list of plumber names.
+     * @param nomadNames The list of nomad names.
+     */
     public void loadElements(ArrayList<String> plumberNames, ArrayList<String> nomadNames) {
         game.startGame(plumberNames, nomadNames);
         for (NetworkElement networkElement : game.getMap().getElements()) {
@@ -104,9 +149,9 @@ public class GameFrame extends JFrame {
         currentPlayer = plumbers.get(0);
     }
 
-    //I wanted to solve place pump here
-    //When someone placed a pump, it wouldn't get drawn
-    //So I made this function, that updates the elements
+    /**
+     * This method updates the elements.
+     */
     private void updateElements(){
         ArrayList<JGameElement> gameElementsCopy = new ArrayList<>(gameElements);
         for (NetworkElement networkElement : game.getMap().getElements()) {
@@ -166,6 +211,7 @@ public class GameFrame extends JFrame {
         gamePanel.setElements(gameElements);
     }
 
+    /** No usage */
     public static void addElementToNetworkMap(NetworkElement element){
         game.getMap().addElement(element);
     }
@@ -251,11 +297,19 @@ public class GameFrame extends JFrame {
         }
     }
 
+    /**
+     * This function draws the game
+     */
     public void draw(){
         gamePanel.paintComponent(gamePanel.getGraphics());
         controlsPanel.repaint();
     }
 
+    /**
+     * This function is called when the user clicks on the game panel
+     * @param networkElement the element that was clicked on
+     * @return the element that was clicked on
+     */
     public static JGameElement findElement(NetworkElement networkElement) {
         for (JGameElement gameElement : gameElements) {
             if (gameElement.getObject().equals(networkElement)) return gameElement;
@@ -263,14 +317,26 @@ public class GameFrame extends JFrame {
         return null;
     }
 
+    /**
+     * This method sets the userAction boolean to true or false
+     * @param userAction the boolean that the userAction boolean is set to
+     */
     public void setUserAction(boolean userAction) {
         this.userAction = userAction;
     }
 
+    /**
+     * This method returns the current player.
+     * @return the current player
+     */
     public JPlayer getCurrentPlayer() {
         return currentPlayer;
     }
 
+    /**
+     * This method returns the game.
+     * @return the game
+     */
     public static Game getGame() {
         return game;
     }

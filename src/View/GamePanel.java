@@ -4,12 +4,29 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
+/**
+ * This class is the graphical representation of the game.
+ */
 public class GamePanel extends JPanel {
+    /**
+     * The elements of the game.
+     */
     ArrayList<JGameElement> elements;
+    /**
+     * The nomads of the game.
+     */
     ArrayList<JNomad> nomads;
+    /**
+     * The plumbers of the game.
+     */
     ArrayList<JPlumber> plumbers;
 
-
+    /**
+     * Constructor for GamePanel. Creates the Panel for the running game.
+     * @param _elements The elements of the game.
+     * @param _nomads The nomads of the game.
+     * @param _plumbers The plumbers of the game.
+     */
     public GamePanel(ArrayList<JGameElement> _elements, ArrayList<JNomad> _nomads, ArrayList<JPlumber> _plumbers){
         super();
         setLayout(null);
@@ -24,12 +41,18 @@ public class GamePanel extends JPanel {
         giveCoordinatesToPlayers();
     }
 
+    /**
+     * Adds all the elements to the panel.
+     */
     private void addToPanel() {
         for (JGameElement element : elements) {
             add(element);
         }
     }
 
+    /**
+     * Refreshes the panel.
+     */
     @Override
     public void repaint(){
         if(this.elements != null){
@@ -41,6 +64,10 @@ public class GamePanel extends JPanel {
 
     }
 
+    /**
+     * Paints the panel.
+     * @param g the Graphics object to protect
+     */
     @Override
     public void paintComponent(Graphics g){
         super.paintComponent(g);
@@ -92,6 +119,9 @@ public class GamePanel extends JPanel {
 
     }
 
+    /**
+     * Gives the coordinates to the elements.
+     */
     private void giveCoordinates(){
         //The sources
         elements.get(0).initPosition(20, 600);
@@ -110,6 +140,9 @@ public class GamePanel extends JPanel {
         elements.get(25).initPosition(600, 100);
     }
 
+    /**
+     * Gives the coordinates to the players.
+     */
     private void giveCoordinatesToPlayers() {
         for (int i = 0; i < nomads.size(); i++) {
             JNomad nomad = nomads.get(i);
@@ -126,6 +159,10 @@ public class GamePanel extends JPanel {
         }
     }
 
+    /**
+     * Sets the elements of the game.
+     * @param elements The elements of the game that need to be set.
+     */
     public void setElements(ArrayList<JGameElement> elements){
         this.elements = new ArrayList<>(elements);
     }
