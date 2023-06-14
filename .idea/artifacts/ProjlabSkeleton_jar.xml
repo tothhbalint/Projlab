@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="ProjlabSkeleton:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/ProjlabSkeleton_jar</output-path>
+    <root id="archive" name="ProjlabSkeleton.jar">
+      <element id="module-output" name="ProjlabSkeleton" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/flatlaf-3.1.1.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
